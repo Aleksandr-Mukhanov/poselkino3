@@ -1,0 +1,3 @@
+<?
+//$MESS["/bitrix/components/bitrix/..."]["..."] = "...";
+?>

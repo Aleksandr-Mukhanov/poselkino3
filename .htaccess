@@ -1,0 +1,192 @@
+Options -Indexes
+ErrorDocument 404 /404.php
+
+<IfModule mod_php5.c>
+  php_flag session.use_trans_sid off
+  php_value display_errors 1
+  #php_value mbstring.internal_encoding UTF-8
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  Options +FollowSymLinks
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$
+  RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
+  RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
+  RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
+
+  RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]
+  RewriteCond %{REQUEST_URI} !/bitrix/.* [NC]
+  RewriteRule (.*?)index\.php/*(.*) /$1$2 [R=301,NE,L]
+
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+<IfModule mod_dir.c>
+  DirectoryIndex index.php index.html
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault "access plus 1 month"
+
+  # Включаем кэширование изображений и флэш
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType application/x-shockwave-flash "access plus 1 month"
+
+  # Включаем кэширование css, javascript и текстовых файлов
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
+
+  # Включаем кэширование html и htm файлов
+  ExpiresByType text/html "access plus 1 month"
+
+  # Включаем кэширование xml файлов
+  ExpiresByType application/xhtml+xml "access plus 1 month"
+
+  # Нестандартные шрифты сайта
+  ExpiresByType application/x-font-ttf "access plus 1 month"
+  ExpiresByType font/opentype "access plus 1 month"
+  ExpiresByType application/x-font-woff "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+
+</IfModule>
+
+<filesMatch ".(jpg|jpeg|gif|png|svg|js|css|mp3|ogg|mpe?g|avi|zip|gz|bz2?|rar|swf|woff|eot|ttf|pdf|mp4|exe|doc|html|flv|ico|xml|txt|css|ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$">
+  Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+
+	php_value mbstring.func_overload 2
+	php_value mbstring.internal_encoding UTF-8
+	php_flag register_globals off
+	php_value max_input_vars 10000
+	php_flag display_errors Off
+	php_value error_reporting "E_ALL"
+  php_value allow_url_fopen Off
+  php_value request_order GPC
+  php_value memory_limit 1024M
+
+  Redirect 301 /index.html /
+
+# редиректы шоссе
+  Redirect 301 /poselki/filter/shosse-is-volokolamskoe/apply/ /poselki/volokolamskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-gorkovskoe/apply/ /poselki/gorkovskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-dmitrovskoe/apply/ /poselki/dmitrovskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-egorievskoe/apply/ /poselki/egorievskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-kalujskoe/apply/ /poselki/kalujskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-kashirskoe/apply/ /poselki/kashirskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-kievskoe/apply/ /poselki/kievskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-leningradskoe/apply/ /poselki/leningradskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-lihachevskoe/apply/ /poselki/lihachevskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-minskoe/apply/ /poselki/minskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-mozhayskoe/apply/ /poselki/mozhayskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-novorijskoe/apply/ /poselki/novorijskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-novoryazanskoe/apply/ /poselki/novoryazanskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-nosovihinskoe/apply/ /poselki/nosovihinskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-pyatnickoe/apply/ /poselki/pyatnickoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-rogachevskoe/apply/ /poselki/rogachevskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-simferopolskoe/apply/ /poselki/simferopolskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-tarakanovskoe/apply/ /poselki/tarakanovskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-fryanovskoe/apply/ /poselki/fryanovskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-shelkovskoe/apply/ /poselki/shelkovskoe-shosse/
+  Redirect 301 /poselki/filter/shosse-is-yaroslavskoe/apply/ /poselki/yaroslavskoe-shosse/
+
+# редиректы районы
+  Redirect 301 /poselki/filter/region-is-balashihinskiy/apply/ /poselki/balashihinskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-volokolamskiy/apply/ /poselki/volokolamskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-voskresenskiy/apply/ /poselki/voskresenskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-dmitrovskiy/apply/ /poselki/dmitrovskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-domodedovskiy/apply/ /poselki/domodedovskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-istrinskiy/apply/ /poselki/istrinskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-klinskiy/apply/ /poselki/klinskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-kolomenskiy/apply/ /poselki/kolomenskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-leninskiy/apply/ /poselki/leninskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-lubereckiy/apply/ /poselki/lubereckiy-rayon/
+  Redirect 301 /poselki/filter/region-is-mozhayskiy/apply/ /poselki/mozhayskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-novaya-moskva/apply/ /poselki/novaya-moskva-rayon/
+  Redirect 301 /poselki/filter/region-is-noginskiy/apply/ /poselki/noginskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-odincovskiy/apply/ /poselki/odincovskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-orehovo-zuevskiy/apply/ /poselki/orehovo-zuevskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-pavlovo-posadskiy/apply/ /poselki/pavlovo-posadskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-pushkinskiy/apply/ /poselki/pushkinskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-ramenskiy/apply/ /poselki/ramenskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-ruzskiy/apply/ /poselki/ruzskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-sergievo-posadskiy/apply/ /poselki/sergievo-posadskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-serpuhovskiy/apply/ /poselki/serpuhovskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-solnechnogorskiy/apply/ /poselki/solnechnogorskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-stupinskiy/apply/ /poselki/stupinskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-chehovskiy/apply/ /poselki/chehovskiy-rayon/
+  Redirect 301 /poselki/filter/region-is-schelkovskiy/apply/ /poselki/schelkovskiy-rayon/
+
+# редиректы другое
+  Redirect 301 /poselki/dachnye/kupit-uchastok/ /poselki/kupit-dachnyj-uchastok/
+  Redirect 301 /poselki/dachnye/kupit-dom/ /poselki/kupit-dachnyj-dom/
+  Redirect 301 /poselki/kottedzhnye/kupit-uchastok/ /poselki/kupit-kottedzhnyj-uchastok/
+  Redirect 301 /poselki/kottedzhnye/kupit-dom/ /poselki/kupit-kottedzh/
+
+# редиректы другое
+  Redirect 301 /poselki/66a0aef69e672d554df24a57d4e360b0-rayon/kupit-dom/ /poselki/kupit-dom/
+  Redirect 301 /poselki/detail.php /poselki/
+  Redirect 301 /poselki/test.php /test/
+
+  Redirect 301 /poselki/snt-i-dnp/ /poselki/snt/
+  Redirect 301 /poselki/kupit-uchastok-snt-i-dnp/ /poselki/kupit-uchastok-snt/
+  Redirect 301 /poselki/kupit-dom-snt-i-dnp/ /poselki/kupit-dom-snt/
+
+  Redirect 301 /poselki/kupit-uchastok-eсonom-class/ /poselki/kupit-uchastok-econom-class/
+  Redirect 301 /poselki/kupit-dom-eсonom-class/ /poselki/kupit-dom-econom-class/
+  Redirect 301 /poselki/eсonom-class/ /poselki/econom-class/
+
+# девелоперы
+  Redirect 301  /developery/lesireka/ /developery/les-i-reka/
+  Redirect 301  "/developery/Pragma Kapital/" /developery/Pragma-Kapital/
+  Redirect 301  "/developery/Lisya gorka/" /developery/Lisya-gorka/
+  Redirect 301  "/developery/New Bakeevo/" /developery/Novoe-Bakeevo/
+  Redirect 301  "/developery/Golden Pines/" /developery/Zolotye-Sosny/
+  Redirect 301  "/developery/Dacha 9-18/" /developery/Dacha-9-18/
+  Redirect 301  "/developery/Moskovskie Dali/" /developery/Moskovskie-Dali/
+  Redirect 301  "/developery/AKRON Development/" /developery/AKRON-Development/
+  Redirect 301  "/developery/Rio Land/" /developery/Rio-Land/
+  Redirect 301  "/developery/Lama Village/" /developery/Lama-Village/
+  Redirect 301  "/developery/My Land/" /developery/Moya-Zemlya/
+  Redirect 301  "/developery/Ekaterininskoe podvore/" /developery/Ekaterininskoe-podvore/
+  Redirect 301  "/developery/Mozaik development/" /developery/Mozaik-development/
+  Redirect 301  "/developery/Maleevskie prostory/" /developery/Maleevskie-prostory/
+  Redirect 301  "/developery/Russian lands/" /developery/Zemli-Rossii/
+  Redirect 301  "/developery/Adva Esteyt/" /developery/Adva-Esteyt/
+  Redirect 301  "/developery/Dachnyy Alyans/" /developery/Dachnyy-Alyans/
+  Redirect 301  "/developery/Tierra Group/" /developery/Tierra-Group/
+  Redirect 301  "/developery/M9 Land.ru/" /developery/M9-Land.ru/
+  Redirect 301  "/developery/Vash poselok/" /developery/Vash-poselok/
+  Redirect 301  "/developery/ABVG Dacha/" /developery/ABVG-Dacha/
+  Redirect 301  "/developery/world of luck/" /developery/Mir-Udach/
+  Redirect 301  "/developery/Green Town/" /developery/Green-Town/
+  Redirect 301  "/developery/Zemlya MO/" /developery/Zemlya-MO/
+  Redirect 301  /developery/Zemexx/ /developery/Zemelniy-Ekspress/
+  Redirect 301  /developery/zemeco/ /developery/EkoZem/
+  Redirect 301  /developery/Own-land/ /developery/Svoya-Zemlya/
+  Redirect 301  /developery/ivanov/ /developery/Ivanov-i-Partnery/
+  Redirect 301  /developery/Moscow_coast/ /developery/Moskovskiy-Bereg/
+  Redirect 301  /developery/beautiful_land/ /developery/Krasivaya-Zemlya/
+  Redirect 301  /developery/Own_Country/ /developery/Svoya-Dacha/
+  Redirect 301  /developery/Atlas/ /developery/Atlas-dom/
+  Redirect 301  /developery/Land-Msk/ /developery/Zemli-Msk/
+  Redirect 301  /developery/Land_Format/ /developery/Zemelniy-Format/
+  Redirect 301  /developery/native-land/ /developery/Rodnie-Zemli/
+
+# поселки
+  Redirect 301 "/poselki/zaokskaya dolina/" /poselki/zaokskaya-dolina/
+  Redirect 301 "/poselki/dolina ozer2/" /poselki/dolina-ozer-2/

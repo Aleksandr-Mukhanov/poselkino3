@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCE00;}
+	.st1{clip-path:url(#SVGID_2_);fill:#FFA426;}
+	.st2{fill:#06B26B;}
+	.st3{fill:#0A9154;}
+	.st4{fill:#FFFFFF;}
+	.st5{fill:#E9EDF5;}
+</style>
+<g id="football_1_">
+	<g id="forest_1_">
+		<g>
+			<g id="fence_10_">
+				<g>
+					<g id="security_11_">
+						<g>
+							<g>
+								<circle class="st0" cx="19" cy="19" r="19"/>
+							</g>
+						</g>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+	<g>
+		<g>
+			<defs>
+				<circle id="SVGID_1_" cx="19" cy="19" r="19"/>
+			</defs>
+			<clipPath id="SVGID_2_">
+				<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+			</clipPath>
+			<path class="st1" d="M38.3,20.7L25.9,8.4L9.7,27.6l0.8,2.5l-0.6,1.3l7.6,7c1.3,0.3,0.5,0,1.9,0C29.4,38.3,37.6,30.6,38.3,20.7z"
+				/>
+		</g>
+	</g>
+	<g id="football">
+		<path class="st2" d="M28.6,18.3l-1.5,0.6l1.5,0.9v11.9h-4.5l-0.5-1.5l-0.9,1.5h-7.4l-0.6-1.5l-0.9,1.5H9.4v-12l1.5-0.6l-1.5-0.9
+			V6.3h4.5l0.9,1.5l0.5-1.5h7.4l0.9,1.5l0.5-1.5h4.5C28.6,6.3,28.6,18.3,28.6,18.3z"/>
+		<path class="st3" d="M28.6,18.3l-1.5,0.6l1.5,0.9v11.9h-4.5l-0.5-1.5l-0.9,1.5H19V6.3h3.7l0.9,1.5l0.5-1.5h4.5V18.3z"/>
+		<g>
+			<path class="st4" d="M24.2,6.3v6H13.8v-6h1.5v4.5h7.4V6.3H24.2z"/>
+			<path class="st4" d="M24.2,25.7v6h-1.5v-4.5h-7.4v4.5h-1.5v-6H24.2z"/>
+			<path class="st4" d="M22.6,18.3c-0.3-1.7-1.8-3-3.6-3s-3.3,1.3-3.6,3h-6v1.5h6c0.3,1.7,1.8,3,3.6,3s3.3-1.3,3.6-3h6v-1.5H22.6z
+				 M19,21.2c-1,0-1.8-0.6-2.1-1.5h4.2C20.8,20.6,20,21.2,19,21.2z M16.9,18.3c0.3-0.9,1.1-1.5,2.1-1.5s1.8,0.6,2.1,1.5H16.9z"/>
+		</g>
+		<path class="st5" d="M24.2,12.3H19v-1.5h3.7V6.3h1.5V12.3z"/>
+		<path class="st5" d="M19,25.7h5.2v6h-1.5v-4.5H19V25.7z"/>
+		<path class="st5" d="M28.6,18.3v1.5h-6c-0.3,1.7-1.8,3-3.6,3v-1.5c1,0,1.8-0.6,2.1-1.5H19v-1.5h2.1c-0.3-0.9-1.1-1.5-2.1-1.5v-1.5
+			c1.8,0,3.3,1.3,3.6,3H28.6z"/>
+	</g>
+</g>
+</svg>
