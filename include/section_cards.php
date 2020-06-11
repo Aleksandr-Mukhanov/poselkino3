@@ -35,8 +35,11 @@
 		$sectionSortOrder = 'asc';
 	}
 
-	global $arrFilter;
-	$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+	if (!CSite::InDir('/poisk/')) { // если не в поиске
+		global $arrFilter;
+			$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+			$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+	}
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",

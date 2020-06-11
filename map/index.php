@@ -1,5 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Карта поселков");
+ini_set('memory_limit', '1024M');
 
 use Bitrix\Main\Page\Asset;
   Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=0c55e225-bb2b-4b98-94a5-3390b6dbf643&lang=ru_RU');
@@ -41,11 +42,11 @@ use Bitrix\Main\Page\Asset;
   if (strpos($dir, 's-ohranoj') !== false) $typeURL = 's-ohranoj';
   if (strpos($dir, 's-dorogami') !== false) $typeURL = 's-dorogami';
 
-  require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
-
   global $arrFilter;
-	$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+	 $arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+   $arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
 
+  require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
 ?>
 <main class="page page-map">
   <div class="page-map__wrap">

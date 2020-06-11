@@ -13,7 +13,10 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 	$cntAllOtz++;
 }
 
-global $arrFilter;?>
+global $arrFilter;
+	$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+	$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+?>
 <main class="page page-home">
   <!-- Hero-->
   <div class="bg-white">

@@ -217,7 +217,7 @@
 @media (min-width: 767px){
 	.modal-xl, .modal-xxl .modal-content {
 		overflow-y: auto;
-		
+
 	}
 }
 
@@ -316,7 +316,14 @@
 	font-family: rublregular, Arial, Tahoma, sans-serif !important;
 }
 
+/* правка окошка шоссе на главной в фильтре */
+.hero #highwayModal label.custom-control-label{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #3c4b5a;
+}
 
+/* карта */
 .page-map__container {
 	position: relative;
 }
@@ -391,7 +398,7 @@
 		font-size: 14px;
 		line-height: 26px;
 	}
-	
+
 	.offer-house__metro {
 		display: flex;
 	}

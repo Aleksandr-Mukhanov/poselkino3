@@ -36,7 +36,8 @@
 }
 
 global $arrFilter;
-$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+	$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+	$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",

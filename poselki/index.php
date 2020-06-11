@@ -1,7 +1,13 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+global $arrFilter;
+  $arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+  $arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+
 $APPLICATION->SetTitle("Поселки в Московской области");
 $APPLICATION->SetPageProperty("title", "Поселки в Московской области – лучшие поселки на карте Подмосковья");
 $APPLICATION->SetPageProperty("description", "Поселки в Московской области ➤Цены от ".getMetaInfo($arrFilter)['minPrice']." руб.➤Кол-во объявлений - ".getMetaInfo($arrFilter)['cntPos']." ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота");
+
 // dump($_REQUEST);
 $shosse = $_REQUEST['SHOSSE_CODE'];
 $rayon = $_REQUEST['RAYON_CODE'];
@@ -193,7 +199,7 @@ if($pagen && $pageTitleDesc){ // дописываем страницу в паг
           </div>
         </div>
       </div>
-      
+
 
     </div>
   </div>
@@ -302,7 +308,7 @@ if($pagen && $pageTitleDesc){ // дописываем страницу в паг
       </div>
     </div>
   </div>
-  
+
   <div class="bg-white">
     <div class="footer-feedback">
       <div class="container">
