@@ -1,0 +1,10 @@
+ul.markerChek{
+	margin: 20px 0 20px 25px;
+}
+ul.markerChek li:before{
+	content: "\f00c";
+	font: normal normal normal 14px/1 FontAwesome;
+	color: #1ad793;
+	font-weight: 100;
+	padding-right: 10px;
+}

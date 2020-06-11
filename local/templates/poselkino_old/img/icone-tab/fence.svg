@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#06B26B;}
+	.st1{clip-path:url(#SVGID_2_);fill:#0A9154;}
+	.st2{fill:#FFFFFF;}
+	.st3{fill:#E9EDF5;}
+</style>
+<g id="fence">
+	<g id="security_1_">
+		<g>
+			<g>
+				<circle class="st0" cx="19" cy="19" r="19"/>
+			</g>
+		</g>
+	</g>
+	<g>
+		<defs>
+			<circle id="SVGID_1_" cx="19" cy="19" r="19"/>
+		</defs>
+		<clipPath id="SVGID_2_">
+			<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+		</clipPath>
+		<polygon class="st1" points="44.1,24.8 30.2,40 16.3,25.4 21.3,22.9 23.2,18.4 29.6,15.3 30.2,8.7 		"/>
+	</g>
+	<g>
+		<path class="st2" d="M7.8,15.3h22.4v3H7.8V15.3z"/>
+		<path class="st2" d="M7.8,22.7h22.4v3H7.8V22.7z"/>
+		<path class="st3" d="M19,15.3h11.2v3H19V15.3z"/>
+		<path class="st3" d="M19,22.7h11.2v3H19V22.7z"/>
+		<path class="st2" d="M9.3,13.1v16.3h-3V13.1l1.5-4.5L9.3,13.1z"/>
+		<path class="st3" d="M9.3,13.1v16.3H7.8V8.6L9.3,13.1z"/>
+		<path class="st2" d="M16.8,13.1v16.3h-3V13.1l1.5-4.5L16.8,13.1z"/>
+		<path class="st3" d="M16.8,13.1v16.3h-1.5V8.6L16.8,13.1z"/>
+		<path class="st2" d="M24.2,13.1v16.3h-3V13.1l1.5-4.5L24.2,13.1z"/>
+		<path class="st3" d="M24.2,13.1v16.3h-1.5V8.6L24.2,13.1z"/>
+		<path class="st2" d="M31.7,13.1v16.3h-3V13.1l1.5-4.5L31.7,13.1z"/>
+		<path class="st3" d="M31.7,13.1v16.3h-1.5V8.6L31.7,13.1z"/>
+	</g>
+</g>
+</svg>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<poselkino-feed xmlns="https://poselkino.ru/">
+<generation-date>31.01.2020</generation-date>
+<offer data-id="001">
+<village-name>Лесная опушка</village-name>
+<date-update>31.01.2020</date-update>
+<number-of-lands-sold>298</number-of-lands-sold>
+<number-of-lands-for-sale>80</number-of-lands-for-sale>
+<min-cost-of-the-land>60000</min-cost-of-the-land>
+<max-cost-of-the-land>148320</max-cost-of-the-land>
+<min-cost-of-a-sotka>10000</min-cost-of-a-sotka>
+<max-cost-of-a-sotka>20000</max-cost-of-a-sotka>
+<min-cost-of-the-house>no</min-cost-of-the-house>
+<max-cost-of-the-house>no</max-cost-of-the-house>
+<list-of-houses>no
+<list-house data-id="01">
+<date-update-house>15.01.2020</date-update-house>
+<image-house-block>
+  <image-house>https://poselkino.ru/test_feed/images/house/house-1.jpg</image-house>
+</image-house-block>
+<area-house>60</area-house>
+<price-house>2000000</price-house>
+<material-house>брус</material-house>
+<finish-house>плитка</finish-house>
+<floors-house>2</floors-house>
+<stage-house>завершение</stage-house>
+<number-land-house>77</number-land-house>
+<area-land-house>9</area-land-house>
+<description-house>Красивый дом с балконом</description-house>
+</list-house>
+<list-house data-id="02">
+<date-update-house>14.01.2020</date-update-house>
+<image-house-block>
+  <image-house>https://poselkino.ru/test_feed/images/house/house-2.jpg</image-house>
+</image-house-block>
+<area-house>70</area-house>
+<price-house>2500000</price-house>
+<material-house>кирпич</material-house>
+<finish-house>вагонка</finish-house>
+<floors-house>3</floors-house>
+<stage-house>начало</stage-house>
+<number-land-house>82</number-land-house>
+<area-land-house>6</area-land-house>
+<description-house>Кирпичный 3-этажный дом</description-house>
+</list-house>
+</list-of-houses>
+<list-of-lands>yes
+<list-land data-id="31">
+<date-update-land>31.01.2020</date-update-land>
+<image-land-block>
+  <image-land>https://yadi.sk/i/vb5H4Aj-k7wIFQ</image-land>
+  <image-land>https://yadi.sk/i/vb5H4Aj-k7wIFQ</image-land>
+</image-land-block>
+<price-land>120000</price-land>
+<number-plan-land>31</number-plan-land>
+<area-land>6</area-land>
+<description-land>Участок находится рядом с въездной группой. Участок ровный, площадью 6 соток. Соседний также доступен для покупки.</description-land>
+</list-land>
+<list-land data-id="66">
+<date-update-land>31.01.2020</date-update-land>
+<image-land-block>
+  <image-land>https://yadi.sk/i/L7iQt-0wXy8otg</image-land>
+  <image-land>https://yadi.sk/i/2tTUhrHWeq25Rw</image-land>
+</image-land-block>
+<price-land>102300</price-land>
+<number-plan-land>66</number-plan-land>
+<area-land>6</area-land>
+<description-land>Участок находится в центральной части поселка и одновременно рядом с лесом. Удобная транспортная доступность. Рядом г. Сергиево-Посад. </description-land>
+</list-land>
+</list-of-lands>
+</offer>
+</poselkino-feed>

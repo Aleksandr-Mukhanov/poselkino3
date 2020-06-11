@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22.974" height="21.967" viewBox="0 0 22.974 21.967" class="inline-svg">
+  <g transform="translate(0 -6.247)">
+    <g transform="translate(0 6.247)">
+      <rect width="1.904" height="2.188" transform="translate(6.206 6.28)" class="color-fill" />
+      <rect width="1.904" height="2.188" transform="translate(14.864 6.28)" class="color-fill" />
+      <rect width="1.904" height="2.188" transform="translate(6.206 16.781)" class="color-fill" />
+      <rect width="1.904" height="2.188" transform="translate(14.864 16.781)" class="color-fill" />
+      <path d="M3.3,6.516a.547.547,0,0,0-.942,0L.077,10.372A.537.537,0,0,0,0,10.65V27.666a.547.547,0,0,0,.547.547H5.112a.547.547,0,0,0,.546-.547V10.65a.546.546,0,0,0-.076-.278Z" transform="translate(0 -6.247)" class="color-fill" />
+      <path d="M110.694,6.729a.568.568,0,0,0-.941,0l-2.283,3.857a.546.546,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.567a.547.547,0,0,0,.546-.547V10.864a.542.542,0,0,0-.076-.278Z" transform="translate(-98.737 -6.461)"
+        class="color-fill" />
+      <path d="M220.384,10.586,218.1,6.729a.569.569,0,0,0-.942,0l-2.282,3.857a.545.545,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.565a.548.548,0,0,0,.547-.547V10.864A.538.538,0,0,0,220.384,10.586Z" transform="translate(-197.487 -6.461)"
+        class="color-fill" />
+    </g>
+  </g>
+</svg>
