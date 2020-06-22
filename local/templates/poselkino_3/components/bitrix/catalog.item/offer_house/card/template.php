@@ -30,7 +30,7 @@ if($item["PREVIEW_PICTURE"]){
 // dump($arResult);
 ?>
 <div class="card-house">
-	<div class="d-flex flex-wrap bg-white card-grid">
+	<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 		<div class="card-house__photo photo ">
             <a href="/doma/<?=$item['CODE']?>/" class="stretched-link"></a>
 			<div class="slider__header">

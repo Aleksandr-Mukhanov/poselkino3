@@ -732,7 +732,7 @@ switch ($km_MKAD) {
 			<div class="list--grid">
 				<?foreach ($arResult["arHouses"] as $id => $house) { // dump($house);?>
 				<div class="card-house">
-					<div class="d-flex flex-wrap bg-white card-grid">
+					<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 						<div class="card-house__photo photo">
 							<div class="card-photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
@@ -796,7 +796,7 @@ switch ($km_MKAD) {
 			<div class="list--grid">
 				<?foreach ($arResult["arPlots"] as $id => $plot) { // dump($plot);?>
 				<div class="card-house">
-					<div class="d-flex flex-wrap bg-white card-grid">
+					<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 						<div class="card-house__photo photo">
 							<div class="card-photo__list">
 								<?foreach ($plot['IMG'] as $value) {?>
@@ -1225,7 +1225,7 @@ switch ($km_MKAD) {
 			<div class="list--grid">
 				<?foreach ($arResult["arPlots"] as $id => $plot) { // dump($plot);?>
 				<div class="card-house">
-					<div class="d-flex flex-wrap bg-white card-grid">
+					<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 						<div class="card-house__photo photo">
 							<div class="card-photo__list">
 								<?foreach ($plot['IMG'] as $value) {?>

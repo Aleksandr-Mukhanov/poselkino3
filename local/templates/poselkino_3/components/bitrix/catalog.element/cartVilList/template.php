@@ -303,7 +303,7 @@ switch ($km_MKAD) {
 	<div class="list--grid">
 		<?foreach ($arResult["arHouses"] as $id => $house) { // dump($house);?>
 		<div class="card-house">
-			<div class="d-flex flex-wrap bg-white card-grid">
+			<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
             <a class="stretched-link" href="/doma/<?=$house['CODE']?>/"></a>
@@ -360,7 +360,7 @@ switch ($km_MKAD) {
 	<div class="list--grid">
 		<?foreach ($arResult["arPlots"] as $id => $plot) { // dump($house);?>
 		<div class="card-house area">
-			<div class="d-flex flex-wrap bg-white card-grid">
+			<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
 						<a class="stretched-link" href="/uchastki/<?=$plot['CODE']?>/"></a>

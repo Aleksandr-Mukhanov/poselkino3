@@ -95,7 +95,7 @@ $photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>41
 		</div>
 	</div>
 </div>
-<div class="page__content-title">
+<div class="page__content-title  mb-3">
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="order-0 col-lg-9 col-md-8">
@@ -179,7 +179,7 @@ $photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>41
 						?>
 						<div class="col-md-6">
 							<div class="review-card" itemprop="review" itemscope itemtype="http://schema.org/Review">
-								<meta itemprop="itemReviewed" content="о девелопере <?=$arResult['row']['UF_NAME']?>">
+								<meta itemprop="itemReviewed" content="о поселке <?=$arResult['name']?>">
 								<div class="review-card__user">
 									<div class="review-card__user-avatar"></div>
 									<div class="name" itemprop="author"><?=$comment["FIO"]?></div>

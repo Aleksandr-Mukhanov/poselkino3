@@ -244,42 +244,7 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 <?}elseif($arParams['TEMPLATE_CARD'] == 'map'){ // на карте ?>
 
 	<script>
-
-		function showCard(item){ // показ карточки
-
-			$.post("/ajax/cardMap.php",
-				{ item: item },
-				function(data) {
-
-					$('.card-map').html(data);
-
-					// заново переопределим некоторые события
-					// слайдер изображений
-					$('.photo__list, .card-photo__list').not('.slick-initialized').slick(getPhoto()).on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
-						var counter = $(this).parent('.photo').find('.photo__count .current');
-						if (currentSlide) {
-							console.log(currentSlide, counter);
-
-							counter.text(currentSlide + 1);
-						} else {
-							counter.text(1);
-						}
-					});
-					// чтобы отделять 3 знака в числах
-					$('.split-number').each(function(index, el) {
-						var text_number = $(this).text();
-						var text_number = String(text_number).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
-						$(this).text(text_number);
-					});
-					// замена рубля
-					$('.rep_rubl').html('<span class="rubl">a</span>');
-				}
-			);
-
-			$('.card-map').show(0).css({'z-index':'99999999999'});
-		}
-
-		function loadMaps() { // загрузка карты
+		function loadMaps() {
 			ymaps.ready(function() {
 
 				var myMap = new ymaps.Map("pageMapContainer", {
@@ -308,8 +273,36 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 
 						item = <?=$arResult['ITEMS_JSON'][$id]?>,
 
-						showCard(item);
+						$.post("/ajax/cardMap.php",
+						  { item: item },
+						  function(data) {
 
+						    $('.card-map').html(data);
+
+								// заново переопределим некоторые события
+								// слайдер изображений
+							  $('.photo__list, .card-photo__list').not('.slick-initialized').slick(getPhoto()).on('init reInit afterChange', function(event, slick, currentSlide, nextSlide) {
+							    var counter = $(this).parent('.photo').find('.photo__count .current');
+							    if (currentSlide) {
+							      console.log(currentSlide, counter);
+
+							      counter.text(currentSlide + 1);
+							    } else {
+							      counter.text(1);
+							    }
+							  });
+								// чтобы отделять 3 знака в числах
+								$('.split-number').each(function(index, el) {
+									var text_number = $(this).text();
+									var text_number = String(text_number).replace(/(\d)(?=(\d{3})+([^\d]|$))/g, '$1 ');
+									$(this).text(text_number);
+								});
+							  // замена рубля
+								$('.rep_rubl').html('<span class="rubl">a</span>');
+						  }
+						);
+
+						$('.card-map').show(0).css({'z-index':'99999999999'});
 					});
 
 					myMap.geoObjects.add(myPlacemark_<?=$id?>);

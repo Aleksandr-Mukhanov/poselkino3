@@ -29,7 +29,7 @@ if($item["PREVIEW_PICTURE"]){
 
 // dump($arResult);
 ?>
-<div class="d-flex flex-wrap bg-white card-grid">
+<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
 	<div class="card-house__photo photo ">
 		<div class="slider__header">
 			<?if($item['PROPERTIES']['ACTION']['VALUE']){?>

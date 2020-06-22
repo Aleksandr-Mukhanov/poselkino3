@@ -124,7 +124,7 @@ $reviewsText = ($arResult["COMMENTS"][$item["ID"]]) ? $arResult["COMMENTS"][$ite
 // отображение по Наличию домов
 $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
 ?>
-<div class="d-flex flex-wrap bg-white card-grid">
+<div class="d-flex flex-wrap bg-white card-grid align-items-baseline">
   <div class="card-house__photo photo">
     <div class="slider__header">
 			<?if($item['PROPERTIES']['ACTION']['VALUE']){?>

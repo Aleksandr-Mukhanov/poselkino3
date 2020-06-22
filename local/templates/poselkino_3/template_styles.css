@@ -188,8 +188,6 @@
 	}
 	.list--grid .card-house__inline-value {
 		display: flex;
-		width: 100%;
-		padding-left: 9px;
 		margin-top: 10px;
 		align-items: baseline;
 		align-self: center;
@@ -217,7 +215,7 @@
 @media (min-width: 767px){
 	.modal-xl, .modal-xxl .modal-content {
 		overflow-y: auto;
-
+		
 	}
 }
 
@@ -316,14 +314,7 @@
 	font-family: rublregular, Arial, Tahoma, sans-serif !important;
 }
 
-/* правка окошка шоссе на главной в фильтре */
-.hero #highwayModal label.custom-control-label{
-  margin-top: 0;
-  margin-bottom: 0;
-  color: #3c4b5a;
-}
 
-/* карта */
 .page-map__container {
 	position: relative;
 }
@@ -384,6 +375,9 @@
 	.offer-house__info {
 		padding-top: 0;
 	}
+	.list--grid .card-house__content {
+		width: 100%;
+	}
 	.offer-house__info .offer-house__title,
 	.list--grid .card-house__title {
 		font-size: 16px;
@@ -398,7 +392,7 @@
 		font-size: 14px;
 		line-height: 26px;
 	}
-
+	
 	.offer-house__metro {
 		display: flex;
 	}
@@ -484,6 +478,7 @@
 	}
 	.list--grid .card-house__inline-value {
 		font-size: 13px;
+		padding-left: 0;
 	}
 
 	.card-house__inline-value span.split-number {
@@ -492,11 +487,11 @@
 	.list--grid .card-house__inline-title {
 		 min-width: 100px;
 	}
-	.offer-house__info .offer-house__inline-info .card-house__inline-value,
-	.list--grid .card-house__inline-value {
+	.offer-house__info .offer-house__inline-info .card-house__inline-value, {
 		 width: auto;
 		margin-left: auto;
 	 }
+	 
 	.list--grid .card-house__inline-value span {
 		display: inline;
 	}
