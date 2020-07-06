@@ -8,12 +8,15 @@ if (!empty($arResult['ERROR'])){
 global $USER_FIELD_MANAGER;
 global $arrFilter;
 // dump($arResult['row']);
-$photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>417, 'height'=>250), BX_RESIZE_IMAGE_EXACT); //dump($photoRes);?>
+$photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>417, 'height'=>250), BX_RESIZE_IMAGE_PROPORTIONAL_ALT); //dump($photoRes);
+
+$pagen_1 = ($_REQUEST['PAGEN_1']) ? ' - страница '.$_REQUEST['PAGEN_1'] : '';
+?>
 	<div class="container developer__info">
 		<div class="row">
 			<div class="col-sm-4 d-none d-sm-block"><a href="#"><img class="logo" src="<?=$photoRes['src']?>" alt="<?=$arResult['row']['UF_NAME']?>"></a></div>
 			<div class="col-sm-8">
-				<h1 class="title"><?=$arResult['row']['UF_NAME']?></h1>
+				<h1 class="title"><?=$arResult['row']['UF_NAME']?><?=$pagen_1?></h1>
 				<div class="subtitle font-weight-bold">Компания <?=$arResult['row']['UF_NAME']?>: отзывы, рейтинг поселки</div>
 				<div class="d-sm-none"><a href="#"><img class="logo" src="<?=$photoRes['src']?>" alt="<?=$arResult['row']['UF_NAME']?>"></a></div>
 				<div class="row d-none d-lg-flex">
@@ -358,6 +361,7 @@ $photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>41
 	</div>
 </div>
 <div class="footer-description bg-white">
+ <?if(!$_REQUEST['PAGEN_1']){?>
 	<div class="container">
 		<div class="row">
 			<div class="offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
@@ -366,3 +370,4 @@ $photoRes = CFile::ResizeImageGet($arResult['row']['UF_FILE'], array('width'=>41
 			</div>
 		</div>
 	</div>
+ <?}?>

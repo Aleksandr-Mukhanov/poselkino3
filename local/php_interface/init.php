@@ -209,6 +209,28 @@ function num2str($num) {
 	return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
 }
 
+// получение элементов HL-блока
+function getElHL($idHL,$order,$filter,$select){
+
+	$hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById($idHL)->fetch();
+	$entity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
+	$entity_data_class = $entity->getDataClass();
+	$entity_table_name = $hlblock['TABLE_NAME'];
+	$sTableID = 'tbl_'.$entity_table_name;
+
+	$rsData = $entity_data_class::getList([
+		'order' => $order,
+	  'filter' => $filter,
+		'select' => $select
+	]);
+	$rsData = new CDBResult($rsData, $sTableID);
+
+	while($arRes = $rsData->Fetch()){
+		$arElements[$arRes['ID']] = $arRes;
+	}
+	return $arElements;
+}
+
 // обработка 404 ошибки
 AddEventHandler('main', 'OnEpilog', '_Check404Error', 1);
 function _Check404Error(){

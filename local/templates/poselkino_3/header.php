@@ -37,7 +37,12 @@ $APPLICATION->AddPanelButton(
 	$bReplace = false //заменить существующую кнопку?
 );
 
-$canonical = ($_REQUEST['PAGEN_1']) ? '?PAGEN_1='.$_REQUEST['PAGEN_1'] : '';
+// canonical
+$canonical = 'https://poselkino.ru'.$APPLICATION->GetCurDir();
+$ourPage = $APPLICATION->GetCurPage(false);
+if (strpos($ourPage, '/filter/') !== false) $canonical = 'https://poselkino.ru/poselki/';
+if ($_REQUEST['PAGEN_1']) $canonical .= '?PAGEN_1='.$_REQUEST['PAGEN_1'];
+$APPLICATION->SetPageProperty('canonical', $canonical);
 
 // dump($_COOKIE); // разбираем куки
 if(isset($_COOKIE['comparison_vil'])){
@@ -52,7 +57,6 @@ if(isset($_COOKIE['favorites_vil'])){
 <head>
 	<title><?$APPLICATION->ShowTitle();?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
-	<link rel="canonical" href="<?='https://poselkino.ru'.$APPLICATION->GetCurDir()?><?=$canonical?>">
 	<link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/png">
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="yandex-verification" content="7dc43856ec298fed" />

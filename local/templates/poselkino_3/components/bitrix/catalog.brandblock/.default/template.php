@@ -11,14 +11,14 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-// dump($arResult);?>
+// dump($arParams['CODE_DEVEL']);?>
 <div class="d-flex flex-wrap flex-md-nowrap text-cener justify-content-center mt-3 mt-md-5 align-items-center">
   <?foreach ($arResult["BRAND_BLOCKS"] as $blockId => $arBB){?>
     <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-center width-md-auto">
-      <a class="developer-logo mt-3 mt-md-0" href="/developery/<?=$arParams['CODE_DEVEL']?>/" target="_blank" itemprop="manufacturer"><img src="<?=$arBB['PICT']['SRC']?>" alt="<?=$arBB['NAME'] // Девелопер ID?>"></a>
+      <a class="developer-logo mt-3 mt-md-0" href="/developery/<?=$arParams['CODE_DEVEL'][0]?>/" target="_blank" itemprop="manufacturer"><img src="<?=$arBB['PICT']['SRC']?>" alt="<?=$arBB['NAME'] // Девелопер ID?>"></a>
     </div>
-    <a class="btn btn-warning rounded-pill mb-3" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с девелопером</a>
-    <a class="d-none d-md-inline developer-logo mt-3 mt-md-0" href="/developery/<?=$arParams['CODE_DEVEL']?>/" target="_blank"><img src="<?=$arBB['PICT']['SRC']?>" alt="<?=$arBB['NAME'] // Девелопер ID?>"></a>
-    <input type="hidden" id="develInfo" data-develId='<?=$arParams['CODE_DEVEL']?>' data-develName='<?=$arBB['NAME']?>'>
+    <?/*?><a class="btn btn-warning rounded-pill mb-3" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с девелопером</a><?*/?>
+    <a class="d-none d-md-inline developer-logo mt-3 mt-md-0" href="/developery/<?=$arParams['CODE_DEVEL'][0]?>/" target="_blank"><img src="<?=$arBB['PICT']['SRC']?>" alt="<?=$arBB['NAME'] // Девелопер ID?>"></a>
+    <input type="hidden" id="develInfo" data-develId='<?=$arParams['CODE_DEVEL'][0]?>' data-develName='<?=$arBB['NAME']?>'>
   <?}?>
 </div>

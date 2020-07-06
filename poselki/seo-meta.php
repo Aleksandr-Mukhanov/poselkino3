@@ -28,7 +28,7 @@ if($arRes = $rsData->Fetch()){ // dump($arRes);
   $newTitle = $arRes['UF_TITLE'];
   $newDesc = $arRes['UF_DESC'];
   $h1 = $arRes['UF_H1'];
-  $h2 = '<h2>'.$arRes['UF_H2'].'</h2>';
+  $h2 = ($arRes['UF_H2']) ? '<h2>'.$arRes['UF_H2'].'</h2>' : '';
   $SEO_text = $arRes['UF_TEXT'];
 
 }else{ // выведем шаблонные

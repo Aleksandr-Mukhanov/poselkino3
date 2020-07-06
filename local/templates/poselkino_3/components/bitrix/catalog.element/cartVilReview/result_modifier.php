@@ -200,43 +200,44 @@ $vodaVal = $arResult['PROPERTIES']['PROVEDENA_VODA']['VALUE'];
 $plottageMin = $arResult['PROPERTIES']['PLOTTAGE']['VALUE'][0];
 $plottageMax = $arResult['PROPERTIES']['PLOTTAGE']['VALUE'][1];
 
-switch ($housesValEnum) { // Наличие домов
-	case 3: // Участки
-		if($typeValEnum == 1){ // Дачный поселок
-			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в ДП '.$arResult['NAME'];
-			// $setDescription = 'Продажа земельных участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа земельных участков в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}elseif($typeValEnum == 2){ // Коттеджный поселок
-			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в КП '.$arResult['NAME'];
-			// $setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}
-		break;
-	case 4: // Дома
-		if($typeValEnum == 1){ // Дачный поселок
-			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или дачу в ДП '.$arResult['NAME'];
-			// $setDescription = 'Продажа домов и дач в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов и дач в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}elseif($typeValEnum == 2){ // Коттеджный поселок
-			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом (коттедж) в КП '.$arResult['NAME'];
-			// $setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}
-		break;
-	case 256: // Дома и участки
-		if($typeValEnum == 1){ // Дачный поселок
-			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в ДП '.$arResult['NAME'];
-			// $setDescription = 'Продажа домов, дач и участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}elseif($typeValEnum == 2){ // Коттеджный поселок
-			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в КП '.$arResult['NAME'];
-			// $setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
-		}
-		break;
-}
+// switch ($housesValEnum) { // Наличие домов
+// 	case 3: // Участки
+// 		if($typeValEnum == 1){ // Дачный поселок
+// 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в ДП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа земельных участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа земельных участков в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}elseif($typeValEnum == 2){ // Коттеджный поселок
+// 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в КП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}
+// 		break;
+// 	case 4: // Дома
+// 		if($typeValEnum == 1){ // Дачный поселок
+// 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или дачу в ДП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа домов и дач в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа домов и дач в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}elseif($typeValEnum == 2){ // Коттеджный поселок
+// 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом (коттедж) в КП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}
+// 		break;
+// 	case 256: // Дома и участки
+// 		if($typeValEnum == 1){ // Дачный поселок
+// 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в ДП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа домов, дач и участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}elseif($typeValEnum == 2){ // Коттеджный поселок
+// 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в КП '.$arResult['NAME'];
+// 			// $setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+// 			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Московской области '.$km_MKAD.' км от МКАД ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+// 		}
+// 		break;
+// }
 
-$seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - отзывы, цены, фото, план';
+$seoTitle = 'Отзывы о поселке '.trim($arResult['NAME']).' - отзывы жильцов КП '.trim($arResult['NAME']);
+$setDescription = 'Отзывы жильцов о поселке '.trim($arResult['NAME']).'. Все отзывы, плюсы и минусы о КП '.trim($arResult['NAME']).' на сайте Поселкино';
 
 $cp = $this->__component;
 if (is_object($cp))

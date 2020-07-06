@@ -47,6 +47,9 @@ use Bitrix\Main\Page\Asset;
    $arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
 
   require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
+
+  $arOurPage = explode('/map/',$ourPage);
+  $APPLICATION->SetPageProperty('canonical', $arOurPage[0]);
 ?>
 <main class="page page-map">
   <div class="page-map__wrap">

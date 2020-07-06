@@ -186,6 +186,7 @@ ErrorDocument 404 /404.php
   Redirect 301  /developery/Land-Msk/ /developery/Zemli-Msk/
   Redirect 301  /developery/Land_Format/ /developery/Zemelniy-Format/
   Redirect 301  /developery/native-land/ /developery/Rodnie-Zemli/
+  Redirect 301  /developery/Profinvest/ /developery/profinvest/
 
 # поселки
   Redirect 301 "/poselki/zaokskaya dolina/" /poselki/zaokskaya-dolina/

@@ -158,6 +158,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки в '.$arNames['NAME_KOM'].' районе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ участки с коммуникациями в '.$arNames['NAME_KOM'].' районе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков в '.$arNames['NAME_KOM'].' районе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Участки '.$arNames['NAME'].' район, коммуникации';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом в '.$arNames['NAME_KOM'].' районе с коммуникациями';
@@ -165,6 +166,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома в '.$arNames['NAME_KOM'].' районе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ дома с коммуникациями в '.$arNames['NAME_KOM'].' районе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей в '.$arNames['NAME_KOM'].' районе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Дома '.$arNames['NAME'].' район, коммуникации';
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с коммуникациями';
@@ -172,6 +174,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки с коммуникациями в '.$arNames['NAME_KOM'].' районе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков в '.$arNames['NAME_KOM'].' районе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' район, коммуникации';
       break;
   }
   $urlAll = "/poselki/".$rayon."-rayon-kommunikatsii/";
@@ -191,6 +194,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки в '.$arNames['NAME_KOM'].' районе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ участки в '.$arNames['NAME_KOM'].' районе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков со светом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Участки '.$arNames['NAME'].' район, свет';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом в '.$arNames['NAME_KOM'].' районе с электричеством, светом';
@@ -198,6 +202,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома в '.$arNames['NAME_KOM'].' районе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ дома в '.$arNames['NAME_KOM'].' районе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей со светом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Дома '.$arNames['NAME'].' район, свет';
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с электричеством, светом';
@@ -205,6 +210,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки в '.$arNames['NAME_KOM'].' районе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков со светом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' район, свет';
       break;
   }
   $urlAll = "/poselki/".$rayon."-rayon-svet/";
@@ -224,6 +230,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки в '.$arNames['NAME_KOM'].' районе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ участки в '.$arNames['NAME_KOM'].' районе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков с газопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Участки '.$arNames['NAME'].' район, газ';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом в '.$arNames['NAME_KOM'].' районе с газом';
@@ -231,6 +238,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома в '.$arNames['NAME_KOM'].' районе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ дома в '.$arNames['NAME_KOM'].' районе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей с газопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Дома '.$arNames['NAME'].' район, газ';
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с газом';
@@ -238,7 +246,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки в '.$arNames['NAME_KOM'].' районе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков с газопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' район газ';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' район, газ';
       break;
   }
   $urlAll = "/poselki/".$rayon."-rayon-gaz/";
@@ -258,6 +266,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки в '.$arNames['NAME_KOM'].' районе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ участки в '.$arNames['NAME_KOM'].' районе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков с водопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Участки '.$arNames['NAME'].' район, вода';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом в '.$arNames['NAME_KOM'].' районе с водой, водоснабжением';
@@ -265,6 +274,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома в '.$arNames['NAME_KOM'].' районе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ дома в '.$arNames['NAME_KOM'].' районе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей с водопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Дома '.$arNames['NAME'].' район, вода';
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с водой, водоснабжением';
@@ -272,6 +282,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки в '.$arNames['NAME_KOM'].' районе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки в '.$arNames['NAME_KOM'].' районе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков с водопроводом в '.$arNames['NAME_KOM'].' районе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' район, вода';
       break;
   }
   $urlAll = "/poselki/".$rayon."-rayon-voda/";
@@ -291,6 +302,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ участки с коммуникациями на '.$arNames['NAME_KOM'].' шоссе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков на '.$arNames['NAME_KOM'].' шоссе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Участок - '.$arNames['NAME'].' шоссе - коммуникации';
+        $pageDesc = 'Участок '.$arNames['NAME'].' шоссе, коммуникации';
+      }
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе с коммуникациями';
@@ -298,6 +313,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ дома с коммуникациями на '.$arNames['NAME_KOM'].' шоссе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей на '.$arNames['NAME_KOM'].' шоссе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Дом - '.$arNames['NAME'].' шоссе - коммуникации';
+        $pageDesc = 'Дом '.$arNames['NAME'].' шоссе, коммуникации';
+      }
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с коммуникациями';
@@ -305,7 +324,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с коммуникациями';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки с коммуникациями на '.$arNames['NAME_KOM'].' шоссе. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков на '.$arNames['NAME_KOM'].' шоссе с коммуникациями ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе коммуникации';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе, коммуникации';
       break;
   }
   $urlAll = "/poselki/".$shosse."-shosse-kommunikatsii/";
@@ -325,6 +344,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ участки на '.$arNames['NAME_KOM'].' шоссе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков со светом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Участок - '.$arNames['NAME'].' шоссе - свет';
+        $pageDesc = 'Участок '.$arNames['NAME'].' шоссе, свет';
+      }
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе с электричеством';
@@ -332,6 +355,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ дома на '.$arNames['NAME_KOM'].' шоссе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей со светом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Дом - '.$arNames['NAME'].' шоссе - свет';
+        $pageDesc = 'Дом '.$arNames['NAME'].' шоссе, свет';
+      }
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с электричеством';
@@ -339,7 +366,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с электричеством';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки на '.$arNames['NAME_KOM'].' шоссе с электричеством. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков со светом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе свет';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе, свет';
       break;
   }
   $urlAll = "/poselki/".$shosse."-shosse-svet/";
@@ -359,7 +386,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ участки на '.$arNames['NAME_KOM'].' шоссе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков с газопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Купить участок '.$arNames['NAME'].' шоссе газ';
+      if ($pagen) $pageTitleDesc = 'Купить участок '.$arNames['NAME'].' шоссе, газ';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе с газом';
@@ -367,6 +394,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ дома на '.$arNames['NAME_KOM'].' шоссе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей с газопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Дом - '.$arNames['NAME'].' шоссе - газ';
+        $pageDesc = 'Дом '.$arNames['NAME'].' шоссе, газ';
+      }
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с газом';
@@ -374,7 +405,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с газом';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки на '.$arNames['NAME_KOM'].' шоссе с газом. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков с газопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе газ';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе, газ';
       break;
   }
   $urlAll = "/poselki/".$shosse."-shosse-gaz/";
@@ -394,7 +425,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ участки на '.$arNames['NAME_KOM'].' шоссе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков с водопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Купить участок '.$arNames['NAME'].' шоссе вода';
+      if ($pagen) $pageTitleDesc = 'Купить участок '.$arNames['NAME'].' шоссе, вода';
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе с водой';
@@ -402,6 +433,10 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ дома на '.$arNames['NAME_KOM'].' шоссе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей с водопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) {
+        $pageTitle = 'Дом - '.$arNames['NAME'].' шоссе - вода';
+        $pageDesc = 'Дом '.$arNames['NAME'].' шоссе, вода';
+      }
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с водой';
@@ -409,7 +444,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с водой';
       $SEO_text = '<p>В данном разделе представлены ▶ поселки на '.$arNames['NAME_KOM'].' шоссе с водой. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$vilName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджных поселков с водопроводом на '.$arNames['NAME_KOM'].' шоссе ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
-      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе вода';
+      if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе, вода';
       break;
   }
   $urlAll = "/poselki/".$shosse."-shosse-voda/";
@@ -437,6 +472,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе до '.$mkadKM.' км от МКАД';
       $SEO_text = '<p>В данном разделе представлены ▶ дома на '.$arNames['NAME_KOM'].' шоссе до '.$mkadKM.' км от МКАД. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей по '.$arNames['NAME_KOMU'].' направлению на расстоянии до '.$mkadKM.' км от Москвы ▶ стоимость варьируется от '.$arMetaInfo['minPrice'].' рублей до '.$arMetaInfo['maxPrice'].' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Купить дом '.$arNames['NAME'].' шоссе до '.$mkadKM.' км МКАД';
       break;
     default: // Поселки
       $newTitle = 'Коттеджные поселки '.$arNames['NAME'].' шоссе до '.$mkadKM.' км от МКАД';
@@ -501,6 +537,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки до '.$mkadKM.' км от МКАД до '.$price.' рублей';
       $SEO_text = '<p>В данном разделе представлены ▶ участки до '.$mkadKM.' км от МКАД до '.$price.' рублей. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков до '.$priceURL.' '.$nameBCFullMln2.' рублей на расстоянии до '.$mkadKM.' км от Москвы.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = $newTitle;
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом до '.$mkadKM.' км от МКАД до '.$priceURL.' '.$nameBCFullMln2.' рублей';
@@ -508,6 +545,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома до '.$mkadKM.' км от МКАД до '.$price.' рублей';
       $SEO_text = '<p>В данном разделе представлены ▶ дома до '.$mkadKM.' км от МКАД до '.$price.' рублей. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей до '.$priceURL.' '.$nameBCFullMln2.' рублей на расстоянии до '.$mkadKM.' км от Москвы.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = $newTitle;
       break;
   }
   $onlyParam = true;
@@ -532,6 +570,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе до '.$price.' рублей';
       $SEO_text = '<p>В данном разделе представлены ▶ дома на '.$arNames['NAME_KOM'].' шоссе до до '.$price.' рублей. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей по '.$arNames['NAME_KOMU'].' направлению стоимостью до '.$priceURL.' '.$nameBCFullMln2.' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = 'Купить дом '.$arNames['NAME'].' шоссе до '.$priceURL.' '.$nameBCFullMln2.'';
       break;
   }
   $onlyParam = true;
@@ -548,6 +587,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Земельные участки в '.$arNames['NAME_KOM'].' районе до '.$price.' рублей';
       $SEO_text = '<p>В данном разделе представлены ▶ участки в '.$arNames['NAME_KOM'].' районе до '.$priceURL.' '.$nameBCFullMln2.' рублей. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$areaName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены земельных участков по '.$arNames['NAME_KOMU'].' району стоимостью до '.$price.' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = $newTitle;
       break;
     case 'withDom': // Дома
       $newTitle = 'Купить дом '.$arNames['NAME'].' район до '.$priceURL.' '.$nameBCFullMln2.' рублей';
@@ -555,6 +595,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
       $h1 = 'Дома в '.$arNames['NAME_KOM'].' районе до '.$price.' рублей';
       $SEO_text = '<p>В данном разделе представлены ▶ дома в '.$arNames['NAME_KOM'].' районе до '.$priceURL.' '.$nameBCFullMln2.' рублей. Здесь представлено ▶ '.$arMetaInfo['cntPos'].' '.$houseName.' с независимыми отзывами и рейтингом. Вы можете выбрать самые доступные цены коттеджей по '.$arNames['NAME_KOMU'].' району стоимостью до '.$price.' рублей.</p>
       <p>★ Особенности проекта Poselkino ★ - для каждого объекта мы подбираем данные:</p>';
+      if ($pagen) $pageTitleDesc = $newTitle;
       break;
   }
   $onlyParam = true;

@@ -52,6 +52,10 @@
 	// 	unset($arPhoto);
 	// } // dump($arPhoto);
 
+// получим девелоперов
+	// dump($arResult['PROPERTIES']['DEVELOPER_ID']);
+	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE']); // dump($arResult['DEVELOPERS']);
+
 // узнаем отзывы
 	$cntCom = 0;$ratingSum = 0;
 	$arOrder = Array("ACTIVE_FROM"=>"DESC");

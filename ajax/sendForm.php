@@ -49,6 +49,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		$mailFields = array(
 			"name" => $name,
 			"tel" => $tel,
+			"email" => $email,
 			"namePos" => $namePos,
 			"codePos" => $codePos,
 			"subject" => $subject,
@@ -57,7 +58,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 			"emailDevel" => $emailDevel,
 			"page" => $_SERVER['HTTP_REFERER'],
 		);
-		if (CEvent::Send("SEND_TO_VIEW", "s1", $mailFields)) mesOk("Сообщение успешно отправлено!");
+		if (CEvent::Send("SEND_TO_VIEW", "s1", $mailFields)) mesOk("Ваша заявка успешно отправлена!<br /> Представитель поселка свяжется с Вами в самое ближайшее время)");
 		else mesEr("Error: ".$el->LAST_ERROR);
 
 		// обновим счетчик UP_TO_VIEW

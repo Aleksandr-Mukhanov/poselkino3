@@ -54,6 +54,13 @@ use Bitrix\Highloadblock as HL,
   </div>
 </main>
 <? // установим мета
-$APPLICATION->SetPageProperty("title",$nameDevel." - отзывы, участки и поселки компании в Подмосковье");
-$APPLICATION->SetPageProperty("description","Все 🏠 доступные поселки ▶ Компания ".$nameDevel." ▶ Реальные отзывы, адрес девелопера и контакты, официальный сайт – на сайте Poselkino.ru");?>
+if($_REQUEST['PAGEN_1']){
+  $title = $nameDevel." - страница ".$_REQUEST['PAGEN_1'];
+  $description = $title.' - сайт Поселкино';
+}else{
+  $title = $nameDevel." - отзывы, участки и поселки компании в Подмосковье";
+  $description = "Все 🏠 доступные поселки ▶ Компания ".$nameDevel." ▶ Реальные отзывы, адрес девелопера и контакты, официальный сайт – на сайте Poselkino.ru";
+}
+$APPLICATION->SetPageProperty("title",$title);
+$APPLICATION->SetPageProperty("description",$description);?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

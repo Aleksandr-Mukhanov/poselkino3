@@ -198,7 +198,7 @@ $(document).ready(function(){
 
 	// Написать нам
 	$('#formToUs').submit(function(event){
-		//alert(777);return false;
+		event.preventDefault();
 		name = $('#nameToUs').val();
 		tel = $('#telToUs').val();
 		email = $('#emailToUs').val();
@@ -212,18 +212,19 @@ $(document).ready(function(){
 				mes: mes,
 				ourForm: 'ToUs'
 			},function(data){
-				//alert(data);
 				$('#formToUs').html(data);
-				return false;
 			}
 		);
 	});
 
 	//  Записаться на просмотр
-	$('#formSignToView').submit(function(event){
-		name = $('#nameSignToView').val();
-		tel = $('#telSignToView').val();
+	$('.formSignToView').submit(function(event){
+    event.preventDefault();
+		name = $(this).find('.nameSignToView').val();
+		tel = $(this).find('.telSignToView').val();
+    email = $(this).find('.emailSignToView').val();
 		idButton = $('#idButton').val();
+    if (idButton == '') idButton = 'SIGN_UP_TO_VIEW';
 		yaCounter50830593.reachGoal(idButton);
 		idPos = $('#posInfo').attr('data-idPos');
 		namePos = $('#posInfo').attr('data-namePos');
@@ -239,6 +240,7 @@ $(document).ready(function(){
 		$.post("/ajax/sendForm.php",{
 				name: name,
 				tel: tel,
+        email: email,
 				ourForm: 'SignToView',
 				subject: subject,
 				idPos: idPos,
@@ -248,9 +250,7 @@ $(document).ready(function(){
 				develId: develId,
 				develName: develName
 			},function(data){
-				// alert(data);
-				$('#formSignToView').html(data);
-				return false;
+				$('.formSignToView').html(data);
 			}
 		);
 	});
@@ -264,9 +264,7 @@ $(document).ready(function(){
 				email: email,
 				ourForm: 'Subscribe'
 			},function(data){
-				//alert(data);
 				$('#subscribeForm').css({'background':'none'}).html(data);
-				return false;
 			}
 		);
 	});
@@ -281,9 +279,7 @@ $(document).ready(function(){
 				mes: textPosEr,
 				ourForm: 'SendError'
 			},function(data){
-				//alert(data);
 				$('#formSendError').css({'background':'none'}).html(data);
-				return false;
 			}
 		);
 	});
@@ -319,21 +315,19 @@ $(document).ready(function(){
 				comment: comment,
 				resident: resident,
 			},function(data){
-				//alert(data);
 				$('#formSendReview').html(data);
-				return false;
 			}
 		);
 	});
 
 });
 
-(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-ym(55033927, "init", {
-		 clickmap:true,
-		 trackLinks:true,
-		 accurateTrackBounce:true
-});
+// (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+// m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+// (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+//
+// ym(55033927, "init", {
+// 		 clickmap:true,
+// 		 trackLinks:true,
+// 		 accurateTrackBounce:true
+// });

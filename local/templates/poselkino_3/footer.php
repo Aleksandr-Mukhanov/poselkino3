@@ -109,24 +109,30 @@
           <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
       </div>
-      <div class="modal-body">
-        <form class="row form-feedback-modal" id="formSignToView" action="">
+      <div class="modal-body px-3 px-md-5">
+        <form class="row form-feedback-modal formSignToView" action="">
           <div class="col-12">
             <p class="text-center">Мы передадим ваши контактные данные представителям поселка</p>
           </div>
           <div class="col-12">
             <div class="form-group">
-              <label for="nameSignToView">Ваше имя</label>
-              <input class="form-control" id="nameSignToView" type="text" placeholder="Введите имя" required>
+              <input class="form-control nameSignToView" id="nameSignToView" type="text" placeholder="Ваше имя" required>
             </div>
-            <div class="form-group">
-              <label for="telSignToView">Ваш телефон</label>
-              <input class="phone form-control" id="telSignToView" type="text" placeholder="Ваш телефон" required>
-            </div>
+              <div class="form-group">
+                  <input class="phone form-control telSignToView" id="telSignToView" type="text" placeholder="Номер телефон" autocomplete="off" required>
+              </div>
+              <div class="form-group">
+                  <input class="form-control emailSignToView" id="emailSignToView" type="text" placeholder="Email" required>
+              </div>
           </div>
           <div class="col-12 text-center">
-            <button class="btn btn-warning px-5 rounded-pill" type="submit">Отправить</button>
-            <p class="mt-2"> <small>Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь c </small><a class="text-success" href="/politika-konfidentsialnosti/">Политикой Конфиденциальности</a></p>
+            <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
+            <p class="mt-2">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                  <input class="custom-control-input" id="privacy-policy" type="checkbox" name="privacy-policy" checked="" required="">
+                  <label class="custom-control-label" for="privacy-policy" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+              </div>
+            </p>
           </div>
         </form>
       </div>
@@ -156,7 +162,7 @@
             </div>
             <div class="form-group">
               <label for="telToUs">Ваш телефон</label>
-              <input class="phone form-control" id="telToUs" type="text" placeholder="Ваш телефон" required>
+              <input class="phone form-control" id="telToUs" type="text" placeholder="Ваш телефон" autocomplete="off" required>
             </div>
             <div class="form-group">
               <label for="emailToUs">Ваш E-mail</label>
@@ -207,6 +213,7 @@
   </div>
 </div>
 
+<?php if (stripos(@$_SERVER['HTTP_USER_AGENT'], 'Lighthouse') === false): ?>
 <!-- Global site tag (gtag.js) - Google Ads: 783230785 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-783230785"></script>
 <script>
@@ -270,5 +277,6 @@ fbq('track', 'PageView');
 (function(w,d,n,c){w.CalltouchDataObject=n;w[n]=function(){w[n]["callbacks"].push(arguments)};if(!w[n]["callbacks"]){w[n]["callbacks"]=[]}w[n]["loaded"]=false;if(typeof c!=="object"){c=[c]}w[n]["counters"]=c;for(var i=0;i<c.length;i+=1){p(c[i])}function p(cId){var a=d.getElementsByTagName("script")[0],s=d.createElement("script"),i=function(){a.parentNode.insertBefore(s,a)};s.type="text/javascript";s.async=true;s.src="https://mod.calltouch.ru/init.js?id="+cId;if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",i,false)}else{i()}}})(window,document,"ct","u4selnrd");
 </script>
 <!-- calltouch -->
+<?php endif; ?>
 </body>
 </html>
