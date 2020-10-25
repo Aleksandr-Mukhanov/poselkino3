@@ -163,12 +163,12 @@ switch ($km_MKAD) {
 		<div class="row">
 			<div class="order-0 col-12 d-md-none">
 				<div class="page-title">
-					<h1 class="h2">Отзывы о поселке <?=$name?></h1>
+					<h1 class="h2">Отзывы о поселке <?=$name?><?=$arResult["TITLE_DOP"]?></h1>
 				</div>
 			</div>
 			<div class="order-2 order-md-1 col-md-6">
 				<div class="page-title d-none d-md-block">
-					<h1 class="h2">Отзывы о поселке <?=$name?></h1>
+					<h1 class="h2">Отзывы о поселке <?=$name?><?=$arResult["TITLE_DOP"]?></h1>
 					<div class="wrap-raiting mt-4">
 						<div class="card-house__raiting d-flex">
 							<div class="line-raiting">

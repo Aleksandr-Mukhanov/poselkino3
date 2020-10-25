@@ -179,17 +179,17 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		'/poselki/dachnye/',
 		'/poselki/kupit-dachnyj-uchastok/',
 		'/poselki/kupit-dachnyj-dom/',
-		'/poselki/kupit-letnij-dom/',
-		'/poselki/kupit-zimnij-dom/',
-		'/poselki/s-infrastrukturoj/',
-		'/poselki/kupit-uchastok-s-infrastrukturoj/',
-		'/poselki/kupit-dom-s-infrastrukturoj/',
-		'/poselki/s-ohranoj/',
-		'/poselki/kupit-uchastok-s-ohranoj/',
-		'/poselki/kupit-dom-s-ohranoj/',
-		'/poselki/s-dorogami/',
-		'/poselki/kupit-uchastok-s-dorogami/',
-		'/poselki/kupit-dom-s-dorogami/',
+		// '/poselki/kupit-letnij-dom/',
+		// '/poselki/kupit-zimnij-dom/',
+		// '/poselki/s-infrastrukturoj/',
+		// '/poselki/kupit-uchastok-s-infrastrukturoj/',
+		// '/poselki/kupit-dom-s-infrastrukturoj/',
+		// '/poselki/s-ohranoj/',
+		// '/poselki/kupit-uchastok-s-ohranoj/',
+		// '/poselki/kupit-dom-s-ohranoj/',
+		// '/poselki/s-dorogami/',
+		// '/poselki/kupit-uchastok-s-dorogami/',
+		// '/poselki/kupit-dom-s-dorogami/',
 		'/poselki/kupit-uchastok/',
 		'/poselki/kupit-dom/',
 	];
@@ -414,7 +414,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	}
 
 // коммуникации и шоссе
-	$commun2 = ['svet','voda','gaz','kommunikatsii'];
+	$commun2 = ['svet','voda','gaz','kommunikatsii','ryadom-s-lesom','u-vody','izhs','snt'];
 
 	foreach ($commun2 as $commun) {
 		foreach ($onlyShosse as $shosse) {

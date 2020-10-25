@@ -489,6 +489,138 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   $onlyParam = true;
   $SEO_text_add = true;
 
+}elseif($shosse && $typeURL == 'ryadom-s-lesom'){ // yaroslavskoe-shosse-ryadom-s-lesom
+
+  $arMetaInfo = getMetaInfo($arrFilter);
+
+  switch ($domPos) {
+    case 'noDom': // Участки
+      $newTitle = 'Купить участок на '.$arNames['NAME_KOM'].' шоссе с лесом';
+      $newDesc = '▶ Участки на '.$arNames['NAME_KOM'].' шоссе рядом с лесом ▶ Полная база земельных участков с лесом на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе у леса';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    case 'withDom': // Дома
+      $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе с лесом';
+      $newDesc = '▶ Дома на '.$arNames['NAME_KOM'].' шоссе рядом с лесом ▶ Полная база коттеджей с лесом на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе у леса';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    default: // Поселки
+      $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе с лесом';
+      $newDesc = '▶ Поселки на '.$arNames['NAME_KOM'].' шоссе рядом с лесом ▶ Полная база коттеджных поселков с лесом на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе у леса';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+  }
+  $urlAll = "/poselki/".$shosse."-shosse-ryadom-s-lesom/";
+  $urlNoDom = "/poselki/kupit-uchastok/".$shosse."-shosse-ryadom-s-lesom/";
+  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-ryadom-s-lesom/";
+  $onlyParam = true;
+  // $SEO_text_add = true;
+
+}elseif($shosse && $typeURL == 'u-vody'){ // yaroslavskoe-shosse-u-vody
+
+  $arMetaInfo = getMetaInfo($arrFilter);
+
+  switch ($domPos) {
+    case 'noDom': // Участки
+      $newTitle = 'Купить участок на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером';
+      $newDesc = '▶ Участки на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером ▶ Полная база земельных участков у воды на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Земельные участки на '.$arNames['NAME_KOM'].' шоссе у воды';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    case 'withDom': // Дома
+      $newTitle = 'Купить дом на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером';
+      $newDesc = '▶ Дома на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером ▶ Полная база коттеджей у воды на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Дома на '.$arNames['NAME_KOM'].' шоссе у воды';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    default: // Поселки
+      $newTitle = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером';
+      $newDesc = '▶ Поселки на '.$arNames['NAME_KOM'].' шоссе рядом с рекой или озером ▶ Полная база коттеджных поселков у воды на '.$arNames['NAME_KOM'].' шоссе ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Коттеджные поселки на '.$arNames['NAME_KOM'].' шоссе у воды';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+  }
+  $urlAll = "/poselki/".$shosse."-shosse-u-vody/";
+  $urlNoDom = "/poselki/kupit-uchastok/".$shosse."-shosse-u-vody/";
+  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-u-vody/";
+  $onlyParam = true;
+  // $SEO_text_add = true;
+
+}elseif($shosse && $typeURL == 'izhs'){ // yaroslavskoe-shosse-izhs
+
+  $arMetaInfo = getMetaInfo($arrFilter);
+
+  switch ($domPos) {
+    case 'noDom': // Участки
+      $newTitle = 'Купить участок ИЖС '.$arNames['NAME'].' шоссе ';
+      $newDesc = '▶ Участки ИЖС на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база земельных участков ИЖС по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Земельные участки ИЖС на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    case 'withDom': // Дома
+      $newTitle = 'Купить дом ИЖС '.$arNames['NAME'].' шоссе';
+      $newDesc = '▶ Дома ИЖС на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база коттеджей и домов ИЖС по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Дома ИЖС на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    default: // Поселки
+      $newTitle = 'Коттеджные поселки ИЖС '.$arNames['NAME'].' шоссе';
+      $newDesc = '▶ Поселки ИЖС на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база коттеджных поселков по '.$arNames['NAME_KOMU'].' направлению с землей ИЖС ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Коттеджные поселки ИЖС на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+  }
+  $urlAll = "/poselki/".$shosse."-shosse-izhs/";
+  $urlNoDom = "/poselki/kupit-uchastok/".$shosse."-shosse-izhs/";
+  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-izhs/";
+  $onlyParam = true;
+  // $SEO_text_add = true;
+
+}elseif($shosse && $typeURL == 'snt'){ // yaroslavskoe-shosse-snt
+
+  $arMetaInfo = getMetaInfo($arrFilter);
+
+  switch ($domPos) {
+    case 'noDom': // Участки
+      $newTitle = 'Купить участок СНТ '.$arNames['NAME'].' шоссе ';
+      $newDesc = '▶ Участки СНТ на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база земельных участков СНТ по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Земельные участки СНТ на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    case 'withDom': // Дома
+      $newTitle = 'Купить дом СНТ '.$arNames['NAME'].' шоссе';
+      $newDesc = '▶ Дома СНТ на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база коттеджей и домов СНТ по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Дома СНТ на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+    default: // Поселки
+      $newTitle = 'Коттеджные поселки СНТ '.$arNames['NAME'].' шоссе';
+      $newDesc = '▶ Поселки СНТ на '.$arNames['NAME_KOM'].' шоссе ▶ Полная база коттеджных поселков по '.$arNames['NAME_KOMU'].' направлению с землей СНТ ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+      $h1 = 'Коттеджные поселки СНТ на '.$arNames['NAME_KOM'].' шоссе';
+      $SEO_text = '';
+      if ($pagen) $pageTitleDesc = $newTitle;
+      break;
+  }
+  $urlAll = "/poselki/".$shosse."-shosse-snt/";
+  $urlNoDom = "/poselki/kupit-uchastok/".$shosse."-shosse-snt/";
+  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-snt/";
+  $onlyParam = true;
+  // $SEO_text_add = true;
+
 }elseif($typeURL == 'izhs' && $mkadKM){ // do-30-km-mkad-izhs
 
   $arMetaInfo = getMetaInfo($arrFilter);

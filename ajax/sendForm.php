@@ -41,8 +41,8 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		$rsData = new CDBResult($rsData, $sTableID);
 
 		if($arRes = $rsData->Fetch()){ // dump($arRes);
-			foreach ($arRes['UF_EMAIL'] as $email) {
-				$emailDevel = ($emailDevel) ? $emailDevel.','.trim($email) : trim($email);
+			foreach ($arRes['UF_EMAIL'] as $uf_email) {
+				$emailDevel = ($emailDevel) ? $emailDevel.','.trim($uf_email) : trim($uf_email);
 			}
 		}
 

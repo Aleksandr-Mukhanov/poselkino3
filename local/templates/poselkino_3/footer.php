@@ -129,8 +129,8 @@
             <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
             <p class="mt-2">
               <div class="custom-control custom-checkbox custom-control-inline">
-                  <input class="custom-control-input" id="privacy-policy" type="checkbox" name="privacy-policy" checked="" required="">
-                  <label class="custom-control-label" for="privacy-policy" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+                  <input class="custom-control-input" id="privacy-policy-1" type="checkbox" name="privacy-policy" checked="" required="">
+                  <label class="custom-control-label" for="privacy-policy-1" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
               </div>
             </p>
           </div>
@@ -150,32 +150,33 @@
           <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
       </div>
-      <div class="modal-body">
+      <div class="modal-body px-3 px-md-5">
         <form class="row form-feedback-modal" id="formToUs" action="">
           <div class="col-12">
             <p class="text-center">В форме обратной связи Вы можете задать нам любой вопрос</p>
           </div>
           <div class="col-12">
             <div class="form-group">
-              <label for="nameToUs">Ваше имя</label>
-              <input class="form-control" id="nameToUs" type="text" placeholder="Введите имя" required>
+              <input class="form-control" id="nameToUs" type="text" placeholder="Ваше имя" required>
             </div>
             <div class="form-group">
-              <label for="telToUs">Ваш телефон</label>
-              <input class="phone form-control" id="telToUs" type="text" placeholder="Ваш телефон" autocomplete="off" required>
+              <input class="phone form-control" id="telToUs" type="text" placeholder="Номер телефона" autocomplete="off" required>
             </div>
             <div class="form-group">
-              <label for="emailToUs">Ваш E-mail</label>
-              <input class="form-control" id="emailToUs" type="text" placeholder="Ваш E-mail" required>
+              <input class="form-control" id="emailToUs" type="text" placeholder="E-mail" required>
             </div>
             <div class="form-group">
-              <label for="textToUs">Текст обращения</label>
               <textarea class="form-control" id="textToUs" placeholder="Текст обращения" required></textarea>
             </div>
           </div>
           <div class="col-12 text-center">
-            <button class="btn btn-warning px-5 rounded-pill" type="submit">Отправить</button>
-            <p class="mt-2"> <small>Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь c </small><a class="text-success" href="/politika-konfidentsialnosti/">Политикой Конфиденциальности</a></p>
+            <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
+            <p class="mt-2">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                  <input class="custom-control-input" id="privacy-policy-2" type="checkbox" name="privacy-policy" checked="" required="">
+                  <label class="custom-control-label" for="privacy-policy-2" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+              </div>
+            </p>
           </div>
         </form>
       </div>

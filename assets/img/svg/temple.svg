@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24.723" height="23.043" viewBox="0 0 24.723 23.043" class="inline-svg">
   <g transform="translate(0 -10.535)">
-    <path d="M253.381,206.25v7.434H257.9V208.86Z" transform="translate(-233.173 -180.106)" class="color-fill" />
-    <path d="M0,213.618H4.515v-7.44L0,208.794Z" transform="translate(0 -180.04)" class="color-fill" />
-    <path d="M66.619,107.094v9.937h4.629v-4.213a2.393,2.393,0,0,1,2.393-2.393h.053a2.393,2.393,0,0,1,2.393,2.393v4.213h4.629v-9.937l-7.049-5.847Z" transform="translate(-61.306 -83.478)" class="color-fill" />
-    <path d="M27.5,22.582l1.2,1.451L37.67,16.64l8.972,7.393,1.2-1.451-9.61-7.919V12.9h1.725V11.784H38.228V10.535H37.112v1.249H35.387V12.9h1.725v1.762Z" transform="translate(-25.309)" class="color-fill" />
+    <path d="M253.381,206.25v7.434H257.9V208.86Z" transform="translate(-233.173 -180.106)" fill="#8A6EAC" class="color-fill" />
+    <path d="M0,213.618H4.515v-7.44L0,208.794Z" transform="translate(0 -180.04)" fill="#8A6EAC" class="color-fill" />
+    <path d="M66.619,107.094v9.937h4.629v-4.213a2.393,2.393,0,0,1,2.393-2.393h.053a2.393,2.393,0,0,1,2.393,2.393v4.213h4.629v-9.937l-7.049-5.847Z" transform="translate(-61.306 -83.478)" fill="#8A6EAC" class="color-fill" />
+    <path d="M27.5,22.582l1.2,1.451L37.67,16.64l8.972,7.393,1.2-1.451-9.61-7.919V12.9h1.725V11.784H38.228V10.535H37.112v1.249H35.387V12.9h1.725v1.762Z" transform="translate(-25.309)" fill="#8A6EAC" class="color-fill" />
   </g>
 </svg>

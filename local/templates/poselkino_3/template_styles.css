@@ -696,3 +696,76 @@ p.mesOk {
 .modal-body label a {
 	color: #3c4b5a;
 }
+
+@media (max-width: 767px) {
+	.village-slider .slick-arrow {
+		margin-top: 180px !important;
+	}
+}
+@media (max-width: 480px) {
+	.village-slider .slick-arrow {
+		margin-top: 80px !important;
+	}
+}
+
+.feedback-form {
+	position: relative;
+}
+
+.feedback-form--help {
+	background-color: #fff;
+	box-shadow: 0 15px 30px 0 rgba(156,167,178,.15);
+}
+
+.feedback-form__bg {
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: url('/assets/img/site/image-form.png') no-repeat top right;
+	background-size: auto 300px;
+	opacity: .5;
+}
+
+
+@media (max-width: 991px) {
+	.feedback-form__bg {
+		background-position: bottom right;
+	}
+}
+
+@media (max-width: 767px) {
+	.feedback-form h2,
+	.feedback-form p {
+		text-align: center;
+	}
+	.feedback-form__bg {
+		background-size: 320px auto;
+		background-position: bottom center;
+		bottom: 0px;
+	}
+}
+
+.phone-cart__block a {
+	color: #3c4b5a;
+	text-decoration: none;
+}
+
+.tag-list__item a.active {
+	color: #fff;
+	background-color: #78a86d;
+	border-color: #78a86d;
+}
+.tag-list__item a.active .text-secondary {
+	color: #fff !important;
+}
+
+.feedback-form--help {
+	overflow: hidden;
+}
+
+.feedback-form--help p.mesOk {
+	text-align: left;
+	padding: 0;
+}

@@ -1,12 +1,12 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 // dump($arTegs);
 // получим наши поселки
-$arOrder = Array("SORT" => "ASC");
-$arFilter = Array("IBLOCK_ID" => 1, "ACTIVE" => "Y");
+$arOrder = Array('SORT' => 'ASC');
+$arFilter = Array('IBLOCK_ID' => 1,'ACTIVE' => 'Y','!PROPERTY_SALES_PHASE' => [254],'!PROPERTY_HIDE_POS' => 273);
 if ($arrFilter) array_push($arFilter, $arrFilter); // dump($arrFilter);
-$arSelect = Array("ID", "PROPERTY_5", "PROPERTY_6", "PROPERTY_PROVEDEN_GAZ", "PROPERTY_ELECTRO_DONE", "PROPERTY_33", "PROPERTY_45", "PROPERTY_47", "PROPERTY_8", "PROPERTY_20", "PROPERTY_77", "PROPERTY_79");
+$arSelect = Array('ID','NAME','PROPERTY_5','PROPERTY_6','PROPERTY_PROVEDEN_GAZ','PROPERTY_ELECTRO_DONE','PROPERTY_PROVEDENA_VODA','PROPERTY_33','PROPERTY_45','PROPERTY_47','PROPERTY_8','PROPERTY_20','PROPERTY_77','PROPERTY_79','PROPERTY_2','PROPERTY_17','PROPERTY_120');
 $rsElements = CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSelect);
-while ($arElement = $rsElements->GetNext()) { // dump($arElement);
+while ($arElement = $rsElements->GetNext()) { // dump($arElement['NAME']);
 
     if (!$shosse) {// шоссе
         if (array_key_exists(179, $arElement['PROPERTY_5_VALUE'])) { // Дмитровское - север
@@ -29,13 +29,14 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement);
         }
     }
 
-    if ($arElement['PROPERTY_PROVEDEN_GAZ_ENUM_ID'] == 17) { // Газ (проведен)
-        $arTegs['gaz']['cnt'] += 1;
-    }
+    if ($arElement['PROPERTY_PROVEDEN_GAZ_ENUM_ID'] == 17) // Газ (проведен)
+      $arTegs['gaz']['cnt'] += 1;
 
-    if ($arElement['PROPERTY_ELECTRO_DONE_ENUM_ID'] == 14) { // Электричество (проведен)
-        $arTegs['elektro']['cnt'] += 1;
-    }
+    if ($arElement['PROPERTY_ELECTRO_DONE_ENUM_ID'] == 14) // Электричество (проведен)
+      $arTegs['elektro']['cnt'] += 1;
+
+    if ($arElement['PROPERTY_PROVEDENA_VODA_ENUM_ID'] == 20) // Водопровод (проведен)
+      $arTegs['voda']['cnt'] += 1;
 
     if (in_array($arElement['PROPERTY_33_ENUM_ID'], [154, 228])) { // Вид разрешенного использования - ИЖС
         $arTegs['izhs']['cnt'] += 1;
@@ -44,12 +45,12 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement);
     }
 
     if (in_array($arElement['PROPERTY_45_ENUM_ID'], [35, 36, 37, 38])) { // Лес
-        $arTegs['les']['cnt'] += 1;
+        $arTegs['ryadom-s-lesom']['cnt'] += 1;
     }
 
     foreach ($arElement['PROPERTY_47_VALUE'] as $key => $value) { // Водоем
         if (in_array($key, [39, 40, 41])) {
-            $arTegs['voda']['cnt'] += 1;
+            $arTegs['u-vody']['cnt'] += 1;
             break;
         }
     }
@@ -64,6 +65,15 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement);
         $arTegs['komfort']['cnt'] += 1;
     }
 
+    // по стоимости
+    // dump($arElement);
+    if($arElement['PROPERTY_2_ENUM_ID'] == 3 || $arElement['PROPERTY_2_ENUM_ID'] == 256){ // участки
+      if ($arElement['PROPERTY_120_VALUE'][0] && $arElement['PROPERTY_120_VALUE'][0] <= 1000000)
+        $arTegs['do-1-milliona']['cnt'] += 1;
+    } else if($arElement['PROPERTY_2_ENUM_ID'] == 4 || $arElement['PROPERTY_2_ENUM_ID'] == 256){ // дома
+      if ($arElement['PROPERTY_17_VALUE'][0] && $arElement['PROPERTY_17_VALUE'][0] <= 2000000)
+        $arTegs['do-2-milliona']['cnt'] += 1;
+    }
 } // dump($arTegs);
 
 // формируем мультитеги
@@ -179,6 +189,8 @@ if (!$arTegs['elektro']['url']) {
     $arTegs['elektro']['url'] = $urlTeg;
 }
 
+$arTegs['voda']['name'] = 'С водой';
+
 $arTegs['izhs']['name'] = 'ИЖС';
 if (!$arTegs['izhs']['url']) {
     switch ($domPos) {
@@ -211,8 +223,8 @@ if (!$arTegs['snt']['url']) {
     $arTegs['snt']['url'] = $urlTeg;
 }
 
-$arTegs['les']['name'] = 'У леса';
-if (!$arTegs['les']['url']) {
+$arTegs['ryadom-s-lesom']['name'] = 'У леса';
+if (!$arTegs['ryadom-s-lesom']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
             $urlTeg = "/poselki/kupit-uchastok-ryadom-s-lesom/";
@@ -224,11 +236,11 @@ if (!$arTegs['les']['url']) {
             $urlTeg = "/poselki/ryadom-s-lesom/";
             break;
     }
-    $arTegs['les']['url'] = $urlTeg;
+    $arTegs['ryadom-s-lesom']['url'] = $urlTeg;
 }
 
-$arTegs['voda']['name'] = 'У воды';
-if (!$arTegs['voda']['url']) {
+$arTegs['u-vody']['name'] = 'У воды';
+if (!$arTegs['u-vody']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
             $urlTeg = "/poselki/kupit-uchastok-u-vody/";
@@ -240,8 +252,7 @@ if (!$arTegs['voda']['url']) {
             $urlTeg = "/poselki/u-vody/";
             break;
     }
-    $arTegs['voda']['url'] = $urlTeg;
-    // $arTegs['voda']['url'] = $ourDir.'?teg=voda';
+    $arTegs['u-vody']['url'] = $urlTeg;
 }
 
 $arTegs['econom']['name'] = 'Эконом';
@@ -275,6 +286,9 @@ if (!$arTegs['komfort']['url']) {
     }
     $arTegs['komfort']['url'] = $urlTeg;
 }
+
+$arTegs['do-1-milliona']['name'] = 'До 1 млн. руб.';
+$arTegs['do-2-milliona']['name'] = 'До 2 млн. руб.';
 
 // какие теги выводить
 if (!$arTegsShow) $arTegsShow = ['north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
@@ -311,16 +325,19 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
         case 'elektro':
             $arrFilter['=PROPERTY_21'] = [14]; // Электричество (проведен)
             break;
+        case 'voda':
+            $arrFilter['=PROPERTY_27'] = [20]; // Водопровод (проведен)
+            break;
         case 'izhs':
             $arrFilter['=PROPERTY_33'] = [154, 228]; // Вид разрешенного использования - ИЖС
             break;
         case 'snt':
             $arrFilter['=PROPERTY_33'] = [108, 150, 123, 162]; // Вид разрешенного использования - СНТ
             break;
-        case 'les':
+        case 'ryadom-s-lesom':
             $arrFilter['=PROPERTY_45'] = [35, 36, 37, 38]; // Лес
             break;
-        case 'voda':
+        case 'u-vody':
             $arrFilter['=PROPERTY_47'] = [39, 40, 41]; // Водоем
             break;
         case 'econom':
@@ -336,19 +353,20 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
 }
 ?>
 <div class="tag-list d-none d-md-flex mb-1">
-    <? foreach ($arTegsShow as $teg) {
-        if ($arTegs[$teg]['cnt']) {
-            if ($onlyParam) {
-                $arTegs[$teg]['url'] = $ourDir . '?teg=' . $teg;
-            }
-            $activeTeg = ($ourDir == $arTegs[$teg]['url'] || $tegReq == $teg) ? 'class="active"' : ''; ?>
-            <div class="tag-list__item">
-                <a href="<?= $arTegs[$teg]['url'] ?>" <?= $activeTeg ?>><?= $arTegs[$teg]['name'] ?> <span
-                            class="text-secondary"><?= $arTegs[$teg]['cnt'] ?></span></a>
-            </div>
-        <?
-        }
-    } ?>
+  <? foreach ($arTegsShow as $teg) {
+    if ($arTegs[$teg]['cnt']) {
+      if ($onlyParam)
+        $arTegs[$teg]['url'] = $ourDir . '?teg=' . $teg;
+
+    $activeTeg = ($ourDir == $arTegs[$teg]['url'] || $tegReq == $teg) ? 'class="active"' : '';
+  ?>
+    <div class="tag-list__item">
+      <a href="<?= $arTegs[$teg]['url'] ?>" <?=$activeTeg?>><?=$arTegs[$teg]['name']?> <span class="text-secondary"><?= $arTegs[$teg]['cnt'] ?></span></a>
+    </div>
+  <?
+    }
+  }
+  ?>
 </div>
 <div class="d-flex d-md-none mb-1">
     <div class="dropdown w-100">
@@ -377,8 +395,10 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
                                 }
                                 $activeTeg = ($ourDir == $arTegs[$teg]['url'] || $tegReq == $teg) ? 'class="active"' : ''; ?>
                                 <div class="tag-list__item">
-                                    <a href="<?= $arTegs[$teg]['url'] ?>" <?= $activeTeg ?>><?= $arTegs[$teg]['name'] ?> <span
-                                                class="text-secondary"><?= $arTegs[$teg]['cnt'] ?></span></a>
+                                    <a href="<?= $arTegs[$teg]['url'] ?>" <?= $activeTeg ?>>
+                                      <?= $arTegs[$teg]['name'] ?>
+                                      <span class="text-secondary"><?= $arTegs[$teg]['cnt'] ?></span>
+                                    </a>
                                 </div>
                                 <?
                             }

@@ -236,8 +236,20 @@ $plottageMax = $arResult['PROPERTIES']['PLOTTAGE']['VALUE'][1];
 // 		break;
 // }
 
-$seoTitle = 'Отзывы о поселке '.trim($arResult['NAME']).' - отзывы жильцов КП '.trim($arResult['NAME']);
-$setDescription = 'Отзывы жильцов о поселке '.trim($arResult['NAME']).'. Все отзывы, плюсы и минусы о КП '.trim($arResult['NAME']).' на сайте Поселкино';
+// правка титл для поселков-дубли
+switch ($arResult['CODE']) {
+	case 'lesnoe-ozero-shach': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+	case 'lesnoe-ozero': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+	case 'polesie': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+	case 'polese': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+	case 'solnechnyy-bereg': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+	case 'solnechniy_bereg': $regionTitle = ' в '.$descRayon.' районе'; $arResult["TITLE_DOP"] = ', '.$arResult['PROPERTIES']['REGION']['VALUE_ENUM'].' район'; break;
+
+	default: $regionTitle = ''; $arResult["TITLE_DOP"] = ''; break;
+} // dump($arResult["TITLE_DOP"]);
+
+$seoTitle = 'Отзывы о поселке '.trim($arResult['NAME']).$regionTitle.' - отзывы жильцов КП '.trim($arResult['NAME']);
+$setDescription = 'Отзывы жильцов о поселке '.trim($arResult['NAME']).$regionTitle.'. Все отзывы, плюсы и минусы о КП '.trim($arResult['NAME']).' на сайте Поселкино';
 
 $cp = $this->__component;
 if (is_object($cp))

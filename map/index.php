@@ -18,6 +18,7 @@ use Bitrix\Main\Page\Asset;
   $commun = $_REQUEST['COMMUN'];
   $typeURL = $_REQUEST['TYPE_URL'];
   $plottage = $_REQUEST['PLOTTAGE'];
+  $developerCode = $_REQUEST['DEVELOPER_CODE'];
 
   // переопределим
   global $APPLICATION;

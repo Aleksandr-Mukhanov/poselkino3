@@ -193,12 +193,12 @@ switch ($km_MKAD) {
 						</svg> <span><?=$arResult['PROPERTIES']['SALES_PHASE']['VALUE'] // Этап продаж?></span>
 					</div>
 				</div>
-                <?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
-                    <a class="ml-4 area-link" href="/poselki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
-                            <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
-                        </svg><?=$arResult['PROPERTIES']['REGION']['VALUE'] // Район?> район</a>
-                <?endif;?>
+        <?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
+          <a class="ml-4 area-link" href="/poselki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
+              <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
+            </svg><?=$arResult['PROPERTIES']['REGION']['VALUE'] // Район?> район</a>
+        <?endif;?>
 			</div>
 		</div>
 		<div class="order-2 order-md-1 col-xl-4 col-md-5 mt-4 mt-md-0">
@@ -413,7 +413,7 @@ switch ($km_MKAD) {
 				</div>
 				<?//=dump($arResult['PROPERTIES']['CONTACTS'])?>
 				<?if($arResult['PROPERTIES']['CONTACTS']['VALUE_XML_ID'] == 'tel' && $arResult['PROPERTIES']['PHONE']['VALUE'] && count($arResult['DEVELOPERS']) == 1){?>
-        	<div class="phone-cart__block"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?> <span>Показать</span></div>
+        	<div class="phone-cart__block"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?> <span onclick="ym(50830593, 'reachGoal', 'phone_click'); return true;">Показать</span></div>
 				<?}?>
 				<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Записаться на просмотр</a>
 				<div class="mt-4 text-lg-center">На просмотр уже записались: <b><?=$cntPos?> <?=$correctText?></b></div>
@@ -449,7 +449,22 @@ switch ($km_MKAD) {
 							</g>
 						</svg>
 					</div>
-					<div class="bank-widget__text"><span>Доступна рассрочка</span><br><a class="text-success" href="#">Посмотреть условия</a></div>
+					<div class="bank-widget__text"><span>Доступна рассрочка</span><br><a class="text-success" data-toggle="modal" data-target="#bank-widget">Посмотреть условия</a></div>
+					<div class="modal fade" id="bank-widget" tabindex="-1" role="dialog" aria-labelledby="bank-widget" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title mt-3" id="exampleModalLabel">Условия рассрочки</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					        <p><?=$arResult['PROPERTIES']['INS_TERMS']['VALUE']?></p>
+					      </div>
+					    </div>
+					  </div>
+					</div>
 				</div>
 			<?}?>
 		</div>
@@ -488,7 +503,7 @@ switch ($km_MKAD) {
 	              </h2>
 	            </div>
 	          </div>
-	          <div class="col-lg-5 text-lg-right pt-2"><div class="phone-cart__block mt-2"><?=$value['UF_PHONE']?> <span>Показать</span></div></div>
+	          <div class="col-lg-5 text-lg-right pt-2"><div class="phone-cart__block mt-2"><?=$value['UF_PHONE']?> <span onclick="ym(50830593, 'reachGoal', 'phone_click'); return true;">Показать</span></div></div>
 	        </div>
 	      </div>
 			<?endif;?>
@@ -497,9 +512,18 @@ switch ($km_MKAD) {
 				<div class="bg-white radius plan plan--village">
 					<div class="row w-100">
 						<div class="col-xl-6 col-lg-5 mb-md-3">
-							<?$planIMG_res = CFile::ResizeImageGet($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE'], array('width'=>351, 'height'=>194), BX_RESIZE_IMAGE_EXACT); //dump($planIMG);
-							$planIMG = CFile::GetPath($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE']); //dump($planIMG);?>
-							<div id="openPlan"><a href="<?=$planIMG?>"><img class="w-100" src="<?=$planIMG_res["src"] // План поселка?>" alt="План поселка <?=$name?>"></a></div>
+							<? // План поселка
+							$planIMG_res = CFile::ResizeImageGet($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE'], array('width'=>351, 'height'=>194), BX_RESIZE_IMAGE_EXACT); //dump($planIMG);
+
+							if($arResult['PROPERTIES']['PLAN_IMG_IFRAME'.$nProp]['VALUE']){
+								$planIMG = $arResult['PROPERTIES']['PLAN_IMG_IFRAME'.$nProp]['VALUE'];
+								$frame = 'data-iframe="true"';
+							}else{
+								$planIMG = CFile::GetPath($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE']);
+								$frame = '';
+							}
+							?>
+							<div class="openPlan"><a href="<?=$planIMG?>" <?=$frame?>><img class="w-100" src="<?=$planIMG_res["src"] // План поселка?>" alt="План поселка <?=$name?>"></a></div>
 						</div>
 						<div class="col-xl-6 col-lg-7 pr-0">
 							<h2 class="h2">План поселка</h2>
@@ -525,7 +549,7 @@ switch ($km_MKAD) {
 						</div>
 						<div class="price__title">
 							Площадь участков:&nbsp;</div>
-						<div class="price__value">от <?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE'][0]?> до <?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE'][1]?> соток</div>
+						<div class="price__value">от <?=$arResult['PROPERTIES']['PLOTTAGE'.$nProp]['VALUE'][0]?> до <?=$arResult['PROPERTIES']['PLOTTAGE'.$nProp]['VALUE'][1]?> соток</div>
 					</div>
 					<?if($housesValEnum != 4){ // Только участки ?>
 						<div class="d-flex price__row" itemscope itemtype="http://schema.org/AggregateOffer">
@@ -536,7 +560,7 @@ switch ($km_MKAD) {
 							</div>
 							<div class="price__title">
 								Стоимость участков:&nbsp;</div>
-							<div class="price__value">от <span class="split-number" itemprop="lowPrice"><?=formatPrice($arResult['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0])?></span> <span class="rep_rubl">руб.</span> до <span class="split-number" itemprop="highPrice"><?=formatPrice($arResult['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][1])?></span> <span class="rep_rubl">руб.</span></div>
+							<div class="price__value">от <span class="split-number" itemprop="lowPrice"><?=formatPrice($arResult['PROPERTIES']['COST_LAND_IN_CART'.$nProp]['VALUE'][0])?></span> <span class="rep_rubl">руб.</span> до <span class="split-number" itemprop="highPrice"><?=formatPrice($arResult['PROPERTIES']['COST_LAND_IN_CART'.$nProp]['VALUE'][1])?></span> <span class="rep_rubl">руб.</span></div>
 						</div>
 						<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="hide">
 							<meta itemprop="price" content="<?=formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]) // Цена за сотку мин?>">
@@ -555,7 +579,7 @@ switch ($km_MKAD) {
 							</div>
 							<div class="price__title">
 								Площадь домов:&nbsp;</div>
-							<div class="price__value">от <?=$arResult['PROPERTIES']['HOUSE_AREA']['VALUE'][0]?> до <?=$arResult['PROPERTIES']['HOUSE_AREA']['VALUE'][1]?> м<sup>2</sup></div>
+							<div class="price__value">от <?=$arResult['PROPERTIES']['HOUSE_AREA'.$nProp]['VALUE'][0]?> до <?=$arResult['PROPERTIES']['HOUSE_AREA'.$nProp]['VALUE'][1]?> м<sup>2</sup></div>
 						</div>
 						<div class="d-flex price__row">
 							<div class="price__icon">
@@ -565,13 +589,13 @@ switch ($km_MKAD) {
 							</div>
 							<div class="price__title">
 								Стоимость домов:&nbsp;</div>
-							<div class="price__value">от <span class="split-number"><?=formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0])?></span> <span class="rep_rubl">руб.</span> до <span class="split-number"><?=formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][1])?></span> <span class="rep_rubl">руб.</span></div>
+							<div class="price__value">от <span class="split-number"><?=formatPrice($arResult['PROPERTIES']['HOME_VALUE'.$nProp]['VALUE'][0])?></span> <span class="rep_rubl">руб.</span> до <span class="split-number"><?=formatPrice($arResult['PROPERTIES']['HOME_VALUE'.$nProp]['VALUE'][1])?></span> <span class="rep_rubl">руб.</span></div>
 						</div>
 					<?}?>
 					<div class="d-flex price__row bg-white" itemscope itemtype="http://schema.org/AggregateOffer">
 							<div class="price__title" style="width: 190px">
 								Цена за обустройство:&nbsp;</div>
-							<div class="price__value"><?=$arResult['PROPERTIES']['PRICE_ARRANGE']['VALUE']?></div>
+							<div class="price__value"><?=$arResult['PROPERTIES']['PRICE_ARRANGE'.$nProp]['VALUE']?></div>
 						</div>
 					<?if($arResult["arHouses"] || $arResult["arPlots"]){
 						$hrefAll = (!$arResult["arHouses"] && $arResult["arPlots"]) ? 'area' : 'home';?>
@@ -591,7 +615,7 @@ switch ($km_MKAD) {
 <?if($arResult['PROPERTIES']['VIDEO_VIL']['VALUE']){ //  Видео поселка ?>
 	<div class="bg-white about-village__video">
 		<div class="container">
-			<div class="video radius" style="background: #333 url(/assets/img/content/village-video-bg@2x.jpg) no-repeat center center; background-size: cover;" data-youtube="<?=$arResult['PROPERTIES']['VIDEO_VIL']['CODE_YB']?>">
+			<div class="video radius" style="background: #333 url(/assets/img/site/hero@2x.jpg) no-repeat center center; background-size: cover;" data-youtube="<?=$arResult['PROPERTIES']['VIDEO_VIL']['CODE_YB']?>">
 				<svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" class="inline-svg play">
 					<g transform="translate(-314 -1783)">
 						<g>
@@ -840,8 +864,8 @@ switch ($km_MKAD) {
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="19.974" height="23.456" viewBox="0 0 19.974 23.456" class="inline-svg">
 									<g transform="translate(0 0.001)">
-										<path d="M124.911,158.457a4.469,4.469,0,1,0,4.469,4.469A4.474,4.474,0,0,0,124.911,158.457Zm2.653,3.627-3.2,3.2a.688.688,0,0,1-.973,0l-1.224-1.224a.688.688,0,0,1,.973-.973l.737.737,2.715-2.715a.688.688,0,0,1,.973.973Zm0,0" transform="translate(-114.924 -151.199)" class="color-fill" />
-										<path d="M19.951,6.363V6.345c-.01-.225-.017-.464-.021-.729a2.486,2.486,0,0,0-2.341-2.435A9.647,9.647,0,0,1,11.023.413L11.008.4a1.5,1.5,0,0,0-2.04,0L8.952.413A9.648,9.648,0,0,1,2.387,3.181,2.486,2.486,0,0,0,.046,5.616c0,.263-.011.5-.021.729v.042c-.052,2.75-.118,6.173,1.027,9.279A11.812,11.812,0,0,0,3.885,20.08,14.824,14.824,0,0,0,9.43,23.36a1.715,1.715,0,0,0,.227.062,1.679,1.679,0,0,0,.66,0,1.716,1.716,0,0,0,.228-.062,14.833,14.833,0,0,0,5.54-3.282,11.829,11.829,0,0,0,2.834-4.415C20.068,12.547,20,9.118,19.951,6.363ZM9.987,17.573a5.846,5.846,0,1,1,5.846-5.846A5.852,5.852,0,0,1,9.987,17.573Zm0,0" transform="translate(0)" class="color-fill" />
+										<path d="M124.911,158.457a4.469,4.469,0,1,0,4.469,4.469A4.474,4.474,0,0,0,124.911,158.457Zm2.653,3.627-3.2,3.2a.688.688,0,0,1-.973,0l-1.224-1.224a.688.688,0,0,1,.973-.973l.737.737,2.715-2.715a.688.688,0,0,1,.973.973Zm0,0" transform="translate(-114.924 -151.199)" fill="#5277f5" class="color-fill" />
+										<path d="M19.951,6.363V6.345c-.01-.225-.017-.464-.021-.729a2.486,2.486,0,0,0-2.341-2.435A9.647,9.647,0,0,1,11.023.413L11.008.4a1.5,1.5,0,0,0-2.04,0L8.952.413A9.648,9.648,0,0,1,2.387,3.181,2.486,2.486,0,0,0,.046,5.616c0,.263-.011.5-.021.729v.042c-.052,2.75-.118,6.173,1.027,9.279A11.812,11.812,0,0,0,3.885,20.08,14.824,14.824,0,0,0,9.43,23.36a1.715,1.715,0,0,0,.227.062,1.679,1.679,0,0,0,.66,0,1.716,1.716,0,0,0,.228-.062,14.833,14.833,0,0,0,5.54-3.282,11.829,11.829,0,0,0,2.834-4.415C20.068,12.547,20,9.118,19.951,6.363ZM9.987,17.573a5.846,5.846,0,1,1,5.846-5.846A5.852,5.852,0,0,1,9.987,17.573Zm0,0" transform="translate(0)" fill="#5277f5" class="color-fill" />
 									</g>
 								</svg>
 								<div class="arrangement__text">Охрана</div>
@@ -854,13 +878,13 @@ switch ($km_MKAD) {
 								<svg xmlns="http://www.w3.org/2000/svg" width="22.974" height="21.967" viewBox="0 0 22.974 21.967" class="inline-svg">
 									<g transform="translate(0 -6.247)">
 										<g transform="translate(0 6.247)">
-											<rect width="1.904" height="2.188" transform="translate(6.206 6.28)" class="color-fill" />
-											<rect width="1.904" height="2.188" transform="translate(14.864 6.28)" class="color-fill" />
-											<rect width="1.904" height="2.188" transform="translate(6.206 16.781)" class="color-fill" />
-											<rect width="1.904" height="2.188" transform="translate(14.864 16.781)" class="color-fill" />
-											<path d="M3.3,6.516a.547.547,0,0,0-.942,0L.077,10.372A.537.537,0,0,0,0,10.65V27.666a.547.547,0,0,0,.547.547H5.112a.547.547,0,0,0,.546-.547V10.65a.546.546,0,0,0-.076-.278Z" transform="translate(0 -6.247)" class="color-fill" />
-											<path d="M110.694,6.729a.568.568,0,0,0-.941,0l-2.283,3.857a.546.546,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.567a.547.547,0,0,0,.546-.547V10.864a.542.542,0,0,0-.076-.278Z" transform="translate(-98.737 -6.461)" class="color-fill" />
-											<path d="M220.384,10.586,218.1,6.729a.569.569,0,0,0-.942,0l-2.282,3.857a.545.545,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.565a.548.548,0,0,0,.547-.547V10.864A.538.538,0,0,0,220.384,10.586Z" transform="translate(-197.487 -6.461)" class="color-fill" />
+											<rect width="1.904" height="2.188" transform="translate(6.206 6.28)" fill="#06b26b" class="color-fill" />
+											<rect width="1.904" height="2.188" transform="translate(14.864 6.28)" fill="#06b26b" class="color-fill" />
+											<rect width="1.904" height="2.188" transform="translate(6.206 16.781)" fill="#06b26b" class="color-fill" />
+											<rect width="1.904" height="2.188" transform="translate(14.864 16.781)" fill="#06b26b" class="color-fill" />
+											<path d="M3.3,6.516a.547.547,0,0,0-.942,0L.077,10.372A.537.537,0,0,0,0,10.65V27.666a.547.547,0,0,0,.547.547H5.112a.547.547,0,0,0,.546-.547V10.65a.546.546,0,0,0-.076-.278Z" transform="translate(0 -6.247)" fill="#06b26b" class="color-fill" />
+											<path d="M110.694,6.729a.568.568,0,0,0-.941,0l-2.283,3.857a.546.546,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.567a.547.547,0,0,0,.546-.547V10.864a.542.542,0,0,0-.076-.278Z" transform="translate(-98.737 -6.461)" fill="#06b26b" class="color-fill" />
+											<path d="M220.384,10.586,218.1,6.729a.569.569,0,0,0-.942,0l-2.282,3.857a.545.545,0,0,0-.076.278V27.88a.547.547,0,0,0,.546.547h4.565a.548.548,0,0,0,.547-.547V10.864A.538.538,0,0,0,220.384,10.586Z" transform="translate(-197.487 -6.461)" fill="#06b26b" class="color-fill" />
 										</g>
 									</g>
 								</svg>
@@ -881,7 +905,7 @@ switch ($km_MKAD) {
 						<div class="col-xl-6">
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="17.38" height="24.833" viewBox="0 0 17.38 24.833" class="inline-svg">
-									<path d="M72.266,7.657a4.88,4.88,0,0,0-.51-.475,2.01,2.01,0,0,0-1.871-2.747c-.065,0-.13,0-.194.009a4.838,4.838,0,0,0-8.9-2.2,3.412,3.412,0,0,0-3.306,5.4l-.012.013a4.841,4.841,0,0,0,3.549,8.133,4.93,4.93,0,0,0,.743-.056l1.787,2.76-.871,5.642a.6.6,0,0,0,.133.486.623.623,0,0,0,.476.211h3.186a.623.623,0,0,0,.476-.211.6.6,0,0,0,.133-.486l-.856-5.547,1.84-2.842a4.932,4.932,0,0,0,.652.044,4.841,4.841,0,0,0,3.549-8.133Zm-7.349,9.29-1.254-1.938a4.829,4.829,0,0,0,1.2-1.123,4.826,4.826,0,0,0,1.275,1.167Z" transform="translate(-56.177)" class="color-fill" />
+									<path d="M72.266,7.657a4.88,4.88,0,0,0-.51-.475,2.01,2.01,0,0,0-1.871-2.747c-.065,0-.13,0-.194.009a4.838,4.838,0,0,0-8.9-2.2,3.412,3.412,0,0,0-3.306,5.4l-.012.013a4.841,4.841,0,0,0,3.549,8.133,4.93,4.93,0,0,0,.743-.056l1.787,2.76-.871,5.642a.6.6,0,0,0,.133.486.623.623,0,0,0,.476.211h3.186a.623.623,0,0,0,.476-.211.6.6,0,0,0,.133-.486l-.856-5.547,1.84-2.842a4.932,4.932,0,0,0,.652.044,4.841,4.841,0,0,0,3.549-8.133Zm-7.349,9.29-1.254-1.938a4.829,4.829,0,0,0,1.2-1.123,4.826,4.826,0,0,0,1.275,1.167Z" transform="translate(-56.177)" fill="#78A86D" class="color-fill" />
 								</svg>
 								<div class="arrangement__text">Лес</div>
 							</div>
@@ -894,17 +918,17 @@ switch ($km_MKAD) {
 									<g transform="translate(0 -98.909)">
 										<g transform="translate(0 98.909)">
 											<g>
-												<path d="M20.686,100.11a5.278,5.278,0,0,0-6.7,0,3.561,3.561,0,0,1-2.425.9,3.561,3.561,0,0,1-2.426-.9,5.078,5.078,0,0,0-3.352-1.2,5.078,5.078,0,0,0-3.352,1.2,3.561,3.561,0,0,1-2.426.9V103.9a3.561,3.561,0,0,0,2.426-.9,5.078,5.078,0,0,1,3.352-1.2A5.078,5.078,0,0,1,9.13,103a3.561,3.561,0,0,0,2.426.9,3.561,3.561,0,0,0,2.425-.9,5.278,5.278,0,0,1,6.7,0,3.561,3.561,0,0,0,2.425.9V101.01A3.561,3.561,0,0,1,20.686,100.11Z" transform="translate(0 -98.909)" class="color-fill" />
+												<path d="M20.686,100.11a5.278,5.278,0,0,0-6.7,0,3.561,3.561,0,0,1-2.425.9,3.561,3.561,0,0,1-2.426-.9,5.078,5.078,0,0,0-3.352-1.2,5.078,5.078,0,0,0-3.352,1.2,3.561,3.561,0,0,1-2.426.9V103.9a3.561,3.561,0,0,0,2.426-.9,5.078,5.078,0,0,1,3.352-1.2A5.078,5.078,0,0,1,9.13,103a3.561,3.561,0,0,0,2.426.9,3.561,3.561,0,0,0,2.425-.9,5.278,5.278,0,0,1,6.7,0,3.561,3.561,0,0,0,2.425.9V101.01A3.561,3.561,0,0,1,20.686,100.11Z" transform="translate(0 -98.909)" fill="#66C1C4" class="color-fill" />
 											</g>
 										</g>
 										<g transform="translate(0 108.101)">
 											<g>
-												<path d="M19.759,303.446a3.719,3.719,0,0,0-4.851,0,5.077,5.077,0,0,1-3.352,1.2,5.078,5.078,0,0,1-3.352-1.2,3.562,3.562,0,0,0-2.426-.9,3.561,3.561,0,0,0-2.426.9A5.078,5.078,0,0,1,0,304.647v2.889a5.078,5.078,0,0,0,3.352-1.2,3.561,3.561,0,0,1,2.426-.9,3.561,3.561,0,0,1,2.426.9,5.078,5.078,0,0,0,3.352,1.2,5.077,5.077,0,0,0,3.352-1.2,3.719,3.719,0,0,1,4.851,0,5.077,5.077,0,0,0,3.352,1.2v-2.889A5.077,5.077,0,0,1,19.759,303.446Z" transform="translate(0 -302.546)" class="color-fill" />
+												<path d="M19.759,303.446a3.719,3.719,0,0,0-4.851,0,5.077,5.077,0,0,1-3.352,1.2,5.078,5.078,0,0,1-3.352-1.2,3.562,3.562,0,0,0-2.426-.9,3.561,3.561,0,0,0-2.426.9A5.078,5.078,0,0,1,0,304.647v2.889a5.078,5.078,0,0,0,3.352-1.2,3.561,3.561,0,0,1,2.426-.9,3.561,3.561,0,0,1,2.426.9,5.078,5.078,0,0,0,3.352,1.2,5.077,5.077,0,0,0,3.352-1.2,3.719,3.719,0,0,1,4.851,0,5.077,5.077,0,0,0,3.352,1.2v-2.889A5.077,5.077,0,0,1,19.759,303.446Z" transform="translate(0 -302.546)" fill="#66C1C4" class="color-fill" />
 											</g>
 										</g>
 										<g transform="translate(0 103.374)">
 											<g>
-												<path d="M19.759,198.718a3.719,3.719,0,0,0-4.851,0,5.077,5.077,0,0,1-3.352,1.2,5.078,5.078,0,0,1-3.352-1.2,3.561,3.561,0,0,0-2.426-.9,3.561,3.561,0,0,0-2.426.9A5.077,5.077,0,0,1,0,199.919v3.152a3.561,3.561,0,0,0,2.426-.9,5.078,5.078,0,0,1,3.352-1.2,5.078,5.078,0,0,1,3.352,1.2,3.561,3.561,0,0,0,2.426.9,3.561,3.561,0,0,0,2.425-.9,5.278,5.278,0,0,1,6.7,0,3.561,3.561,0,0,0,2.425.9v-3.152A5.077,5.077,0,0,1,19.759,198.718Z" transform="translate(0 -197.818)" class="color-fill" />
+												<path d="M19.759,198.718a3.719,3.719,0,0,0-4.851,0,5.077,5.077,0,0,1-3.352,1.2,5.078,5.078,0,0,1-3.352-1.2,3.561,3.561,0,0,0-2.426-.9,3.561,3.561,0,0,0-2.426.9A5.077,5.077,0,0,1,0,199.919v3.152a3.561,3.561,0,0,0,2.426-.9,5.078,5.078,0,0,1,3.352-1.2,5.078,5.078,0,0,1,3.352,1.2,3.561,3.561,0,0,0,2.426.9,3.561,3.561,0,0,0,2.425-.9,5.278,5.278,0,0,1,6.7,0,3.561,3.561,0,0,0,2.425.9v-3.152A5.077,5.077,0,0,1,19.759,198.718Z" transform="translate(0 -197.818)" fill="#66C1C4" class="color-fill" />
 											</g>
 										</g>
 									</g>
@@ -918,7 +942,7 @@ switch ($km_MKAD) {
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="21.889" height="21.799" viewBox="0 0 21.889 21.799" class="inline-svg">
 									<g transform="translate(0 -0.093)">
-										<path d="M21.565,18.948a.947.947,0,0,0-.744-.229,25.544,25.544,0,0,1-4.17.2,11.6,11.6,0,0,1-3-.558L10.325,8.835a37.7,37.7,0,0,1,7.317-1.6.943.943,0,0,0,.734-1.372A9.638,9.638,0,0,0,7.571.953L7.491.725A.942.942,0,0,0,6.29.146L6.274.151a.943.943,0,0,0-.579,1.2l.079.228A9.636,9.636,0,0,0,.368,12.113a.943.943,0,0,0,1.44.615A34.44,34.44,0,0,1,8.528,9.46l2.8,8.012c-2.261-.958-4.424-1.961-7.28-1.526A6.96,6.96,0,0,0,.237,18.28.95.95,0,0,0,0,18.9V20.95a.946.946,0,0,0,.947.943H20.942a.947.947,0,0,0,.948-.943v-1.3A.952.952,0,0,0,21.565,18.948Z" class="color-fill" />
+										<path d="M21.565,18.948a.947.947,0,0,0-.744-.229,25.544,25.544,0,0,1-4.17.2,11.6,11.6,0,0,1-3-.558L10.325,8.835a37.7,37.7,0,0,1,7.317-1.6.943.943,0,0,0,.734-1.372A9.638,9.638,0,0,0,7.571.953L7.491.725A.942.942,0,0,0,6.29.146L6.274.151a.943.943,0,0,0-.579,1.2l.079.228A9.636,9.636,0,0,0,.368,12.113a.943.943,0,0,0,1.44.615A34.44,34.44,0,0,1,8.528,9.46l2.8,8.012c-2.261-.958-4.424-1.961-7.28-1.526A6.96,6.96,0,0,0,.237,18.28.95.95,0,0,0,0,18.9V20.95a.946.946,0,0,0,.947.943H20.942a.947.947,0,0,0,.948-.943v-1.3A.952.952,0,0,0,21.565,18.948Z" fill="#E5A33B" class="color-fill" />
 									</g>
 								</svg>
 								<div class="arrangement__text">Пляж</div>
@@ -1229,15 +1253,9 @@ switch ($km_MKAD) {
 			<div class="col-md-4">
 				<div class="map-block">
 					<div class="map-block__icon">
-						<svg xmlns="http://www.w3.org/2000/svg" width="33.298" height="13.319" viewBox="0 0 33.298 13.319" class="inline-svg">
-							<path d="M250.156,139.33h2.22a.555.555,0,0,0,.555-.555v-3.33a.555.555,0,0,0-.555-.555h-2.22a.555.555,0,0,0-.555.555v3.33A.555.555,0,0,0,250.156,139.33Zm.555-3.33h1.11v2.22h-1.11Zm0,0" transform="translate(-235.172 -132.671)" fill="#3c4b5a" />
-							<path d="M137.173,139.33a.555.555,0,0,0,.555-.555v-3.33a.555.555,0,0,0-.555-.555h-2.22a.555.555,0,0,0-.555.555v3.33a.555.555,0,0,0,.555.555ZM135.509,136h1.11v2.22h-1.11Zm0,0" transform="translate(-126.629 -132.671)" fill="#3c4b5a" />
-							<path d="M60.376,139.33a.555.555,0,0,0,.555-.555v-3.33a.555.555,0,0,0-.555-.555h-2.22a.555.555,0,0,0-.555.555v3.33a.555.555,0,0,0,.555.555ZM58.711,136h1.11v2.22h-1.11Zm0,0" transform="translate(-54.272 -132.671)" fill="#3c4b5a" />
-							<path d="M2.22,138.775v-3.33a.555.555,0,0,0-.555-.555H0V136H1.11v2.22H0v1.11H1.665A.555.555,0,0,0,2.22,138.775Zm0,0" transform="translate(0 -132.671)" fill="#3c4b5a" />
-							<path d="M364.8,192.488h2.22v1.11H364.8Zm0,0" transform="translate(-343.712 -186.939)" fill="#3c4b5a" />
-							<path d="M460.8,230.887h1.11V232H460.8Zm0,0" transform="translate(-434.162 -223.117)" fill="#3c4b5a" />
-							<path d="M518.4,230.887h1.11V232H518.4Zm0,0" transform="translate(-488.43 -223.117)" fill="#3c4b5a" />
-							<path d="M15.242,96.488H0V97.6H12.209v6.66H0v1.11H12.209v1.11H0v1.11H2.775a2.2,2.2,0,0,0,.308,1.11H0v1.11H33.3V108.7H26.885a2.2,2.2,0,0,0,.308-1.11H29.72a3.578,3.578,0,0,0,2.291-6.327l-3.718-3.1a7.23,7.23,0,0,0-4.62-1.673h-8.43ZM4.995,108.7a1.11,1.11,0,0,1-1.11-1.11H6.1A1.11,1.11,0,0,1,4.995,108.7Zm3.33,0a1.11,1.11,0,0,1-1.11-1.11h2.22A1.11,1.11,0,0,1,8.325,108.7Zm4.995-3.33h5.55v1.11h-5.55Zm-3.083,3.33a2.2,2.2,0,0,0,.308-1.11H22.754a2.2,2.2,0,0,0,.309,1.11Zm14.738,0a1.11,1.11,0,0,1-1.11-1.11h2.22A1.11,1.11,0,0,1,24.974,108.7Zm3.573-8.879,2.664,2.22H25.973a.555.555,0,0,1-.427-.2l-1.682-2.02h4.683Zm-8.567,5.55h5.55v-1.11h-5.55V97.6h3.693a6.118,6.118,0,0,1,3.508,1.11H23.864a1.11,1.11,0,0,0-.852,1.82l1.685,2.02a1.661,1.661,0,0,0,1.277.6h6.049a2.439,2.439,0,0,1-2.3,3.33H19.979Zm-1.11-7.77v6.66h-5.55V97.6Z" transform="translate(0 -96.488)" fill="#3c4b5a" />
+						<svg xmlns="http://www.w3.org/2000/svg" width="33.298" height="13.32" viewBox="0 0 33.298 13.32" class="inline-svg">
+							<path d="M242.22,86.891H240V88h2.22Zm0,0" transform="translate(-222.796 -81.896)" fill="#3c4b5a" />
+							<path d="M.476,3.827l3.77-.538A19.021,19.021,0,0,1,6.382,2.157,18.689,18.689,0,0,1,14.114.492h.655a18.864,18.864,0,0,1,9.008,2.3l1.9,1.038a13.113,13.113,0,0,1,6.346,1.72A2.534,2.534,0,0,1,33.3,7.741v3.3a.555.555,0,0,1-.555.555H30.88a3.318,3.318,0,0,1-6.262,0H9.791a3.318,3.318,0,0,1-6.262,0h-.2a.557.557,0,0,1-.206-.04l-1.8-.721A2.1,2.1,0,0,1,0,8.872v-4.5A.555.555,0,0,1,.476,3.827Zm25.1,7.1a2.22,2.22,0,1,0-.045-.444A2.22,2.22,0,0,0,25.574,10.925Zm-10.034-.444h8.88a3.33,3.33,0,1,1,6.66,0h1.11V7.741a1.42,1.42,0,0,0-.714-1.23,12,12,0,0,0-5.945-1.579H15.539Zm0-6.66h7.813l-.107-.058a17.745,17.745,0,0,0-7.706-2.137ZM14.429,1.6h-.314a17.565,17.565,0,0,0-6.53,1.251l.969.969h5.875ZM4.485,10.925a2.22,2.22,0,1,0-.045-.444A2.22,2.22,0,0,0,4.485,10.925ZM1.11,5.487H2.775V6.6H1.11V8.872a.993.993,0,0,0,.628.927l1.592.639c0-.051.007-.1.01-.153s0-.111.01-.166.017-.111.026-.166.016-.111.027-.161.027-.107.042-.159.026-.106.042-.158.037-.1.055-.152.036-.1.056-.153.046-.1.069-.142.046-.1.072-.147.056-.088.081-.133.055-.1.087-.14.061-.082.092-.123.065-.089.1-.132.069-.076.1-.111.073-.082.111-.121.076-.07.114-.1.079-.075.122-.111.085-.064.127-.1.084-.065.129-.1.094-.055.142-.086.087-.056.132-.079.1-.049.152-.073.091-.046.138-.066.111-.041.166-.061.092-.036.139-.051c.063-.019.128-.033.193-.049.042-.01.083-.023.125-.032.068-.014.138-.022.208-.032.041-.005.08-.014.121-.018a3.383,3.383,0,0,1,.338-.017,3.333,3.333,0,0,1,3.33,3.33h4.441V4.932h-6.1a.554.554,0,0,1-.392-.163L6.493,3.33a17.8,17.8,0,0,0-1.759.962.557.557,0,0,1-.215.079L1.11,4.858Zm0,0" transform="translate(0 -0.492)" fill="#3c4b5a" />
 						</svg>
 					</div>
 					<div class="map-block__text">
@@ -1359,7 +1377,7 @@ switch ($km_MKAD) {
         <div class="feedback-form" style="background: #f7fafc; padding: 30px; border-radius: 15px;">
             <div class="feedback-form__title pt-0">
                 <h2>Записаться на просмотр</h2>
-                <?if($arResult['PROPERTIES']['CONTACTS']['VALUE_XML_ID'] == 'tel' && $arResult['PROPERTIES']['PHONE']['VALUE']){?>
+                <?if($arResult['PROPERTIES']['CONTACTS']['VALUE_XML_ID'] == 'tel' && $arResult['PROPERTIES']['PHONE']['VALUE'] && count($arResult['DEVELOPERS']) == 1){?>
                     <p>Позвоните по телефону <a href="tel:<?=$arResult['PROPERTIES']['PHONE']['VALUE']?>"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?></a>, или заполните форму ниже</p>
                 <?}else{?>
                     <p>Заполните форму ниже</p>
@@ -1379,8 +1397,8 @@ switch ($km_MKAD) {
                         </div>
                         <div class="col-lg-8">
                             <div class="custom-control custom-checkbox custom-control-inline">
-                                <input class="custom-control-input" id="privacy-policy" type="checkbox" name="privacy-policy" checked required>
-                                <label class="custom-control-label" for="privacy-policy" style="font-size: 13px;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp;
+                                <input class="custom-control-input" id="privacy-policy-3" type="checkbox" name="privacy-policy" checked required>
+                                <label class="custom-control-label" for="privacy-policy-3" style="font-size: 13px;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp;
                                     <a href="/politika-konfidentsialnosti/" class="font-weight-bold" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a>
                                 </label>
                             </div>
@@ -1472,7 +1490,7 @@ switch ($km_MKAD) {
 						<?}?>
 						<div class="col-12 mt-4 text-center">
 							<div class="row">
-								<div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6 offset-sm-3 col-sm-6"><a class="btn btn-warning rounded-pill w-100" href="/poselki/<?=$arResult["CODE"]?>/reviews/">Все отзывы</a></div>
+								<div class="offset-lg-4 col-lg-4 offset-md-3 col-md-6 offset-sm-3 col-sm-6"><a class="btn btn-outline-warning rounded-pill w-100" href="/poselki/<?=$arResult["CODE"]?>/reviews/">Все отзывы</a></div>
 							</div>
 						</div>
 					</div>
@@ -1593,8 +1611,8 @@ switch ($km_MKAD) {
 						<div class="row align-items-center">
 							<div class="col-md-8 privacy-policy-label">
 								<div class="custom-control custom-checkbox custom-control-inline">
-									<input class="custom-control-input" id="privacy-policy" type="checkbox" name="privacy-policy" checked required>
-									<label class="custom-control-label" for="privacy-policy">
+									<input class="custom-control-input" id="privacy-policy-4" type="checkbox" name="privacy-policy" checked required>
+									<label class="custom-control-label" for="privacy-policy-4">
 										Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
 								</div>
 							</div>
@@ -1613,7 +1631,7 @@ switch ($km_MKAD) {
 		<h2>Скорее всего вам будут интересны данные поселки:</h2>
 		<div class="block-page__offer" id="raiting-area-home-slick">
 			<?global $arrFilter;
-			// dump($arResult['PROPERTIES']['PRICE_SOTKA']);
+			// dump($arResult['PROPERTIES']['RECOM']);
 			$arrFilter = [
 				'!ID' => $arResult['ID'],
 				'PROPERTY_DOMA' => $housesValEnum,
@@ -1639,7 +1657,13 @@ switch ($km_MKAD) {
 				$homeValueTo = $homeValue2 + ($homeValue2 / 100 * $percent);
 				$arrFilter['>=PROPERTY_HOME_VALUE'] = $homeValueFrom;
 				$arrFilter['<=PROPERTY_HOME_VALUE'] = $homeValueTo;
-			} // dump($arrFilter);
+			}
+			$arrFilter = [
+				['LOGIC' => 'OR',
+					['ID' => $arResult['PROPERTIES']['RECOM']['VALUE']],
+					$arrFilter
+				]
+			]; // dump($arrFilter);
 			// $arrFilter=array('PROPERTY_DOMA'=>3,'!PROPERTY_ACTION'=>false); // показывать только акции?>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:main.include",
@@ -1675,7 +1699,7 @@ switch ($km_MKAD) {
 	      var myMap = new ymaps.Map('villageMap', {
 	        center: [<?=$arResult['PROPERTIES']['COORDINATES']['VALUE'] // Координаты поселка?>],
 	        zoom: 12,
-	        controls: []
+	        controls: ["zoomControl"]
 	      });
 
 	      var myPlacemark = new ymaps.Placemark(myMap.getCenter(), {

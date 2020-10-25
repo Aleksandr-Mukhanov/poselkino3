@@ -373,9 +373,9 @@ $this->setFrameMode(true);
 									<div class="row">
 										<div class="col-lg-8 mt-40">
 											<div class="d-flex align-items-center flex-wrap">
-												<?foreach($arResult["ITEMS"][1]["VALUES"] as $val => $ar): //dump($ar); // Тип поселка
-										      if($ar["URL_ID"] == 'dacha')$ar["VALUE"] = 'Для дачи';
-										      if($ar["URL_ID"] == 'cottage')$ar["VALUE"] = 'Для коттеджа';
+												<?/*foreach($arResult["ITEMS"][1]["VALUES"] as $val => $ar): //dump($ar); // Тип поселка
+										      if($ar["URL_ID"] == 'dacha')$ar["VALUE"] = 'Дачный';
+										      if($ar["URL_ID"] == 'cottage')$ar["VALUE"] = 'ИЖС';
 										    ?>
 										      <div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
 										        <input
@@ -389,7 +389,41 @@ $this->setFrameMode(true);
 										        />
 											      <label class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled': '' ?>" data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"];?></label>
 													</div>
-										    <?endforeach;?>
+										    <?endforeach;*/?>
+												<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+									        <input
+									          type="checkbox"
+														class="custom-control-input"
+									          value="dacha"
+									          name="type_permitted"
+									          id="dacha"
+									          <? echo $arResult["ITEMS"][33]["VALUES"][108]["CHECKED"] ? 'checked="checked"' : '' ?>
+									        />
+										      <label class="custom-control-label" data-role="label_dacha" for="dacha">Дачный</label>
+												</div>
+												<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+									        <input
+									          type="checkbox"
+														class="custom-control-input"
+									          value="ihs"
+									          name="type_permitted"
+									          id="ihs"
+									          <? echo $arResult["ITEMS"][33]["VALUES"][228]["CHECKED"] ? 'checked="checked"' : '' ?>
+									        />
+										      <label class="custom-control-label" data-role="label_ihs" for="ihs">ИЖС</label>
+												</div>
+												<div class="hide">
+													<?foreach($arResult["ITEMS"][33]["VALUES"] as $val => $ar): // Вид разрешенного использования?>
+										        <input
+										          type="checkbox"
+										          value="<? echo $ar["HTML_VALUE"] ?>"
+										          name="<? echo $ar["CONTROL_NAME"] ?>"
+										          id="<? echo $ar["CONTROL_ID"] ?>"
+										          <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+										          onclick="smartFilter.click(this)"
+										        />
+											    <?endforeach;?>
+												</div>
 												<?foreach($arResult["ITEMS"][116]["VALUES"] as $val => $ar): //dump($ar); // Акция?>
 													<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
 														<input
@@ -404,10 +438,20 @@ $this->setFrameMode(true);
 														<label class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled': '' ?>" data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>">Поселки с акциями</label>
 													</div>
 												<?endforeach;?>
-												<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
-													<input class="custom-control-input" id="extraOptionsTypeIP" type="checkbox" name="extraOptionsTypeIP">
-													<label class="custom-control-label" for="extraOptionsTypeIP">Доступна рассрочка</label>
-												</div>
+												<?foreach($arResult["ITEMS"][159]["VALUES"] as $val => $ar): //dump($ar); // Рассрочка?>
+													<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+														<input
+															type="checkbox"
+															class="custom-control-input"
+															value="<? echo $ar["HTML_VALUE"] ?>"
+															name="<? echo $ar["CONTROL_NAME"] ?>"
+															id="<? echo $ar["CONTROL_ID"] ?>"
+															<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+															onclick="smartFilter.click(this)"
+														/>
+														<label class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled': '' ?>" data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>">Доступна рассрочка</label>
+													</div>
+												<?endforeach;?>
 											</div>
 										</div>
 									</div>
@@ -887,7 +931,7 @@ $this->setFrameMode(true);
 							<div class="order-3 order-lg-6 col-12 mt-4 pt-1">
 								<div class="d-flex flex-wrap justify-content-start">
 									<input class="btn btn-lg btn-warning mr-4" type="submit" id="set_dop_filter" name="set_dop_filter" value="Подобрать" disabled>
-									<button class="btn btn-link filter__button-clear p-0" type="reset" onclick="smartFilter.click(this)">
+									<button class="btn btn-link filter__button-clear p-0" type="reset" id="del_filter" name="del_filter" onclick="smartFilter.click(this)">
 										<svg xmlns="http://www.w3.org/2000/svg" width="12.669" height="12.669" viewBox="0 0 12.669 12.669" class="inline-svg">
 											<path d="M12.24 2.5L8.4 6.336l3.839 3.839a1.462 1.462 0 1 1-2.067 2.068L6.334 8.4 2.5 12.242a1.462 1.462 0 0 1-2.072-2.067l3.839-3.839L.428 2.5A1.462 1.462 0 0 1 2.495.43l3.839 3.839L10.173.43A1.462 1.462 0 0 1 12.24 2.5z" />
 										</svg>Сбросить фильтр

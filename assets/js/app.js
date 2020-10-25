@@ -185,7 +185,7 @@ $(document).ready(function() {
   })
 
   // Plan
-  $("#openPlan").lightGallery();
+  $(".openPlan").lightGallery();
 
   // Work steps
   let step = $('.step'),
@@ -286,7 +286,8 @@ $(document).ready(function() {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 2
+          slidesToShow: 2,
+          arrows: false,
         }
       },
       {
@@ -388,7 +389,7 @@ $(document).ready(function() {
 
   // Phone
   $(".phone").inputmask({
-    "mask": "+7 (999) 999-9999",
+    "mask": "+9 (999) 999-9999",
     // "placeholder": ""
   });
 

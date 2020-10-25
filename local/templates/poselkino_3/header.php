@@ -58,6 +58,7 @@ if(isset($_COOKIE['favorites_vil'])){
 	<title><?$APPLICATION->ShowTitle();?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 	<link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/png">
+	<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<?$APPLICATION->ShowHead();?>

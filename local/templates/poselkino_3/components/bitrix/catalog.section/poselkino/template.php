@@ -154,11 +154,12 @@ $containerName = 'container-'.$navParams['NavNum'];
 // dump($arParams);
 // dump($arResult);
 ?>
-<?if ($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
+<?if ($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе
+	$cntPos = count($arResult['ITEMS']);?>
 
 <div class="page__content-list list w-100">
   <div class="container">
-    <div class="list--grid" data-entity="<?=$containerName?>" data-cnt-pos=<?=count($arResult['ITEMS'])?>>
+    <div class="list--grid" data-entity="<?=$containerName?>" data-cnt-pos=<?=$cntPos?>>
 
 	<?}elseif($arParams['TEMPLATE_CARD'] == 'map'){ // на карте?>
 
@@ -183,19 +184,27 @@ $containerName = 'container-'.$navParams['NavNum'];
 				// создадим массив меток для карты
 				$adresItem = $item['PROPERTIES']['OBLAST']['VALUE'].", ".$item['PROPERTIES']['REGION']['VALUE']." р-он, ".$item['PROPERTIES']['HIGTWAY']['VALUE'][0]." шоссе, ".$item['PROPERTIES']['MKAD']['VALUE']." км. от МКАД ";
 				$point = $item['PROPERTIES']['COORDINATES']['VALUE'];
+				// проверка на правильность координат по регулярки
+				$point = str_replace([' ',chr(0xC2).chr(0xA0)],'',$point);
+				$pattern = '/^([0-9]{2}\.[0-9]+,[0-9]{2}\.[0-9]+)?$/';
+				if(preg_match($pattern, $point)){
+					$arMapItem[$item['ID']] = [
+						"NAME" => $item["NAME"],
+						"adresItem" => $adresItem,
+						"point" => $point,
+						//"point2" => $point2,
+					];
+				}else {
+					// echo $item["NAME"].' '.$point.'<br>';
+				}
 				//$point2 = curl_get_coordinates($adresItem); // сполучаем координаты метки
-				$arMapItem[$item['ID']] = [
-					"NAME" => $item["NAME"],
-					"adresItem" => $adresItem,
-					"point" => $point,
-					//"point2" => $point2,
-				];
+
 				$arResult['ITEMS_JSON'][$item['ID']] = json_encode($item,JSON_UNESCAPED_SLASHES);
-			}
+			} // dump($arMapItem);
 		}
 
 if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
-
+		$i = 0;
 		foreach ($arResult['ITEM_ROWS'] as $rowData)
 		{
 			$rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
@@ -206,7 +215,8 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 			if(isset($_COOKIE['favorites_vil'])){
 				$arFavorites = explode('-',$_COOKIE['favorites_vil']);
 			}
-			foreach ($rowItems as $item){ // вывод карточек
+
+			foreach ($rowItems as $item){ $i++; // вывод карточек
 				$generalParams['COMPARISON'] = (in_array($item['ID'],$arComparison)) ? 'Y' : 'N';
 				$generalParams['FAVORITES'] = (in_array($item['ID'],$arFavorites)) ? 'Y' : 'N';
 				$generalParams['TEMPLATE_CARD'] = $arParams['TEMPLATE_CARD'];?>
@@ -229,6 +239,48 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 					$component,
 					array('HIDE_ICONS' => 'Y')
 				);?>
+				<? // вставка формы
+				$nPos = ($cntPos > 5) ? $cntPos / 2 : $cntPos;
+				if($i == $nPos){ ?>
+			    <div style="margin-top: 15px; margin-bottom: 15px;">
+			        <div class="container">
+			            <div class="feedback-form feedback-form--help" style="padding: 30px; border-radius: 15px;">
+			                <div class="feedback-form__bg"></div>
+			                <div class="feedback-form__title pt-0">
+			                    <h2>Затрудняетесь с поиском?</h2>
+			                    <p>Отправьте заявку и наш специалист сделает вам точный подбор.<br>Экономьте время</p>
+			                </div>
+			                <div class="feedback-form__body" style="padding: 15px 0;">
+			                    <form action="" class="formSignToView">
+			                        <div class="row">
+			                            <div class="col-lg-8 col-md-9">
+			                                <div class="row">
+			                                    <div class="col-lg-4 col-sm-6">
+			                                        <div class="form-group"><input class="form-control nameSignToView" id="request-name" type="text" name="review-name" placeholder="Ваше имя" required=""></div>
+			                                    </div>
+			                                    <div class="col-lg-4 col-sm-6">
+			                                        <div class="form-group"><input class="form-control phone telSignToView" id="request-phone" type="text" name="review-name" placeholder="Номер телефона" autocomplete="off" required="" inputmode="text"></div>
+			                                    </div>
+			                                    <div class="col-lg-3 col-md-4 col-sm-5">
+			                                        <button class="btn btn-warning rounded-pill w-100 leave_request" type="submit" data-id-button="LEAVE_REQUEST">Отправить</button>
+			                                    </div>
+			                                    <div class="col-12">
+			                                        <div class="custom-control custom-checkbox custom-control-inline">
+			                                            <input class="custom-control-input" id="privacy-policy" type="checkbox" name="privacy-policy" checked="" required="">
+			                                            <label class="custom-control-label" for="privacy-policy" style="font-size: 13px;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь <br class="d-none d-lg-block">с&nbsp;
+			                                                <a href="/politika-konfidentsialnosti/" class="font-weight-bold" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a>
+			                                            </label>
+			                                        </div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </form>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+				<?}?>
 			<?}
 		}
 }

@@ -104,7 +104,7 @@ $pagen_1 = ($_REQUEST['PAGEN_1']) ? ' - страница '.$_REQUEST['PAGEN_1'] 
 			<div class="order-0 col-lg-9 col-md-8">
 				<h2>Коттеджные и дачные поселки девелопера <?=$arResult['row']['UF_NAME']?>&nbsp;<span class="text-secondary"><?=$arResult["CNT_POS"]?></span></h2>
 			</div>
-			<div class="order-2 order-md-1 col-lg-3 col-md-4 col-sm-6 text-right"><a class="btn btn-outline-warning show-map-sort" href="/map/">
+			<div class="order-2 order-md-1 col-lg-3 col-md-4 col-sm-6 text-right"><a class="btn btn-outline-warning show-map-sort" href="/developery/<?=$arResult['row']['UF_XML_ID']?>/map/">
 				<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
 					<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 				</svg>&nbsp;

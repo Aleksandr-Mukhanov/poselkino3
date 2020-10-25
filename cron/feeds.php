@@ -46,7 +46,7 @@ $arFilter = Array("IBLOCK_ID"=>1,"PROPERTY_DEVELOPER_ID" => $arIdDeveloper);
 $arSelect = Array("ID","NAME","PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->GetNext()){ // dump($arElement);
-  $arVillage[$arElement['PROPERTY_DEVELOPER_ID_VALUE']][strtolower($arElement['NAME'])] = [
+  $arVillage[$arElement['PROPERTY_DEVELOPER_ID_VALUE'][0]][strtolower($arElement['NAME'])] = [
     'ID' => $arElement['ID'],
     'NAME' => $arElement['NAME'],
     'DATE_FEED' => $arElement['PROPERTY_DATE_FEED_VALUE'],
@@ -55,7 +55,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 		'MKAD_KM' => $arElement['PROPERTY_MKAD_VALUE'],
   ];
 	$arVillageIds[] = $arElement['ID'];
-} // dump($arVillage);
+} // dump($arVillage); die();
 
 // получим дома девелоперов
 $arOrder = Array("SORT"=>"ASC");
@@ -91,16 +91,17 @@ foreach ($arDeveloper as $idDeveloper => $feed) { // переберем фиды
     foreach ($offers as $offer) { // переберем поселки
 
 			$vilName = (string)$offer->{'village-name'};
+			$vilCode = CUtil::translit($vilName, "ru", $params);
 			$vilNameLower = strtolower((string)$offer->{'village-name'});
 			$dateUpdateVil = $offer->{'date-update'};
 			$COUNT_PLOTS_SOLD = $offer->{'number-of-lands-sold'};
 			$COUNT_PLOTS_SALE = $offer->{'number-of-lands-for-sale'};
-			$COST_LAND_IN_CART_MIN = $offer->{'min-cost-of-the-land'};
-			$COST_LAND_IN_CART_MAX = $offer->{'max-cost-of-the-land'};
-			$PRICE_SOTKA_MIN = $offer->{'min-cost-of-a-sotka'};
-			$PRICE_SOTKA_MAX = $offer->{'max-cost-of-a-sotka'};
-			$HOME_VALUE_MIN = $offer->{'min-cost-of-the-house'};
-			$HOME_VALUE_MAX = $offer->{'max-cost-of-the-house'};
+			$COST_LAND_IN_CART_MIN = str_replace(' ','',$offer->{'min-cost-of-the-land'});
+			$COST_LAND_IN_CART_MAX = str_replace(' ','',$offer->{'max-cost-of-the-land'});
+			$PRICE_SOTKA_MIN = str_replace(' ','',$offer->{'min-cost-of-a-sotka'});
+			$PRICE_SOTKA_MAX = str_replace(' ','',$offer->{'max-cost-of-a-sotka'});
+			$HOME_VALUE_MIN = str_replace(' ','',$offer->{'min-cost-of-the-house'});
+			$HOME_VALUE_MAX = str_replace(' ','',$offer->{'max-cost-of-the-house'});
 
 			if(array_key_exists($vilNameLower,$arVillage[$idDeveloper])){ // нашли поселок
 
@@ -144,16 +145,15 @@ foreach ($arDeveloper as $idDeveloper => $feed) { // переберем фиды
 				  "IBLOCK_ID"      => 1,
 				  "PROPERTY_VALUES"=> $PROP,
 				  "NAME"           => $vilName,
+					"CODE"					 => $vilCode,
 				  "ACTIVE"         => "N",            // активен
-				); // dump($arLoadProductArray);
+				); // dump($arLoadProductArray); die();
 
 				if($idVil = $el->Add($arLoadProductArray))
 				  mesOk("Поселок успешно добавлен!");
 				else
 				  mesEr("Error: ".$el->LAST_ERROR);
 			}
-
-			$vilCode = CUtil::translit($vilName, "ru", $params);
 
 			// обновим дома
 			$list_of_houses = $offer->{'list-of-houses'}; // dump($list_of_houses);
@@ -254,9 +254,9 @@ foreach ($arDeveloper as $idDeveloper => $feed) { // переберем фиды
 				foreach ($list_plot as $plot) { // dump($plot);
 
 					$dateUpdate = $plot->{'date-update-land'};
-					$PRICE = $plot->{'price-land'};
+					$PRICE = str_replace(' ','',$plot->{'price-land'});
 					$NUMBER = $plot->{'number-plan-land'};
-					$PLOTTAGE = $plot->{'area-land'};
+					$PLOTTAGE = str_replace(',','.',$plot->{'area-land'});
 					$plotName = $vilName.': участок '.$NUMBER;
 					$plotCode = 'kupit-uchastok-'.$vilCode.'-'.$PLOTTAGE.'-sotok-'.$vilMKAD.'-km-mkad-id-'.$NUMBER;
 					$PREVIEW_TEXT = $plot->{'description-land'};

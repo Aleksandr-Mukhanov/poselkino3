@@ -35,21 +35,26 @@ if ($shosse) { // шоссе
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
   }
-  // url для С газом
-  switch ($domPos) {
-    case 'noDom': // Участки
-      $urlTeg = "/poselki/kupit-uchastok/".$shosse."-shosse-gaz/";
-      break;
-    case 'withDom': // Дома
-      $urlTeg = "/poselki/kupit-dom/".$shosse."-shosse-gaz/";
-      break;
-    default: // Поселки
-      $urlTeg = "/poselki/".$shosse."-shosse-gaz/";;
-      break;
+  $arNameTeg = ['gaz','voda','do-1-milliona','do-2-milliona','izhs','snt','ryadom-s-lesom','u-vody'];
+  foreach ($arNameTeg as $nameTeg) {
+    switch ($domPos) {
+      case 'noDom': // Участки
+        $urlTeg = '/poselki/kupit-uchastok/'.$shosse.'-shosse-'.$nameTeg.'/';
+        break;
+      case 'withDom': // Дома
+        $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-'.$nameTeg.'/';
+        break;
+      default: // Поселки
+        $urlTeg = '/poselki/'.$shosse.'-shosse-'.$nameTeg.'/';
+        break;
+    }
+    if (!$domPos) $urlTeg = str_replace('/poselki/','/poselki/kupit-uchastok/',$urlTeg); // у поселков нет
+    $arTegs[$nameTeg]['url'] = $urlTeg;
   }
-  $arTegs['gaz']['url'] = $urlTeg;
+
   // теги для шоссе
-  $arTegsShow = ['mkad_20','mkad_30','mkad_50','gaz','izhs','snt','les','voda','econom','komfort'];
+  $arTegsShow = ['mkad_20','mkad_30','mkad_50','gaz','voda','izhs','snt','ryadom-s-lesom','u-vody'];
+  array_push($arTegsShow,'do-1-milliona','do-2-milliona'); // было только участки и дома
 }
 
 if ($rayon) { // район
@@ -79,7 +84,7 @@ if ($rayon) { // район
   }
   $arTegs['gaz']['url'] = $urlTeg;
   // теги для района
-  $arTegsShow = ['gaz','izhs','snt','les','voda','econom','komfort'];
+  $arTegsShow = ['gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
 }
 
 if ($typePos) { // выбор по типу
@@ -222,7 +227,7 @@ if ($mkadKM) { // выбор по км от мкад
     }
     $arTegs['izhs']['url'] = $urlTeg;
     // теги для км от МКАД
-    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','les','voda','econom','komfort'];
+    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
   }else{
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
@@ -262,7 +267,7 @@ if($plottage){ // площадь дома
     $APPLICATION->AddChainItem('Купить дом '.$plottage.' кв.м.',"/poselki/kupit-dom-".$plottage."-kv-m/",true);
     $UF_Code = "kupit-dom-".$plottage."-kv-m";
     // теги для площади
-    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','les','voda','econom','komfort'];
+    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
   }else{
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
@@ -322,7 +327,7 @@ if($priceURL){ // выборка по цене
     $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
   }
   // теги для цены
-  $arTegsShow = ['north','east','south','west','gaz','elektro','izhs','snt','les','voda'];
+  $arTegsShow = ['north','east','south','west','gaz','elektro','izhs','snt','ryadom-s-lesom','u-vody'];
 }
 
 if($areaUrl){ // выборка по площади
@@ -371,7 +376,7 @@ if($areaUrl){ // выборка по площади
     if($domPos == 'withDom')$nameDomPos = 'Дома на';
     $APPLICATION->AddChainItem($nameDomPos.' '.$areaUrl.' '.$nameArea,'',true);
     // теги для площади
-    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','les','voda','econom','komfort'];
+    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
   }else{
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
@@ -424,7 +429,7 @@ if($classCode){ // выборка по классу econom / biznes / komfort / 
   }
   $APPLICATION->AddChainItem($nameClass2.' класса','',true);
   // теги для класса
-  $arTegsShow = ['north','east','south','west','mkad_20','mkad_30','mkad_50','gaz','les','voda'];
+  $arTegsShow = ['north','east','south','west','mkad_20','mkad_30','mkad_50','gaz','ryadom-s-lesom','u-vody'];
 }
 
 if($commun){ // коммуникации
@@ -438,7 +443,7 @@ if($commun){ // коммуникации
     case 'vodoprovodom':
       $arrFilter['=PROPERTY_27'] = [20]; // Водопровод (проведен)
       $APPLICATION->AddChainItem('С водой','',true);
-      $commun2 = 'voda';
+      $commun2 = 'u-vody';
       break;
     case 'gazom':
       $arrFilter['=PROPERTY_24'] = [17]; // Газ (проведен)
@@ -487,7 +492,7 @@ if($commun){ // коммуникации
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
   }
   // теги для коммуникаций
-  $arTegsShow = ['north','east','south','west','mkad_20','mkad_30','mkad_50','les','voda','econom','komfort'];
+  $arTegsShow = ['north','east','south','west','mkad_20','mkad_30','mkad_50','ryadom-s-lesom','u-vody','econom','komfort'];
 }
 
 if($typeURL){ // другие URL
@@ -638,7 +643,11 @@ if($typeURL){ // другие URL
         $arTegs['mkad_'.$i]['url'] = $urlTeg;
       }
     }
-    $arTegsShow = ['north','east','south','west','mkad_30','mkad_50','gaz','les','voda','econom','komfort'];
+    $arTegsShow = ['north','east','south','west','mkad_30','mkad_50','gaz','ryadom-s-lesom','u-vody','econom','komfort'];
   }
+}
+
+if($developerCode){ // по девелоперу
+  $arrFilter['=PROPERTY_122'] = $developerCode; // Вид разрешенного использования
 }
 ?>

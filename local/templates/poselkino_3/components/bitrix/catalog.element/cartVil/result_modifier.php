@@ -149,10 +149,10 @@
 		unset($arPhoto);
   }
 
-if (!$arHouses && $arPlots) { // если нет домов
-  $arHouses = $arPlots;
-  unset($arPlots);
-}
+// if (!$arHouses && $arPlots) { // если нет домов
+//   $arHouses = $arPlots;
+//   unset($arPlots);
+// }
 
 $arResult["CNT_COMMENTS"] = $cntCom;
 $arResult["RATING_TOTAL"] = round($ratingTotal,1);

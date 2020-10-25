@@ -24,6 +24,10 @@ function formatPrice($price){
 	$newPrice = number_format($price, 0, ',', '');
 	return $newPrice;
 }
+function formatPriceSite($price){
+	$newPrice = number_format($price, 0, ',', ' ');
+	return $newPrice;
+}
 // формат цены с точками
 function formatPricePoint($price){
 	$newPrice = number_format($price, 0, ',', '.');
@@ -103,6 +107,20 @@ function getNameRoad($idRoad){
 	}
 
 	return $arNameRoads[$idRoad];
+}
+
+function getRoadName($value){
+	switch ($value) {
+		case 'Асфальт': $arRoadName['WHAT'] = 'Асфальтированная дорога'; break;
+		case 'Щебень': $arRoadName['WHAT'] = 'Дорога из щебня'; break;
+		case 'Битый кирпич': $arRoadName['WHAT'] = 'Дорога из битого кирпича'; break;
+		case 'Грунтовка': $arRoadName['WHAT'] = 'Грунтовая дорога'; break;
+		case 'Асф. кр.': $arRoadName['WHAT'] = 'Дорога из асфальтовой крошки'; break;
+		case 'Бетонные плиты': $arRoadName['WHAT'] = 'Дорога из бетонных плит'; break;
+		default: $arRoadName['WHAT'] = 'Нет дороги'; break;
+	}
+
+	return $arRoadName;
 }
 
 // получим названия из списка для отдельных страниц
@@ -229,6 +247,30 @@ function getElHL($idHL,$order,$filter,$select){
 		$arElements[$arRes['ID']] = $arRes;
 	}
 	return $arElements;
+}
+
+AddEventHandler('iblock', 'OnBeforeIBlockElementAdd', array('MyClass', 'OnBeforeIBlockElementHandler'));
+AddEventHandler('iblock', 'OnBeforeIBlockElementUpdate', array('MyClass', 'OnBeforeIBlockElementHandler'));
+
+class MyClass
+{
+  public function OnBeforeIBlockElementHandler(&$arFields)
+  {
+		if($arFields['PROPERTY_VALUES'][58])
+		{
+			foreach ($arFields['PROPERTY_VALUES'][58] as $value) {
+				$point = $value['VALUE'];
+				$point = str_replace([' ',chr(0xC2).chr(0xA0)],'',$point);
+				// проверка на правильность координат по регулярки
+				$pattern = '/^([0-9]{2}\.[0-9]+,[0-9]{2}\.[0-9]+)?$/';
+				if(!preg_match($pattern, $point)){
+					global $APPLICATION;
+          $APPLICATION->throwException('Не правильно введены координаты поселка! Нужно в формате: 99.99,99.99');
+          return false;
+				}
+			}
+		}
+  }
 }
 
 // обработка 404 ошибки

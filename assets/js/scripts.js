@@ -163,13 +163,23 @@ $(document).ready(function(){
 		else $('.Areas').removeClass('active');
 	});
 
+  //
+  $('input[name=type_permitted]').change(function(){ // Вид разрешенного использования
+    permitted = $(this).val();
+    if(permitted == 'dacha'){
+      $('#arrFilter_33_766302424,#arrFilter_33_1577100463,#arrFilter_33_2602800704,#arrFilter_33_2286445522').trigger("click");
+    }else if(permitted == 'ihs'){
+      $('#arrFilter_33_500958211,#arrFilter_33_1500340406').trigger("click");
+    }
+  });
+
   // выбор направлений
   $('.highway-block__title').click(function(){
     $(this).parent().find('input').trigger('click');
   });
 
   // отправка форм
-  $('a[data-toggle=modal]').click(function(event){ // установка цели
+  $('a[data-toggle=modal],.leave_request').click(function(event){ // установка цели
 		var id_button = $(this).attr('data-id-button');
 		$('#idButton').val(id_button);
   });
