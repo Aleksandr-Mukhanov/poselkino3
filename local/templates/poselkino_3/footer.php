@@ -118,19 +118,19 @@
             <div class="form-group">
               <input class="form-control nameSignToView" id="nameSignToView" type="text" placeholder="Ваше имя" required>
             </div>
-              <div class="form-group">
-                  <input class="phone form-control telSignToView" id="telSignToView" type="text" placeholder="Номер телефон" autocomplete="off" required>
-              </div>
-              <div class="form-group">
-                  <input class="form-control emailSignToView" id="emailSignToView" type="text" placeholder="Email" required>
-              </div>
+            <div class="form-group">
+                <input class="phone form-control telSignToView" id="telSignToView" type="tel" placeholder="Номер телефон" autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <input class="form-control emailSignToView" id="emailSignToView" type="email" placeholder="Email" required>
+            </div>
           </div>
           <div class="col-12 text-center">
             <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
             <p class="mt-2">
               <div class="custom-control custom-checkbox custom-control-inline">
-                  <input class="custom-control-input" id="privacy-policy-1" type="checkbox" name="privacy-policy" checked="" required="">
-                  <label class="custom-control-label" for="privacy-policy-1" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+                <input class="custom-control-input" id="privacy-policy-1" type="checkbox" name="privacy-policy" checked required>
+                <label class="custom-control-label" for="privacy-policy-1" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
               </div>
             </p>
           </div>
@@ -160,10 +160,10 @@
               <input class="form-control" id="nameToUs" type="text" placeholder="Ваше имя" required>
             </div>
             <div class="form-group">
-              <input class="phone form-control" id="telToUs" type="text" placeholder="Номер телефона" autocomplete="off" required>
+              <input class="phone form-control" id="telToUs" type="tel" placeholder="Номер телефона" autocomplete="off" required>
             </div>
             <div class="form-group">
-              <input class="form-control" id="emailToUs" type="text" placeholder="E-mail" required>
+              <input class="form-control" id="emailToUs" type="email" placeholder="E-mail" required>
             </div>
             <div class="form-group">
               <textarea class="form-control" id="textToUs" placeholder="Текст обращения" required></textarea>
@@ -173,8 +173,8 @@
             <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
             <p class="mt-2">
               <div class="custom-control custom-checkbox custom-control-inline">
-                  <input class="custom-control-input" id="privacy-policy-2" type="checkbox" name="privacy-policy" checked="" required="">
-                  <label class="custom-control-label" for="privacy-policy-2" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+                <input class="custom-control-input" id="privacy-policy-2" type="checkbox" name="privacy-policy" checked required>
+                <label class="custom-control-label" for="privacy-policy-2" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
               </div>
             </p>
           </div>
@@ -246,32 +246,19 @@ fbq('track', 'PageView');
 </script>
 <!-- End Facebook Pixel Code -->
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter50830593 = new Ya.Metrika2({
-                    id:50830593,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/tag.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks2");
+   ym(50830593, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
+   });
 </script>
+<noscript><div><img src="https://mc.yandex.ru/watch/50830593" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 <!-- calltouch -->
 <script type="text/javascript">

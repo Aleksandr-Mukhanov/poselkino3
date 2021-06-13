@@ -31,7 +31,13 @@ for($index = 0; $index < $itemSize; $index++)
 	}
 	else
 	{
-		$strReturn .= '<li class="breadcrumb-item active">'.$title.'</li>';
+		$strReturn .= '
+			<li class="breadcrumb-item active" id="bx_breadcrumb_'.$index.'" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+				<a href="'.$APPLICATION->GetCurPage().'" title="'.$title.'" itemprop="item">
+					<span itemprop="name">'.$title.'</span>
+				</a>
+				<meta itemprop="position" content="'.($index + 1).'" />
+		</li>';
 	}
 }
 

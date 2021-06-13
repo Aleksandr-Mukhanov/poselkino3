@@ -50,7 +50,7 @@ use Bitrix\Main\Page\Asset;
   require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
 
   $arOurPage = explode('/map/',$ourPage);
-  $APPLICATION->SetPageProperty('canonical', $arOurPage[0]);
+  $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$arOurPage[0].'/');
 ?>
 <main class="page page-map">
   <div class="page-map__wrap">

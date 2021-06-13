@@ -73,12 +73,12 @@ if(isset($_COOKIE['favorites_vil'])){
 						<button class="navbar-toggler" type="button" data-target="#navbarHeader" data-expanded="false" aria-label="Переключатель навигации"><span class="navbar-toggler-ic"><span></span><span></span><span></span></span><span class="navbar-toggler-title d-none d-md-block">Меню</span></button>
 					</div>
 				</div>
-				<div class="header__logo order-1 order-xl-2 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 pl-lg-0 text-sm-center"><a href="/"><img src="/assets/img/site/logo.png" alt="Посёлкино"></a></div>
+				<div class="header__logo order-1 order-xl-2 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 pl-lg-0 text-sm-center"><a href="/"><img src="/assets/img/site/logo-poselkino.png" alt="Посёлкино"></a></div>
 				<div class="order-2 order-xl-1 col-xl-4 col-lg-6 pr-0 d-none d-lg-block">
-					<ul class="nav navbar-top">
-						<li class="nav-item"><a class="nav-link" href="/poselki/">Все&nbsp;<span class="text-secondary"><?=$cntAllVil?></span></a></li>
-						<li class="nav-item"><a class="nav-link" href="/poselki/kottedzhnye/">Коттеджные&nbsp;<span class="text-secondary"><?=$cntCottage?></span></a></li>
-						<li class="nav-item"><a class="nav-link" href="/poselki/dachnye/">Дачные&nbsp;<span class="text-secondary"><?=$cntDacha?></span></a></li>
+					<ul class="nav navbar-top" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все&nbsp;<span class="text-secondary"><?=$cntAllVil?></span></a></li>
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/kottedzhnye/">Коттеджные&nbsp;<span class="text-secondary"><?=$cntCottage?></span></a></li>
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/dachnye/">Дачные&nbsp;<span class="text-secondary"><?=$cntDacha?></span></a></li>
 					</ul>
 				</div>
 				<div class="order-3 col-xl-5 col-lg-3 col-sm-4 col-6 text-right">
@@ -122,13 +122,13 @@ if(isset($_COOKIE['favorites_vil'])){
 		</div>
 		<div class="header__navbar collapse navbar-collapse" id="navbarHeader">
 			<button class="navbar-toggler w-100" type="button" data-target="#navbarHeader" data-expanded="false" aria-label="Переключатель навигации"><span class="navbar-toggler-ic"><span></span><span></span><span></span></span><span class="navbar-toggler-title">Меню</span></button>
-			<ul class="nav">
-				<li class="nav-item"><a class="nav-link" href="/poselki/kottedzhnye/">Коттеджные поселки <?=$cntCottage?></a></li>
-				<li class="nav-item"><a class="nav-link" href="/poselki/dachnye/">Дачные поселки <?=$cntDacha?></a></li>
-				<li class="nav-item"><a class="nav-link" href="/o-proekte/">О проекте</a></li>
-				<li class="nav-item"><a class="nav-link" href="/blog/">Блог</a></li>
-				<li class="nav-item"><a class="nav-link" href="/reklama/">Реклама и сотрудничество</a></li>
-				<li class="nav-item"><a class="nav-link" href="/kontakty/">Контакты</a></li>
+			<ul class="nav" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/kottedzhnye/">Коттеджные поселки <?=$cntCottage?></a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/dachnye/">Дачные поселки <?=$cntDacha?></a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/o-proekte/">О проекте</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/blog/">Блог</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/reklama/">Реклама и сотрудничество</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/kontakty/">Контакты</a></li>
 				<li class="nav-item mt-auto mail">
 					<div class="nav-item-label">E-mail:&nbsp;</div><a href="mailto:welcome@poselkino.ru">welcome@poselkino.ru</a>
 				</li>

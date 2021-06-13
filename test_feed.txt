@@ -33,7 +33,7 @@
   image-house-block - в блок передаются изображения дома
   image-house - изображение дома
 
-  list-of-houses - в блок передаются участки
+  list-of-lands - в блок передаются участки
   list-land - предложение участка
   date-update-land - дата обновления участка
   price-land - цена участка

@@ -394,7 +394,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 			<div class="home-about-villiage">
 				<h2>О поселке</h2>
 				<div class="row mt-4">
-					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/"></a>
+					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F2F8FD;">
 							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
 									<g transform="translate(-38.036 -36.319)">
@@ -434,7 +434,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 							<div class="offer-card__title">Обустройство поселка</div>
 						</div>
 					</div>
-					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#ecologyBlock"></a>
+					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#ecologyBlock" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F1F8EF;">
 							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
 									<g transform="translate(-38.036 -36.319)">
@@ -474,7 +474,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 							<div class="offer-card__title">Экология и природа</div>
 						</div>
 					</div>
-					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#mapShow"></a>
+					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#mapShow" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F6F5FA;">
 							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
 									<g transform="translate(-38.036 -36.319)">

@@ -128,7 +128,7 @@
   // получим участки
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
-	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
@@ -145,6 +145,7 @@
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
+			"NUMBER" => $arElement["PROPERTY_NUMBER_VALUE"],
 		];
 		unset($arPhoto);
   }

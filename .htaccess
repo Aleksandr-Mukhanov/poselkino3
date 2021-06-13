@@ -11,16 +11,21 @@ ErrorDocument 404 /404.php
   Options +FollowSymLinks
   RewriteEngine On
 
+  #del www
   RewriteCond %{HTTP_HOST} ^www\.(.*)$
   RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+  #add /
+  RewriteCond %{REQUEST_URI} ^(.*/[^/\.]+)$
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [R=301,L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !/bitrix/urlrewrite.php$
-  
+
   RewriteRule ^(.*)$ /bitrix/urlrewrite.php [L]
-  
+
   RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization}]
 
   RewriteCond %{THE_REQUEST} ^GET.*index\.php [NC]

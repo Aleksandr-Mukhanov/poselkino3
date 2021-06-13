@@ -233,7 +233,11 @@ switch ($km_MKAD) {
 			<div class="village-slider">
 				<div class="slider__header">
 					<?if($arResult['PROPERTIES']['ACTION']['VALUE']){ // вывод акции?>
-						<div class="slider__label">Акция<?if($arResult['PROPERTIES']['SALE_SUM']['VALUE']){?> - <?=$arResult['PROPERTIES']['SALE_SUM']['VALUE']?>%<?}?></div>
+						<?if($arResult['PROPERTIES']['ACTION_TEXT']['VALUE']): // условия акции?>
+							<div class="slider__label"><a class="action_text" data-toggle="modal" data-target="#action-widget">Акция<?if($arResult['PROPERTIES']['SALE_SUM']['VALUE']){?> - <?=$arResult['PROPERTIES']['SALE_SUM']['VALUE']?>%<?}?></a></div>
+						<?else:?>
+							<div class="slider__label">Акция<?if($arResult['PROPERTIES']['SALE_SUM']['VALUE']){?> - <?=$arResult['PROPERTIES']['SALE_SUM']['VALUE']?>%<?}?></div>
+						<?endif?>
 					<?}?>
 					<div class="photo__buttons">
 						<button title="<?=$comp_text?>" class="comparison-click <?=$comp_active?>" data-id="<?=$arResult['ID']?>">
@@ -267,13 +271,13 @@ switch ($km_MKAD) {
 				<div class="village-slider__list" id="village-slider">
 					<?foreach ($arResult['MORE_PHOTO'] as $photo){ // Основные фото
 					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') no-repeat; background-size: cover;" itemprop="image"></div>
+						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') 0 100% no-repeat; background-size: cover;" itemprop="image"></div>
 					<?unset($photoRes);}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
 					<?foreach ($arResult['MORE_PHOTO'] as $photo){ // Доп. фото
 					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>616, 'height'=>436), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item-thumb" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover;" itemprop="image"></div>
+						<div class="village-slider__item-thumb" style="background: url('<?=$photoRes['src']?>') 0 100% no-repeat; background-size: cover;" itemprop="image"></div>
 				  <?unset($photoRes);}?>
 				</div>
 			</div>
@@ -413,11 +417,17 @@ switch ($km_MKAD) {
 				</div>
 				<?//=dump($arResult['PROPERTIES']['CONTACTS'])?>
 				<?if($arResult['PROPERTIES']['CONTACTS']['VALUE_XML_ID'] == 'tel' && $arResult['PROPERTIES']['PHONE']['VALUE'] && count($arResult['DEVELOPERS']) == 1){?>
-        	<div class="phone-cart__block"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?> <span onclick="ym(50830593, 'reachGoal', 'phone_click'); return true;">Показать</span></div>
+        	<div class="phone-cart__block"><a href="tel:<?=$arResult['PROPERTIES']['PHONE']['VALUE']?>"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?></a> <span onclick="ym(50830593, 'reachGoal', 'phone_click'); return true;">Показать</span></div>
 				<?}?>
 				<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Записаться на просмотр</a>
 				<div class="mt-4 text-lg-center">На просмотр уже записались: <b><?=$cntPos?> <?=$correctText?></b></div>
 				<input type="hidden" id="posInfo" data-namePos='<?=$arResult['NAME']?>' data-codePos='<?=$arResult['CODE']?>' data-idPos='<?=$arResult['ID']?>' data-cntPos='<?=$arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']?>'>
+				<?if($arResult['PROPERTIES']['SITE']['VALUE']):
+					$arSite = explode('//',$arResult['PROPERTIES']['SITE']['VALUE']);?>
+					<div class="w-100 text-lg-center mt-3">
+						<p>Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arSite[1]?></a></p>
+					</div>
+				<?endif;?>
 			</div>
 		</div>
 	</div>
@@ -1346,6 +1356,11 @@ switch ($km_MKAD) {
 							<path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z" />
 						</g>
 					</svg></a></p>
+				<?if($arResult['PROPERTIES']['SITE']['VALUE']):?>
+					<p class="w-100 mt-3">
+						Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['NAME']?></a>
+					</p>
+				<?endif;?>
 				<? // dump($arResult['PROPERTIES']['DEVELOPER_ID']); // Девелопер ID
 				$APPLICATION->IncludeComponent( // выводим девелопера
 					'bitrix:catalog.brandblock',
@@ -1678,6 +1693,23 @@ switch ($km_MKAD) {
 		</div>
 	</div>
 </div>
+<?if($arResult['PROPERTIES']['ACTION_TEXT']['VALUE']): // условия акции?>
+	<div class="modal fade" id="action-widget" tabindex="-1" role="dialog" aria-labelledby="action-widget" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title mt-3" id="exampleModalLabel">Условия акции</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p><?=$arResult['PROPERTIES']['ACTION_TEXT']['VALUE']?></p>
+				</div>
+			</div>
+		</div>
+	</div>
+<?endif?>
 <div class="bg-white py-4">
 	<div class="footer-feedback-village">
 		<div class="container">

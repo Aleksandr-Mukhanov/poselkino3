@@ -37,13 +37,14 @@ Disallow: /*&bxajaxid=
 Disallow: /*?view_result=
 Disallow: /*&view_result=
 Disallow: /poselki/filter
-Disallow: /*map
+Disallow: */map/
 Disallow: /*DIFFERENT
 Disallow: /uchastki
 Disallow: /doma
 Disallow: /*?teg=
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel
+Disallow: /poisk
 Host: https://poselkino.ru
 Sitemap: https://poselkino.ru/sitemap.xml
 
@@ -89,7 +90,7 @@ Disallow: /*&bxajaxid=
 Disallow: /*?view_result=
 Disallow: /*&view_result=
 Disallow: /poselki/filter
-Disallow: /*map
+Disallow: */map/
 Disallow: /*DIFFERENT
 Disallow: /null_price.php
 Disallow: /uchastki
@@ -97,4 +98,5 @@ Disallow: /doma
 Disallow: /*?teg=
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel
+Disallow: /poisk
 Sitemap: https://poselkino.ru/sitemap.xml
