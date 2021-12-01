@@ -179,9 +179,9 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 					<p><b>Возможна ипотека</b></p>
           <?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
           	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?> <span>Показать</span></div>
-						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=strtolower($offerName)?></a>
+						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
-						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=strtolower($offerName)?></a>
+						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#writeToUs" data-id-button="WRITE_TO_US_FOOT">Задать вопрос</a>
 					<?}?>
 				</div>
@@ -195,7 +195,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 			<div class="home-communication">
 				<h2>Коммуникации</h2>
 				<div class="row">
-					<?if(strtolower($arResult['arVillage']['ELECTRO']) == 'есть'):?>
+					<?if(mb_strtolower($arResult['arVillage']['ELECTRO']) == 'есть'):?>
 					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
 						<div class="communication-card communication-card--light">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="50.019" height="60" viewBox="0 0 50.019 60" class="inline-svg">
@@ -223,7 +223,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 						</div>
 					</div>
 					<?endif;?>
-					<?if(strtolower($arResult['arVillage']['GAS']) == 'есть'):?>
+					<?if(mb_strtolower($arResult['arVillage']['GAS']) == 'есть'):?>
 					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
 						<div class="communication-card communication-card--gas">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="60" viewBox="0 0 55 60" class="inline-svg">
@@ -247,7 +247,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 						</div>
 					</div>
 					<?endif;?>
-					<?if(strtolower($arResult['arVillage']['PLUMBING']) == 'есть'):?>
+					<?if(mb_strtolower($arResult['arVillage']['PLUMBING']) == 'есть'):?>
 					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
 						<div class="communication-card communication-card--water">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="60" viewBox="0 0 55 60" class="inline-svg">
@@ -543,12 +543,12 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 					<p><b>Возможна ипотека</b></p>
 					<?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
           	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?> <span>Показать</span></div>
-						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=strtolower($offerName)?></a>
+						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
-						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=strtolower($offerName)?></a>
+						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#writeToUs" data-id-button="WRITE_TO_US_FOOT">Задать вопрос</a>
 					<?}?>
-					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>'>
+					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>'>
 				</div>
 			</div>
 		</div>
@@ -623,7 +623,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 <?endif;?>
 <?if($arResult["arSimilarOffers"]):?>
 	<div class="block-page">
-		<h2>Похожие <?=strtolower($offerNameM)?></h2>
+		<h2>Похожие <?=mb_strtolower($offerNameM)?></h2>
 		<div class="card-house-carousel house-in-village area-in-village" id="similar_houses">
 			<?foreach ($arResult["arSimilarOffers"] as $id => $house) { // dump($house);?>
 				<div class="item mr-4">

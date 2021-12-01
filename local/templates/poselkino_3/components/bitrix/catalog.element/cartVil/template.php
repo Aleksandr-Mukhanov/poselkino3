@@ -30,22 +30,22 @@ $arVideoVil = explode('https://youtu.be/',$arResult['PROPERTIES']['VIDEO_VIL']['
 $arResult['PROPERTIES']['VIDEO_VIL']['CODE_YB'] = $arVideoVil[1];
 
 // объекты на тер. и в радиусе 5 км
-if (strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в поселке') $inTer['shop']='Магазин';
-elseif(strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в радиусе 5км') $rad5km['shop']='Магазин';
-if (strtolower($arResult['PROPERTIES']['APTEKA']['VALUE']) == 'в поселке') $inTer['pharmacy']='Аптека';
-elseif(strtolower($arResult['PROPERTIES']['APTEKA']['VALUE']) == 'в радиусе 5км') $rad5km['pharmacy']='Аптека';
-if (strtolower($arResult['PROPERTIES']['CERKOV']['VALUE']) == 'в поселке') $inTer['temple']='Церковь';
-elseif(strtolower($arResult['PROPERTIES']['CERKOV']['VALUE']) == 'в радиусе 5км') $rad5km['temple']='Церковь';
-if (strtolower($arResult['PROPERTIES']['SHKOLA']['VALUE']) == 'в поселке') $inTer['school']='Школа';
-elseif(strtolower($arResult['PROPERTIES']['SHKOLA']['VALUE']) == 'в радиусе 5км') $rad5km['school']='Школа';
-if (strtolower($arResult['PROPERTIES']['DETSAD']['VALUE']) == 'в поселке') $inTer['kindergarten']='Дет.сад';
-elseif(strtolower($arResult['PROPERTIES']['DETSAD']['VALUE']) == 'в радиусе 5км') $rad5km['kindergarten']='Дет.сад';
-if (strtolower($arResult['PROPERTIES']['STROYMATERIALI']['VALUE']) == 'в поселке') $inTer['shop_building']='Строймат.';
-elseif(strtolower($arResult['PROPERTIES']['STROYMATERIALI']['VALUE']) == 'в радиусе 5км') $rad5km['shop_building']='Строймат.';
-if (strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в поселке') $inTer['cafe']='Кафе';
-elseif(strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в радиусе 5км') $rad5km['cafe']='Кафе';
-if (strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в поселке') $inTer['gas']='АЗС';
-elseif(strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в радиусе 5км') $rad5km['gas']='АЗС';
+if (mb_strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в поселке') $inTer['shop']='Магазин';
+elseif(mb_strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в радиусе 5км') $rad5km['shop']='Магазин';
+if (mb_strtolower($arResult['PROPERTIES']['APTEKA']['VALUE']) == 'в поселке') $inTer['pharmacy']='Аптека';
+elseif(mb_strtolower($arResult['PROPERTIES']['APTEKA']['VALUE']) == 'в радиусе 5км') $rad5km['pharmacy']='Аптека';
+if (mb_strtolower($arResult['PROPERTIES']['CERKOV']['VALUE']) == 'в поселке') $inTer['temple']='Церковь';
+elseif(mb_strtolower($arResult['PROPERTIES']['CERKOV']['VALUE']) == 'в радиусе 5км') $rad5km['temple']='Церковь';
+if (mb_strtolower($arResult['PROPERTIES']['SHKOLA']['VALUE']) == 'в поселке') $inTer['school']='Школа';
+elseif(mb_strtolower($arResult['PROPERTIES']['SHKOLA']['VALUE']) == 'в радиусе 5км') $rad5km['school']='Школа';
+if (mb_strtolower($arResult['PROPERTIES']['DETSAD']['VALUE']) == 'в поселке') $inTer['kindergarten']='Дет.сад';
+elseif(mb_strtolower($arResult['PROPERTIES']['DETSAD']['VALUE']) == 'в радиусе 5км') $rad5km['kindergarten']='Дет.сад';
+if (mb_strtolower($arResult['PROPERTIES']['STROYMATERIALI']['VALUE']) == 'в поселке') $inTer['shop_building']='Строймат.';
+elseif(mb_strtolower($arResult['PROPERTIES']['STROYMATERIALI']['VALUE']) == 'в радиусе 5км') $rad5km['shop_building']='Строймат.';
+if (mb_strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в поселке') $inTer['cafe']='Кафе';
+elseif(mb_strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в радиусе 5км') $rad5km['cafe']='Кафе';
+if (mb_strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в поселке') $inTer['gas']='АЗС';
+elseif(mb_strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в радиусе 5км') $rad5km['gas']='АЗС';
 // dump($inTer); dump($rad5km);
 
 // водный знак
@@ -81,7 +81,7 @@ switch ($arResult['PROPERTIES']['TYPE']['VALUE_ENUM_ID']) { // название 
 
 $LES = $arResult['PROPERTIES']['LES']['VALUE']; // Лес
 $FOREST_KM = $arResult['PROPERTIES']['FOREST_KM']['VALUE']; // Лес расстояние, км
-if (strtolower($LES) == 'нет') $LES = 'Рядом нет';
+if (mb_strtolower($LES) == 'нет') $LES = 'Рядом нет';
 
 // выводим водоемы
 $arWater = $arResult['PROPERTIES']['WATER']['VALUE']; // Водоем
@@ -125,13 +125,13 @@ switch ($km_MKAD) {
 // объекты экологии
 	// склады
 	$STORAGE_KM = $arResult['PROPERTIES']['STORAGE_KM']['VALUE'];
-	$storage = (strtolower($arResult['PROPERTIES']['STORAGE']['VALUE']) == 'есть') ? true : false;
+	$storage = (mb_strtolower($arResult['PROPERTIES']['STORAGE']['VALUE']) == 'есть') ? true : false;
 	// Промзона
 	$INDUSTRIAL_ZONE_KM = $arResult['PROPERTIES']['INDUSTRIAL_ZONE_KM']['VALUE'];
-	$industrialZone = (strtolower($arResult['PROPERTIES']['INDUSTRIAL_ZONE']['VALUE']) != 'нет' && $INDUSTRIAL_ZONE_KM <= 1) ? true : false;
+	$industrialZone = (mb_strtolower($arResult['PROPERTIES']['INDUSTRIAL_ZONE']['VALUE']) != 'нет' && $INDUSTRIAL_ZONE_KM <= 1) ? true : false;
 	// Полигон ТБО
 	$LANDFILL_KM = $arResult['PROPERTIES']['LANDFILL_KM']['VALUE'];
-	$landfill = (strtolower($arResult['PROPERTIES']['LANDFILL']['VALUE']) == 'есть' && $LANDFILL_KM <= 3) ? true : false;
+	$landfill = (mb_strtolower($arResult['PROPERTIES']['LANDFILL']['VALUE']) == 'есть' && $LANDFILL_KM <= 3) ? true : false;
 
 	$nameVil = $arResult['PROPERTIES']['TYPE']['VALUE'].' '.$name; // тип поселка
 
@@ -417,11 +417,11 @@ switch ($km_MKAD) {
 				</div>
 				<?//=dump($arResult['PROPERTIES']['CONTACTS'])?>
 				<?if($arResult['PROPERTIES']['CONTACTS']['VALUE_XML_ID'] == 'tel' && $arResult['PROPERTIES']['PHONE']['VALUE'] && count($arResult['DEVELOPERS']) == 1){?>
-        	<div class="phone-cart__block"><a href="tel:<?=$arResult['PROPERTIES']['PHONE']['VALUE']?>"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?></a> <span onclick="ym(50830593, 'reachGoal', 'phone_click'); return true;">Показать</span></div>
+        	<div class="phone-cart__block"><a href="tel:<?=$arResult['PROPERTIES']['PHONE']['VALUE']?>"><?=$arResult['PROPERTIES']['PHONE']['VALUE']?></a> <span onclick="ym(50830593,'reachGoal','phone_click');ga('event','phone_click');return true;">Показать</span></div>
 				<?}?>
 				<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Записаться на просмотр</a>
 				<div class="mt-4 text-lg-center">На просмотр уже записались: <b><?=$cntPos?> <?=$correctText?></b></div>
-				<input type="hidden" id="posInfo" data-namePos='<?=$arResult['NAME']?>' data-codePos='<?=$arResult['CODE']?>' data-idPos='<?=$arResult['ID']?>' data-cntPos='<?=$arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']?>'>
+				<input type="hidden" id="posInfo" data-namePos='<?=$arResult['NAME']?>' data-codePos='<?=$arResult['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['ID']?>' data-cntPos='<?=$arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']?>'>
 				<?if($arResult['PROPERTIES']['SITE']['VALUE']):
 					$arSite = explode('//',$arResult['PROPERTIES']['SITE']['VALUE']);?>
 					<div class="w-100 text-lg-center mt-3">
@@ -911,7 +911,7 @@ switch ($km_MKAD) {
 				<div class="arrangement__card radius">
 					<div class="arrangement__title">Природа</div>
 					<div class="row">
-						<?if(strtolower($arResult['PROPERTIES']['LES']['VALUE']) != 'нет'): // Лес?>
+						<?if(mb_strtolower($arResult['PROPERTIES']['LES']['VALUE']) != 'нет'): // Лес?>
 						<div class="col-xl-6">
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="17.38" height="24.833" viewBox="0 0 17.38 24.833" class="inline-svg">
@@ -921,7 +921,7 @@ switch ($km_MKAD) {
 							</div>
 						</div>
 						<?endif;?>
-						<?if(strtolower($arResult['PROPERTIES']['WATER']['VALUE']) != 'нет'): // Водоем?>
+						<?if(mb_strtolower($arResult['PROPERTIES']['WATER']['VALUE']) != 'нет'): // Водоем?>
 						<div class="col-xl-6">
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="23.111" height="14.182" viewBox="0 0 23.111 14.182" class="inline-svg">
@@ -947,7 +947,7 @@ switch ($km_MKAD) {
 							</div>
 						</div>
 						<?endif;?>
-						<?if(strtolower($arResult['PROPERTIES']['PLYAZH']['VALUE']) != 'нет'): // Пляж для купания?>
+						<?if(mb_strtolower($arResult['PROPERTIES']['PLYAZH']['VALUE']) != 'нет'): // Пляж для купания?>
 						<div class="col-xl-6">
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="21.889" height="21.799" viewBox="0 0 21.889 21.799" class="inline-svg">
@@ -1012,9 +1012,9 @@ switch ($km_MKAD) {
 		<?if($arResult['PROPERTIES']['UTILITY_PAY']['VALUE']): // Коммунальные платежи?>
 			<p>– Коммунальные платежи: <?=$arResult['PROPERTIES']['UTILITY_PAY']['VALUE']?> руб в месяц</p>
 		<?endif;?>
-		<?if(strtolower($arResult['PROPERTIES']['ART_WELLS']['VALUE']) != 'нет'): // Артезианские скважины на участках?>
+		<?if(mb_strtolower($arResult['PROPERTIES']['ART_WELLS']['VALUE']) != 'нет'): // Артезианские скважины на участках?>
 			<?if($arResult['PROPERTIES']['ART_WELLS_DEPTH']['VALUE']){?>
-				<p>– Средняя глубина <?=strtolower($arResult['PROPERTIES']['ART_WELLS']['VALUE']) // Артезианские скважины на участках?> в этой местности составляет — <?=$arResult['PROPERTIES']['ART_WELLS_DEPTH']['VALUE'] // Артезианские скважины на участках глубина, м?> м</p>
+				<p>– Средняя глубина <?=mb_strtolower($arResult['PROPERTIES']['ART_WELLS']['VALUE']) // Артезианские скважины на участках?> в этой местности составляет — <?=$arResult['PROPERTIES']['ART_WELLS_DEPTH']['VALUE'] // Артезианские скважины на участках глубина, м?> м</p>
 			<?}?>
 		<?endif;?>
 		<?if($arResult['PROPERTIES']['DOP_OBJECT']['VALUE']): // Описание доп. объектов в поселке?>
@@ -1101,7 +1101,7 @@ switch ($km_MKAD) {
 			</div>
 		</div>
 		<div class="row ecology-card-img">
-			<?if($LES && strtolower($LES) != 'нет'): // Лес?>
+			<?if($LES && mb_strtolower($LES) != 'нет'): // Лес?>
 			<div class="col-lg-3 col-sm-6">
 				<div class="ecology__item radius" style="background: url(/assets/img/content/forest.jpg) no-repeat center center; background-size: cover;">
 					<div class="ecology__card-img">
@@ -1126,7 +1126,7 @@ switch ($km_MKAD) {
 					<div class="ecology__card-img">
 						<div class="ecology__card-img-title">Водоем</div>
 						<div class="ecology__card-img-type"><?=$strWater // Водоем?></div>
-						<div class="ecology__card-img-distance"><?if(strtolower($strWater) != 'нет'):?>расстояние <?$WATER_KM = $arResult['PROPERTIES']['WATER_KM']['VALUE']?><?=($WATER_KM < 1) ? ($WATER_KM*1000).' м' : $WATER_KM.' км' // Водоем расстояние, км?><?endif;?></div>
+						<div class="ecology__card-img-distance"><?if(mb_strtolower($strWater) != 'нет'):?>расстояние <?$WATER_KM = $arResult['PROPERTIES']['WATER_KM']['VALUE']?><?=($WATER_KM < 1) ? ($WATER_KM*1000).' м' : $WATER_KM.' км' // Водоем расстояние, км?><?endif;?></div>
 					</div>
 				</div>
 			</div>
@@ -1747,3 +1747,23 @@ switch ($km_MKAD) {
 
 		setTimeout(loadMaps, 3000);
 	</script>
+	<?$arVillageFB = ['gorki-layf','dmitrovka-lesnaya','lesnoy-bereg'];
+	if(in_array($arResult['CODE'],$arVillageFB)):?>
+		<!-- Facebook Pixel Code -->
+		<script>
+		  !function(f,b,e,v,n,t,s)
+		  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		  n.queue=[];t=b.createElement(e);t.async=!0;
+		  t.src=v;s=b.getElementsByTagName(e)[0];
+		  s.parentNode.insertBefore(t,s)}(window, document,'script',
+		  'https://connect.facebook.net/en_US/fbevents.js');
+		  fbq('init', '1573489849672695');
+		  fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none"
+		  src="https://www.facebook.com/tr?id=1573489849672695&ev=PageView&noscript=1"
+		/></noscript>
+		<!-- End Facebook Pixel Code -->
+	<?endif;?>

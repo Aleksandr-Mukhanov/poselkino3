@@ -215,6 +215,7 @@ $(document).ready(function(){
 		mes = $('#textToUs').val();
 		idButton = $('#idButton').val();
 		yaCounter50830593.reachGoal(idButton);
+    ga('event',idButton);
 		$.post("/ajax/sendForm.php",{
 				name: name,
 				tel: tel,
@@ -236,9 +237,11 @@ $(document).ready(function(){
 		idButton = $('#idButton').val();
     if (idButton == '') idButton = 'SIGN_UP_TO_VIEW';
 		yaCounter50830593.reachGoal(idButton);
+    ga('event',idButton);
 		idPos = $('#posInfo').attr('data-idPos');
 		namePos = $('#posInfo').attr('data-namePos');
 		codePos = $('#posInfo').attr('data-codePos');
+    highway = $('#posInfo').attr('data-highwayPos');
 		cntPos = $('#posInfo').attr('data-cntPos');
 		develId = $('#develInfo').attr('data-develId');
 		develName = $('#develInfo').attr('data-develName');
@@ -256,6 +259,7 @@ $(document).ready(function(){
 				idPos: idPos,
 				namePos: namePos,
 				codePos: codePos,
+        highway: highway,
 				cntPos: cntPos,
 				develId: develId,
 				develName: develName
@@ -270,6 +274,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		email = $('#emailSubscribeForm').val();
 		yaCounter50830593.reachGoal('SUBSCRIBE');
+    ga('event','SUBSCRIBE');
 		$.post("/ajax/sendForm.php",{
 				email: email,
 				ourForm: 'Subscribe'
@@ -284,6 +289,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		textPosEr = $('#textPosEr').val();
 		yaCounter50830593.reachGoal('SEND_ERROR');
+    ga('event','SEND_ERROR');
 		$.post("/ajax/sendForm.php",{
 				url: window.location.href,
 				mes: textPosEr,

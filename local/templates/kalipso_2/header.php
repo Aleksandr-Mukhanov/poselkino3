@@ -44,9 +44,16 @@ use Bitrix\Main\Page\Asset,
     case 'lisichkyn-lug.ru': $villageID = 3171; $yandex_verification=''; break;
     case 'uzhny-park.ru': $villageID = 3193; $yandex_verification=''; break;
     case 'shelest-kp.ru': $villageID = 3190; $yandex_verification=''; break;
-    case 'kp-florapark.ru': $villageID = 3156; $yandex_verification=''; break;
+    case 'kp-florapark.ru': $villageID = 3256; $yandex_verification=''; break;
     case 'novaya-derevnya.ru': $villageID = 3149; $yandex_verification=''; break;
     case 'lesnaya-polana.ru': $villageID = 3070; $yandex_verification=''; break;
+    case 'alekseevskye-dachi.ru': $villageID = 1876; $yandex_verification=''; break;
+    case 'udino-park.com': $villageID = 3306; $yandex_verification=''; break;
+    case 'elky-park.ru': $villageID = 3345; $yandex_verification=''; break;
+    case 'levadia.ru': $villageID = 3341; $yandex_verification=''; break;
+    case 'rybackaya-derevnya.ru': $villageID = 3151; $yandex_verification=''; break;
+    case 'maximovskie-dachi.ru': $villageID = 3337; $yandex_verification=''; break;
+    // case '': $villageID = ; $yandex_verification=''; break;
   }
 
   $arOrder = Array('SORT'=>'ASC');
@@ -64,7 +71,7 @@ use Bitrix\Main\Page\Asset,
 
   $LES = $arVillage['PROPERTY_LES_VALUE']; // Лес
   $FOREST_KM = $arVillage['PROPERTY_FOREST_KM_VALUE']; // Лес расстояние, км
-  if (strtolower($LES) == 'нет') $LES = 'Рядом нет';
+  if (mb_strtolower($LES) == 'нет') $LES = 'Рядом нет';
 
   // выводим водоемы
   $arWater = $arVillage['PROPERTY_WATER_VALUE']; // Водоем
@@ -80,6 +87,20 @@ use Bitrix\Main\Page\Asset,
   // получим девелопера
   $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
   $phone = ($arVillage["PROPERTY_PHONE_VALUE"]) ? $arVillage["PROPERTY_PHONE_VALUE"] : $arDevel[0]['UF_PHONE'];
+
+  $mainUrl = '/var/www/u0428181/data/www/olne.ru';
+  // капча
+  include_once($mainUrl."/bitrix/modules/main/classes/general/captcha.php");
+  $cpt = new CCaptcha();
+  $captchaPass = COption::GetOptionString("main", "captcha_password", "");
+  if(strlen($captchaPass) <= 0)
+  {
+    $captchaPass = randString(10);
+    COption::SetOptionString("main", "captcha_password", $captchaPass);
+  }
+  $cpt->SetCodeCrypt($captchaPass);
+
+  include_once ($mainUrl.'/include/sites/phone.php');
 ?>
 <!DOCTYPE html>
 <html lang="<?=LANGUAGE_ID?>" prefix="og: http://ogp.me/ns#">

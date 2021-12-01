@@ -29,10 +29,19 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 			"TEL" => $_POST["phoneTest"],
 			"EMAIL" => $_POST["emailTest"],
 		);
-		if (CEvent::Send("SEND_TEST", "s1", $mailFields)) mesOk("Результат теста отправлен!<br>Наш менеджер свяжется с вами в ближайщее время.");
+		if (CEvent::Send("SEND_TEST", "s1", $mailFields)) mesOk("Результат теста отправлен!<br>Наш менеджер свяжется с вами в ближайшее время.");
 		else mesEr("Error: ".$el->LAST_ERROR);
 	}else{?>
-	 <form class="test" id="test" action="" method="post" onSubmit="yaCounter50830593.reachGoal('SEND_TEST');return true;">
+	<div class="py-4 py-sm-5">
+		<div class="container">
+			<div class="row align-items-end">
+				<div class="order-1 order-sm-0 col-xl-8 col-sm-9">
+					<h2 class="mb-0 text-transform">Ответьте на 6 вопросов, и мы подберем 5 лучших участков по Вашим требованиям!</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form class="test" id="test" action="" method="post" onSubmit="yaCounter50830593.reachGoal('SEND_TEST');ga('event','SEND_TEST');return true;">
 		<div class="test-step">
 			<div class="bg-white py-4 py-sm-5">
 				<div class="container">
@@ -41,7 +50,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 							<h1 class="mb-0 text-transform title-step">Выберите направление:</h1>
 							<p class="subtitle mb-0"></p>
 						</div>
-						<div class="order-0 order-sm-1 col-xl-4 col-sm-3 text-sm-right"><span class="question-count">Вопрос:</span><span class="question__number">01</span><span class="question__all">/08</span></div>
+						<div class="order-0 order-sm-1 col-xl-4 col-sm-3 text-sm-right"><span class="question-count">Вопрос:</span><span class="question__number">01</span><span class="question__all">/06</span></div>
 					</div>
 				</div>
 			</div>
@@ -61,18 +70,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 						<button class="form-card__item" data-input-name="route" data-input-value="Восток" type="button"> <img src="/assets/img/test/east.svg" alt="Восток"><img class="img-active" src="/assets/img/test/east-active.svg" alt="Восток"><span>Восток</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step" data-title-step="Для чего хотите использовать земельный участок?" data-step="2" data-show-step="false" style="display: none;">
-					<input class="hidden sr-only" id="for_what" value name="for_what">
-					<div class="col-sm-6">
-						<button class="form-card__item form-card__item--big" data-input-name="for_what" data-input-value="Для дачи" type="button"> <img src="/assets/img/test/in-village.svg" alt="Для дачи"><img class="img-active" src="/assets/img/test/in-village-active.svg"
-								alt="Для дачи"><span>Для дачи</span></button>
-					</div>
-					<div class="col-sm-6">
-						<button class="form-card__item form-card__item--big" data-input-name="for_what" data-input-value="Для дома" type="button"> <img src="/assets/img/test/in-home.svg" alt="Для дома"><img class="img-active" src="/assets/img/test/in-home-active.svg"
-								alt="Для дома"><span>Для дома</span></button>
-					</div>
-				</div>
-				<div class="row test-body__step" data-title-step="На какой удаленности от Москвы рассматриваете земельный участок?" data-step="3" data-show-step="false" style="display: none;">
+				<div class="row test-body__step" data-title-step="На какой удаленности от Москвы рассматриваете земельный участок?" data-step="2" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="remoteness" value name="remoteness">
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="20" type="button"> <img src="/assets/img/test/20.svg" alt="20"><img class="img-active" src="/assets/img/test/20-active.svg" alt="20"><span>До
@@ -94,66 +92,40 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="irrelevant" type="button"> <span>Не имеет значения</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step" data-title-step="В какую стоимость планируете уложиться при выборе участка?" data-step="4" data-show-step="false" style="display: none;">
+				<div class="row test-body__step" data-title-step="В какую стоимость планируете уложиться при выборе участка?" data-step="3" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="cost" value name="cost">
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="200000" type="button"> <img src="/assets/img/test/200.svg" alt="200 000"><img class="img-active" src="/assets/img/test/200-active.svg" alt="200 000"><span>До
-								200 000</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 500 000" type="button"><span>До 500 000</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="500000" type="button"> <img src="/assets/img/test/500.svg" alt="500 000"><img class="img-active" src="/assets/img/test/500-active.svg" alt="500 000"><span>До
-								500 000</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 1,5 млн." type="button"><span>До 1,5 млн.</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="1000000" type="button"> <img src="/assets/img/test/1mln.svg" alt="1 000 000"><img class="img-active" src="/assets/img/test/1mln-active.svg"
-								alt="1 000 000"><span>До 1 млн.</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 2 млн." type="button"><span>До 2 млн.</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="2000000" type="button"> <img src="/assets/img/test/2mln.svg" alt="2 000 000"><img class="img-active" src="/assets/img/test/2mln-active.svg"
-								alt="2 000 000"><span>До 2 млн.</span></button>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="irrelevant" type="button"> <span>Не имеет значения</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="Выше 2 млн." type="button"><span>Выше 2 млн.</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step" data-title-step="Когда вы планируете начать использовать земельный участок?" data-step="5" data-show-step="false" style="display: none;">
-					<input class="hidden sr-only" id="plan" value name="plan">
-					<div class="col-md-4 col-sm-6">
-						<button class="form-card__item" data-input-name="plan" data-input-value="Сразу после покупки" type="button"> <img src="/assets/img/test/right_away.svg" alt="Сразу после покупки"><img class="img-active" src="/assets/img/test/right_away-active.svg"
-								alt="Сразу после покупки"><span>Сразу после покупки</span></button>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<button class="form-card__item" data-input-name="plan" data-input-value="Ближайшие 1-2 года" type="button"> <img src="/assets/img/test/near.svg" alt="Ближайшие 1-2 года"><img class="img-active" src="/assets/img/test/near-active.svg"
-								alt="Ближайшие 1-2 года"><span>Ближайшие 1-2 года</span></button>
-					</div>
-					<div class="col-md-4 col-sm-6">
-						<button class="form-card__item" data-input-name="plan" data-input-value="Беру на дальнюю перспективу" type="button"> <img src="/assets/img/test/calendar.svg" alt="Беру на дальнюю перспективу"><img class="img-active" src="/assets/img/test/calendar-active.svg"
-								alt="Беру на дальнюю перспективу"><span>Беру на дальнюю перспективу</span></button>
-					</div>
-				</div>
-				<div class="row test-body__step" data-title-step="Какой размер участка для Вас наиболее подходящий?" data-step="6" data-show-step="false" style="display: none;">
+				<div class="row test-body__step" data-title-step="Какой размер участка для Вас наиболее подходящий?" data-step="4" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="size" value name="size">
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="6-8 соток" type="button"> <img src="/assets/img/test/6-8.svg" alt="6-8 соток"><img class="img-active" src="/assets/img/test/6-8-active.svg"
-								alt="6-8 соток"><span>6-8 соток</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="5-6 соток" type="button"><span>5-6 соток</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="8-12 соток" type="button"> <img src="/assets/img/test/8-12.svg" alt="8-12 соток"><img class="img-active" src="/assets/img/test/8-12-active.svg"
-								alt="8-12 соток"><span>8-12 соток</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="7-9 соток" type="button"><span>7-9 соток</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="12-15 соток" type="button"> <img src="/assets/img/test/12-15.svg" alt="12-15 соток"><img class="img-active" src="/assets/img/test/12-15-active.svg"
-								alt="12-15 соток"><span>12-15 соток</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="10-12 соток" type="button"><span>10-12 соток</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="Больше 15" type="button"> <img src="/assets/img/test/15.svg" alt="Больше 15"><img class="img-active" src="/assets/img/test/15-active.svg"
-								alt="Больше 15"><span>Больше 15</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="15 соток" type="button"><span>15 соток</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="Любой" type="button"> <span>Любой</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="size" data-input-value="Любой" type="button"><span>Любой</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step" data-title-step="Каким видом транспорта планируете добираться до посёлка?" data-step="7" data-show-step="false" style="display: none;">
+				<div class="row test-body__step" data-title-step="Каким видом транспорта планируете добираться до посёлка?" data-step="5" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="transport" value name="transport">
 					<div class="col-md-4 col-sm-6">
 						<button class="form-card__item" data-input-name="transport" data-input-value="Автомобиль" type="button"> <img src="/assets/img/test/car.svg" alt="Автомобиль"><img class="img-active" src="/assets/img/test/car-active.svg" alt="Автомобиль"><span>Автомобиль</span></button>
@@ -167,7 +139,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 								alt="Беру на дальнюю перспективу"><span>Оба варианта</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step step-last" data-title-step="Отправьте нам результаты теста" data-subtitle-step="И мы пришлем перечень поселков, которые вам подходят:" data-step="8" data-show-step="false" style="display: none;">
+				<div class="row test-body__step step-last" data-title-step="Отправьте нам результаты теста" data-subtitle-step="И мы пришлем перечень поселков, которые вам подходят:" data-step="6" data-show-step="false" style="display: none;">
 					<div class="col-md-4 mb-3 mb-md-0">
 						<input id="nameTest" type="text" value placeholder="Ваше имя" name="nameTest" required>
 					</div>
@@ -232,7 +204,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
             // Добавляем класс active по чему кликнули
             $(this).addClass('active');
 
-            if ($('.test-body__step[data-show-step="true"]').data('step') == 8) {
+            if ($('.test-body__step[data-show-step="true"]').data('step') == 6) {
                 $('.btn[type="submit"]').removeAttr('disabled');
             }
         });
@@ -257,7 +229,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
                 }
 
                 // Если шаг 8, скрываем кнопку далее и показываем кнопку отправить
-                if ($('.test-body__step[data-show-step="true"]').data('step') == 8) {
+                if ($('.test-body__step[data-show-step="true"]').data('step') == 6) {
                     $('.btn--next').hide();
                     $('.btn[type="submit"]').show();
                 }
@@ -286,7 +258,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
             }
 
             // Если шаг 8, скрываем кнопку далее и показываем кнопку отправить
-            if ($('.test-body__step[data-show-step="true"]').data('step') !== 8) {
+            if ($('.test-body__step[data-show-step="true"]').data('step') !== 6) {
                 $('.btn--next').show();
                 $('.btn[type="submit"]').hide();
             }
@@ -308,4 +280,21 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 
     </script>
 </main>
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1573489849672695');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1573489849672695&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

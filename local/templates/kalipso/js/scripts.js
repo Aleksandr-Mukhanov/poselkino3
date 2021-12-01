@@ -1,3 +1,15 @@
+// время на сайте
+var timeSendForm = 10; // значение, через сколько секунд возможна отправка формы
+startdate = new Date();
+clockStart = startdate.getTime();
+function getSecs() {
+  var thisTime = new Date();
+	var timePassed = (thisTime.getTime() - clockStart) / 1000;
+	var tSecs = Math.round(timePassed);
+  var iSecs = tSecs % 60;
+  return iSecs;
+}
+
 $(document).ready(function(){
 
   // построить маршрут
@@ -10,7 +22,13 @@ $(document).ready(function(){
   //  Записаться на просмотр
   $('.formSignToView').submit(function(event){
     event.preventDefault();
+    iSecs = getSecs();
+  	if (iSecs < timeSendForm) {
+  		alert('Вы на сайте всего: '+iSecs+' сек');
+  		return false;
+  	}
     name = $(this).find('.nameSignToView').val();
+    lname = $(this).find('.lnameSignToView').val();
     tel = $(this).find('.telSignToView').val();
     email = $(this).find('.emailSignToView').val();
     // idButton = $('#idButton').val();
@@ -19,36 +37,56 @@ $(document).ready(function(){
     idPos = $('#posInfo').attr('data-idPos');
     namePos = $('#posInfo').attr('data-namePos');
     codePos = $('#posInfo').attr('data-codePos');
+    highway = $('#posInfo').attr('data-highwayPos');
     cntPos = $('#posInfo').attr('data-cntPos');
     develId = $('#develInfo').attr('data-idDevel');
     develName = $('#develInfo').attr('data-nameDevel');
     develCode = $('#develInfo').attr('data-codeDevel');
     phoneDevel = $('#develInfo').attr('data-phoneDevel');
     siteId = $('#posInfo').attr('data-siteId');
+    captcha_code = $(this).find('input[name=captcha_code]').val();
+    captcha_word = $(this).find('input[name=captcha_word]').val();
     // if(idButton == 'LEAVE_REQUEST'){
     //   subject = 'Заявка с сайта Поселкино.ру';
     // }else{
     //   subject = 'Запись на просмотр';
     // }
     subject = 'Запись на просмотр с сайта ' + window.location.host;
-    $.post("/local/ajax/sendForm.php",{
-        name: name,
-        tel: tel,
-        email: email,
-        ourForm: 'SignToView',
-        subject: subject,
-        idPos: idPos,
-        namePos: namePos,
-        codePos: codePos,
-        cntPos: cntPos,
-        develId: develCode,
-        develName: develName,
-        phoneDevel: phoneDevel,
-        siteId: siteId
-      },function(data){
-        $('.formSignToView').html(data);
-      }
-    );
+
+    if(!lname){
+      $.post("/local/ajax/sendForm.php",{
+          captcha_code: captcha_code,
+          captcha_word: captcha_word,
+          ourForm: 'chekCaptcha',
+        },function(data){
+          // console.log(captcha_code + ' - ' + captcha_word);
+          // console.log(data);
+          if (data == 'no') {
+            alert('Неверная капча!');
+          } else {
+            $.post("/local/ajax/sendForm.php",{
+                name: name,
+                tel: tel,
+                email: email,
+                ourForm: 'SignToView',
+                subject: subject,
+                idPos: idPos,
+                namePos: namePos,
+                codePos: codePos,
+                highway: highway,
+                cntPos: cntPos,
+                develId: develCode,
+                develName: develName,
+                phoneDevel: phoneDevel,
+                siteId: siteId
+              },function(data){
+                $('.formSignToView').html(data);
+              }
+            );
+          }
+        }
+      );
+    }
   });
 
   // отправка отзыва

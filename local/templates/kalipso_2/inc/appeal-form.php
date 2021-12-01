@@ -8,11 +8,19 @@
         <div class="col appeal-form__col-input">
           <input class="input-el nameSignToView" type="text" name="name" required placeholder="Ваше имя">
         </div>
+        <div class="col appeal-form__col-input lastNameSpam">
+          <input class="input-el lnameSignToView" type="text" name="lname" placeholder="Ваша фамилия">
+        </div>
         <div class="col appeal-form__col-input">
           <input class="input-el telSignToView" type="tel" name="phone" required placeholder="Номер телефона">
         </div>
         <div class="col appeal-form__col-input">
           <input class="input-el emailSignToView" type="email" name="address" placeholder="Адрес электронной почты">
+        </div>
+        <div class="col appeal-form__col-input">
+          <input name="captcha_code" value="<?=htmlspecialchars($cpt->GetCodeCrypt());?>" type="hidden">
+          <input class="input-el" name="captcha_word" type="text" placeholder="Введите код капчи ниже" required>
+          <img src="/bitrix/tools/captcha.php?captcha_code=<?=htmlspecialchars($cpt->GetCodeCrypt());?>">
         </div>
         <div class="col appeal-form__col-submit">
           <input class="btn btn--theme_green appeal-form__btn" type="submit" value="Записаться на просмотр">

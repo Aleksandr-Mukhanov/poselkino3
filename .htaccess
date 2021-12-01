@@ -198,3 +198,5 @@ ErrorDocument 404 /404.php
 # поселки
   Redirect 301 "/poselki/zaokskaya dolina/" /poselki/zaokskaya-dolina/
   Redirect 301 "/poselki/dolina ozer2/" /poselki/dolina-ozer-2/
+
+  Redirect 301 /poselki/bor-izhs/ /404.php

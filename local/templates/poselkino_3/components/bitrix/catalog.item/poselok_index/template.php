@@ -91,7 +91,7 @@ if (isset($arResult['ITEM']))
 	<div id="<?=$areaId?>" data-entity="item" class="item">
 		<?
 		$documentRoot = Main\Application::getDocumentRoot();
-		$templatePath = strtolower($arResult['TYPE']).'/template.php';
+		$templatePath = mb_strtolower($arResult['TYPE']).'/template.php';
 		$file = new Main\IO\File($documentRoot.$templateFolder.'/'.$templatePath);
 		if ($file->isExists())
 		{

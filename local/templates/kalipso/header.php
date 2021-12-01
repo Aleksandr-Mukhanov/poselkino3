@@ -23,7 +23,7 @@ use Bitrix\Main\Page\Asset,
 
   // получим наш поселок
   switch (SITE_SERVER_NAME) {
-    case 'kalipso-village.ru': $villageID = 339; $yandex_verification='ddf736673b321033'; break;
+    case 'kalipso-village.ru': $villageID = 3299; $yandex_verification='ddf736673b321033'; break;
     case 'forvard-kp.ru': $villageID = 1261; $yandex_verification='cd608604022ce295'; break;
     case 'matchino-park.ru': $villageID = 190; $yandex_verification=''; break;
     case 'soninskiy-les.ru': $villageID = 3145; $yandex_verification=''; break;
@@ -44,9 +44,26 @@ use Bitrix\Main\Page\Asset,
     case 'lisichkyn-lug.ru': $villageID = 3171; $yandex_verification=''; break;
     case 'uzhny-park.ru': $villageID = 3193; $yandex_verification=''; break;
     case 'shelest-kp.ru': $villageID = 3190; $yandex_verification=''; break;
-    case 'kp-florapark.ru': $villageID = 3156; $yandex_verification=''; break;
+    case 'kp-florapark.ru': $villageID = 3256; $yandex_verification=''; break;
     case 'novaya-derevnya.ru': $villageID = 3149; $yandex_verification=''; break;
     case 'lesnaya-polana.ru': $villageID = 3070; $yandex_verification=''; break;
+    case 'kp-brehovo.ru': $villageID = 3160; $yandex_verification=''; break;
+    case 'kalitino-kp.ru': $villageID = 3321; $yandex_verification=''; break;
+    case 'kp-beregovoy.ru': $villageID = 3163; $yandex_verification=''; break;
+    case 'lesnoi-bereg.ru': $villageID = 3339; $yandex_verification=''; break;
+    case 'kp-polesie.ru': $villageID = 3343; $yandex_verification=''; break;
+    case 'berez-rosha.ru': $villageID = 3349; $yandex_verification=''; break;
+    case 'akadempark-kp.ru': $villageID = 3335; $yandex_verification=''; break;
+    case 'darinskye-dachi.ru': $villageID = 3347; $yandex_verification=''; break;
+    // case '': $villageID = ; $yandex_verification=''; break;
+    case 'novoe-sonino.ru': $villageID = 3356; $yandex_verification=''; break;
+    case 'vasilkovo-kp.ru': $villageID = 3290; $yandex_verification=''; break;
+    case 'kuzminskiy-kp.ru': $villageID = 3188; $yandex_verification=''; break;
+    case 'admiral-kp.ru': $villageID = 1818; $yandex_verification=''; break;
+    case 'kutuzovskie-holmy.ru': $villageID = 1815; $yandex_verification=''; break;
+    case 'festival-kp.ru': $villageID = 3360; $yandex_verification=''; break;
+    case 'kp-barsovo.ru': $villageID = 3314; $yandex_verification=''; break;
+    case 'faustovo-kp.ru': $villageID = 3358; $yandex_verification=''; break;
   }
 
   $arOrder = Array('SORT'=>'ASC');
@@ -64,7 +81,7 @@ use Bitrix\Main\Page\Asset,
 
   $LES = $arVillage['PROPERTY_LES_VALUE']; // Лес
   $FOREST_KM = $arVillage['PROPERTY_FOREST_KM_VALUE']; // Лес расстояние, км
-  if (strtolower($LES) == 'нет') $LES = 'Рядом нет';
+  if (mb_strtolower($LES) == 'нет') $LES = 'Рядом нет';
 
   // выводим водоемы
   $arWater = $arVillage['PROPERTY_WATER_VALUE']; // Водоем
@@ -80,6 +97,20 @@ use Bitrix\Main\Page\Asset,
   // получим девелопера
   $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
   $phone = ($arVillage["PROPERTY_PHONE_VALUE"]) ? $arVillage["PROPERTY_PHONE_VALUE"] : $arDevel[0]['UF_PHONE'];
+
+  $mainUrl = '/var/www/u0428181/data/www/olne.ru';
+  // капча
+  include_once($mainUrl."/bitrix/modules/main/classes/general/captcha.php");
+  $cpt = new CCaptcha();
+  $captchaPass = COption::GetOptionString("main", "captcha_password", "");
+  if(strlen($captchaPass) <= 0)
+  {
+    $captchaPass = randString(10);
+    COption::SetOptionString("main", "captcha_password", $captchaPass);
+  }
+  $cpt->SetCodeCrypt($captchaPass);
+
+  include_once ($mainUrl.'/include/sites/phone.php');
 ?>
 <!DOCTYPE html>
 <html lang="<?=LANGUAGE_ID?>" prefix="og: http://ogp.me/ns#">

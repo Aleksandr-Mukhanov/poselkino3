@@ -218,7 +218,7 @@ global $arrFilter;
           </div>
           <div class="col-sm-5 col-lg-4">
             <div class="h1">Пройдите тест</div>
-            <p>И определите поселок, котороый подходит вам больше всех</p><a class="btn btn-warning rounded-pill" href="/test/">Пройти тест</a>
+            <p>И определите поселок, который подходит вам больше всех</p><a class="btn btn-warning rounded-pill" href="/test/">Пройти тест</a>
           </div>
         </div>
       </div>

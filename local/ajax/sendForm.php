@@ -10,8 +10,11 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	$email = $_POST['email'];
 	$mes = $_POST['mes'];
 	$namePos = $_POST['namePos'];
+	$highway = $_POST['highway'];
 	$codePos = $_POST['codePos'];
 	$subject = $_POST['subject'];
+	$captcha_code = $_POST['captcha_code'];
+	$captcha_word = $_POST['captcha_word'];
 
 	if($ourForm == 'ToUs'){ // Написать нам
 
@@ -54,6 +57,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 			"email" => $email,
 			"namePos" => $namePos,
 			"codePos" => $codePos,
+			"highway" => $highway,
 			"subject" => $subject,
 			"develId" => $_POST['develId'],
 			"develName" => $_POST['develName'],
@@ -173,6 +177,13 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		}else{
 			mesEr("Error: ".$el->LAST_ERROR);
 		}
+	}
+	elseif($ourForm == 'chekCaptcha') // Проверка капчи
+	{
+		if (!$APPLICATION->CaptchaCheckCode($captcha_word, $captcha_code))
+			echo 'no';
+		else
+			echo 'ok';
 	}
 
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");?>

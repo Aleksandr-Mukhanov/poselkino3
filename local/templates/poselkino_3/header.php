@@ -61,10 +61,12 @@ if(isset($_COOKIE['favorites_vil'])){
 	<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
+	<meta name="facebook-domain-verification" content="t9usvm7ssxhfyexr5yotrpgupfwvi9" />
 	<?$APPLICATION->ShowHead();?>
 </head>
 <body>
 	<div id="panel"><?$APPLICATION->ShowPanel();?></div>
+	<?if(!CSite::InDir('/test/')):?>
 	<header class="header bg-white">
 		<div class="container">
 			<nav class="navbar p-0 row">
@@ -135,3 +137,4 @@ if(isset($_COOKIE['favorites_vil'])){
 			</ul>
 		</div>
 	</header>
+	<?endif;?>

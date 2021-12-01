@@ -1,4 +1,5 @@
 <?if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)die();?>
+<?if(!CSite::InDir('/test/')):?>
 <footer class="footer">
   <div class="footer--top">
     <div class="container">
@@ -97,6 +98,7 @@
     </div>
   </div>
 </footer>
+<?endif;?>
 
 <input type="hidden" id="idButton">
 <!-- Записаться на просмотр -->

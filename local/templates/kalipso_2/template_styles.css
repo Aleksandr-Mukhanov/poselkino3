@@ -26,3 +26,7 @@
 .shape {
   z-index: 3;
 }
+
+.lastNameSpam{
+  display: none;
+}
