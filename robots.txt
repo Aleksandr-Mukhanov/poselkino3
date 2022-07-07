@@ -37,11 +37,9 @@ Disallow: /*&bxajaxid=
 Disallow: /*?view_result=
 Disallow: /*&view_result=
 Disallow: /poselki/filter
-Disallow: */map/
 Disallow: /*DIFFERENT
-Disallow: /uchastki
+Disallow: /kupit-uchastki
 Disallow: /doma
-Disallow: /*?teg=
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel
 Disallow: /poisk
@@ -90,12 +88,10 @@ Disallow: /*&bxajaxid=
 Disallow: /*?view_result=
 Disallow: /*&view_result=
 Disallow: /poselki/filter
-Disallow: */map/
 Disallow: /*DIFFERENT
 Disallow: /null_price.php
-Disallow: /uchastki
+Disallow: /kupit-uchastki
 Disallow: /doma
-Disallow: /*?teg=
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel
 Disallow: /poisk

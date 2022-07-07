@@ -23,7 +23,7 @@ $i=0;?>
     <input type="hidden" id="develInfo" data-develId='<?=$arParams['CODE_DEVEL'][$i]?>' data-develName='<?=$arBB['NAME']?>'>
   <?$i++;}?>
   <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-center width-md-auto">
-    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank" itemprop="manufacturer"><img src="/assets/img/site/logo.png" alt="Поселкино"></a>
+    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank" itemprop="manufacturer"><img src="/assets/img/logo_site.svg" alt="Поселкино" width="200"></a>
   </div>
-  <a class="d-none d-md-inline developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/site/logo.png" alt="Поселкино"></a>
+  <a class="d-none d-md-inline developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Поселкино" width="200"></a>
 </div>

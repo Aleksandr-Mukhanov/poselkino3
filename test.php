@@ -3,7 +3,18 @@ $APPLICATION->SetTitle("test");
 use Bitrix\Main\Loader;
 	Loader::includeModule('iblock');
 	Loader::includeModule('highloadblock');
-use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;?>
+use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
+
+// блокировка заявок по E-mail
+$arElHL = getElHL(11,[],[],['*']);
+foreach ($arElHL as $value)
+	$arEmails[] = $value['UF_EMAIL'];
+
+$email = 'r.aymanov@yandex.ru';
+
+if (!in_array($email,$arEmails)) echo 'ok';
+else echo 'no';
+?>
 <main class="page page-contacts">
 	<div class="bg-white">
 		<div class="container my-5">

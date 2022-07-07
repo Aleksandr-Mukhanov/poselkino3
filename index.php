@@ -152,6 +152,18 @@ global $arrFilter;
       </div>
     </div>
   </div>
+
+	<?$APPLICATION->IncludeComponent(
+		 "bitrix:main.include",
+		 "",
+		 Array(
+			 "AREA_FILE_SHOW" => "file",
+			 "AREA_FILE_SUFFIX" => "inc",
+			 "EDIT_TEMPLATE" => "",
+			 "PATH" => "/include/block_useful_links.php"
+		)
+	);?>
+
   <!-- Портал Поселкино.ру-->
   <div class="about about-home-portal bg-white">
     <div class="container">

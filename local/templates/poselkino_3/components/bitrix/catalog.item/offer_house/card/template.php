@@ -28,11 +28,12 @@ if($item["PREVIEW_PICTURE"]){
 } // dump($item['PROPERTIES']['DOP_PHOTO']['VALUE']);
 
 // dump($arResult);
+$offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
 ?>
 <div class="card-house">
 	<div class="d-flex flex-wrap bg-white card-grid">
 		<div class="card-house__photo photo">
-            <a href="/doma/<?=$item['CODE']?>/" class="stretched-link"></a>
+      <a href="<?=$offerURL?>" class="stretched-link"></a>
 			<div class="slider__header">
 				<?if($item['PROPERTIES']['ACTION']['VALUE']){?>
 					<div class="slider__label">Акция</div>
@@ -51,8 +52,8 @@ if($item["PREVIEW_PICTURE"]){
 		<div class="card-house__content">
 			<div class="wrap-title">
 				<div class="card-house__title">Дом в посёлке <?=$arResult['VILLAGE']['NAME']?>
-                    <a href="/doma/<?=$item['CODE']?>/" class="stretched-link"></a>
-                </div>
+          <a href="<?=$offerURL?>" class="stretched-link"></a>
+        </div>
 			</div>
 			<div class="card-house__inline">
 				<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
@@ -82,7 +83,7 @@ if($item["PREVIEW_PICTURE"]){
 				<div class="card-house__inline-value"><span><?=$item['PROPERTIES']['MATERIAL']['VALUE']?></span></div>
 			</div>
 			<div class="footer-card d-flex align-items-center">
-				<div class="footer-card__price"><span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill" href="/doma/<?=$item['CODE']?>/">Подробнее</a>
+				<div class="footer-card__price"><span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
 			</div>
 		</div>
 	</div>

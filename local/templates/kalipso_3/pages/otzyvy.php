@@ -94,7 +94,7 @@ $APPLICATION->SetPageProperty("description", "Отзывы покупателе�
     </div>
   </div>
 </section>
-<?require_once $_SERVER["DOCUMENT_ROOT"].SITE_TEMPLATE_PATH.'/inc/appeal-form.php';?>
+<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
 <!-- text-block BEGIN-->
 <section class="text-block">
   <div class="container text-block__container">

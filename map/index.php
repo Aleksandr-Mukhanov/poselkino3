@@ -3,7 +3,7 @@ $APPLICATION->SetTitle("Карта поселков");
 ini_set('memory_limit', '1024M');
 
 use Bitrix\Main\Page\Asset;
-  Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=0c55e225-bb2b-4b98-94a5-3390b6dbf643&lang=ru_RU');
+  Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?apikey=4d6909eb-d228-4129-aaa1-5192433484c3&lang=ru_RU');
 
   $shosse = $_REQUEST['SHOSSE_CODE'];
   $rayon = $_REQUEST['RAYON_CODE'];
@@ -51,6 +51,7 @@ use Bitrix\Main\Page\Asset;
 
   $arOurPage = explode('/map/',$ourPage);
   $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$arOurPage[0].'/');
+  $APPLICATION->SetPageProperty('robots', 'noindex, follow');
 ?>
 <main class="page page-map">
   <div class="page-map__wrap">

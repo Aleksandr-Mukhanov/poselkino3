@@ -11,5 +11,15 @@ use Bitrix\Main\Loader;
 
 global $APPLICATION;
 
-$APPLICATION->SetPageProperty("title",$arResult['SEO_TITLE']);
+$APPLICATION->SetPageProperty('title',$arResult['SEO_TITLE']);
 $APPLICATION->SetPageProperty('description', $arResult['SEO_DESCRIPTION']);
+
+// $APPLICATION->AddChainItem($arVillage['TYPE_AB'].' '.$arVillage['NAME'],'/poselki/'.$arVillage['CODE'].'/');
+$offerType = $_REQUEST['OFFER_TYPE'];
+$offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
+$offerNameM = ($offerType == 'plots') ? 'Участки' : 'Дома';
+$offerCodeM = ($offerType == 'plots') ? 'uchastki' : 'doma';
+$offerCodeM2 = ($offerType == 'plots') ? 'kupit-'.$offerCodeM : $offerCodeM;
+
+$APPLICATION->AddChainItem($offerNameM.' в поселке '.$arResult['VILLAGE_NAME'],'/'.$offerCodeM.'/'.$offerCodeM2.'-v-poselke-'.$arResult['VILLAGE_CODE'].'/');
+$APPLICATION->AddChainItem($offerName.' '.$arResult['NUMBER'],'');

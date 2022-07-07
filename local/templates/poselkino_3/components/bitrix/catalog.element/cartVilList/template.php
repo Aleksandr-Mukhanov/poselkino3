@@ -153,22 +153,18 @@ switch ($km_MKAD) {
 	$fav_active = ($favorites == 'Y') ? 'active' : '';
 	$comp_text = ($comparison != 'Y') ? 'Добавить к сравнению' : 'Удалить из сравнения';
 	$fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'Удалить из избранного';
-
-	$chainItem = ($_REQUEST['OFFER_TYPE'] == 'plots') ? 'Участки' : 'Дома';
-	$APPLICATION->AddChainItem($nameVil,"/poselki/".$arResult['CODE']."/",true);
-	$APPLICATION->AddChainItem($chainItem.' в '.$typePos.' '.$arResult['NAME'],"",true);
 // dump($arResult);?>
 
 <div class="container mt-md-5">
 	<div class="row">
 		<div class="order-0 col-12 d-md-none">
 			<div class="page-title">
-				<h1 class="h2"><?=$chainItem.' в '.$typePos.' '.$arResult['NAME']?></h1>
+				<h1 class="h2"><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
 			</div>
 		</div>
 		<div class="order-2 order-md-1 col-md-6">
 			<div class="page-title d-none d-md-block">
-				<h1 class="h2"><?=$chainItem.' в '.$typePos.' '.$arResult['NAME']?></h1>
+				<h1 class="h2"><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
 				<div class="wrap-raiting mt-4">
 					<div class="card-house__raiting d-flex">
 						<div class="line-raiting">
@@ -196,7 +192,7 @@ switch ($km_MKAD) {
 			<div class="row">
 				<div class="col-xl-6">
 					<?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
-					<a class="area-link" href="/poselki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/">
+					<a class="area-link" href="/poselki/<?=$arResult['CODE']?>/#mapShow" target="_blank">
 						<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
 							<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 						</svg><?=$arResult['PROPERTIES']['REGION']['VALUE'] // Район?> р-н, <?=$arResult['PROPERTIES']['SETTLEM']['VALUE'] // Ближайший населенный пункт?></a>
@@ -218,18 +214,25 @@ switch ($km_MKAD) {
 				</div>
 				<div class="col-xl-6">
 					<div class="card-house__inline d-flex">
-						<div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-                                <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"></path>
-                            </svg></div>
-						<div class="card-house__inline-title">
-							Площадь участков:&nbsp;</div>
+						<div class="icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
+                <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"></path>
+              </svg>
+						</div>
+						<div class="card-house__inline-title">Площадь участков:&nbsp;</div>
 						<div class="card-house__inline-value">от <?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE'][0]?> до <?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE'][1]?> соток</div>
+					</div>
+					<div class="card-house__inline d-flex">
+						<div class="icon"></div>
+						<div class="card-house__inline-title">Поселок:&nbsp;</div>
+						<div class="card-house__inline-value"><a class="text-success" href="/poselki/<?=$arResult['CODE']?>/"><?=$arResult['NAME']?></a></div>
 					</div>
 					<?if($housesValEnum != 3){ // Участки с домами ?>
 						<div class="card-house__inline d-flex">
-							<div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
-                                    <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
-                                </svg></div>
+							<div class="icon">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
+                	<path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
+                </svg></div>
 							<div class="card-house__inline-title">
 								Площадь домов:&nbsp;</div>
 							<div class="card-house__inline-value">от <?=$arResult['PROPERTIES']['HOUSE_AREA']['VALUE'][0]?> до <?=$arResult['PROPERTIES']['HOUSE_AREA']['VALUE'][1]?> м<sup>2</sup></div>
@@ -281,15 +284,15 @@ switch ($km_MKAD) {
 					</div>
 				</div>
 				<div class="village-slider__list" id="village-slider">
-					<?foreach ($arResult['MORE_PHOTO'] as $key => $photo){ // Основные фото
+					<?foreach ($arResult['MORE_PHOTO'] as $photo){ // Основные фото
 					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') no-repeat; background-size: cover;"></div>
+						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') 0 100% no-repeat; background-size: cover;" itemprop="image"></div>
 					<?unset($photoRes);}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
-					<?foreach ($arResult['MORE_PHOTO'] as $key => $photo){ // Доп. фото
+					<?foreach ($arResult['MORE_PHOTO'] as $photo){ // Доп. фото
 					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item-thumb" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover;" itemprop="image"></div>
+						<div class="village-slider__item-thumb" style="background: url('<?=$photoRes['src']?>') 0 100% no-repeat; background-size: cover;" itemprop="image"></div>
 				  <?unset($photoRes);}?>
 				</div>
 			</div>
@@ -301,12 +304,12 @@ switch ($km_MKAD) {
 <div class="container">
 <div class="house-in-village area-in-village page__content-list">
 	<div class="list--grid">
-		<?foreach ($arResult["arHouses"] as $id => $house) { // dump($house);?>
+		<?foreach ($arResult["arHouses"] as $id => $house) {
+			$offerURL = '/doma/'.$arResult['CODE'].'-dom-'.$house['ID'].'/';?>
 		<div class="card-house">
 			<div class="d-flex flex-wrap bg-white card-grid">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
-            <a class="stretched-link" href="/doma/<?=$house['CODE']?>/"></a>
 						<?foreach ($house['IMG'] as $key => $value) {?>
 							<div class="card-photo__item" style="background: url(<?=$value['src']?>) center center / cover no-repeat; width: 495px;"></div>
 						<?}?>
@@ -316,35 +319,29 @@ switch ($km_MKAD) {
 				</div>
 				<div class="card-house__content">
 					<div class="wrap-title">
-						<div class="card-house__title"><a href="/doma/<?=$house['CODE']?>/">Дом в посёлке <?=$arResult['NAME']?></a></div>
+						<div class="card-house__title"><a href="<?=$offerURL?>"><?=$house['NAME']?></a></div>
 					</div>
 					<div class="card-house__inline">
-						<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-							<path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)" />
-						</svg>
+						<img src="/assets/img/svg/house-plan.svg" alt="Площадь дома" class="svg_image">
 						<div class="card-house__inline-title">
 							Площадь дома:&nbsp;</div>
 						<div class="card-house__inline-value"><?=$house['AREA_HOUSE']?> м<sup>2</sup></div>
 					</div>
 					<div class="card-house__inline">
-						<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-							<path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)" />
-						</svg>
+						<img src="/assets/img/svg/stairs.svg" alt="Этажей" class="svg_image">
 						<div class="card-house__inline-title">
 							Этажей:&nbsp;</div>
 						<div class="card-house__inline-value"><?=$house['FLOORS']?></div>
 					</div>
 					<div class="card-house__inline">
-						<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-							<path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)" />
-						</svg>
+						<img src="/assets/img/svg/brickwall.svg" alt="Материал" class="svg_image">
 						<div class="card-house__inline-title">
 							Материал:&nbsp;</div>
 						<div class="card-house__inline-value"><span><?=$house['MATERIAL']?></span></div>
 					</div>
 					<div class="footer-card d-flex align-items-center">
 						<div class="footer-card__price"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
-						<a class="btn btn-outline-warning rounded-pill" href="/doma/<?=$house['CODE']?>/">Подробнее</a>
+						<a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
 					</div>
 				</div>
 			</div>
@@ -363,17 +360,17 @@ switch ($km_MKAD) {
 			<div class="d-flex flex-wrap bg-white card-grid">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
-						<a class="stretched-link" href="/uchastki/<?=$plot['CODE']?>/"></a>
 						<?foreach ($plot['IMG'] as $value) {?>
 							<div class="card-photo__item" style="background: url(<?=$value['src']?>) center center / cover no-repeat; width: 495px;"></div>
 						<?}?>
 					</div>
-					<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($plot['IMG'])?></span>
+					<div class="photo__count">
+						<span class="current">1</span> / <span class="count"><?=count($plot['IMG'])?></span>
 					</div>
 				</div>
 				<div class="card-house__content">
 					<div class="wrap-title">
-						<div class="card-house__title"><a href="/uchastki/<?=$plot['CODE']?>/">Участок в посёлке <?=$arResult['NAME']?></a></div>
+						<div class="card-house__title"><a href="/uchastki/uchastok-<?=$plot['ID']?>/">Участок <?=$plot['NUMBER']?> в посёлке <?=$arResult['NAME']?></a></div>
 					</div>
 					<div class="card-house__inline">
 						<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
@@ -411,7 +408,7 @@ switch ($km_MKAD) {
 					</div>
 					<div class="footer-card d-flex align-items-center">
 						<div class="footer-card__price"><span class="split-number"><?=$plot['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
-						<a class="btn btn-outline-warning rounded-pill" href="/uchastki/<?=$plot['CODE']?>/">Подробнее</a>
+						<a class="btn btn-outline-warning rounded-pill" href="/uchastki/uchastok-<?=$plot['ID']?>/">Подробнее</a>
 					</div>
 				</div>
 			</div>

@@ -3,11 +3,8 @@
 // получим поселок
 	$arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>1,"ID"=>$arResult['ITEM']['PROPERTIES']['VILLAGE']['VALUE']);
-	$arSelect = Array("ID","NAME");
+	$arSelect = Array("ID","NAME","CODE");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-	if($arElement = $rsElements->GetNext()){ // dump($arElement);
-		$arResult['VILLAGE'] = [
-			'NAME' => $arElement['NAME'],
-		];
-	} // dump($arResult);
+	if ($arElement = $rsElements->Fetch())
+		$arResult['VILLAGE'] = $arElement;
 ?>

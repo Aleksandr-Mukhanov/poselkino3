@@ -185,7 +185,8 @@ $(document).ready(function() {
   })
 
   // Plan
-  $(".openPlan").lightGallery();
+  $(".openPlan").lightGallery({'iframeMaxWidth': '80%'});
+  // $(".openPlan").lightGallery({zoom: true});
 
   // Work steps
   let step = $('.step'),
@@ -345,10 +346,17 @@ $(document).ready(function() {
     $(this).parent().prev().find('span').text(valueCredit);
   })
 
+  screenWidth = window.screen.width;
+
+  if (screenWidth > 990) $('form.search-header').addClass('active');
+
   // Search
   $('.icon-search').on('click', function(e) {
     e.preventDefault();
-    $('.search-header').toggleClass('active');
+    if (screenWidth > 990)
+      $('form.search-header').submit();
+    else
+      $('.search-header').toggleClass('active');
   });
 
   // Archor

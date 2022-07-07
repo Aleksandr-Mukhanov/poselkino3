@@ -121,6 +121,8 @@ $reviewsText = ($arResult["COMMENTS"][$item["ID"]]) ? $arResult["COMMENTS"][$ite
 
 // отображение по Наличию домов
 $housesValEnum = $item['PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
+
+$amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; // а то на карте фото не показывает
 ?>
 <div class="offer-house__item card-house">
 	<a class="stretched-link z-index-0 position-absolute w-100 h-100" href="<?=$item['DETAIL_PAGE_URL']?>"></a>
@@ -128,7 +130,7 @@ $housesValEnum = $item['PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
 		<div class="photo__list">
 			<?foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $key => $photo){ // Фото
       $photoRes = CFile::ResizeImageGet($photo, array('width'=>616, 'height'=>436), BX_RESIZE_IMAGE_EXACT);?>
-				<div class="photo__item" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover; background-position: center center;"></div>
+				<div class="photo__item" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover; background-position: center center;" <?=$amlazySkip?>></div>
       <?}?>
 		</div>
 		<div class="slider__header">
@@ -180,14 +182,14 @@ $housesValEnum = $item['PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
             <div class="line-raiting__title"><?=$ratingItogo?></div>
           </div>
         </div>
-        <div class="review mt-0" style="padding: 0 20px;">
+        <!-- <div class="review mt-0" style="padding: 0 20px;">
           <div class="d-flex"><a href="<?=$item['DETAIL_PAGE_URL']?>#block_reviews">
             <svg xmlns="http://www.w3.org/2000/svg" width="18.455" height="15.821" viewBox="0 0 18.455 15.821" class="inline-svg">
               <g transform="translate(0 -36.507)">
                 <path d="M17.22 39.787a8.348 8.348 0 0 0-3.357-2.4 11.972 11.972 0 0 0-4.634-.881 12.246 12.246 0 0 0-3.584.52A10.023 10.023 0 0 0 2.7 38.433a7.025 7.025 0 0 0-1.969 2.106A4.905 4.905 0 0 0 0 43.1a5 5 0 0 0 .932 2.894 7.562 7.562 0 0 0 2.549 2.266 6.546 6.546 0 0 1-.268.782q-.154.371-.278.608a4.184 4.184 0 0 1-.335.525q-.211.288-.319.407l-.355.391q-.247.273-.319.355a.72.72 0 0 0-.082.093l-.072.087-.063.092q-.052.077-.046.1a.274.274 0 0 1-.021.1.136.136 0 0 0 .005.124v.01a.518.518 0 0 0 .18.3.4.4 0 0 0 .314.092A7.73 7.73 0 0 0 3 52.1a11.256 11.256 0 0 0 4.737-2.492 14.09 14.09 0 0 0 1.493.082 11.968 11.968 0 0 0 4.634-.881 8.347 8.347 0 0 0 3.357-2.4 5.053 5.053 0 0 0 0-6.622z" class="cls-2" data-name="Path 7" />
               </g>
             </svg><?=$reviewsText?></a></div>
-        </div>
+        </div> -->
 		<div class="offer-house__metro">
 			<?if($item['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе
 				$idEnumHW = $item['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0];

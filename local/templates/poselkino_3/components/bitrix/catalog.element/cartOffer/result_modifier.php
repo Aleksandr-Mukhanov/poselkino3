@@ -5,6 +5,7 @@
  * @var CatalogElementComponent $component
  */
 
+use Bitrix\Main\Grid\Declension;
 // dump($arResult);
 
 $offerType = $_REQUEST['OFFER_TYPE'];
@@ -29,34 +30,60 @@ function ResizeImage($idPhoto){
 	return $photoRes;
 }
 
-$idVillage = $arResult['PROPERTIES']['VILLAGE']['VALUE'];
+$villageID = $arResult['PROPERTIES']['VILLAGE']['VALUE'];
+$villageCode = $_REQUEST['VILLAGE_CODE'];
 $material = $arResult['PROPERTIES']['MATERIAL']['VALUE'];
 $areaHouse = $arResult['PROPERTIES']['AREA_HOUSE']['VALUE'];
 $floors = $arResult['PROPERTIES']['FLOORS']['VALUE'];
 $price = $arResult['PROPERTIES']['PRICE']['VALUE'];
 $plottage = $arResult['PROPERTIES']['PLOTTAGE']['VALUE'];
+$number = $arResult['PROPERTIES']['NUMBER']['VALUE'];
 
 // получим поселок
-$arOrder = Array("SORT"=>"ASC");
-$arFilter = Array("IBLOCK_ID"=>1,"ID"=>$idVillage);
-$arSelect = Array("ID","NAME","CODE","PROPERTY_MKAD","PROPERTY_SHOSSE","PROPERTY_REGION","PROPERTY_TYPE","PROPERTY_SETTLEM","PROPERTY_ELECTRO","PROPERTY_GAS","PROPERTY_PLUMBING","PROPERTY_ELECTRO_DONE","PROPERTY_ELECTRO_KVT","PROPERTY_PROVEDEN_GAZ","PROPERTY_PROVEDENA_VODA","PROPERTY_LAND_CAT","PROPERTY_TYPE_USE","PROPERTY_LEGAL_FORM","PROPERTY_DEVELOPER_ID","PROPERTY_COORDINATES","PROPERTY_AUTO_NO_JAMS","PROPERTY_TRAIN_TRAVEL_TIME","PROPERTY_TRAIN_VOKZAL","PROPERTY_TRAIN_PRICE","PROPERTY_TRAIN_PRICE_TAXI","PROPERTY_TRAIN_ID_YANDEX","PROPERTY_BUS_VOKZAL","PROPERTY_BUS_TIME_KM","PROPERTY_PLAN_IMG","PROPERTY_UP_TO_VIEW","PROPERTY_CONTACTS","PROPERTY_PHONE");
+$arOrder = ['SORT'=>'ASC'];
+
+if ($villageCode)
+	$arFilter = ['IBLOCK_ID'=>1,'CODE'=>$villageCode];
+else
+	$arFilter = ['IBLOCK_ID'=>1,'ID'=>$villageID];
+
+$arSelect = Array('ID','NAME','CODE','PROPERTY_MKAD','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_TYPE','PROPERTY_SETTLEM','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_ELECTRO_DONE','PROPERTY_ELECTRO_KVT','PROPERTY_PROVEDEN_GAZ','PROPERTY_PROVEDENA_VODA','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_DEVELOPER_ID','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_UP_TO_VIEW','PROPERTY_CONTACTS','PROPERTY_PHONE','PROPERTY_PHONE','PROPERTY_PRICE_ARRANGE_INT','PROPERTY_SRC_MAP','PROPERTY_SITE','PROPERTY_RATING');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-if($arElement = $rsElements->GetNext()){ // dump($arElement);
+if ($arElement = $rsElements->GetNext())
+{
+	$villageID = $arElement['ID'];
+
   $i = 0;
   foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $key => $value) {
     if ($i == 0) $arShosseOne['VALUE_ENUM_ID'] = $key;
     $strShosse = ($strShosse) ? $strShosse.', '.$value : $value;
     $i++;
   }
+
   $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>1,"CODE"=>"SHOSSE","ID"=>$arShosseOne['VALUE_ENUM_ID']]);
 	if($enumFields = $propEnums->GetNext()){ // dump($enumFields);
     $arShosseOne['VALUE_XML_ID'] = $enumFields['XML_ID'];
     $arShosseOne['VALUE'] = $enumFields['VALUE'];
   }
+
   $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>1,"CODE"=>"REGION","ID"=>$arElement['PROPERTY_REGION_ENUM_ID']]);
 	if($enumFields = $propEnums->GetNext()){ // dump($enumFields);
     $arRegionXML = $enumFields['XML_ID'];
   }
+
+	// узнаем отзывы
+	$cntCom = 0;
+	$arOrder = Array("ACTIVE_FROM"=>"DESC");
+	$arFilter = Array("IBLOCK_ID"=>2,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arElement['ID']);
+	$arSelect = Array("ID");
+	$rsElementsCom = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>4],$arSelect);
+	while ($arElementCom = $rsElementsCom->Fetch())
+		$cntCom++; // кол-во отзывов
+
+	// выводим правильное окончание
+	$reviewsDeclension = new Declension('отзыв', 'отзыва', 'отзывов');
+	$reviewsText = $reviewsDeclension->get($cntCom);
+	$reviewsText = ($cntCom) ? $cntCom . ' ' . $reviewsText : 'нет отзывов';
 
   switch ($arElement['PROPERTY_TYPE_ENUM_ID']) { // название по типу
   	case 1: $typePos = "ДП"; break;
@@ -95,20 +122,26 @@ if($arElement = $rsElements->GetNext()){ // dump($arElement);
     'BUS_VOKZAL' => $arElement['PROPERTY_BUS_VOKZAL_VALUE'],
     'BUS_TIME_KM' => $arElement['PROPERTY_BUS_TIME_KM_VALUE'],
     'PLAN_IMG' => $arElement['PROPERTY_PLAN_IMG_VALUE'],
+		'PLAN_IMG_IFRAME' => $arElement['PROPERTY_PLAN_IMG_IFRAME_VALUE'],
     'UP_TO_VIEW' => $arElement['PROPERTY_UP_TO_VIEW_VALUE'],
 		'CONTACTS' => $arElement['PROPERTY_CONTACTS_ENUM_ID'],
 		'PHONE' => $arElement['PROPERTY_PHONE_VALUE'],
+		'PRICE_ARRANGE' => $arElement['PROPERTY_PRICE_ARRANGE_INT_VALUE'],
+		'SRC_MAP' => $arElement['PROPERTY_SRC_MAP_VALUE'],
+		'SITE' => $arElement['PROPERTY_SITE_VALUE'],
+		'RATING' => $arElement['PROPERTY_RATING_VALUE'],
+		'CNT_REVIEWS' => $reviewsText,
   ];
 } // dump($arVillage);
 
-if($offerType == 'plots'){ // если участки
-
+if ($offerType == 'plots') // если участки
+{
   // получим участки
   $arOrder = Array("SORT"=>"ASC");
-	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$idVillage,"!ID"=>$arResult['ID']);
-	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$villageID,"!ID"=>$arResult['ID']);
+	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
-	while($arElement = $rsElements->GetNext()){ // dump($arElement);
+	while ($arElement = $rsElements->GetNext()) { // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
 		if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
@@ -124,6 +157,7 @@ if($offerType == 'plots'){ // если участки
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
+			"NUMBER" => $arElement["PROPERTY_NUMBER_VALUE"],
 		];
 		unset($arPhoto);
   }
@@ -131,9 +165,9 @@ if($offerType == 'plots'){ // если участки
   // получим похожие участки
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_PLOTTAGE"=>$plottage,"!ID"=>$arResult['ID']);
-	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
-	while($arElement = $rsElements->GetNext()){ // dump($arElement);
+	while ($arElement = $rsElements->GetNext()) { // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
 		if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
@@ -149,19 +183,23 @@ if($offerType == 'plots'){ // если участки
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
+			"NUMBER" => $arElement["PROPERTY_NUMBER_VALUE"],
 		];
 		unset($arPhoto);
   }
 
-  $seoTitle = 'Купить участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
-  $seoH1 = 'Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей в поселке '.$arVillage['NAME'].'';
-  $setDescription = '▶ Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+  // $seoTitle = 'Купить участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
+	$seoTitle = 'Продажа участка в поселке '.$arVillage['NAME'].' - '.$plottage.' соток, за '.$price.' руб.';
+  // $seoH1 = 'Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей в поселке '.$arVillage['NAME'].'';
+	$seoH1 = 'Продажа участка № '.$number.' в коттеджном поселке '.$arVillage['NAME'];
+  // $setDescription = '▶ Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+	$setDescription = 'Продажа участка в КП '.$arVillage['NAME'].' на '.$arVillage['SHOSSE'].' шоссе в Московской области. '.$arVillage['MKAD'].' км от МКАД. Площадь участка '.$plottage.' соток, стоимость сотки от '.$price.' руб. Коммуникации: на участке, газ '.$arVillage['PROVEDEN_GAZ'].'. Рейтинг поселка - '.$arVillage['RATING'].'. Количество отзывов - '.$arVillage['CNT_REVIEWS'].'.';
 
 }else{ // если дома
 
   // получим дома
   $arOrder = Array("SORT"=>"ASC");
-  $arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$idVillage,"!ID"=>$arResult['ID']);
+  $arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$villageID,"!ID"=>$arResult['ID']);
   $arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
   $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
   while($arElement = $rsElements->GetNext()){ // dump($arElement);
@@ -223,15 +261,15 @@ $arResult['arVillage'] = $arVillage;
 $arResult['arOffers'] = $arOffers;
 $arResult['arSimilarOffers'] = $arSimilarOffers;
 
-// $APPLICATION->AddChainItem('Поселки','/poselki/');
-// $APPLICATION->AddChainItem($arVillage['TYPE_AB'].' '.$arVillage['NAME'],'/poselki/'.$arVillage['CODE'].'/');
-
 $cp = $this->__component;
 if (is_object($cp))
 {
- $cp->arResult["SEO_TITLE"] = $seoTitle;
- $cp->arResult["SEO_DESCRIPTION"] = $setDescription;
- $cp->SetResultCacheKeys(array("SEO_TITLE","SEO_DESCRIPTION")); //cache keys in $arResult array
+	$cp->arResult['SEO_TITLE'] = $seoTitle;
+	$cp->arResult['SEO_DESCRIPTION'] = $setDescription;
+	$cp->arResult['VILLAGE_NAME'] = $arVillage['NAME'];
+	$cp->arResult['VILLAGE_CODE'] = $arVillage['CODE'];
+	$cp->arResult['NUMBER'] = $number;
+	$cp->SetResultCacheKeys(array('SEO_TITLE','SEO_DESCRIPTION','VILLAGE_NAME','VILLAGE_CODE','NUMBER')); //cache keys in $arResult array
 }
 
 $component = $this->getComponent();

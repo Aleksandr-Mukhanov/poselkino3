@@ -11,6 +11,8 @@
  * @var string $templateFolder
  */
 
+use Bitrix\Main\Grid\Declension;
+
 $this->setFrameMode(true);
 
 $templateLibrary = array('popup', 'fx');
@@ -18,6 +20,7 @@ $templateLibrary = array('popup', 'fx');
 $offerType = $_REQUEST['OFFER_TYPE'];
 $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 $offerNameM = ($offerType == 'plots') ? 'Участки' : 'Дома';
+$offerPriceFor = ($offerType == 'plots') ? 'сотку' : 'кв.м.';
 
 $name = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'])
 	? $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']
@@ -77,30 +80,61 @@ switch ($km_MKAD) {
 
 $plottage = ($offerType == 'plots') ? 'PLOTTAGE' : 'AREA_HOUSE';
 $oneKVMetr = round($arResult['PROPERTIES']['PRICE']['VALUE'] / $arResult['PROPERTIES'][$plottage]['VALUE']);
+// выводим правильное окончание
+$plottageDeclension = new Declension('сотка', 'сотки', 'соток');
+$plottageText = ($offerType == 'plots') ? $plottageDeclension->get($arResult['PROPERTIES'][$plottage]['VALUE']) : 'кв.м.';
+
 $finish = $arResult['PROPERTIES']['FINISH']['VALUE'];
-$planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG);
-// dump($arResult);
+
+// План поселка
+$nProp = ''; // dump($arResult['arVillage']);
+if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
+	$planIMG = $arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp];
+	$frame = 'data-iframe="true"';
+}else{
+	$planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG'.$nProp]);
+	$frame = '';
+}
+
+$priceArrange = ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) ? $arResult['PROPERTIES']['ARRANGEMENT']['VALUE'] : $arResult['arVillage']['PRICE_ARRANGE'];
+// dump($arResult['arVillage']);
+
+if ($offerType == 'plots')
+	$h1 = $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'];
+else
+	$h1 = $arResult['NAME'];
+
+$house_disclaimer = $arResult['PROPERTIES']['TYPE']['VALUE'];
+$house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'ready') ? 'В стоимость входит дом и участок' : 'Цена указана за дом без участка';
 ?>
 <div class="container mt-md-5">
 	<div class="row">
-	 <?if($finish): // если есть отделка?>
-		<div class="order-0 order-md-0 col-xl-8 col-md-7">
-			<div class="page-title">
-				<h1 class="h2"><?=$offerName?> <?=$arResult['NAME']?> в <?=$arResult['arVillage']['TYPE_AB']?> <?=$arResult['arVillage']['NAME']?></h1>
+	 <?if($finish || $house_disclaimer): // если есть отделка?>
+			<div class="order-0 order-md-0 col-xl-8 col-md-7">
+				<div class="page-title">
+					<h1 class="h2"><?=$h1?></h1>
+				</div>
 			</div>
-		</div>
-		<div class="col-xl-4 col-md-5 justify-content-end">
-			<div class="active-sale justify-content-end">
-				<div class="d-none d-md-inline-block">
-					<div class="active-sale__badge"> <span><?=$finish?></span>
+			<div class="col-xl-4 col-md-5 justify-content-end">
+				<div class="active-sale justify-content-end">
+					<div class="d-none d-md-inline-block">
+						<?if($house_disclaimer):?>
+							<div class="active-sale__badge disclaimer__badge">
+								<span><?=$house_disclaimer?></span>
+							</div>
+						<?endif;?>
+						<?if($finish):?>
+							<div class="active-sale__badge">
+								<span><?=$finish?></span>
+							</div>
+						<?endif;?>
 					</div>
 				</div>
 			</div>
-		</div>
 	 <?else:?>
 		<div class="order-0 order-md-0 col-12">
 			<div class="page-title">
-				<h1 class="h2"><?=$offerName?> <?=$arResult['NAME']?> в <?=$arResult['arVillage']['TYPE_AB']?> <?=$arResult['arVillage']['NAME']?></h1>
+				<h1 class="h2"><?=$h1?></h1>
 			</div>
 		</div>
 	 <?endif;?>
@@ -129,9 +163,14 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 					 <div class="home-info-col__value"><?=$arResult['PROPERTIES']['NUMBER']['VALUE']?></div>
 					 <div class="home-info-col__title">Номер на плане</div>
 				 </div>
-				 <div class="home-info__slider-plan text-left text-lg-right ml-auto" id="openPlan"><a class="text-success" href="<?=$planIMG?>">План участка</a></div>
+				 <div class="home-info-col">
+					<div class="home-info-col__value"><?=$priceArrange?></div>
+					<div class="home-info-col__title">Цена за обустройство</div>
+				</div>
+				 <div class="home-info__slider-plan text-left text-lg-right ml-auto openPlan"><a class="text-success" href="<?=$planIMG?>" <?=$frame?>>План участка</a></div>
 			 </div>
-		 <?else: // если дом?>
+		 <?else: // если дом
+			 $plottage = ($arResult['PROPERTIES']['PLOTTAGE']['VALUE']) ? $arResult['PROPERTIES']['PLOTTAGE']['VALUE'].' сот.' : 'Любой';?>
 			<div class="home-info__slider-bottom">
 				<div class="home-info-col">
 					<div class="home-info-col__value"><?=$arResult['PROPERTIES']['AREA_HOUSE']['VALUE']?> м<sup>2</sup></div>
@@ -146,10 +185,10 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 					<div class="home-info-col__title">Этап строительства</div>
 				</div>
 				<div class="home-info-col">
-					<div class="home-info-col__value"><?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE']?> сот.</div>
+					<div class="home-info-col__value"><?=$plottage?></div>
 					<div class="home-info-col__title">Участок дома</div>
 				</div>
-				<div class="home-info__slider-plan text-left text-sm-right" id="openPlan"><a class="text-success" href="<?=$planIMG?>">План участка</a></div>
+				<div class="home-info__slider-plan text-left text-sm-right openPlan"><a class="text-success" href="<?=$planIMG?>" <?=$frame?>>План поселка</a></div>
 			</div>
 			<p class="px-30 mt-4">
 				Материал: <b class="d-block d-sm-inline"><?=$arResult['PROPERTIES']['MATERIAL']['VALUE']?></b></p>
@@ -175,10 +214,12 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
 					<?endif;?>
 					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rep_rubl">руб.</span></div>
-					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 м<sup>2</sup></div>
-					<p><b>Возможна ипотека</b></p>
+					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 <?=$offerPriceFor?></div>
+					<?if($arResult['PROPERTIES']['INS']['VALUE']){ // рассрочка?>
+						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
+					<?}else{?><p></p><?}?>
           <?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
-          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?> <span>Показать</span></div>
+          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?></div>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
@@ -188,9 +229,12 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 			</div>
 			<div class="home-description">
 				<h2>Описание</h2>
-				<p>Поселок расположен в <?=$km_MKAD?> км от МКАД по <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке. </p>
-				<p>В поселка развитая инфраструктура: имеется супермаркет, ресторан, фитнес-центр, детские и спортивные площадки.</p>
-				<p>Поселок выполнен в едином архитектурном стиле, имеются прогулочные пункты. Обеспечена безопасность: охрана, пропускная система, видеонаблюдение. Есть освещение, дорожное покрытие, озеленение мест общего пользования.</p>
+				<?if($house_disclaimer):?>
+					<p class="house_disclaimer"><img src="/assets/img/svg/alert-triangle.svg" alt=""><?=$house_disclaimer_txt?></p>
+				<?endif;?>
+				<p>Поселок <a href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank" class="text-success a__bold"><?=$arResult['arVillage']['NAME']?></a></p>
+				<p>Поселок расположен в <?=$km_MKAD?> км от МКАД по <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
+				<p><?=$arResult['PREVIEW_TEXT']?></p>
 			</div>
 			<div class="home-communication">
 				<h2>Коммуникации</h2>
@@ -272,9 +316,26 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 				<p>
 					Категория замель: <?=$arResult['arVillage']['LAND_CAT']?><br>
 					Вид разрешенного использования: <?=$arResult['arVillage']['TYPE_USE']?><br>
-					Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?></p>
+					Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?><br>
+					<?if($arResult['PROPERTIES']['CADASTRAL']['VALUE']):?>
+						Кадастровый номер: <?=$arResult['PROPERTIES']['CADASTRAL']['VALUE']?>
+					<?endif;?>
+				</p>
+				<p class="mt-2"><a class="font-weight-bold text-success text-decoration-none" href="<?=$arResult['arVillage']['SRC_MAP'] // Ссылка на публичную карту?>" target="_blank" rel="nofollow">
+					Посёлок на карте Росреестра&nbsp;
+					<svg xmlns="http://www.w3.org/2000/svg" width="6.847" height="11.883" viewBox="0 0 6.847 11.883" class="inline-svg">
+						<g transform="rotate(180 59.406 5.692)">
+							<path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z" />
+						</g>
+					</svg></a>
+				</p>
+				<?if($arResult['arVillage']['SITE']):?>
+					<p class="w-100 mt-3">
+						Сайт поселка: <a href="<?=$arResult['arVillage']['SITE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['arVillage']['NAME']?></a>
+					</p>
+				<?endif;?>
 				<? // dump($arResult['arVillage']['DEVELOPER_ID']); // Девелопер ID
-				// dump($arParams);
+				/*
 				$APPLICATION->IncludeComponent( // выводим девелопера
 					'bitrix:catalog.brandblock',
 					'cardHome',
@@ -295,7 +356,14 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 					),
 					$component,
 					array('HIDE_ICONS' => 'N')
-				);?>
+				);*/?>
+				<div class="d-flex flex-wrap flex-md-nowrap text-left justify-content-start mt-3 mt-md-5 align-items-center">
+				  <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-left width-md-auto">
+				    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="250"></a>
+				  </div>
+				  <a class="btn btn-warning rounded-pill mb-3 mr-5" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с нами</a>
+				  <a class="d-none d-md-inline developer-logo" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="250"></a>
+				</div>
 			</div>
 			<div class="village-map page-map bg-white">
 				<div class="container px-0">
@@ -396,121 +464,25 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 				<div class="row mt-4">
 					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F2F8FD;">
-							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
-									<g transform="translate(-38.036 -36.319)">
-										<path d="M198.4,53.75a.682.682,0,0,0-.931-.249l-7.73,4.463-7.73-4.463a.682.682,0,1,0-.682,1.18l7.73,4.463v8.925a.682.682,0,1,0,1.363,0V59.144l7.73-4.463A.681.681,0,0,0,198.4,53.75Z" transform="translate(-103.976 -12.431)"
-											fill="#dfecdc" />
-										<path d="M60.469,89.609l-2.328-2.328a.681.681,0,0,0-.964,0,4.573,4.573,0,0,1-6.467,0,.681.681,0,0,0-.964,0l-2.329,2.328a.681.681,0,0,0,0,.964,9.229,9.229,0,0,0,13.052,0A.682.682,0,0,0,60.469,89.609Z" transform="translate(-6.679 -36.923)"
-											fill="#78a86d" opacity="0.402" />
-										<path d="M116.594,50.41a.752.752,0,1,0-.752-.752A.753.753,0,0,0,116.594,50.41Z" transform="translate(-56.594 -9.155)" fill="#c1d8bb" />
-										<path d="M116.594,63.759a.752.752,0,1,0,.752.752A.753.753,0,0,0,116.594,63.759Z" transform="translate(-56.594 -19.959)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 47.849)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 51.899)" fill="#c1d8bb" />
-										<path d="M82.417,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v19.046A.681.681,0,0,1,82.417,137.668Z" transform="translate(-31.785 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M114.549,132.281a.681.681,0,0,1-.682-.682V117.94a.682.682,0,0,1,1.363,0V131.6A.681.681,0,0,1,114.549,132.281Z" transform="translate(-55.157 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M146.68,124.707a.681.681,0,0,1-.682-.682v-6.085a.682.682,0,1,1,1.363,0v6.085A.681.681,0,0,1,146.68,124.707Z" transform="translate(-78.528 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M178.812,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,1,1,1.363,0v19.046A.681.681,0,0,1,178.812,137.668Z" transform="translate(-101.9 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M210.943,149.041a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v30.419A.681.681,0,0,1,210.943,149.041Z" transform="translate(-125.271 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M141.909,162.265a.681.681,0,0,1-.682-.682V140.941h-4.356v20.643a.682.682,0,0,1-1.363,0V140.26a.681.681,0,0,1,.682-.682h5.72a.681.681,0,0,1,.682.682v21.324A.681.681,0,0,1,141.909,162.265Z" transform="translate(-70.898 -75.107)"
-											fill="#78a86d" />
-										<g transform="translate(38.036 36.319)">
-											<path d="M198.148,41.069l-8.07-4.659a.681.681,0,0,0-.682,0l-8.07,4.659a.681.681,0,0,0-.341.59v9.319a.681.681,0,0,0,.341.59l8.07,4.659a.681.681,0,0,0,.682,0l8.07-4.659a.681.681,0,0,0,.341-.59V41.66A.681.681,0,0,0,198.148,41.069Zm-1.022,9.516-7.389,4.266-7.389-4.266V42.053l7.389-4.266,7.389,4.266Z"
-												transform="translate(-142.012 -36.319)" fill="#3c4b5a" />
-											<path d="M41.221,58.055a.68.68,0,0,0,.482-.2l2.329-2.328a.682.682,0,0,0,0-.964,4.573,4.573,0,0,1,0-6.467h0a4.573,4.573,0,0,1,6.467,0h0a4.573,4.573,0,0,1,0,6.467.682.682,0,0,0,0,.964l2.328,2.328a.682.682,0,0,0,.964,0,9.229,9.229,0,1,0-13.052,0A.677.677,0,0,0,41.221,58.055Zm12.067-1.666-1.371-1.371a5.94,5.94,0,0,0,0-7.377l.651-.652.72-.72a7.869,7.869,0,0,1,0,10.119ZM47.265,43.463a7.806,7.806,0,0,1,5.06,1.842l-1.371,1.371a5.94,5.94,0,0,0-7.377,0l-1.371-1.371A7.806,7.806,0,0,1,47.265,43.463ZM41.241,46.27l.21.21,1.161,1.162a5.94,5.94,0,0,0,0,7.377l-1.371,1.371a7.868,7.868,0,0,1,0-10.119Z"
-												transform="translate(-38.036 -40.524)" fill="#3c4b5a" />
-											<path d="M128.652,50.528h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -45.663)" fill="#3c4b5a" />
-											<path d="M128.652,65.382h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -56.467)" fill="#3c4b5a" />
-											<path d="M128.652,80.235h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -67.271)" fill="#3c4b5a" />
-											<path d="M128.652,95.089h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -78.075)" fill="#3c4b5a" />
-											<path d="M77.648,196.845a.681.681,0,0,0,.682-.682V187.8a.681.681,0,0,0-.682-.682H71.929a.681.681,0,0,0-.682.682v8.363a.682.682,0,0,0,1.363,0v-7.681h4.356v7.681A.681.681,0,0,0,77.648,196.845Z" transform="translate(-62.193 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M103.378,168.043v13.75a.682.682,0,0,0,1.363,0V168.724H109.1v13.068a.682.682,0,1,0,1.363,0v-13.75a.681.681,0,0,0-.682-.682H104.06a.681.681,0,0,0-.682.682Z" transform="translate(-85.564 -131.635)" fill="#3c4b5a" />
-											<path d="M168.323,196.845a.681.681,0,0,0,.682-.682v-7.681h4.356v7.681a.682.682,0,1,0,1.363,0V187.8a.681.681,0,0,0-.682-.682h-5.719a.681.681,0,0,0-.682.682v8.363A.681.681,0,0,0,168.323,196.845Z" transform="translate(-132.306 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M92.6,147.678H48.581V117.941a.682.682,0,0,0-1.363,0v30.419a.681.681,0,0,0,.682.682H92.6a.682.682,0,1,0,0-1.363Z" transform="translate(-44.715 -95.192)" fill="#3c4b5a" />
-										</g>
-									</g>
-								</svg></div>
+							<div class="offer-card__icon">
+								<img class="inline-svg" src="/assets/img/site/city.svg">
+							</div>
 							<div class="offer-card__title">Обустройство поселка</div>
 						</div>
 					</div>
 					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#ecologyBlock" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F1F8EF;">
-							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
-									<g transform="translate(-38.036 -36.319)">
-										<path d="M198.4,53.75a.682.682,0,0,0-.931-.249l-7.73,4.463-7.73-4.463a.682.682,0,1,0-.682,1.18l7.73,4.463v8.925a.682.682,0,1,0,1.363,0V59.144l7.73-4.463A.681.681,0,0,0,198.4,53.75Z" transform="translate(-103.976 -12.431)"
-											fill="#dfecdc" />
-										<path d="M60.469,89.609l-2.328-2.328a.681.681,0,0,0-.964,0,4.573,4.573,0,0,1-6.467,0,.681.681,0,0,0-.964,0l-2.329,2.328a.681.681,0,0,0,0,.964,9.229,9.229,0,0,0,13.052,0A.682.682,0,0,0,60.469,89.609Z" transform="translate(-6.679 -36.923)"
-											fill="#78a86d" opacity="0.402" />
-										<path d="M116.594,50.41a.752.752,0,1,0-.752-.752A.753.753,0,0,0,116.594,50.41Z" transform="translate(-56.594 -9.155)" fill="#c1d8bb" />
-										<path d="M116.594,63.759a.752.752,0,1,0,.752.752A.753.753,0,0,0,116.594,63.759Z" transform="translate(-56.594 -19.959)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 47.849)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 51.899)" fill="#c1d8bb" />
-										<path d="M82.417,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v19.046A.681.681,0,0,1,82.417,137.668Z" transform="translate(-31.785 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M114.549,132.281a.681.681,0,0,1-.682-.682V117.94a.682.682,0,0,1,1.363,0V131.6A.681.681,0,0,1,114.549,132.281Z" transform="translate(-55.157 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M146.68,124.707a.681.681,0,0,1-.682-.682v-6.085a.682.682,0,1,1,1.363,0v6.085A.681.681,0,0,1,146.68,124.707Z" transform="translate(-78.528 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M178.812,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,1,1,1.363,0v19.046A.681.681,0,0,1,178.812,137.668Z" transform="translate(-101.9 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M210.943,149.041a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v30.419A.681.681,0,0,1,210.943,149.041Z" transform="translate(-125.271 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M141.909,162.265a.681.681,0,0,1-.682-.682V140.941h-4.356v20.643a.682.682,0,0,1-1.363,0V140.26a.681.681,0,0,1,.682-.682h5.72a.681.681,0,0,1,.682.682v21.324A.681.681,0,0,1,141.909,162.265Z" transform="translate(-70.898 -75.107)"
-											fill="#78a86d" />
-										<g transform="translate(38.036 36.319)">
-											<path d="M198.148,41.069l-8.07-4.659a.681.681,0,0,0-.682,0l-8.07,4.659a.681.681,0,0,0-.341.59v9.319a.681.681,0,0,0,.341.59l8.07,4.659a.681.681,0,0,0,.682,0l8.07-4.659a.681.681,0,0,0,.341-.59V41.66A.681.681,0,0,0,198.148,41.069Zm-1.022,9.516-7.389,4.266-7.389-4.266V42.053l7.389-4.266,7.389,4.266Z"
-												transform="translate(-142.012 -36.319)" fill="#3c4b5a" />
-											<path d="M41.221,58.055a.68.68,0,0,0,.482-.2l2.329-2.328a.682.682,0,0,0,0-.964,4.573,4.573,0,0,1,0-6.467h0a4.573,4.573,0,0,1,6.467,0h0a4.573,4.573,0,0,1,0,6.467.682.682,0,0,0,0,.964l2.328,2.328a.682.682,0,0,0,.964,0,9.229,9.229,0,1,0-13.052,0A.677.677,0,0,0,41.221,58.055Zm12.067-1.666-1.371-1.371a5.94,5.94,0,0,0,0-7.377l.651-.652.72-.72a7.869,7.869,0,0,1,0,10.119ZM47.265,43.463a7.806,7.806,0,0,1,5.06,1.842l-1.371,1.371a5.94,5.94,0,0,0-7.377,0l-1.371-1.371A7.806,7.806,0,0,1,47.265,43.463ZM41.241,46.27l.21.21,1.161,1.162a5.94,5.94,0,0,0,0,7.377l-1.371,1.371a7.868,7.868,0,0,1,0-10.119Z"
-												transform="translate(-38.036 -40.524)" fill="#3c4b5a" />
-											<path d="M128.652,50.528h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -45.663)" fill="#3c4b5a" />
-											<path d="M128.652,65.382h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -56.467)" fill="#3c4b5a" />
-											<path d="M128.652,80.235h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -67.271)" fill="#3c4b5a" />
-											<path d="M128.652,95.089h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -78.075)" fill="#3c4b5a" />
-											<path d="M77.648,196.845a.681.681,0,0,0,.682-.682V187.8a.681.681,0,0,0-.682-.682H71.929a.681.681,0,0,0-.682.682v8.363a.682.682,0,0,0,1.363,0v-7.681h4.356v7.681A.681.681,0,0,0,77.648,196.845Z" transform="translate(-62.193 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M103.378,168.043v13.75a.682.682,0,0,0,1.363,0V168.724H109.1v13.068a.682.682,0,1,0,1.363,0v-13.75a.681.681,0,0,0-.682-.682H104.06a.681.681,0,0,0-.682.682Z" transform="translate(-85.564 -131.635)" fill="#3c4b5a" />
-											<path d="M168.323,196.845a.681.681,0,0,0,.682-.682v-7.681h4.356v7.681a.682.682,0,1,0,1.363,0V187.8a.681.681,0,0,0-.682-.682h-5.719a.681.681,0,0,0-.682.682v8.363A.681.681,0,0,0,168.323,196.845Z" transform="translate(-132.306 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M92.6,147.678H48.581V117.941a.682.682,0,0,0-1.363,0v30.419a.681.681,0,0,0,.682.682H92.6a.682.682,0,1,0,0-1.363Z" transform="translate(-44.715 -95.192)" fill="#3c4b5a" />
-										</g>
-									</g>
-								</svg></div>
+							<div class="offer-card__icon">
+								<img class="inline-svg" src="/assets/img/site/eco.svg">
+							</div>
 							<div class="offer-card__title">Экология и природа</div>
 						</div>
 					</div>
 					<div class="d-block col-md-4"><a class="stretched-link" href="/poselki/<?=$arResult['arVillage']['CODE']?>/#mapShow" target="_blank"></a>
 						<div class="offer-card" style="background-color: #F6F5FA;">
-							<div class="offer-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="56.477" height="53.849" viewBox="0 0 56.477 53.849" class="inline-svg">
-									<g transform="translate(-38.036 -36.319)">
-										<path d="M198.4,53.75a.682.682,0,0,0-.931-.249l-7.73,4.463-7.73-4.463a.682.682,0,1,0-.682,1.18l7.73,4.463v8.925a.682.682,0,1,0,1.363,0V59.144l7.73-4.463A.681.681,0,0,0,198.4,53.75Z" transform="translate(-103.976 -12.431)"
-											fill="#dfecdc" />
-										<path d="M60.469,89.609l-2.328-2.328a.681.681,0,0,0-.964,0,4.573,4.573,0,0,1-6.467,0,.681.681,0,0,0-.964,0l-2.329,2.328a.681.681,0,0,0,0,.964,9.229,9.229,0,0,0,13.052,0A.682.682,0,0,0,60.469,89.609Z" transform="translate(-6.679 -36.923)"
-											fill="#78a86d" opacity="0.402" />
-										<path d="M116.594,50.41a.752.752,0,1,0-.752-.752A.753.753,0,0,0,116.594,50.41Z" transform="translate(-56.594 -9.155)" fill="#c1d8bb" />
-										<path d="M116.594,63.759a.752.752,0,1,0,.752.752A.753.753,0,0,0,116.594,63.759Z" transform="translate(-56.594 -19.959)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 47.849)" fill="#c1d8bb" />
-										<circle cx="0.752" cy="0.752" r="0.752" transform="translate(59.248 51.899)" fill="#c1d8bb" />
-										<path d="M82.417,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v19.046A.681.681,0,0,1,82.417,137.668Z" transform="translate(-31.785 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M114.549,132.281a.681.681,0,0,1-.682-.682V117.94a.682.682,0,0,1,1.363,0V131.6A.681.681,0,0,1,114.549,132.281Z" transform="translate(-55.157 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M146.68,124.707a.681.681,0,0,1-.682-.682v-6.085a.682.682,0,1,1,1.363,0v6.085A.681.681,0,0,1,146.68,124.707Z" transform="translate(-78.528 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M178.812,137.668a.681.681,0,0,1-.682-.682V117.941a.682.682,0,1,1,1.363,0v19.046A.681.681,0,0,1,178.812,137.668Z" transform="translate(-101.9 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M210.943,149.041a.681.681,0,0,1-.682-.682V117.941a.682.682,0,0,1,1.363,0v30.419A.681.681,0,0,1,210.943,149.041Z" transform="translate(-125.271 -58.873)" fill="#78a86d" opacity="0.15" />
-										<path d="M141.909,162.265a.681.681,0,0,1-.682-.682V140.941h-4.356v20.643a.682.682,0,0,1-1.363,0V140.26a.681.681,0,0,1,.682-.682h5.72a.681.681,0,0,1,.682.682v21.324A.681.681,0,0,1,141.909,162.265Z" transform="translate(-70.898 -75.107)"
-											fill="#78a86d" />
-										<g transform="translate(38.036 36.319)">
-											<path d="M198.148,41.069l-8.07-4.659a.681.681,0,0,0-.682,0l-8.07,4.659a.681.681,0,0,0-.341.59v9.319a.681.681,0,0,0,.341.59l8.07,4.659a.681.681,0,0,0,.682,0l8.07-4.659a.681.681,0,0,0,.341-.59V41.66A.681.681,0,0,0,198.148,41.069Zm-1.022,9.516-7.389,4.266-7.389-4.266V42.053l7.389-4.266,7.389,4.266Z"
-												transform="translate(-142.012 -36.319)" fill="#3c4b5a" />
-											<path d="M41.221,58.055a.68.68,0,0,0,.482-.2l2.329-2.328a.682.682,0,0,0,0-.964,4.573,4.573,0,0,1,0-6.467h0a4.573,4.573,0,0,1,6.467,0h0a4.573,4.573,0,0,1,0,6.467.682.682,0,0,0,0,.964l2.328,2.328a.682.682,0,0,0,.964,0,9.229,9.229,0,1,0-13.052,0A.677.677,0,0,0,41.221,58.055Zm12.067-1.666-1.371-1.371a5.94,5.94,0,0,0,0-7.377l.651-.652.72-.72a7.869,7.869,0,0,1,0,10.119ZM47.265,43.463a7.806,7.806,0,0,1,5.06,1.842l-1.371,1.371a5.94,5.94,0,0,0-7.377,0l-1.371-1.371A7.806,7.806,0,0,1,47.265,43.463ZM41.241,46.27l.21.21,1.161,1.162a5.94,5.94,0,0,0,0,7.377l-1.371,1.371a7.868,7.868,0,0,1,0-10.119Z"
-												transform="translate(-38.036 -40.524)" fill="#3c4b5a" />
-											<path d="M128.652,50.528h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -45.663)" fill="#3c4b5a" />
-											<path d="M128.652,65.382h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -56.467)" fill="#3c4b5a" />
-											<path d="M128.652,80.235h7.223a.682.682,0,0,0,0-1.363h-7.223a.682.682,0,0,0,0,1.363Z" transform="translate(-103.451 -67.271)" fill="#3c4b5a" />
-											<path d="M128.652,95.089h7.223a.682.682,0,1,0,0-1.363h-7.223a.682.682,0,1,0,0,1.363Z" transform="translate(-103.451 -78.075)" fill="#3c4b5a" />
-											<path d="M77.648,196.845a.681.681,0,0,0,.682-.682V187.8a.681.681,0,0,0-.682-.682H71.929a.681.681,0,0,0-.682.682v8.363a.682.682,0,0,0,1.363,0v-7.681h4.356v7.681A.681.681,0,0,0,77.648,196.845Z" transform="translate(-62.193 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M103.378,168.043v13.75a.682.682,0,0,0,1.363,0V168.724H109.1v13.068a.682.682,0,1,0,1.363,0v-13.75a.681.681,0,0,0-.682-.682H104.06a.681.681,0,0,0-.682.682Z" transform="translate(-85.564 -131.635)" fill="#3c4b5a" />
-											<path d="M168.323,196.845a.681.681,0,0,0,.682-.682v-7.681h4.356v7.681a.682.682,0,1,0,1.363,0V187.8a.681.681,0,0,0-.682-.682h-5.719a.681.681,0,0,0-.682.682v8.363A.681.681,0,0,0,168.323,196.845Z" transform="translate(-132.306 -146.006)"
-												fill="#3c4b5a" />
-											<path d="M92.6,147.678H48.581V117.941a.682.682,0,0,0-1.363,0v30.419a.681.681,0,0,0,.682.682H92.6a.682.682,0,1,0,0-1.363Z" transform="translate(-44.715 -95.192)" fill="#3c4b5a" />
-										</g>
-									</g>
-								</svg></div>
+							<div class="offer-card__icon">
+								<img class="inline-svg" src="/assets/img/site/navigation.svg">
+							</div>
 							<div class="offer-card__title">Как добраться</div>
 						</div>
 					</div>
@@ -539,17 +511,34 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
 					<?endif;?>
 					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rep_rubl">руб.</span></div>
-					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 м<sup>2</sup></div>
-					<p><b>Возможна ипотека</b></p>
+					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 <?=$offerPriceFor?></div>
+					<?if($arResult['PROPERTIES']['INS']['VALUE']){ // рассрочка?>
+						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
+					<?}else{?><p></p><?}?>
 					<?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
-          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?> <span>Показать</span></div>
+          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?></div>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#writeToUs" data-id-button="WRITE_TO_US_FOOT">Задать вопрос</a>
 					<?}?>
-					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>'>
+					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>'>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="bank-widget" tabindex="-1" role="dialog" aria-labelledby="bank-widget" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title mt-3" id="exampleModalLabel">Заголовок</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<?=$arResult['PROPERTIES']['INS_TERMS']['VALUE']?>
 			</div>
 		</div>
 	</div>
@@ -560,11 +549,11 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 	<div class="block-page">
 		<h2><?=$offerNameM?> в этом поселке</h2>
 		<div class="card-house-carousel house-in-village area-in-village" id="house_in_village">
-			<?foreach ($arResult["arOffers"] as $id => $house) { // dump($house);?>
+			<?foreach ($arResult["arOffers"] as $id => $house) {?>
 				<div class="item mr-4">
           <!-- Ссылка карточки-->
           <div class="offer-house__item card-house house-in-village">
-						<a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a>
+						<!-- <a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a> -->
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
@@ -575,44 +564,49 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
               </div>
             </div>
             <div class="offer-house__info card-house__content px-3">
-              <div class="offer-house__title px-0"><?=$offerName?> <?=$house['NAME']?> в посёлке <?=$arResult['arVillage']['NAME']?></div>
+              <div class="offer-house__title">
+								<?if($offerType == 'plots'):?>
+									<?=$offerName?> <?=$house['NUMBER']?> в посёлке <?=$arResult['arVillage']['NAME']?>
+								<?else:?>
+									<?=$house['NAME']?>
+								<?endif;?>
+							</div>
 							<?if($offerType == 'plots'){ // если участки?>
-	              <div class="offer-house__inline-info border-0 mt-0 pt-0">
-	                <div class="card-house__inline px-0"><svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-                            <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"></path>
-                        </svg>
+	              <div class="offer-house__inline-info">
+	                <div class="card-house__inline">
+										<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
+                      <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"></path>
+                    </svg>
 	                  <div class="card-house__inline-title">
 	                    Площадь участка:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['PLOTTAGE']?> соток</div>
 	                </div>
 	              </div>
 							<?}else{?>
-								<div class="offer-house__inline-info border-0 mt-0 pt-0">
-	                <div class="card-house__inline px-0"><svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
-                            <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
-                        </svg>
+								<div class="offer-house__inline-info">
+	                <div class="card-house__inline px-0">
+										<img src="/assets/img/svg/house-plan.svg" alt="Площадь дома" class="svg_image">
 	                  <div class="card-house__inline-title">
 	                    Площадь дома:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['AREA_HOUSE']?> м<sup>2</sup></div>
 	                </div>
 	                <div class="card-house__inline px-0">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
-                            <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
-                        </svg>
+                    <img src="/assets/img/svg/stairs.svg" alt="Этажей" class="svg_image">
 	                  <div class="card-house__inline-title">
 	                    Этажей:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['FLOORS']?></div>
 	                </div>
-	                <div class="card-house__inline px-0"><svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
-                            <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
-                        </svg>
-	                  <div class="card-house__inline-title">Материал:</div>
+	                <div class="card-house__inline px-0">
+										<img src="/assets/img/svg/brickwall.svg" alt="Материал" class="svg_image">
+	                  <div class="card-house__inline-title">
+											Материал:&nbsp;</div>
+										<div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	                </div>
-	                <div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	              </div>
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">
-                <div class="footer-card__price mt-2 mb-4 w-100"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['CODE']?>/">Подробнее</a>
+                <div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+								<a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['CODE']?>/">Подробнее</a>
               </div>
             </div>
           </div>
@@ -629,7 +623,7 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 				<div class="item mr-4">
           <!-- Ссылка карточки-->
           <div class="offer-house__item card-house house-in-village">
-						<a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a>
+						<!-- <a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a> -->
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
@@ -640,7 +634,13 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
               </div>
             </div>
             <div class="offer-house__info card-house__content px-3">
-              <div class="offer-house__title px-0"><?=$offerName?> <?=$house['NAME']?> в посёлке <?=$arResult['arVillage']['NAME']?></div>
+              <div class="offer-house__title px-0">
+								<?if($offerType == 'plots'):?>
+									<?=$offerName?> <?=$house['NAME']?> в посёлке <?=$arResult['arVillage']['NAME']?>
+								<?else:?>
+									<?=$house['NAME']?>
+								<?endif;?>
+							</div>
 							<?if($offerType == 'plots'){ // если участки?>
 	              <div class="offer-house__inline-info border-0 mt-0 pt-0">
 	                <div class="card-house__inline px-0"><img class="mr-3" src="/assets/img/site/house.svg" alt>
@@ -651,20 +651,24 @@ $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']); // dump($planIMG)
 	              </div>
 							<?}else{?>
 								<div class="offer-house__inline-info border-0 mt-0 pt-0">
-	                <div class="card-house__inline px-0"><img class="mr-3" src="/assets/img/site/house.svg" alt>
+	                <div class="card-house__inline px-0">
+										<img src="/assets/img/svg/house-plan.svg" alt="Площадь дома" class="mr-3">
 	                  <div class="card-house__inline-title">
 	                    Площадь дома:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['AREA_HOUSE']?> м<sup>2</sup></div>
 	                </div>
-	                <div class="card-house__inline px-0"><img class="mr-3" src="/assets/img/site/house-plan.svg" alt>
+	                <div class="card-house__inline px-0">
+										<img src="/assets/img/svg/stairs.svg" alt="Этажей" class="mr-3">
 	                  <div class="card-house__inline-title">
 	                    Этажей:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['FLOORS']?></div>
 	                </div>
-	                <div class="card-house__inline px-0"><img class="mr-3" src="/assets/img/site/house-plan.svg" alt>
-	                  <div class="card-house__inline-title">Материал:</div>
+	                <div class="card-house__inline px-0">
+										<img src="/assets/img/svg/brickwall.svg" alt="Материал" class="mr-3">
+	                  <div class="card-house__inline-title">
+											Материал:&nbsp;</div>
+										<div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	                </div>
-	                <div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	              </div>
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">

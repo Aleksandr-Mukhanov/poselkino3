@@ -31,7 +31,7 @@ CUtil::InitJSCore(array('fx'));
         </svg>&nbsp;
         Поделиться статьей:
       </div>
-      <div class="ya-share2" data-services="vkontakte,facebook,twitter,odnoklassniki,telegram"></div>
+      <div class="ya-share2" data-services="vkontakte,twitter,odnoklassniki,telegram"></div>
     </div>
   </div>
 </div>

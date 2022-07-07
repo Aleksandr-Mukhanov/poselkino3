@@ -215,8 +215,8 @@ $(document).ready(function(){
 		mes = $('#textToUs').val();
 		idButton = $('#idButton').val();
 		yaCounter50830593.reachGoal(idButton);
-    ga('event',idButton);
-		$.post("/ajax/sendForm.php",{
+    gtag('event',idButton,{'event_category':'button','event_action':idButton});
+		$.post("/local/ajax/sendForm.php",{
 				name: name,
 				tel: tel,
 				email: email,
@@ -237,7 +237,7 @@ $(document).ready(function(){
 		idButton = $('#idButton').val();
     if (idButton == '') idButton = 'SIGN_UP_TO_VIEW';
 		yaCounter50830593.reachGoal(idButton);
-    ga('event',idButton);
+    gtag('event',idButton,{'event_category':'button','event_action':idButton});
 		idPos = $('#posInfo').attr('data-idPos');
 		namePos = $('#posInfo').attr('data-namePos');
 		codePos = $('#posInfo').attr('data-codePos');
@@ -245,12 +245,14 @@ $(document).ready(function(){
 		cntPos = $('#posInfo').attr('data-cntPos');
 		develId = $('#develInfo').attr('data-develId');
 		develName = $('#develInfo').attr('data-develName');
+    formID = $(this).attr('data-formID');
+    manager = $('#posInfo').attr('data-manager');
 		if(idButton == 'LEAVE_REQUEST'){
 			subject = 'Заявка с сайта Поселкино.ру';
 		}else{
 			subject = 'Запись на просмотр';
 		}
-		$.post("/ajax/sendForm.php",{
+		$.post("/local/ajax/sendForm.php",{
 				name: name,
 				tel: tel,
         email: email,
@@ -262,7 +264,9 @@ $(document).ready(function(){
         highway: highway,
 				cntPos: cntPos,
 				develId: develId,
-				develName: develName
+				develName: develName,
+        formID: formID,
+        manager: manager
 			},function(data){
 				$('.formSignToView').html(data);
 			}
@@ -274,8 +278,8 @@ $(document).ready(function(){
 		event.preventDefault();
 		email = $('#emailSubscribeForm').val();
 		yaCounter50830593.reachGoal('SUBSCRIBE');
-    ga('event','SUBSCRIBE');
-		$.post("/ajax/sendForm.php",{
+    gtag('event','SUBSCRIBE',{'event_category':'button','event_action':'SUBSCRIBE'});
+		$.post("/local/ajax/sendForm.php",{
 				email: email,
 				ourForm: 'Subscribe'
 			},function(data){
@@ -289,8 +293,8 @@ $(document).ready(function(){
 		event.preventDefault();
 		textPosEr = $('#textPosEr').val();
 		yaCounter50830593.reachGoal('SEND_ERROR');
-    ga('event','SEND_ERROR');
-		$.post("/ajax/sendForm.php",{
+    gtag('event','SEND_ERROR',{'event_category':'button','event_action':'SEND_ERROR'});
+		$.post("/local/ajax/sendForm.php",{
 				url: window.location.href,
 				mes: textPosEr,
 				ourForm: 'SendError'
@@ -316,7 +320,7 @@ $(document).ready(function(){
 		comment = $(this).find('textarea[name=review-text]').val();
 		resident = $(this).find('input[name=review-resident]:checked').val();
 		// alert(comment);
-		$.post("/ajax/sendForm.php",{
+		$.post("/local/ajax/sendForm.php",{
 				ourForm: 'SendReview',
 				idPos: idPos,
 				namePos: namePos,

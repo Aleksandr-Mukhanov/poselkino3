@@ -9,7 +9,7 @@
 
 global $APPLICATION;
 
-if (!empty($templateData['TEMPLATE_LIBRARY']))
+/*if (!empty($templateData['TEMPLATE_LIBRARY']))
 {
 	$loadCurrency = false;
 	if (!empty($templateData['CURRENCIES']))
@@ -27,7 +27,7 @@ if (!empty($templateData['TEMPLATE_LIBRARY']))
 		</script>
 		<?
 	}
-}
+}*/
 
 //	lazy load and big data json answers
 $request = \Bitrix\Main\Context::getCurrent()->getRequest();

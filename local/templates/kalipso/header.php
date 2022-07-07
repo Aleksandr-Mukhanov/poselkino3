@@ -50,30 +50,54 @@ use Bitrix\Main\Page\Asset,
     case 'kp-brehovo.ru': $villageID = 3160; $yandex_verification=''; break;
     case 'kalitino-kp.ru': $villageID = 3321; $yandex_verification=''; break;
     case 'kp-beregovoy.ru': $villageID = 3163; $yandex_verification=''; break;
-    case 'lesnoi-bereg.ru': $villageID = 3339; $yandex_verification=''; break;
+    case 'lesnoi-bereg.ru': $villageID = 3339; $yandex_verification=''; break; // vesna-park.ru
+    case 'vesna-park.ru': $villageID = 3339; $yandex_verification=''; break;
     case 'kp-polesie.ru': $villageID = 3343; $yandex_verification=''; break;
     case 'berez-rosha.ru': $villageID = 3349; $yandex_verification=''; break;
     case 'akadempark-kp.ru': $villageID = 3335; $yandex_verification=''; break;
     case 'darinskye-dachi.ru': $villageID = 3347; $yandex_verification=''; break;
-    // case '': $villageID = ; $yandex_verification=''; break;
     case 'novoe-sonino.ru': $villageID = 3356; $yandex_verification=''; break;
     case 'vasilkovo-kp.ru': $villageID = 3290; $yandex_verification=''; break;
     case 'kuzminskiy-kp.ru': $villageID = 3188; $yandex_verification=''; break;
     case 'admiral-kp.ru': $villageID = 1818; $yandex_verification=''; break;
     case 'kutuzovskie-holmy.ru': $villageID = 1815; $yandex_verification=''; break;
     case 'festival-kp.ru': $villageID = 3360; $yandex_verification=''; break;
-    case 'kp-barsovo.ru': $villageID = 3314; $yandex_verification=''; break;
+    case 'kp-barsovo.ru': $villageID = 3314; $yandex_verification=''; break; // edem-kp.ru
+    case 'edem-kp.ru': $villageID = 3314; $yandex_verification=''; break;
     case 'faustovo-kp.ru': $villageID = 3358; $yandex_verification=''; break;
+    case 'kp-tradicii.ru': $villageID = 3367; $yandex_verification=''; break;
+    case 'karamel-kp.ru': $villageID = 3365; $yandex_verification=''; break;
+    case 'minaevo-igs.ru': $villageID = 3388; $yandex_verification=''; break;
+    case 'pahra-river-kp.ru': $villageID = 3394; $yandex_verification=''; break;
+    case 'sokolniki-kp.ru': $villageID = 3396; $yandex_verification=''; break;
+    case 'kp-divniy.ru': $villageID = 3325; $yandex_verification=''; break;
+    case 'shadrino.su': $villageID = 3497; $yandex_verification=''; break;
+    case 'shelkovo-kp.ru': $villageID = 3479; $yandex_verification=''; break;
+    case 'borilovo-kp.ru': $villageID = 1590; $yandex_verification=''; break;
+    case 'dachnaya-practika.ru': $villageID = 3520; $yandex_verification=''; break;
+    case 'eco-razdolie.ru': $villageID = 3272; $yandex_verification=''; break;
+    // case '': $villageID = ; $yandex_verification=''; break;
   }
 
   $arOrder = Array('SORT'=>'ASC');
   $arFilter = Array('IBLOCK_ID'=>1,'ID'=>$villageID);
-  $arSelect = Array('ID','NAME','CODE','PREVIEW_PICTURE','PREVIEW_TEXT','PROPERTY_PLAN_IMG','PROPERTY_AREA_VIL','PROPERTY_COUNT_PLOTS','PROPERTY_COUNT_PLOTS_SOLD','PROPERTY_COUNT_PLOTS_SALE','PROPERTY_PLOTTAGE','PROPERTY_COST_LAND_IN_CART','PROPERTY_PRICE_ARRANGE','PROPERTY_INS_TERMS','PROPERTY_ELECTRO_KVT','PROPERTY_GAS','PROPERTY_PROVEDEN_GAZ','PROPERTY_ART_WELLS_DEPTH','PROPERTY_FOREST_KM','PROPERTY_WATER_KM','PROPERTY_MKAD','PROPERTY_SETTLEM','PROPERTY_SETTLEM_KM','PROPERTY_TOWN','PROPERTY_TOWN_KM','PROPERTY_RAILWAY','PROPERTY_RAILWAY_KM','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PRICE_SOTKA','PROPERTY_RATING','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_SRC_MAP','PROPERTY_SCRIN_EGRN','PROPERTY_DOP_FOTO','PROPERTY_UP_TO_VIEW','PROPERTY_DEVELOPER_ID','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_ROADS_IN_VIL','PROPERTY_ROADS_TO_VIL','PROPERTY_TYPE','PROPERTY_LES','PROPERTY_WATER','PROPERTY_LANDSCAPE','PROPERTY_SOIL','PROPERTY_LEND_TEXT','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_ON_SITE','PROPERTY_ARRANGE','PROPERTY_PHONE'); // ,'PROPERTY_'
+  $arSelect = Array('ID','NAME','CODE','PREVIEW_PICTURE','PREVIEW_TEXT','PROPERTY_PLAN_IMG','PROPERTY_AREA_VIL','PROPERTY_COUNT_PLOTS','PROPERTY_COUNT_PLOTS_SOLD','PROPERTY_COUNT_PLOTS_SALE','PROPERTY_PLOTTAGE','PROPERTY_COST_LAND_IN_CART','PROPERTY_PRICE_ARRANGE','PROPERTY_INS_TERMS','PROPERTY_ELECTRO_KVT','PROPERTY_GAS','PROPERTY_PROVEDEN_GAZ','PROPERTY_ART_WELLS_DEPTH','PROPERTY_FOREST_KM','PROPERTY_WATER_KM','PROPERTY_MKAD','PROPERTY_SETTLEM','PROPERTY_SETTLEM_KM','PROPERTY_TOWN','PROPERTY_TOWN_KM','PROPERTY_RAILWAY','PROPERTY_RAILWAY_KM','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PRICE_SOTKA','PROPERTY_RATING','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_SRC_MAP','PROPERTY_SCRIN_EGRN','PROPERTY_DOP_FOTO','PROPERTY_UP_TO_VIEW','PROPERTY_DEVELOPER_ID','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_ROADS_IN_VIL','PROPERTY_ROADS_TO_VIL','PROPERTY_TYPE','PROPERTY_LES','PROPERTY_WATER','PROPERTY_LANDSCAPE','PROPERTY_SOIL','PROPERTY_LEND_TEXT','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_ON_SITE','PROPERTY_ARRANGE','PROPERTY_PHONE','PROPERTY_MANAGER'); // ,'PROPERTY_'
   $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
   $arVillage = $rsElements->GetNext(); // dump($arVillage);
-  $shosseName = array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0];
-  $shosseNameKom = str_replace('кое','ком',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0]);
-  $shosseNameKomu = str_replace('кое','кому',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0]);
+
+  if (SITE_SERVER_NAME == 'admiral-kp.ru')
+  {
+    $shosseName = array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[1];
+    $shosseNameKom = str_replace('кое','ком',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[1]);
+    $shosseNameKomu = str_replace('кое','кому',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[1]);
+  }
+  else
+  {
+    $shosseName = array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0];
+    $shosseNameKom = str_replace('кое','ком',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0]);
+    $shosseNameKomu = str_replace('кое','кому',array_values($arVillage["PROPERTY_SHOSSE_VALUE"])[0]);
+  }
+
   $regionName = $arVillage["PROPERTY_REGION_VALUE"];
   $roadsInName = getRoadName($arVillage["PROPERTY_ROADS_IN_VIL_VALUE"]);
   $roadsToName = getRoadName($arVillage["PROPERTY_ROADS_TO_VIL_VALUE"]);
@@ -100,15 +124,15 @@ use Bitrix\Main\Page\Asset,
 
   $mainUrl = '/var/www/u0428181/data/www/olne.ru';
   // капча
-  include_once($mainUrl."/bitrix/modules/main/classes/general/captcha.php");
-  $cpt = new CCaptcha();
-  $captchaPass = COption::GetOptionString("main", "captcha_password", "");
-  if(strlen($captchaPass) <= 0)
-  {
-    $captchaPass = randString(10);
-    COption::SetOptionString("main", "captcha_password", $captchaPass);
-  }
-  $cpt->SetCodeCrypt($captchaPass);
+  // include_once($mainUrl."/bitrix/modules/main/classes/general/captcha.php");
+  // $cpt = new CCaptcha();
+  // $captchaPass = COption::GetOptionString("main", "captcha_password", "");
+  // if(strlen($captchaPass) <= 0)
+  // {
+  //   $captchaPass = randString(10);
+  //   COption::SetOptionString("main", "captcha_password", $captchaPass);
+  // }
+  // $cpt->SetCodeCrypt($captchaPass);
 
   include_once ($mainUrl.'/include/sites/phone.php');
 ?>
@@ -209,7 +233,7 @@ use Bitrix\Main\Page\Asset,
                 </div><span>Рейтинг <?=$arVillage['PROPERTY_RATING_VALUE']?> на <a href="https://poselkino.ru/poselki/<?=$arVillage['CODE']?>/" rel="dofollow" target="_blank">poselkino.ru</a></span>
               </div>
             </div>
-          </div><a class="btn btn--large btn--theme_green" href="#takeLook">Записаться на просмотр</a>
+          </div><a class="btn btn--large btn--theme_green" href="#takeLook">Узнать о скидках</a>
         </div>
       </div>
       <div class="shape"><span class="icon icon-arrow-right"></span></div>

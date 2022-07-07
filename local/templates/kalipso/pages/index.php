@@ -304,7 +304,7 @@ $showAddIcon = false; // показ доп. иконки
 		</div>
 	</section>
 <?endif?>
-<?require_once $_SERVER["DOCUMENT_ROOT"].SITE_TEMPLATE_PATH.'/inc/appeal-form.php';?>
+<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
 <section class="ecology-index">
   <div class="container">
     <h2 class="title--size_2 ecology__title page__title section-title">Экология и природа</h2>
@@ -435,4 +435,4 @@ $showAddIcon = false; // показ доп. иконки
     <div class="center"><a class="btn btn--large btn--theme_blue" href="/otzyvy/">Все отзывы</a></div>
   </div>
 </section>
-<?require_once $_SERVER["DOCUMENT_ROOT"].SITE_TEMPLATE_PATH.'/inc/appeal-form-footer.php';?>
+<?require_once $mainUrl.'/include/sites/appeal-form-footer.php';?>

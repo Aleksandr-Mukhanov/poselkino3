@@ -128,7 +128,7 @@ use Bitrix\Main\Page\Asset;
 				"SET_VIEWED_IN_COMPONENT" => "N",
 				"SHOW_404" => "Y",
 				"SHOW_CLOSE_POPUP" => "N",
-				"SHOW_DEACTIVATED" => "Y",
+				"SHOW_DEACTIVATED" => "N",
 				"SHOW_DISCOUNT_PERCENT" => "N",
 				"SHOW_MAX_QUANTITY" => "N",
 				"SHOW_OLD_PRICE" => "N",

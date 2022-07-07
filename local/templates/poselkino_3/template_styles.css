@@ -5,6 +5,7 @@
        url('/assets/fonts/rouble/rouble-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
+font-display: swap;
 }
 
 .hide{
@@ -12,6 +13,31 @@
 }
 .cost_home{
 	display: none;
+}
+
+.home-description{
+  font-size: 16px;
+  line-height: 1.5;
+}
+.house_disclaimer{
+  margin-right: 20px;
+  font-weight: bold;
+}
+.house_disclaimer img{
+  margin-right: 10px;
+}
+.disclaimer__badge{
+  background-color: rgba(251, 179, 88, 0.15);
+  color: #FBB358;
+}
+
+.bank-widget__text a{
+  cursor: pointer;
+}
+
+.svg_image{
+  margin-right: 10px;
+  margin-top: -2px;
 }
 
 .action_text{
@@ -25,6 +51,7 @@
 .seo-text ul{
   list-style: none;
   padding-left: 20px;
+  font-size: 16px;
 }
 
 .text-uppercase.chart, .highway-block__title.chart{
@@ -71,6 +98,11 @@
 }
 .highway-color .twelve{
 	background-color: #A1B3D4 !important;
+}
+
+.arrangement__item svg{
+  max-width: 25px;
+  max-height: 25px;
 }
 
 /* окошко выбора районов в фильтре */
@@ -302,6 +334,9 @@
 	padding: 0 10px;
 	min-height: 40px;
 }
+.offer-house__info .offer-house__title a{
+  color: #3c4b5a;
+}
 .metro-name, .metro-other,
 .offer-house__info .offer-house__price {
 	font-size: 14px;
@@ -471,8 +506,10 @@
 		margin-top: 0;
 	}
 	.list--grid .card-house__inline-value span {
+    display: inline;
 		margin-top: 0;
-		font-size: 13px;
+    margin-left: 1px;
+		font-size: 15px;
 	}
 	.offer-house__info .offer-house__inline-info .card-house__inline {
 		font-size: 14px;
@@ -486,19 +523,16 @@
 	}
 
 	.card-house__inline-value span.split-number {
-		font-size: 14px;
+		font-size: 15px;
 	}
 	.list--grid .card-house__inline-title {
 		 min-width: 100px;
 	}
 	.offer-house__info .offer-house__inline-info .card-house__inline-value,
 	.list--grid .card-house__inline-value {
-		 width: auto;
-		margin-left: auto;
+	   width: auto;
+		 margin-left: auto;
 	 }
-	.list--grid .card-house__inline-value span {
-		display: inline;
-	}
 	.list--grid .card-house__inline svg {
 		margin-right: 7px;
 		width: 36px!important;
@@ -535,6 +569,14 @@
 		color: #3c4b5a;
 		font-size: 14px;
 	}
+
+  .area-in-village .footer-card__price{
+    font-size: 14px;
+  }
+
+  .hide__mob{
+    display: none;
+  }
 }
 @media (max-height: 1160px) {
 	.card-map .photo.offer-house__photo .photo__list,
@@ -774,4 +816,438 @@ p.mesOk {
 .feedback-form--help p.mesOk {
 	text-align: left;
 	padding: 0;
+}
+
+.a__bold{
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.useful-links {
+	padding: 50px 0 88px;
+}
+
+.useful-links a {
+	transition: 0.2s ease-in-out;
+}
+
+.useful-links .row>[class*='col-'] {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.useful-links__title {
+	font-size: 36px;
+	color: #3C4B5A;
+	margin-bottom: 37px;
+}
+
+.useful-links__card {
+	background-color: #fff;
+	border-radius: 15px;
+	padding: 40px 35px 46px 46px;
+	margin-bottom: 32px;
+	height: 100%;
+}
+
+.useful-links__card-title {
+	font-size: 16px;
+	color: #3C4B5A;
+}
+
+.useful-links__list {
+	padding: 0;
+	margin: 0;
+}
+
+.useful-links__item {
+	list-style-type: none;
+	margin-top: 18px;
+}
+
+.useful-links__link {
+	font-family: Gotham, Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	color: #3C4B5A;
+	text-decoration: underline;
+	line-height: 1;
+}
+
+.useful-links__link:focus,
+.useful-links__link:hover {
+	color: #78a86d;
+}
+
+.useful-links__card-link {
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 33px;
+	margin-bottom: 32px;
+	padding: 0;
+}
+
+.useful-links__map:hover,
+.useful-links__map:focus,
+.useful-links__questions:hover,
+.useful-links__questions:focus {
+	box-shadow: 0 15px 30px rgb(156 167 178 / 20%);
+	color: white;
+	text-decoration: none;
+}
+
+.useful-links__map {
+	display: block;
+	background-color: #BBD8E0;
+	background-image: url(/assets/img/content/useful-map.png);
+	background-position: 6px bottom;
+	padding: 42px 37px 45px 46px;
+	height: 100%;
+	border-radius: 15px;
+	background-repeat: no-repeat;
+	color: white;
+	background-size: contain;
+	text-decoration: underline;
+}
+
+.useful-links__questions {
+	display: block;
+	background: right bottom / contain url(/assets/img/content/useful-questions.png) #FBB358 no-repeat;
+	padding: 45px 71px 45px 46px;
+	height: 100%;
+	border-radius: 15px;
+	color: white;
+	text-decoration: underline;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+	.useful-links {
+		padding: 40px 0 70px;
+	}
+
+	.useful-links .col-sm-6 {
+		padding-right: 10px;
+		padding-left: 10px;
+		flex: 0 0 50%;
+		max-width: 50%;
+	}
+
+	.useful-links [class*='col-']:nth-of-type(3) {
+		order: 4;
+	}
+
+	.useful-links [class*='col-']:nth-of-type(4) {
+		order: 3;
+	}
+
+	.useful-links [class*='col-']:nth-of-type(5) {
+		order: 5;
+	}
+
+	.useful-links [class*='col-']:nth-of-type(6) {
+		order: 6;
+	}
+
+	.useful-links__title {
+		font-size: 24px;
+		margin-bottom: 41px;
+	}
+
+	.useful-links__card {
+		margin-bottom: 20px;
+	}
+
+	.useful-links__map {
+		padding-left: 57px;
+		background-position: center bottom;
+	}
+
+}
+
+@media (max-width: 991.98px) {
+	.useful-links {
+		padding: 30px 0 60px;
+	}
+
+	.useful-links__card {
+		padding: 36px 35px 50px 38px;
+	}
+
+	.useful-links__card-link {
+		padding: 0;
+	}
+
+	.useful-links__questions {
+		padding: 39px 40px 45px 39px;
+		background-size: 91%;
+	}
+
+	.useful-links__map {
+		padding: 37px 37px 45px 49px;
+		background-size: 90%;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.useful-links {
+		padding: 10px 0 50px;
+	}
+
+	.useful-links__title {
+		font-size: 18px;
+		margin-bottom: 25px;
+	}
+
+	.useful-links__card {
+		margin-bottom: 10px;
+		padding: 26px 35px 23px 30px;
+	}
+
+	.useful-links__card-title {
+		font-size: 14px;
+	}
+
+	.useful-links__item {
+		margin-top: 15px;
+	}
+
+	.useful-links__card-link {
+		padding: 0;
+	}
+
+	.useful-links__card-link {
+		font-size: 16px;
+	}
+
+	.useful-links__map {
+		padding: 27px 37px 45px 31px;
+		background-position: 17px bottom;
+		background-size: 55%;
+	}
+
+	.useful-links__questions {
+		padding: 29px 30px 45px 32px;
+		line-height: 26.4px;
+		background-size: 55%;
+	}
+
+	.useful-links__questions br {
+		display: none;
+	}
+
+	.useful-links__card,
+	.useful-links__card-link {
+		min-height: 172px;
+	}
+}
+
+@media (max-width: 576px) {
+	.useful-links__questions {
+		background-size: 75%;
+	}
+
+	.useful-links__map {
+		padding: 29px 30px 45px 32px;
+		line-height: 26.4px;
+		background-size: 75%;
+	}
+}
+
+
+@media (max-width: 479.98px) {
+	.useful-links__item {
+		margin-top: 14px;
+	}
+
+	.useful-links__link {
+		font-size: 13px;
+	}
+
+	.useful-links__card {
+		padding: 28px 15px 23px 15px;
+	}
+
+	.useful-links__card-link {
+		padding: 0;
+	}
+
+	.useful-links__map {
+		padding-left: 16px;
+		background-position: -22px 8px;
+		background-size: cover;
+	}
+
+	.useful-links__questions {
+		padding: 28px 55px 45px 16px;
+		background-size: 260px;
+	}
+
+	.useful-links__questions br {
+		display: block;
+	}
+}
+
+.lg-toolbar .lg-icon {
+	border: none;
+	background-color: transparent;
+}
+
+.feedback-sale-form {
+	padding-top: 45px;
+	padding-bottom: 60px;
+}
+.feedback-sale-form .feedback-form {
+	background: #f7fafc url('/assets/img/site/feedback-sale.png') no-repeat 113% center;
+	padding: 60px;
+	border-radius: 15px;
+}
+.feedback-sale-form .feedback-form__body {
+	padding: 15px 0;
+}
+.feedback-sale-form .custom-control-label {
+	font-size: 13px;
+	line-height: 25px;
+}
+.feedback-sale-form .btn-submit {
+	width: 100%;
+}
+
+@media (max-width: 1199px) {
+	.feedback-sale-form .feedback-form {
+		background-position: 175% center;
+		padding: 60px 120px;
+	}
+	.feedback-sale-form .btn-submit {
+		width: 100%;
+		max-width: 304px;
+	}
+	.feedback-sale-form .feedback-form h2 {
+		margin-bottom: 20px;
+	}
+}
+
+@media (max-width: 991px) {
+	.feedback-sale-form .feedback-form {
+		background-position: 190% center;
+		padding: 60px 100px;
+	}
+	.feedback-sale-form .feedback-form h2 {
+		font-size: 24px;
+		line-height: 36px;
+	}
+}
+@media (max-width: 767px) {
+	.feedback-sale-form .feedback-form {
+		background-position: center 175%;
+		padding: 60px 10px 72px;
+		background-size: auto 73%;
+	}
+	.feedback-sale-form .feedback-form h2 {
+		font-size: 18px;
+		line-height: 27px;
+		margin-bottom: 15px;
+	}
+}
+#modalFeedbackSale .custom-control-label {
+	font-size: 13px;
+	line-height: 22px;
+}
+
+#modalFeedbackSale .close {
+	margin-top: 0;
+	position: absolute;
+	right: 20px;
+	top: 0;
+}
+#modalFeedbackSale .modal-header h5 {
+	padding: 0 40px;
+}
+@media (max-width: 767px) {
+	#modalFeedbackSale .modal-header h5 {
+		padding: 0 15px;
+	}
+}
+
+/* увеличение размера */
+.header .navbar-top .nav-link{
+  font-size: 15px;
+}
+.hero__count-title, .form-group-inline label{
+  font-size: 14px;
+}
+.btn{
+  font-size: 14px;
+  padding: 20px;
+}
+
+.nav-village a{
+  width: 150px;
+}
+
+.offer-house__info .offer-house__area, .offer-card__title{
+  font-size: 15px;
+}
+.review a{
+  font-size: 14px;
+}
+.metro-name, .metro-other, .offer-house__info .offer-house__price{
+  font-size: 15px;
+}
+
+.useful-links__link, .about-home-portal__subtitle, .about-home-portal__text p{
+  font-size: 15px;
+}
+
+.work-steps .step-cloud{
+  font-size: 15px;
+}
+
+.article-card__footer{
+  font-size: 14px;
+}
+
+.address__tab .metro-title__title, .footer--bottom .footer__nav a, .footer__social{
+  font-size: 15px;
+}
+
+.tag-list__item a{
+  font-size: 14px;
+}
+
+.list--grid .card-house__area a, .list--grid .card-house__price-title, .list--grid .card-house__price, .list--grid .card-house__inline, .list--grid .card-house__inline-value{
+  font-size: 15px;
+}
+
+.area-link, .card-info, .map-baloon .text-block .title{
+  font-size: 15px;
+}
+.map-baloon .button-block{
+  font-size: 14px;
+}
+
+.ecology__card-text, .ecology__card-img-distance, .ecology__card-img-type, .price--village{
+  font-size: 15px;
+}
+
+.review-add .privacy-policy-label .custom-control label{
+  font-size: 13px;
+}
+
+.content__tag-line a{
+  font-size: 14px;
+}
+.page__sort .selectric {
+	border: none;
+}
+
+.selectric-select-bg-white span.label,
+.selectric .button,
+.selectric .label {
+    line-height: initial;
+}
+
+@media (min-width: 991px) {
+	.hero-wrap h1 {
+		min-height: 100px;
+	}
 }

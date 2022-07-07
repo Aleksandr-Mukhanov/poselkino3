@@ -2,7 +2,7 @@
 
 use Bitrix\Main\Grid\Declension;
 
-$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe'];
+$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
 $nameShosseDir = ['north','east','south','west'];
 
 global $arrFilter;
@@ -70,6 +70,7 @@ if ($rayon) { // район
   $urlNoDom = '/poselki/'.$rayon.'-rayon/kupit-uchastok/';
   $urlWithDom = '/poselki/'.$rayon.'-rayon/kupit-dom/';
   if ($pagen) $pageTitleDesc = $arNames['NAME'].' район поселки'; // если пагинация
+
   // url для С газом
   switch ($domPos) {
     case 'noDom': // Участки
@@ -79,10 +80,25 @@ if ($rayon) { // район
       $urlTeg = "/poselki/kupit-dom/".$rayon."-rayon-gaz/";
       break;
     default: // Поселки
-      $urlTeg = "/poselki/".$rayon."-rayon-gaz/";;
+      $urlTeg = "/poselki/".$rayon."-rayon-gaz/";
       break;
   }
   $arTegs['gaz']['url'] = $urlTeg;
+
+  // url для СНТ
+  switch ($domPos) {
+    case 'noDom': // Участки
+      $urlTeg = "/poselki/kupit-uchastok-snt-".$rayon."-rayon/";
+      break;
+    case 'withDom': // Дома
+      $urlTeg = "/poselki/kupit-dom-snt-".$rayon."-rayon/";
+      break;
+    default: // Поселки
+      $urlTeg = "/poselki/".$rayon."-rayon-snt/";
+      break;
+  }
+  $arTegs['snt']['url'] = $urlTeg;
+
   // теги для района
   $arTegsShow = ['gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
 }
@@ -438,23 +454,23 @@ if($commun){ // коммуникации
     case 'elektrichestvom':
       $arrFilter['=PROPERTY_21'] = [14]; // Электричество (проведен)
       $APPLICATION->AddChainItem('Со светом','',true);
-      $commun2 = 'svet';
+      $commun2 = $commun3 = 'svet';
       break;
     case 'vodoprovodom':
       $arrFilter['=PROPERTY_27'] = [20]; // Водопровод (проведен)
       $APPLICATION->AddChainItem('С водой','',true);
-      $commun2 = 'u-vody';
+      $commun2 = 'u-vody'; $commun3 = 'voda';
       break;
     case 'gazom':
       $arrFilter['=PROPERTY_24'] = [17]; // Газ (проведен)
       $APPLICATION->AddChainItem('С газом','',true);
-      $commun2 = 'gaz';
+      $commun2 = $commun3 = 'gaz';
       break;
     case 'kommunikaciyami':
       $arrFilter['=PROPERTY_21'] = [14]; // Электричество (проведен)
       $arrFilter['=PROPERTY_24'] = [17]; // Газ (проведен)
       $APPLICATION->AddChainItem('С коммуникациями','',true);
-      $commun2 = 'kommunikatsii';
+      $commun2 = $commun3 = 'kommunikatsii';
       break;
     default:
       CHTTP::SetStatus("404 Not Found");
@@ -480,13 +496,13 @@ if($commun){ // коммуникации
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$commun2.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/kupit-uchastok/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$commun2.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       default: // Поселки
-        $urlTeg = '/poselki/'.$commun2.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;

@@ -9,6 +9,10 @@
 
 global $APPLICATION;
 
-$APPLICATION->SetPageProperty("title",$arResult['SEO_TITLE']);
+$APPLICATION->SetPageProperty('title',$arResult['SEO_TITLE']);
 $APPLICATION->SetPageProperty('description', $arResult['SEO_DESCRIPTION']);
+// $APPLICATION->AddChainItem($nameVil,'/poselki/'.$arResult['CODE'].'/',true);
+// $APPLICATION->AddChainItem($arResult['OFFER_TYPE'].' в '.$typePos.' '.$arResult['NAME'],'',true);
+// $APPLICATION->AddChainItem($arResult['NAME'],'/poselki/'.$arResult['CODE'].'/',true);
+$APPLICATION->AddChainItem($arResult['OFFER_TYPE'].' в поселке '.$arResult['NAME'],'',true);
 ?>

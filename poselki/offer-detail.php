@@ -14,7 +14,7 @@ $iblockID = ($offerType == 'plots') ? 5 : 6;?>
         array(
           "PATH" => "",
           "SITE_ID" => "s1",
-          "START_FROM" => "0",
+          "START_FROM" => "1",
           "COMPONENT_TEMPLATE" => "poselkino"
         ),
         false
@@ -26,7 +26,7 @@ $iblockID = ($offerType == 'plots') ? 5 : 6;?>
     	array(
     		"ACTION_VARIABLE" => "action",
     		"ADD_DETAIL_TO_SLIDER" => "N",
-    		"ADD_ELEMENT_CHAIN" => "Y",
+    		"ADD_ELEMENT_CHAIN" => "N",
     		"ADD_PICT_PROP" => "DOP_PHOTO",
     		"ADD_PROPERTIES_TO_BASKET" => "N",
     		"ADD_SECTIONS_CHAIN" => "N",
@@ -52,7 +52,7 @@ $iblockID = ($offerType == 'plots') ? 5 : 6;?>
     		"DISPLAY_NAME" => "Y",
     		"DISPLAY_PREVIEW_TEXT_MODE" => "E",
     		"ELEMENT_CODE" => $_REQUEST["ELEMENT_CODE"],
-    		"ELEMENT_ID" => "",
+    		"ELEMENT_ID" => $_REQUEST["ELEMENT_ID"],
     		"FILE_404" => "",
     		"GIFTS_DETAIL_BLOCK_TITLE" => "Выберите один из подарков",
     		"GIFTS_DETAIL_HIDE_BLOCK_TITLE" => "N",

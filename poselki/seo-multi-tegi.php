@@ -291,6 +291,12 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   $onlyParam = true;
   $SEO_text_add = true;
 
+}elseif($typeURL == 'snt' && $rayon){ // novoryazanskoe-shosse-snt
+
+  $newTitle = 'Купить земельный участок в СНТ '.$arNames['NAME_KOGO'].' района';
+	$newDesc = '▶ Участки СНТ в '.$arNames['NAME_KOM'].' районе ▶ Полная база земельных участков СНТ по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+	$h1 = 'Земельные участки СНТ в '.$arNames['NAME_KOM'].' районе';
+
 }elseif($commun == 'kommunikaciyami' && $shosse){ // varshavskoe-shosse-kommunikatsii
 
   $arMetaInfo = getMetaInfo($arrFilter);

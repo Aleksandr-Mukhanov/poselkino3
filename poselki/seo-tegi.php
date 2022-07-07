@@ -21,6 +21,9 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement['NAME']);
         if (array_key_exists(205, $arElement['PROPERTY_5_VALUE'])) { // Новорижское - запад
             $arTegs['west']['cnt'] += 1;
         }
+        if (array_key_exists(130, $arElement['PROPERTY_5_VALUE'])) { // Каширское шоссе
+            $arTegs['kashirskoe']['cnt'] += 1;
+        }
     }
 
     for ($i = 10; $i < 60; $i += 10) { // до МКАД
@@ -137,6 +140,21 @@ if (!$arTegs['west']['url']) {
             break;
     }
     $arTegs['west']['url'] = $urlTeg;
+}
+$arTegs['kashirskoe']['name'] = 'Каширское ш.';
+if (!$arTegs['kashirskoe']['url']) {
+    switch ($domPos) {
+        case 'noDom': // Участки
+            $urlTeg = '/poselki/kashirskoe-shosse/kupit-uchastok/';
+            break;
+        case 'withDom': // Дома
+            $urlTeg = '/poselki/kashirskoe-shosse/kupit-dom/';
+            break;
+        default: // Поселки
+            $urlTeg = '/poselki/kashirskoe-shosse/';
+            break;
+    }
+    $arTegs['kashirskoe']['url'] = $urlTeg;
 }
 
 for ($i = 10; $i < 60; $i += 10) { // до МКАД
@@ -291,7 +309,7 @@ $arTegs['do-1-milliona']['name'] = 'До 1 млн. руб.';
 $arTegs['do-2-milliona']['name'] = 'До 2 млн. руб.';
 
 // какие теги выводить
-if (!$arTegsShow) $arTegsShow = ['north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
+if (!$arTegsShow) $arTegsShow = ['kashirskoe','north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
 // dump($arTegsShow);
 
 if ($onlyParam) { // если не нужен url тега (3 уровень)
@@ -309,6 +327,9 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
             break;
         case 'west':
             $arrFilter['=PROPERTY_5'] = [205]; // Новорижское
+            break;
+        case 'kashirskoe':
+            $arrFilter['=PROPERTY_5'] = [130]; // Каширское
             break;
         case 'mkad_20':
             $arrFilter['><PROPERTY_6'] = [0, 30];

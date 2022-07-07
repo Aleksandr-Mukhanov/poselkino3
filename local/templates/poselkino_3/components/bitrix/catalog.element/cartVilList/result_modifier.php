@@ -76,8 +76,8 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
   // получим участки
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
-  $arNavParams = ['nPageSize'=>2,"bShowAll" => false];
-	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+  $arNavParams = ['nPageSize'=>5,"bShowAll" => false];
+	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,$arNavParams,$arSelect);
   $arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, "", "poselkino_nav");
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
@@ -89,17 +89,20 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
 				$arPhoto[] = ResizeImage($val);
 			}
 		}
+		shuffle($arPhoto);
     // мин и макс площадь
     $plottage = $arElement["PROPERTY_PLOTTAGE_VALUE"];
     $minArea = ($minArea < $plottage) ? $plottage : $minArea;
     $maxArea = ($maxArea < $plottage) ? $plottage : $maxArea;
-		// соберем дома
+		// соберем участки
 		$arPlots[$arElement["ID"]] = [
+			"ID" => $arElement["ID"],
 			"NAME" => $arElement["NAME"],
       "CODE" => $arElement["CODE"],
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
+			"NUMBER" => $arElement["PROPERTY_NUMBER_VALUE"],
 		];
 		unset($arPhoto);
   }
@@ -109,8 +112,8 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
   // получим дома
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
-  $arNavParams = ['nPageSize'=>2,"bShowAll" => false];
-	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+  $arNavParams = ['nPageSize'=>5,"bShowAll" => false];
+	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,$arNavParams,$arSelect);
   $arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, "", "poselkino_nav");
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
@@ -129,6 +132,7 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
     $maxArea = ($maxArea < $areaHouse) ? $areaHouse : $maxArea;
 		// соберем дома
 		$arHouses[$arElement["ID"]] = [
+			"ID" => $arElement["ID"],
 			"NAME" => $arElement["NAME"],
       "CODE" => $arElement["CODE"],
 			"IMG" => $arPhoto,
@@ -221,12 +225,16 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){
   $setDescription = '▶ Дома и коттеджи в '.$typeLong2.' '.$tempposelokName.' ▶ Купить готовый дом в '.$typeShort.' '.$tempposelokName.' ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
 }
 
+$arResult['OFFER_TYPE'] = ($_REQUEST['OFFER_TYPE'] == 'plots') ? 'Участки' : 'Дома';
+
 $cp = $this->__component;
 if (is_object($cp))
 {
-  $cp->arResult["SEO_TITLE"] = $seoTitle;
-  $cp->arResult["SEO_DESCRIPTION"] = $setDescription;
-  $cp->SetResultCacheKeys(array("SEO_TITLE","SEO_DESCRIPTION")); //cache keys in $arResult array
+  $cp->arResult['SEO_TITLE'] = $seoTitle;
+  $cp->arResult['SEO_DESCRIPTION'] = $setDescription;
+	$cp->arResult['CODE'] = $arResult['CODE'];
+	$cp->arResult['OFFER_TYPE'] = $arResult['OFFER_TYPE'];
+  $cp->SetResultCacheKeys(array('SEO_TITLE','SEO_DESCRIPTION','CODE','OFFER_TYPE')); //cache keys in $arResult array
 }
 
 $component = $this->getComponent();

@@ -312,7 +312,7 @@ $this->setFrameMode(true);
 			</div>
 			<input class="mt-4 btn btn-warning w-100" type="submit" id="set_filter" name="set_filter" value="Подобрать" disabled>
 			<button class="mt-0 w-100 btn other-parameters text-success" type="button" data-toggle="modal" data-target="#searchParamsModal">Дополнительные параметры</button>
-            <button class="btn btn-link filter__button-clear p-0 w-100 text-center" type="reset" onclick="smartFilter.click(this)">
+            <button class="btn btn-link filter__button-clear p-0 w-100 text-center" type="reset" id="del_filter" name="del_filter" onclick="smartFilter.click(this)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12.669" height="12.669" viewBox="0 0 12.669 12.669" class="inline-svg">
                     <path d="M12.24 2.5L8.4 6.336l3.839 3.839a1.462 1.462 0 1 1-2.067 2.068L6.334 8.4 2.5 12.242a1.462 1.462 0 0 1-2.072-2.067l3.839-3.839L.428 2.5A1.462 1.462 0 0 1 2.495.43l3.839 3.839L10.173.43A1.462 1.462 0 0 1 12.24 2.5z"></path>
                 </svg>Сбросить фильтр
@@ -931,7 +931,7 @@ $this->setFrameMode(true);
 							<div class="order-3 order-lg-6 col-12 mt-4 pt-1">
 								<div class="d-flex flex-wrap justify-content-start">
 									<input class="btn btn-lg btn-warning mr-4" type="submit" id="set_dop_filter" name="set_dop_filter" value="Подобрать" disabled>
-									<button class="btn btn-link filter__button-clear p-0" type="reset" id="del_filter" name="del_filter" onclick="smartFilter.click(this)">
+									<button class="btn btn-link filter__button-clear p-0" type="reset" id="del_filter_dop" name="del_filter" onclick="$('#del_filter').trigger('click')">
 										<svg xmlns="http://www.w3.org/2000/svg" width="12.669" height="12.669" viewBox="0 0 12.669 12.669" class="inline-svg">
 											<path d="M12.24 2.5L8.4 6.336l3.839 3.839a1.462 1.462 0 1 1-2.067 2.068L6.334 8.4 2.5 12.242a1.462 1.462 0 0 1-2.072-2.067l3.839-3.839L.428 2.5A1.462 1.462 0 0 1 2.495.43l3.839 3.839L10.173.43A1.462 1.462 0 0 1 12.24 2.5z" />
 										</svg>Сбросить фильтр

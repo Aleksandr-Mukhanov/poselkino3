@@ -4616,7 +4616,11 @@ button {
 
 @media (max-width: 575px) {
     .header__phone {
-        display: none;
+        /* display: none; */
+        margin: 0;
+    }
+    .header__phone a{
+        font-size: 14px;
     }
 
     .content .btn {

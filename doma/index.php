@@ -53,7 +53,7 @@ $APPLICATION->SetTitle("Дома");?>
         		"DETAIL_URL" => "",
         		"DISABLE_INIT_JS_IN_COMPONENT" => "N",
         		"DISPLAY_BOTTOM_PAGER" => "Y",
-        		"DISPLAY_COMPARE" => "Y",
+        		"DISPLAY_COMPARE" => "N",
         		"DISPLAY_TOP_PAGER" => "N",
         		"ELEMENT_SORT_FIELD" => "sort",
         		"ELEMENT_SORT_FIELD2" => "id",

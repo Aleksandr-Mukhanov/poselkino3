@@ -16,6 +16,8 @@ Asset::getInstance()->addJs("/assets/js/scripts.js");
 $cntDacha=0; $cntCottage=0;$cntAllVil=0;
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"ACTIVE"=>"Y");
+$arFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
+$arFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
 $arSelect = Array("ID","PROPERTY_TYPE");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->GetNext()){ // dump($arElement);
@@ -41,8 +43,10 @@ $APPLICATION->AddPanelButton(
 $canonical = 'https://poselkino.ru'.$APPLICATION->GetCurDir();
 $ourPage = $APPLICATION->GetCurPage(false);
 if (strpos($ourPage, '/filter/') !== false) $canonical = 'https://poselkino.ru/poselki/';
-if ($_REQUEST['PAGEN_1']) $canonical .= '?PAGEN_1='.$_REQUEST['PAGEN_1'];
+if ($_REQUEST['PAGEN_1'] && !$_REQUEST['teg']) $canonical .= '?PAGEN_1='.$_REQUEST['PAGEN_1'];
 $APPLICATION->SetPageProperty('canonical', $canonical);
+
+if ($_REQUEST['teg']) $APPLICATION->SetPageProperty('robots', 'noindex, follow');
 
 // dump($_COOKIE); // разбираем куки
 if(isset($_COOKIE['comparison_vil'])){
@@ -75,12 +79,13 @@ if(isset($_COOKIE['favorites_vil'])){
 						<button class="navbar-toggler" type="button" data-target="#navbarHeader" data-expanded="false" aria-label="Переключатель навигации"><span class="navbar-toggler-ic"><span></span><span></span><span></span></span><span class="navbar-toggler-title d-none d-md-block">Меню</span></button>
 					</div>
 				</div>
-				<div class="header__logo order-1 order-xl-2 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 pl-lg-0 text-sm-center"><a href="/"><img src="/assets/img/site/logo-poselkino.png" alt="Посёлкино"></a></div>
+				<div class="header__logo order-1 order-xl-2 col-xl-2 col-lg-2 col-md-4 col-sm-4 col-4 pl-lg-0 text-sm-center"><a href="/"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="160" height="25"></a></div>
 				<div class="order-2 order-xl-1 col-xl-4 col-lg-6 pr-0 d-none d-lg-block">
 					<ul class="nav navbar-top" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
-						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все&nbsp;<span class="text-secondary"><?=$cntAllVil?></span></a></li>
-						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/kottedzhnye/">Коттеджные&nbsp;<span class="text-secondary"><?=$cntCottage?></span></a></li>
-						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/dachnye/">Дачные&nbsp;<span class="text-secondary"><?=$cntDacha?></span></a></li>
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все поселки <span class="text-secondary"><?=$cntAllVil?></span></a></li>
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/map/">На карте</a></li>
+						<!-- <li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/kottedzhnye/">Коттеджные&nbsp;<span class="text-secondary"><?=$cntCottage?></span></a></li>
+						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/dachnye/">Дачные&nbsp;<span class="text-secondary"><?=$cntDacha?></span></a></li> -->
 					</ul>
 				</div>
 				<div class="order-3 col-xl-5 col-lg-3 col-sm-4 col-6 text-right">
@@ -125,8 +130,8 @@ if(isset($_COOKIE['favorites_vil'])){
 		<div class="header__navbar collapse navbar-collapse" id="navbarHeader">
 			<button class="navbar-toggler w-100" type="button" data-target="#navbarHeader" data-expanded="false" aria-label="Переключатель навигации"><span class="navbar-toggler-ic"><span></span><span></span><span></span></span><span class="navbar-toggler-title">Меню</span></button>
 			<ul class="nav" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/kottedzhnye/">Коттеджные поселки <?=$cntCottage?></a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/dachnye/">Дачные поселки <?=$cntDacha?></a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все поселки <?=$cntAllVil?></a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/map/">На карте</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/o-proekte/">О проекте</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/blog/">Блог</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/reklama/">Реклама и сотрудничество</a></li>

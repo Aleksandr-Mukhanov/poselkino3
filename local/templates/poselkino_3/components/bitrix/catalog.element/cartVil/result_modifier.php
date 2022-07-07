@@ -56,6 +56,11 @@
 	// dump($arResult['PROPERTIES']['DEVELOPER_ID']);
 	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE']); // dump($arResult['DEVELOPERS']);
 
+	$arElHL = getElHL(12,[],[],['ID','UF_NAME','UF_XML_ID']); // Инфраструктура
+	foreach ($arElHL as $key => $value)
+		$arResult['INFRASTRUKTURA'][$value['UF_XML_ID']] = $value['UF_NAME'];
+	// dump($arResult['INFRASTRUKTURA']);
+
 // узнаем отзывы
 	$cntCom = 0;$ratingSum = 0;
 	$arOrder = Array("ACTIVE_FROM"=>"DESC");
@@ -102,8 +107,8 @@
   // получим дома
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
-	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
-	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
+	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
+	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
@@ -114,6 +119,7 @@
 		}
 		// соберем дома
 		$arHouses[$arElement["ID"]] = [
+			"ID" => $arElement["ID"],
 			"NAME" => $arElement["NAME"],
       "CODE" => $arElement["CODE"],
 			"IMG" => $arPhoto,
@@ -129,7 +135,7 @@
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
 	$arSelect = Array("ID","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
-	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
+	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
@@ -138,8 +144,10 @@
 				$arPhoto[] = ResizeImage($val);
 			}
 		}
-		// соберем дома
+		shuffle($arPhoto);
+		// соберем участки
 		$arPlots[$arElement["ID"]] = [
+			"ID" => $arElement["ID"],
 			"NAME" => $arElement["NAME"],
       "CODE" => $arElement["CODE"],
 			"IMG" => $arPhoto,

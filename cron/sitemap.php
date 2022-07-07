@@ -222,6 +222,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
   foreach($list as $dir)
   {
 		if ($dir['DATA']['TYPE'] == 'F') continue; // пропустим статические файлы
+		if ($dir['FILE'] == 'doma' || $dir['FILE'] == 'uchastki' || $dir['FILE'] == 'poisk') continue;
 
     $dirKey = "/".ltrim($dir['DATA']['ABS_PATH'], "/");
 
@@ -355,11 +356,11 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		$xml_content .= '<url><loc>https://poselkino.ru/poselki/gaz-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 	}
 // до МКАД ИЖС
-	for ($i=10; $i < 60; $i+=10) {
-		$xml_content .= '<url><loc>https://poselkino.ru/poselki/kupit-uchastok/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-		$xml_content .= '<url><loc>https://poselkino.ru/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-		$xml_content .= '<url><loc>https://poselkino.ru/poselki/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-	}
+	// for ($i=10; $i < 60; $i+=10) {
+	// 	$xml_content .= '<url><loc>https://poselkino.ru/poselki/kupit-uchastok/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	// 	$xml_content .= '<url><loc>https://poselkino.ru/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	// 	$xml_content .= '<url><loc>https://poselkino.ru/poselki/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	// }
 
 // стоимость
 	$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe'];
@@ -414,7 +415,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	}
 
 // коммуникации и шоссе
-	$commun2 = ['svet','voda','gaz','kommunikatsii','ryadom-s-lesom','u-vody','izhs','snt'];
+	$commun2 = ['svet','voda','gaz','kommunikatsii','u-vody','izhs']; // ,'ryadom-s-lesom' ,'snt'
 
 	foreach ($commun2 as $commun) {
 		foreach ($onlyShosse as $shosse) {

@@ -28,6 +28,7 @@ if($item["PREVIEW_PICTURE"]){
 } // dump($item['PROPERTIES']['DOP_PHOTO']['VALUE']);
 
 // dump($arResult);
+$offerURL = '/uchastki/uchastok-'.$item['ID'].'/';
 ?>
 <div class="d-flex flex-wrap bg-white card-grid">
 	<div class="card-house__photo photo">
@@ -48,7 +49,9 @@ if($item["PREVIEW_PICTURE"]){
 	</div>
 	<div class="card-house__content">
 		<div class="wrap-title">
-			<div class="card-house__title">Участок в посёлке <?=$arResult['VILLAGE']['NAME']?></div>
+			<div class="card-house__title">
+				<a href="<?=$offerURL?>">Участок в посёлке <?=$arResult['VILLAGE']['NAME']?></a>
+			</div>
 		</div>
 		<div class="card-house__inline"><img class="mr-3" src="/assets/img/site/house.svg" alt>
 			<div class="card-house__inline-title">
@@ -57,7 +60,7 @@ if($item["PREVIEW_PICTURE"]){
 		</div>
 		<?if($arResult['VILLAGE']['TRAIN'] == 'Есть'): // Электричка?>
 			<div class="map-block">
-				<div class="map-block__icon"><img class="mr-3" src="/assets/img/site/bus.svg" alt></div>
+				<div class="map-block__icon"><img src="/assets/img/site/bus.svg" alt></div>
 				<div class="map-block__text">
 					<div class="map-block__title">На электричке:</div>
 					<div class="map-block__info"><b><?=$arResult['VILLAGE']['TRAIN_TRAVEL_TIME'] // Электричка (время в пути)?></b> от вокзала: <?=$arResult['VILLAGE']['TRAIN_VOKZAL'] // Электричка (вокзал)?></div>
@@ -65,14 +68,17 @@ if($item["PREVIEW_PICTURE"]){
 			</div>
 		<?endif;?>
 		<div class="map-block">
-			<div class="map-block__icon"><img class="mr-3" src="/assets/img/site/car.svg" alt></div>
+			<div class="map-block__icon"><img src="/assets/img/site/car.svg" alt></div>
 			<div class="map-block__text">
 				<div class="map-block__title">На автомобиле:</div>
 				<div class="map-block__info"><b><?=$arResult['VILLAGE']['AUTO_NO_JAMS']?></b> от МКАДа без пробок</div>
 			</div>
 		</div>
 		<div class="footer-card d-flex align-items-center">
-			<div class="footer-card__price"><span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill" href="/uchastki/<?=$item['CODE']?>/">Подробнее</a>
+			<div class="footer-card__price">
+				<span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span>
+			</div>
+			<a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
 		</div>
 	</div>
 </div>

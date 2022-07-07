@@ -16,7 +16,34 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 			);?>
 		</div>
 	</div>
-	<?if($_POST["sendTest"]){ // dump($_POST);
+
+	<?if ($_POST["sendTest"]) {
+
+		// выбор почты
+		switch ($_POST["route"]) {
+			case 'Север':
+				$toEmail = '89645358935@bk.ru,andrey1761300@ya.ru';
+				$toPhone = '+7 (964) 535-89-35,+7 (926) 176-13-00';
+				break;
+			case 'Запад':
+				$toEmail = 'andrey1761300@ya.ru,Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (926) 176-13-00,+7 (977) 308-97-81';
+				break;
+			case 'Восток':
+				$toEmail = '7611911@gmail.com,rosstroi2013@yandex.ru';
+				$toPhone = '+7 (931) 888-85-08,+7 (905) 587-70-94';
+				break;
+			case 'Юг':
+				$toEmail = 'Dmitriy_alex86@mail.ru,Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (925) 566-59-78,+7 (977) 308-97-81';
+				break;
+
+			default:
+				$toEmail = 'start@poselkino.ru';
+				$toPhone = '+7 (926) 108-73-32';
+				break;
+		}
+
 		$mailFields = array(
 			"CHEK1" => $_POST["route"], // направление
 			"CHEK2" => $_POST["for_what"],
@@ -28,10 +55,19 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 			"FIO" => $_POST["nameTest"],
 			"TEL" => $_POST["phoneTest"],
 			"EMAIL" => $_POST["emailTest"],
+			"toEmail" => $toEmail,
 		);
 		if (CEvent::Send("SEND_TEST", "s1", $mailFields)) mesOk("Результат теста отправлен!<br>Наш менеджер свяжется с вами в ближайшее время.");
 		else mesEr("Error: ".$el->LAST_ERROR);
-	}else{?>
+
+		// отправим смс менеджеру
+		// $textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента к девелоперу!';
+		// $arPhone = explode(',',$toPhone);
+		// foreach ($arPhone as $phone)
+			// sendSMS($phone,$textSMS);
+
+	} else { ?>
+
 	<div class="py-4 py-sm-5">
 		<div class="container">
 			<div class="row align-items-end">
@@ -41,7 +77,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 			</div>
 		</div>
 	</div>
-	<form class="test" id="test" action="" method="post" onSubmit="yaCounter50830593.reachGoal('SEND_TEST');ga('event','SEND_TEST');return true;">
+	<form class="test" id="test" action="" method="post" onSubmit="yaCounter50830593.reachGoal('SEND_TEST');gtag('event','SEND_TEST',{'event_category':'button','event_action':'SEND_TEST'});return true;">
 		<div class="test-step">
 			<div class="bg-white py-4 py-sm-5">
 				<div class="container">

@@ -24,6 +24,8 @@ use Bitrix\Main\Grid\Declension;
 
 // dump($item['DISPLAY_PROPERTIES']['TYPE']);
 
+$ourDir = $APPLICATION->GetCurDir();
+
 $domPos = $_REQUEST['DOMA_CODE'];
 
 // тип поселка
@@ -226,9 +228,13 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                        style="cursor: pointer;"><?= $nameDomPos ?> <?= $productTitle ?></a>
                 </div>
                 <? if ($item['DISPLAY_PROPERTIES']['REGION']['VALUE']): ?>
-                    <div class="card-house__area"><a
-                                href="/poselki/<?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE_XML_ID'] ?>-rayon/"><?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE'] ?>
-                            район</a></div>
+                    <div class="card-house__area">
+                      <?if($ourDir == '/poselki/'.$item['DISPLAY_PROPERTIES']['REGION']['VALUE_XML_ID'].'-rayon/'):?>
+                        <a><?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE']?> район</a>
+                      <?else:?>
+                        <a href="/poselki/<?=$item['DISPLAY_PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE']?> район</a>
+                      <?endif;?>
+                    </div>
                 <? endif; ?>
             </div>
             <div class="wrap-raiting">
@@ -240,7 +246,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                         <div class="line-raiting__title"><?= $ratingItogo ?></div>
                     </div>
                 </div>
-                <div class="card-house__review review">
+                <div class="card-house__review review hide__mob">
                     <div class="d-flex"><a href="<?= $item['DETAIL_PAGE_URL'] ?>#block_reviews">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.455" height="15.821"
                                  viewBox="0 0 18.455 15.821" class="inline-svg">
@@ -260,10 +266,14 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
               $nameHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE'][0];
               ?>
               <div class="d-flex flex-wrap w-100 mt-1 mt-lg-2">
-                <a class="metro z-index-1 highway-color mr-3" href="/poselki/<?= $valEnumHW ?>-shosse/">
-                  <span class="metro-color <?= $colorHW ?>"></span>
-                  <span class="metro-name"><?= $nameHW ?> шоссе</span>
-                </a>
+                <?if($ourDir == '/poselki/'.$valEnumHW.'-shosse/'): $closeTag = '</span>';?>
+                  <span class="metro z-index-1 highway-color mr-3">
+                <?else: $closeTag = '</a>';?>
+                  <a class="metro z-index-1 highway-color mr-3" href="/poselki/<?=$valEnumHW?>-shosse/">
+                <?endif;?>
+                    <span class="metro-color <?= $colorHW ?>"></span>
+                    <span class="metro-name"><?= $nameHW ?> шоссе</span>
+                  <?=$closeTag?>
                 <a class="metro ml-0 z-index-1" href="/poselki/<?= $url_km_MKAD ?>/">
                   <span class="metro-other"><?= $km_MKAD ?> км от МКАД</span>
                 </a>
@@ -276,7 +286,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
               $nameHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE'][1];
               ?>
               <div class="d-flex w-100 mt-1 mt-lg-2">
-                <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?= $valEnumHW ?>-shosse/">
+                <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
                   <span class="metro-color <?= $colorHW ?>"></span>
                   <span class="metro-name"><?= $nameHW ?> шоссе</span>
                 </a>
@@ -307,8 +317,8 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     </svg>
                     <div class="card-house__inline-title">Участки:&nbsp;</div>
                     <div class="card-house__inline-value">
-                        от <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][0]) ?>
-                        до <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][1]) ?> соток
+                      от <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][0]) ?>
+                      до <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][1]) ?> соток
                     </div>
                 </div>
                 <div class="card-house__inline">
@@ -318,14 +328,16 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     </svg>
                     <? if ($housesValEnum == 3) { // если только участок?>
                         <div class="card-house__inline-title">Стоимость:&nbsp;</div>
-                        <div class="card-house__inline-value">от <span
-                                    class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>
-                            <span class="rep_rubl">руб.</span></div>
+                        <div class="card-house__inline-value">от&nbsp;
+                          <span class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>
+                          <span class="rep_rubl">руб.</span>
+                        </div>
                     <? } else { ?>
                         <div class="card-house__inline-title">Дома:&nbsp;</div>
                         <div class="card-house__inline-value">
-                            от <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][0]) ?>
-                            до <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][1]) ?> м<sup>2</sup></div>
+                          от <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][0]) ?>
+                          до <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][1]) ?> м<sup>2</sup>
+                        </div>
                     <? } ?>
                 </div>
             </div>
@@ -345,8 +357,8 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     </svg>
                     <div class="card-house__inline-title">Участки:&nbsp;</div>
                     <div class="card-house__inline-value">
-                        от <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][0]) ?>
-                        до <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][1]) ?> соток
+                      от <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][0]) ?>
+                      до <?= round($item['DISPLAY_PROPERTIES']['PLOTTAGE']['VALUE'][1]) ?> соток
                     </div>
                 </div>
                 <div class="card-house__inline">
@@ -356,14 +368,16 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     </svg>
                     <? if ($housesValEnum == 3) { // если только участок?>
                         <div class="card-house__inline-title">Стоимость:&nbsp;</div>
-                        <div class="card-house__inline-value">от <span
-                                    class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>
-                            <span class="rep_rubl">руб.</span></div>
+                        <div class="card-house__inline-value">от&nbsp;
+                          <span class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>
+                          <span class="rep_rubl">руб.</span>
+                        </div>
                     <? } else { ?>
                         <div class="card-house__inline-title">Дома:&nbsp;</div>
                         <div class="card-house__inline-value">
-                            от <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][0]) ?>
-                            до <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][1]) ?> м<sup>2</sup></div>
+                          от <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][0]) ?>
+                          до <?= round($item['DISPLAY_PROPERTIES']['HOUSE_AREA']['VALUE'][1]) ?> м<sup>2</sup>
+                        </div>
                     <? } ?>
                 </div>
             </div>

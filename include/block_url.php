@@ -19,6 +19,17 @@ $propEnums = CIBlockPropertyEnum::GetList(
 while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
 }
+
+// url для страниц
+$curPage = $APPLICATION->GetCurPage();
+switch ($curPage) {
+  case '/poselki/kupit-uchastok/':
+    $toUrl1 = 'kupit-uchastok/'; $toUrl2 = 'kupit-uchastok-'; break;
+  case '/poselki/kupit-dom/':
+    $toUrl1 = 'kupit-dom/'; $toUrl2 = ''; break;
+  default:
+    $toUrl1 = $toUrl2 = ''; break;
+}
 ?>
 <div class="address__tab bg-white" id="shosse_rayon">
   <div class="container">
@@ -39,7 +50,7 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
           <?foreach ($arShosse as $key => $value):
             $colorHW = getColorRoad($value['ID']);?>
             <div class="col-lg-3 col-md-4 col-sm-6">
-              <a class="metro-title highway-color" href="/poselki/<?=$key?>-shosse/">
+              <a class="metro-title highway-color" href="/poselki/<?=$key?>-shosse/<?=$toUrl1?>">
                 <div class="metro-title__color <?=$colorHW?>"></div>
                 <div class="metro-title__title"><?=$value['NAME']?></div>
               </a>
@@ -51,7 +62,7 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
         <div class="row">
           <?foreach ($arRegion as $key => $value): $i++;?>
             <div class="col-lg-3 col-md-4 col-sm-6">
-              <a class="metro-title" href="/poselki/<?=$key?>-rayon/">
+              <a class="metro-title" href="/poselki/<?=$key?>-rayon/<?=$toUrl1?>">
                 <div class="metro-title__title"><?=$value?></div>
               </a>
             </div>
@@ -61,14 +72,14 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
       <div class="tab-pane fade" id="mkadTab" role="tabpanel" aria-labelledby="mkadTab-tab">
         <div class="row">
           <?for($x=10; $x<=80; $x+=5){?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-<?=$x?>-km-ot-mkad/">
+            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-<?=$x?>-km-ot-mkad/">
                 <div class="metro-title__title">до <?=$x?> км</div>
               </a></div>
           <?}?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-100-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-100-km-ot-mkad/">
               <div class="metro-title__title">до 100 км</div>
             </a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-120-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-120-km-ot-mkad/">
               <div class="metro-title__title">до 120 км</div>
             </a></div>
         </div>

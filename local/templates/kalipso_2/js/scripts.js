@@ -44,8 +44,10 @@ $(document).ready(function(){
     develCode = $('#develInfo').attr('data-codeDevel');
     phoneDevel = $('#develInfo').attr('data-phoneDevel');
     siteId = $('#posInfo').attr('data-siteId');
-    captcha_code = $(this).find('input[name=captcha_code]').val();
-    captcha_word = $(this).find('input[name=captcha_word]').val();
+    formID = $(this).attr('data-formID');
+    manager = $('#posInfo').attr('data-manager');
+    // captcha_code = $(this).find('input[name=captcha_code]').val();
+    // captcha_word = $(this).find('input[name=captcha_word]').val();
     // if(idButton == 'LEAVE_REQUEST'){
     //   subject = 'Заявка с сайта Поселкино.ру';
     // }else{
@@ -54,16 +56,16 @@ $(document).ready(function(){
     subject = 'Запись на просмотр с сайта ' + window.location.host;
 
     if(!lname){
-      $.post("/local/ajax/sendForm.php",{
-          captcha_code: captcha_code,
-          captcha_word: captcha_word,
-          ourForm: 'chekCaptcha',
-        },function(data){
-          // console.log(captcha_code + ' - ' + captcha_word);
-          // console.log(data);
-          if (data == 'no') {
-            alert('Неверная капча!');
-          } else {
+      // $.post("/local/ajax/sendForm.php",{
+      //     captcha_code: captcha_code,
+      //     captcha_word: captcha_word,
+      //     ourForm: 'chekCaptcha',
+      //   },function(data){
+      //     // console.log(captcha_code + ' - ' + captcha_word);
+      //     // console.log(data);
+      //     if (data == 'no') {
+      //       alert('Неверная капча!');
+      //     } else {
             $.post("/local/ajax/sendForm.php",{
                 name: name,
                 tel: tel,
@@ -78,14 +80,17 @@ $(document).ready(function(){
                 develId: develCode,
                 develName: develName,
                 phoneDevel: phoneDevel,
-                siteId: siteId
+                siteId: siteId,
+                formID: formID,
+                manager: manager
               },function(data){
                 $('.formSignToView').html(data);
+                fbq('track', 'Lead');
               }
             );
-          }
-        }
-      );
+      //     }
+      //   }
+      // );
     }
   });
 

@@ -26,7 +26,7 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-light"></use>
               </svg>
             </div>
-            <div class="infrastructure-item__name">Электроэнергия<br><?=$arVillage['PROPERTY_ELECTRO_KVT_VALUE']?> кВт на уч.</div>
+            <div class="infrastructure-item__name">Электроэнергия <br><?=$arVillage['PROPERTY_ELECTRO_KVT_VALUE']?> кВт на уч.</div>
           </div>
         </div>
         <?if($arVillage['PROPERTY_GAS_ENUM_ID'] == 15): // есть газ?>
@@ -37,7 +37,7 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
                   <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-fire"></use>
                 </svg>
               </div>
-              <div class="infrastructure-item__name">Газ<br><?=$arVillage['PROPERTY_PROVEDEN_GAZ_VALUE']?></div>
+              <div class="infrastructure-item__name">Газ <br><?=$arVillage['PROPERTY_PROVEDEN_GAZ_VALUE']?></div>
             </div>
           </div>
   			<?endif;?>
@@ -159,7 +159,7 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
     </div>
   </div>
 </section>
-<?require_once $_SERVER["DOCUMENT_ROOT"].SITE_TEMPLATE_PATH.'/inc/appeal-form.php';?>
+<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
 <!-- text-block BEGIN-->
 <section class="text-block">
   <div class="container text-block__container">

@@ -2,12 +2,21 @@
 $APPLICATION->SetTitle("План и цены в КП “".$arVillage['NAME']."”");
 $APPLICATION->SetPageProperty("title", "План и цены участков в поселке “".$arVillage['NAME']."”");
 $APPLICATION->SetPageProperty("description", "План и стоимость участков в коттеджном поселке “".$arVillage['NAME']."” на ".$shosseNameKom." шоссе. Сотка от ".formatPriceSite($arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0])." руб, возможна рассрочка.");
-// dump($arVillage);
+
+// первый план
 $planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
 $planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
 if ($planIFrame) $planIMG = $planIFrame;
 $frame = ($planIFrame) ? 'data-iframe="true"' : '';
-$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);?>
+$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+
+// второй план
+$planIFrame_2 = $arVillage['PROPERTY_PLAN_IMG_IFRAME_2_VALUE'];
+$planIMG_2 = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_2_VALUE']);
+if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+$frame_2 = ($planIFrame_2) ? 'data-iframe="true"' : '';
+$planIMG_2_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+?>
 <section class="page">
   <div class="container page__container">
     <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "kalipso", Array(
@@ -94,11 +103,24 @@ $planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], arra
           </div>
         </div>
       </div>
+      <?/*if($planIMG_2):?>
+        <div class="row">
+          <div class="row__col-12 card__col-picture">
+  					<div class="card__picture">
+  						<a href="<?=$planIMG_2?>" data-fancybox <?=$frame_2?>>
+  							<picture>
+  								<source type="image/webp" srcset="<?=$planIMG_2_res['src']?>">
+  									<img src="<?=$planIMG_2_res['src']?>" alt="План и цены 2 КП <?=$arVillage['NAME']?>" title="План и цены 2 поселок <?=$arVillage['NAME']?>" loading="lazy" decoding="async">
+  							</picture></a>
+            </div>
+          </div>
+        </div>
+      <?endif;*/?>
     </div>
   </div>
 </section>
 <!-- page END-->
-<?require_once $_SERVER["DOCUMENT_ROOT"].SITE_TEMPLATE_PATH.'/inc/appeal-form.php';?>
+<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
 <!-- text-block BEGIN-->
 <section class="text-block">
   <div class="container text-block__container">

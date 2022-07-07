@@ -49,20 +49,105 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 			}
 		}
 
+		$siteId = ($_POST['siteId']) ? $_POST['siteId'] : 's1';
+
+		// разбивка по шоссе
+		switch ($highway) {
+			case 'Дмитровское':
+				$toEmail = '89645358935@bk.ru';
+				$toPhone = '+7 (964) 535-89-35';
+				break;
+			case 'Рогачевское':
+				$toEmail = '89645358935@bk.ru';
+				$toPhone = '+7 (964) 535-89-35';
+				break;
+			case 'Ленинградское':
+				$toEmail = '89645358935@bk.ru';
+				$toPhone = '+7 (964) 535-89-35';
+				break;
+			case 'Пятницкое':
+				$toEmail = 'andrey1761300@ya.ru';
+				$toPhone = '+7 (926) 176-13-00';
+				break;
+			case 'Волоколамское':
+				$toEmail = 'andrey1761300@ya.ru';
+				$toPhone = '+7 (926) 176-13-00';
+				break;
+			case 'Новорижское':
+				$toEmail = 'andrey1761300@ya.ru';
+				$toPhone = '+7 (926) 176-13-00';
+				break;
+			case 'Ильинское':
+				$toEmail = 'andrey1761300@ya.ru';
+				$toPhone = '+7 (926) 176-13-00';
+				break;
+			case 'Рублевское':
+				$toEmail = 'andrey1761300@ya.ru';
+				$toPhone = '+7 (926) 176-13-00';
+				break;
+			case 'Горьковское':
+				$toEmail = '7611911@gmail.com';
+				$toPhone = '+7 (931) 888-85-08';
+				break;
+			case 'Щелковское':
+				$toEmail = '7611911@gmail.com';
+				$toPhone = '+7 (931) 888-85-08';
+				break;
+			case 'Носовихинское':
+				$toEmail = '7611911@gmail.com';
+				$toPhone = '+7 (931) 888-85-08';
+				break;
+			case 'Егорьевское':
+				$toEmail = 'rosstroi2013@yandex.ru';
+				$toPhone = '+7 (905) 587-70-94';
+				break;
+			case 'Новорязанское':
+				$toEmail = 'rosstroi2013@yandex.ru';
+				$toPhone = '+7 (905) 587-70-94';
+				break;
+			case 'Каширское':
+				$toEmail = 'Dmitriy_alex86@mail.ru';
+				$toPhone = '+7 (925) 566-59-78';
+				break;
+			case 'Симферопольское':
+				$toEmail = 'Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (977) 308-97-81';
+				break;
+			case 'Варшавское':
+				$toEmail = 'Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (977) 308-97-81';
+				break;
+			case 'Калужское':
+				$toEmail = 'Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (977) 308-97-81';
+				break;
+			case 'Киевское':
+				$toEmail = 'Liya.Shvec@inbox.ru';
+				$toPhone = '+7 (977) 308-97-81';
+				break;
+
+			default:
+				$toEmail = 'start@poselkino.ru';
+				$toPhone = '+7 (926) 108-73-32';
+				break;
+		}
+
 		$mailFields = array(
 			"name" => $name,
 			"tel" => $tel,
 			"email" => $email,
 			"namePos" => $namePos,
-			"highway" => $highway,
 			"codePos" => $codePos,
+			"highway" => $highway,
 			"subject" => $subject,
 			"develId" => $_POST['develId'],
 			"develName" => $_POST['develName'],
+			"phoneDevel" => $_POST['phoneDevel'],
 			"emailDevel" => $emailDevel,
 			"page" => $_SERVER['HTTP_REFERER'],
+			"toEmail" => $toEmail,
 		);
-		if (CEvent::Send("SEND_TO_VIEW", "s1", $mailFields)) mesOk("Ваша заявка успешно отправлена!<br /> Представитель поселка свяжется с Вами в самое ближайшее время)");
+		if (CEvent::Send("SEND_TO_VIEW", $siteId, $mailFields)) mesOk("Ваша заявка успешно отправлена!<br /> Представитель поселка свяжется с Вами в самое ближайшее время)");
 		else mesEr("Error: ".$el->LAST_ERROR);
 
 		// обновим счетчик UP_TO_VIEW
@@ -117,6 +202,10 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 		];
 		$url = "/api/v2/contacts";
 		$resultAmo = inAmo($arCont,$url); //dump($resultAmo);
+
+		// отправим смс менеджеру
+		$textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента!';
+		sendSMS($toPhone,$textSMS);
 
 	}elseif($ourForm == 'Subscribe'){ // Подписка
 

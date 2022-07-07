@@ -181,20 +181,19 @@ $pagen_1 = ($_REQUEST['PAGEN_1']) ? ' - страница '.$_REQUEST['PAGEN_1'] 
 							$marker = ($comment["RESIDENT"]) ? true : false; // отзыв от жителя
 						?>
 						<div class="col-md-6">
-							<div class="review-card" itemprop="review" itemscope itemtype="http://schema.org/Review">
-								<meta itemprop="itemReviewed" content="о девелопере <?=$arResult['row']['UF_NAME']?>">
+							<div class="review-card">
 								<div class="review-card__user">
 									<div class="review-card__user-avatar"></div>
-									<div class="name" itemprop="author"><?=$comment["FIO"]?></div>
-									<div class="date" itemprop="datePublished" content="<?=$comment["DATE_SCHEMA"]?>>"><?if($marker)echo'Житель, '?><?=$comment["DATE"]?></div>
+									<div class="name"><?=$comment["FIO"]?></div>
+									<div class="date" content="<?=$comment["DATE_SCHEMA"]?>>"><?if($marker)echo'Житель, '?><?=$comment["DATE"]?></div>
 									<div class="review-star">
-										<div class="line-raiting" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+										<div class="line-raiting">
 											<div class="line-raiting__star">
 												<div class="line-raiting__star--wrap" style="width: <?=$comment['RATING'] * 100 / 5; ?>%;"></div>
 											</div>
-											<div class="line-raiting__title" itemprop="ratingValue"><?=$comment["RATING"]?></div>
-											<span itemprop="bestRating" class="hide">5</span>
-											<span itemprop="worstRating" class="hide">1</span>
+											<div class="line-raiting__title"><?=$comment["RATING"]?></div>
+											<span class="hide">5</span>
+											<span class="hide">1</span>
 										</div>
 									</div>
 								</div>
@@ -216,7 +215,7 @@ $pagen_1 = ($_REQUEST['PAGEN_1']) ? ' - страница '.$_REQUEST['PAGEN_1'] 
 								</div>
 								<div class="review-card__text">
 									<div class="review-card__text-title">Отзывы</div>
-									<p itemprop="reviewBody"><?=$comment["TEXT"]?></p>
+									<p><?=$comment["TEXT"]?></p>
 								</div>
 							</div>
 						</div>

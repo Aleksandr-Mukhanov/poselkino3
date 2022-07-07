@@ -34,6 +34,23 @@ function formatPricePoint($price){
 	return $newPrice;
 }
 
+// отправка СМС
+function sendSMS($tel,$text)
+{
+	if(file_exists($_SERVER["DOCUMENT_ROOT"]."/local/libs/smsru_php/sms.ru.php"))
+		require_once($_SERVER["DOCUMENT_ROOT"]."/local/libs/smsru_php/sms.ru.php");
+
+	$smsru = new SMSRU('57F9E134-D93C-78F0-25E3-161BFE0F8246'); // API KEY
+
+	$data = new stdClass();
+	$data->to = $tel;
+	$data->text = $text;
+	$data->partner_id = 251650;
+	$sms = $smsru->send_one($data);
+
+	return $sms;
+}
+
 // получение кол-ва и мин и макс цены
 function getMetaInfo($arrFilter){
 	// получим кол-во поселков и цены
@@ -96,6 +113,40 @@ function getColorRoad($id_enum){
 	return $color;
 }
 
+// код jivosite от шоссе
+function getInfoHW($idEnum){
+	switch ($idEnum) {
+		case 201: $color = 'one'; $jivosite = ''; break; // Киевское
+		case 130: $color = 'two'; $jivosite = 'nTstbLwJ2I'; break; // Каширское
+		case 211: $color = 'two'; $jivosite = ''; break; // Волоколамское
+		case 188: $color = 'two'; $jivosite = 'PBbaYrBnyt'; break; // Ленинградское
+		case 190: $color = 'two'; $jivosite = ''; break; // Таракановское
+		case 249: $color = 'two'; $jivosite = ''; break; // Лихачевское
+		case 199: $color = 'three'; $jivosite = 'nTstbLwJ2I'; break; // Щелковское
+		case 266: $color = 'three'; $jivosite = ''; break; // Рублёво-Успенское
+		case 251: $color = 'four'; $jivosite = ''; break; // Минское
+		case 253: $color = 'four'; $jivosite = ''; break; // Можайское
+		case 221: $color = 'six'; $jivosite = 'PBbaYrBnyt'; break; // Ярославское
+		case 207: $color = 'six'; $jivosite = 'nTstbLwJ2I'; break; // Калужское
+		case 243: $color = 'six'; $jivosite = ''; break; // Фряновское
+		case 191: $color = 'seven'; $jivosite = 'nTstbLwJ2I'; break; // Новорязанское
+		case 137: $color = 'seven'; $jivosite = 'nTstbLwJ2I'; break; // Егорьевское
+		case 245: $color = 'seven'; $jivosite = ''; break; // Пятницкое
+		case 178: $color = 'seven'; $jivosite = 'PBbaYrBnyt'; break; // Рогачёвское
+		case 205: $color = 'seven'; $jivosite = 'PBbaYrBnyt'; break; // Новорижское
+		case 198: $color = 'eight'; $jivosite = 'nTstbLwJ2I'; break; // Горьковское
+		case 196: $color = 'eight'; $jivosite = 'nTstbLwJ2I'; break; // Носовихинское
+		case 129: $color = 'nine'; $jivosite = 'nTstbLwJ2I'; break; // Симферопольское
+		case 265: $color = 'nine'; $jivosite = 'nTstbLwJ2I'; break; // Варшавское
+		case 179: $color = 'ten'; $jivosite = 'PBbaYrBnyt'; break; // Дмитровское
+	}
+	$arInfoHW = [
+		'COLOR' => $color,
+		'JIVOSITE' => $jivosite
+	];
+	return $arInfoHW;
+}
+
 // получим названия шоссе
 function getNameRoad($idRoad){
 	$property_enums = CIBlockPropertyEnum::GetList(Array("DEF"=>"DESC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>"SHOSSE"));
@@ -129,11 +180,13 @@ function getNamesList($codeRoad,$codeProp){
 	if($enum_fields = $property_enums->GetNext()){
 		$nameKomu = str_replace(['кое','кий','кой'],'кому',$enum_fields["VALUE"]); // склонение
 		$nameKom = str_replace(['кое','кий','кой'],'ком',$enum_fields["VALUE"]); // склонение
+		$nameKogo = str_replace(['кое','кий','кой'],'кого',$enum_fields["VALUE"]); // склонение
 		$namesRoad = [
 			"ID" => $enum_fields['ID'],
 			"NAME" => $enum_fields['VALUE'],
 			"NAME_KOMU" => $nameKomu,
 			"NAME_KOM" => $nameKom,
+			"NAME_KOGO" => $nameKogo,
 		];
 	}
 
