@@ -34,6 +34,29 @@ function formatPricePoint($price){
 	return $newPrice;
 }
 
+// ресайз фото
+function ResizeIMG($fileID,$width=580,$height=358)
+{
+	// водный знак
+	$arWaterMark = [
+		[
+			"name" => "watermark",
+			"position" => "bottomright", // Положение
+			"type" => "image",
+			//"size" => "medium",
+			"coefficient" => 3,
+			"file" => $_SERVER["DOCUMENT_ROOT"].'/upload/water_sign.png', // Путь к картинке
+			"fill" => "resize",
+		]
+	];
+
+	// ресайз фото
+	$photoRes = \CFile::ResizeImageGet($fileID, ['width'=>$width, 'height'=>$height], BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
+	$photoRes['id'] = $fileID;
+
+	return $photoRes;
+}
+
 // отправка СМС
 function sendSMS($tel,$text)
 {
@@ -75,6 +98,34 @@ function getMetaInfo($arrFilter){
 		if($maxPriceUch && $maxPrice < $maxPriceUch)$maxPrice = $maxPriceUch;
 		if($maxPriceDom && $maxPrice < $maxPriceDom)$maxPrice = $maxPriceDom;
 	} // echo '$minPrice: '.$minPrice.'$cntPos: '.$cntPos;
+
+	return $metaInfo[] = [ 'minPrice' => formatPrice($minPrice),'maxPrice' => formatPrice($maxPrice),'cntPos' => $cntPos ];
+}
+
+// получение кол-ва и мин и макс цены Участков
+function getMetaInfoPlots($arrFilter){
+	// получим поселки
+	$minPrice = 999999999;
+	$maxPrice = 1;
+	$cntPos = 0;
+	$arOrder = ["SORT"=>"ASC"];
+	$arSelect = ["ID"];
+	$rsElements = CIBlockElement::GetList($arOrder,$arrFilter,false,false,$arSelect);
+	while ($arElement = $rsElements->GetNext())
+		$arVillageIDs[] = $arElement['ID'];
+
+	// получим участки
+	$arOrder = ["SORT"=>"ASC"];
+	$arFilterPlots = ["IBLOCK_ID"=>5,"ACTIVE"=>"Y",'PROPERTY_VILLAGE'=>$arVillageIDs];
+	$arSelect = ["ID","NAME","PROPERTY_PRICE"];
+	$rsElements = CIBlockElement::GetList($arOrder,$arFilterPlots,false,false,$arSelect);
+	while ($arElement = $rsElements->GetNext())
+	{
+		$cntPos++;
+		$plotPrice = $arElement['PROPERTY_PRICE_VALUE'];
+		if ($plotPrice && $minPrice > $plotPrice) $minPrice = $plotPrice;
+		if ($plotPrice && $maxPrice < $plotPrice) $maxPrice = $plotPrice;
+	}
 
 	return $metaInfo[] = [ 'minPrice' => formatPrice($minPrice),'maxPrice' => formatPrice($maxPrice),'cntPos' => $cntPos ];
 }

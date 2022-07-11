@@ -433,7 +433,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 	<div class="container-fluid">
 		<div class="form mb-4" id="contacts">
 			<div class="section-title">Остались вопросы?</div>
-			<div class="form-subtitle">Заполните форму и наш менеджер свяжется с вами в течении 5 минут</div>
+			<div class="form-subtitle">Заполните форму и наш менеджер свяжется с вами в течение 5 минут</div>
 			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
 				<div class="col-12 col-md mb-2">
 					<div class="input">

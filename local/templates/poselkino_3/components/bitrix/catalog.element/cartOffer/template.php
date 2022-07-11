@@ -32,10 +32,11 @@ $alt = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT'])
 	? $arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT']
 	: $arResult['NAME'];
 
+if (!$arResult['PHOTO_VILLAGE'][0]) $arResult['PHOTO_VILLAGE'] = [];
+
 // добавим превьюшку в фото
-if($arResult["PREVIEW_PICTURE"]){
-	array_unshift($arResult['MORE_PHOTO'],$arResult["PREVIEW_PICTURE"]); // положим в начало
-} // dump($arResult['MORE_PHOTO']);
+if ($arResult["PREVIEW_PICTURE"])
+	array_unshift($arResult['PHOTO_VILLAGE'],$arResult["PREVIEW_PICTURE"]); // положим в начало
 
 // водный знак
 $arWaterMark = [
@@ -49,12 +50,18 @@ $arWaterMark = [
 		"fill" => "resize",
 	]
 ];
-foreach ($arResult['MORE_PHOTO'] as $key => $photo){
-	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>3000, 'height'=>3000), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
-	 //dump($photoRes);
-	 $arResult['MORE_PHOTO'][$key]['SRC'] = $photoRes['src'];
+// foreach ($arResult['PHOTO_VILLAGE'] as $key => $photo){
+// 	 // $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>3000, 'height'=>3000), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
+// 	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT, true, $arWaterMark);
+// 	 $arResult['PHOTO_VILLAGE'][$key]['SRC'] = $photoRes['src'];
+// 	 unset($photoRes);
+// }
+foreach ($arResult['PHOTO_VILLAGE'] as $key => $photo){
+	 $photoRes = CFile::ResizeImageGet($photo, array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT, true, $arWaterMark);
+	 $arResult['PHOTO_VILLAGE'][$key] = $photoRes;
 	 unset($photoRes);
 }
+shuffle($arResult['PHOTO_VILLAGE']);
 
 // км от МКАД
 $km_MKAD = $arResult['arVillage']['MKAD'];
@@ -87,7 +94,7 @@ $plottageText = ($offerType == 'plots') ? $plottageDeclension->get($arResult['PR
 $finish = $arResult['PROPERTIES']['FINISH']['VALUE'];
 
 // План поселка
-$nProp = ''; // dump($arResult['arVillage']);
+$nProp = '';
 if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
 	$planIMG = $arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp];
 	$frame = 'data-iframe="true"';
@@ -97,7 +104,7 @@ if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
 }
 
 $priceArrange = ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) ? $arResult['PROPERTIES']['ARRANGEMENT']['VALUE'] : $arResult['arVillage']['PRICE_ARRANGE'];
-// dump($arResult['arVillage']);
+if (!$priceArrange) $priceArrange = 'Включено';
 
 if ($offerType == 'plots')
 	$h1 = $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'];
@@ -141,16 +148,14 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 		<div class="order-1 order-md-2 col-lg-8 col-md-7">
 			<div class="village-slider">
 				<div class="village-slider__list" id="village-slider">
-					<?foreach ($arResult['MORE_PHOTO'] as $key => $photo){ // Основные фото
-					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') no-repeat; background-size: cover;"></div>
-					<?unset($photoRes);}?>
+					<?foreach ($arResult['PHOTO_VILLAGE'] as $photo){ // Основные фото?>
+						<div class="village-slider__item" style="background: #eee url('<?=$photo['src']?>') no-repeat; background-size: cover;"></div>
+					<?}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
-					<?foreach ($arResult['MORE_PHOTO'] as $key => $photo){ // Доп. фото
-					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item-thumb" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover;"></div>
-				  <?unset($photoRes);}?>
+					<?foreach ($arResult['PHOTO_VILLAGE'] as $photo){ // Доп. фото?>
+						<div class="village-slider__item-thumb" style="background: url('<?=$photo['src']?>') no-repeat; background-size: cover;"></div>
+				  <?}?>
 				</div>
 			</div>
 		 <?if($offerType == 'plots'): // если участок?>
@@ -167,7 +172,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 					<div class="home-info-col__value"><?=$priceArrange?></div>
 					<div class="home-info-col__title">Цена за обустройство</div>
 				</div>
-				 <div class="home-info__slider-plan text-left text-lg-right ml-auto openPlan"><a class="text-success" href="<?=$planIMG?>" <?=$frame?>>План участка</a></div>
+				 <div class="home-info__slider-plan text-left text-lg-right ml-auto openPlan"><a class="text-success" href="<?=$planIMG?>" <?=$frame?>>План поселка</a></div>
 			 </div>
 		 <?else: // если дом
 			 $plottage = ($arResult['PROPERTIES']['PLOTTAGE']['VALUE']) ? $arResult['PROPERTIES']['PLOTTAGE']['VALUE'].' сот.' : 'Любой';?>
@@ -201,14 +206,14 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 						$valEnumHW = $arResult['arVillage']['SHOSSE_ONE']['VALUE_XML_ID'];
 						$colorHW = getColorRoad($idEnumHW);
 						$nameHW = $arResult['arVillage']['SHOSSE_ONE']['VALUE'];?>
-						<a class="metro z-index-1 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
+						<a class="metro z-index-1 highway-color" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
 							<span class="metro-color <?=$colorHW?>"></span>
 							<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 					<?endif;?>
-					<a class="metro z-index-1" href="/poselki/<?=$url_km_MKAD?>/">
+					<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
 						<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
 					<?if($arResult['arVillage']['REGION']):?>
-						<a class="area-link" href="/poselki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
+						<a class="area-link" href="/kupit-uchastki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
 							<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
 								<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
@@ -240,7 +245,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 				<h2>Коммуникации</h2>
 				<div class="row">
 					<?if(mb_strtolower($arResult['arVillage']['ELECTRO']) == 'есть'):?>
-					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
+					<div class="d-block col-sm-4">
 						<div class="communication-card communication-card--light">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" width="50.019" height="60" viewBox="0 0 50.019 60" class="inline-svg">
 									<g transform="translate(-4.991)">
@@ -268,7 +273,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 					</div>
 					<?endif;?>
 					<?if(mb_strtolower($arResult['arVillage']['GAS']) == 'есть'):?>
-					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
+					<div class="d-block col-sm-4">
 						<div class="communication-card communication-card--gas">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="60" viewBox="0 0 55 60" class="inline-svg">
 									<defs>
@@ -292,7 +297,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 					</div>
 					<?endif;?>
 					<?if(mb_strtolower($arResult['arVillage']['PLUMBING']) == 'есть'):?>
-					<div class="d-block col-sm-4"><a class="stretched-link" href="#"></a>
+					<div class="d-block col-sm-4">
 						<div class="communication-card communication-card--water">
 							<div class="communication-card__icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="55" height="60" viewBox="0 0 55 60" class="inline-svg">
 									<g transform="translate(-688 -1843)">
@@ -498,14 +503,14 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 						$valEnumHW = $arResult['arVillage']['SHOSSE_ONE']['VALUE_XML_ID'];
 						$colorHW = getColorRoad($idEnumHW);
 						$nameHW = $arResult['arVillage']['SHOSSE_ONE']['VALUE'];?>
-						<a class="metro z-index-1 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
+						<a class="metro z-index-1 highway-color" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
 							<span class="metro-color <?=$colorHW?>"></span>
 							<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 					<?endif;?>
-					<a class="metro z-index-1" href="/poselki/<?=$url_km_MKAD?>/">
+					<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
 						<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
 					<?if($arResult['arVillage']['REGION']):?>
-						<a class="area-link" href="/poselki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
+						<a class="area-link" href="/kupit-uchastki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
 							<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
 								<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
@@ -553,7 +558,6 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 				<div class="item mr-4">
           <!-- Ссылка карточки-->
           <div class="offer-house__item card-house house-in-village">
-						<!-- <a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a> -->
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
@@ -565,18 +569,39 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
             </div>
             <div class="offer-house__info card-house__content px-3">
               <div class="offer-house__title">
-								<?if($offerType == 'plots'):?>
-									<?=$offerName?> <?=$house['NUMBER']?> в посёлке <?=$arResult['arVillage']['NAME']?>
-								<?else:?>
-									<?=$house['NAME']?>
-								<?endif;?>
+								<a href="<?=$house['URL']?>">
+									<?if($offerType == 'plots'):?>
+										<?=$offerName?> <?=round($house['PLOTTAGE'])?> соток в посёлке <?=$arResult['arVillage']['NAME']?>
+									<?else:?>
+										<?=$house['NAME']?>
+									<?endif;?>
+								</a>
 							</div>
+
+							<?if($arResult['arVillage']['REGION']):?>
+								<div class="offer-house__area">
+									<a href="/kupit-uchastki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/"><?= $arResult['arVillage']['REGION']?> район</a>
+								</div>
+							<?endif;?>
+
+							<?if($arResult['arVillage']['SHOSSE_ONE']['VALUE_ENUM_ID']):?>
+								<div class="card-house__metro mt-2 mt-lg-3 metro_no_top">
+									<div class="d-flex flex-wrap w-100 mt-1 mt-lg-2">
+										<a class="metro z-index-1 highway-color mr-3" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
+											<span class="metro-color <?=$colorHW?>"></span>
+											<span class="metro-name"><?=$nameHW?> шоссе</span>
+										</a>
+										<a class="metro ml-0 z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
+											<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+										</a>
+									</div>
+								</div>
+							<?endif;?>
+
 							<?if($offerType == 'plots'){ // если участки?>
 	              <div class="offer-house__inline-info">
 	                <div class="card-house__inline">
-										<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
-                      <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"></path>
-                    </svg>
+										<img class="mr-3" src="/assets/img/site/house.svg" alt>
 	                  <div class="card-house__inline-title">
 	                    Площадь участка:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['PLOTTAGE']?> соток</div>
@@ -606,7 +631,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">
                 <div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
-								<a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['CODE']?>/">Подробнее</a>
+								<a class="btn btn-outline-warning rounded-pill w-100" href="<?=$house['URL']?>">Подробнее</a>
               </div>
             </div>
           </div>
@@ -619,11 +644,10 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 	<div class="block-page">
 		<h2>Похожие <?=mb_strtolower($offerNameM)?></h2>
 		<div class="card-house-carousel house-in-village area-in-village" id="similar_houses">
-			<?foreach ($arResult["arSimilarOffers"] as $id => $house) { // dump($house);?>
+			<?foreach ($arResult["arSimilarOffers"] as $id => $house) {?>
 				<div class="item mr-4">
           <!-- Ссылка карточки-->
           <div class="offer-house__item card-house house-in-village">
-						<!-- <a class="stretched-link z-index-0 position-absolute w-100 h-100" href="/<?=$house['CODE']?>/"></a> -->
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
@@ -643,7 +667,8 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 							</div>
 							<?if($offerType == 'plots'){ // если участки?>
 	              <div class="offer-house__inline-info border-0 mt-0 pt-0">
-	                <div class="card-house__inline px-0"><img class="mr-3" src="/assets/img/site/house.svg" alt>
+	                <div class="card-house__inline px-0">
+										<img class="mr-3" src="/assets/img/site/house.svg" alt>
 	                  <div class="card-house__inline-title">
 	                    Площадь участка:&nbsp;</div>
 	                  <div class="card-house__inline-value"><?=$house['PLOTTAGE']?> соток</div>
@@ -669,10 +694,10 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 											Материал:&nbsp;</div>
 										<div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	                </div>
-	              </div>
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">
-                <div class="footer-card__price mt-2 mb-4 w-100"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['CODE']?>/">Подробнее</a>
+                <div class="footer-card__price mt-2 mb-4 w-100"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+								<a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['URL']?>/">Подробнее</a>
               </div>
             </div>
           </div>

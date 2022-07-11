@@ -128,7 +128,7 @@ p:last-child {
     display: flex;
     margin-left: 35px;
     align-items: center;
-    gap: 0 37px;
+    gap: 0 35px;
 }
 
 .nav__link {

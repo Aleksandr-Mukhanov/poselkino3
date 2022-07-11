@@ -189,7 +189,7 @@ if (!$arTegs['gaz']['url']) {
             $urlTeg = "/kupit-uchastki/kupit-dom-s-gazom/";
             break;
         default: // Поселки
-            $urlTeg = "/kupit-uchastki/uchastki-s-gazom/";
+            $urlTeg = "/kupit-uchastki/s-gazom/";
             break;
     }
     $arTegs['gaz']['url'] = $urlTeg;
@@ -223,7 +223,7 @@ if (!$arTegs['izhs']['url']) {
             $urlTeg = "/kupit-uchastki/kupit-dom-izhs/";
             break;
         default: // Поселки
-            $urlTeg = "/kupit-uchastki/uchastki-izhs/";
+            $urlTeg = "/kupit-uchastki/izhs/";
             break;
     }
     $arTegs['izhs']['url'] = $urlTeg;
@@ -239,7 +239,7 @@ if (!$arTegs['snt']['url']) {
             $urlTeg = "/kupit-uchastki/kupit-dom-snt/";
             break;
         default: // Поселки
-            $urlTeg = "/kupit-uchastki/uchastki-snt/";
+            $urlTeg = "/kupit-uchastki/snt/";
             break;
     }
     $arTegs['snt']['url'] = $urlTeg;
@@ -287,7 +287,7 @@ if (!$arTegs['econom']['url']) {
             $urlTeg = "/kupit-uchastki/kupit-dom-econom-class/";
             break;
         default: // Поселки
-            $urlTeg = "/kupit-uchastki/uchastki-econom-class/";
+            $urlTeg = "/kupit-uchastki/econom-class/";
             break;
     }
     $arTegs['econom']['url'] = $urlTeg;
@@ -303,7 +303,7 @@ if (!$arTegs['komfort']['url']) {
             $urlTeg = "/kupit-uchastki/kupit-dom-komfort-class/";
             break;
         default: // Поселки
-            $urlTeg = "/kupit-uchastki/uchastki-komfort-class/";
+            $urlTeg = "/kupit-uchastki/komfort-class/";
             break;
     }
     $arTegs['komfort']['url'] = $urlTeg;

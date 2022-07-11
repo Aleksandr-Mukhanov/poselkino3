@@ -18,9 +18,8 @@ $alt = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT'])
 	: $arResult['NAME'];
 
 // добавим превьюшку в фото
-if($arResult["PREVIEW_PICTURE"]){
+if($arResult["PREVIEW_PICTURE"])
 	array_unshift($arResult['MORE_PHOTO'],$arResult["PREVIEW_PICTURE"]); // положим в начало
-} //dump($arResult['MORE_PHOTO']);
 
 // ссылка на ютуб Видеосъемка
 $arVideo = explode('https://youtu.be/',$arResult['PROPERTIES']['VIDEO']['VALUE']); //dump($arVideo);
@@ -59,8 +58,13 @@ $arWaterMark = [
 ];
 foreach ($arResult['MORE_PHOTO'] as $key => $photo){
 	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>3000, 'height'=>3000), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
-	 //dump($photoRes);
 	 $arResult['MORE_PHOTO'][$key]['SRC'] = $photoRes['src'];
+	 unset($photoRes);
+}
+// фото поселков для участка
+foreach ($arResult['MORE_PHOTO'] as $photo){
+	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
+	 $arResult['PHOTO_VILLAGE'][] = $photoRes;
 	 unset($photoRes);
 }
 
@@ -355,22 +359,39 @@ switch ($km_MKAD) {
 <div class="container">
 <div class="house-in-village area-in-village page__content-list">
 	<div class="list--grid">
-		<?foreach ($arResult["arPlots"] as $id => $plot) { // dump($house);?>
+		<?foreach ($arResult["arPlots"] as $id => $plot) {
+			if ($plot["IMG"])
+				array_unshift($arResult['PHOTO_VILLAGE'],$plot["IMG"]); // положим в начало
+			shuffle($arResult['PHOTO_VILLAGE']);?>
 		<div class="card-house area">
 			<div class="d-flex flex-wrap bg-white card-grid">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
-						<?foreach ($plot['IMG'] as $value) {?>
+						<?foreach ($arResult['PHOTO_VILLAGE'] as $value) {?>
 							<div class="card-photo__item" style="background: url(<?=$value['src']?>) center center / cover no-repeat; width: 495px;"></div>
 						<?}?>
 					</div>
 					<div class="photo__count">
-						<span class="current">1</span> / <span class="count"><?=count($plot['IMG'])?></span>
+						<span class="current">1</span> / <span class="count"><?=count($arResult['PHOTO_VILLAGE'])?></span>
 					</div>
 				</div>
 				<div class="card-house__content">
 					<div class="wrap-title">
-						<div class="card-house__title"><a href="/uchastki/uchastok-<?=$plot['ID']?>/">Участок <?=$plot['NUMBER']?> в посёлке <?=$arResult['NAME']?></a></div>
+						<div class="card-house__title"><a href="/kupit-uchastki/uchastok-<?=$plot['ID']?>/">Участок <?=round($plot['PLOTTAGE'])?> соток в посёлке <?=$arResult['NAME']?></a></div>
+					</div>
+					<?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
+	          <div class="card-house__area"><a href="/kupit-uchastki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?=$arResult['PROPERTIES']['REGION']['VALUE']?> район</a></div>
+	        <?endif;?>
+					<div class="offer-house__metro metro_no_top">
+						<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]):?>
+							<a class="metro z-index-1 highway-color" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
+								<span class="metro-color <?=$colorHW?>"></span>
+								<span class="metro-name"><?=$nameHW?> шоссе</span>
+							</a>
+						<?endif;?>
+						<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
+							<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+						</a>
 					</div>
 					<div class="card-house__inline">
 						<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
@@ -380,35 +401,9 @@ switch ($km_MKAD) {
 							Площадь участка:&nbsp;</div>
 						<div class="card-house__inline-value"><?=$plot['PLOTTAGE']?> соток</div>
 					</div>
-					<?if($arResult['PROPERTIES']['TRAIN']['VALUE'] == 'Есть'): // Электричка?>
-					<div class="map-block">
-						<div class="map-block__icon">
-							<svg xmlns="http://www.w3.org/2000/svg" width="33.298" height="17.762" viewBox="0 0 33.298 17.762" class="inline-svg">
-								<path d="M.555,16.027h2.83A2.765,2.765,0,0,0,8.325,17.12a2.766,2.766,0,0,0,4.939-1.093h11.21a2.775,2.775,0,0,0,5.439,0h2.83a.555.555,0,0,0,.555-.555V11.259a7.2,7.2,0,0,0-.2-1.669l-1.212-5.1a2.226,2.226,0,0,0-2.177-1.785H13.107L12.154.8a.555.555,0,0,0-.5-.307H3.885a.555.555,0,0,0-.5.307L2.432,2.708H.555A.555.555,0,0,0,0,3.263V15.472A.555.555,0,0,0,.555,16.027Zm5.55,1.11a1.665,1.665,0,1,1,1.665-1.665A1.665,1.665,0,0,1,6.1,17.137Zm4.44,0a1.665,1.665,0,1,1,1.665-1.665A1.665,1.665,0,0,1,10.544,17.137Zm16.649,0a1.665,1.665,0,1,1,1.665-1.665A1.665,1.665,0,0,1,27.194,17.137Zm4.828-7.291c.006.026.008.051.013.077H27.748V6.038h3.369ZM4.228,1.6h7.084l.555,1.11H3.673ZM1.11,3.818h28.6a1.119,1.119,0,0,1,1.093.912l.05.2H1.11Zm25.529,2.22V9.923h-3.33V6.038Zm-4.44,0V9.923h-3.33V6.038Zm-4.44,0V9.923h-3.33V6.038Zm-4.44,0V9.923H9.989V6.038Zm-4.44,0V9.923H5.55V6.038Zm-7.77,0H4.44V9.923H1.11Zm0,7.215H2.22v-1.11H1.11v-1.11H32.175c0,.075.013.15.013.226v.884h-1.11v1.11h1.11v1.665H29.913a.147.147,0,0,0-.009-.029,2.745,2.745,0,0,0-.144-.462c-.022-.056-.051-.1-.076-.154a2.872,2.872,0,0,0-.16-.294c-.035-.056-.076-.106-.115-.158a2.862,2.862,0,0,0-.2-.238c-.047-.049-.095-.1-.145-.142a2.624,2.624,0,0,0-.234-.193q-.083-.061-.166-.116a2.955,2.955,0,0,0-.278-.149c-.059-.028-.116-.055-.177-.083a2.755,2.755,0,0,0-.333-.1c-.056-.014-.107-.033-.164-.044a2.631,2.631,0,0,0-1.054,0c-.056.011-.111.03-.164.044a2.768,2.768,0,0,0-.333.1c-.061.024-.118.056-.177.083a2.927,2.927,0,0,0-.278.149q-.083.055-.166.116a2.592,2.592,0,0,0-.234.193c-.05.046-.1.092-.145.142a2.954,2.954,0,0,0-.2.238c-.039.052-.079.1-.115.158a2.829,2.829,0,0,0-.16.294c-.025.052-.056.1-.076.154a2.767,2.767,0,0,0-.144.462.137.137,0,0,1-.009.029h-11.2a.147.147,0,0,0-.009-.029,2.787,2.787,0,0,0-.144-.462c-.022-.056-.051-.1-.076-.154a2.871,2.871,0,0,0-.16-.294c-.035-.056-.076-.106-.115-.158a2.907,2.907,0,0,0-.2-.238c-.047-.049-.095-.1-.145-.142a2.624,2.624,0,0,0-.234-.193q-.083-.061-.167-.116a2.923,2.923,0,0,0-.277-.149c-.059-.028-.116-.055-.177-.083a2.727,2.727,0,0,0-.33-.1c-.056-.014-.107-.033-.166-.044a2.583,2.583,0,0,0-1.033,0l-.086.016a2.767,2.767,0,0,0-.451.14l-.082.036a2.791,2.791,0,0,0-.42.228l-.022.017a2.789,2.789,0,0,0-.357.295l-.056.051a2.778,2.778,0,0,0-.235.272,2.827,2.827,0,0,0-.242-.278c-.018-.018-.036-.034-.056-.051a2.81,2.81,0,0,0-.357-.295l-.022-.017a2.8,2.8,0,0,0-.42-.228L7.146,12.9a2.792,2.792,0,0,0-.451-.14l-.086-.016a2.581,2.581,0,0,0-1.033,0c-.056.011-.111.03-.164.044a2.716,2.716,0,0,0-.333.1c-.061.024-.118.056-.177.083a2.91,2.91,0,0,0-.275.149c-.055.037-.111.075-.166.116a2.627,2.627,0,0,0-.234.193c-.05.046-.1.092-.145.142a2.832,2.832,0,0,0-.2.238c-.039.052-.079.1-.115.158a2.809,2.809,0,0,0-.16.294c-.025.052-.056.1-.076.154a2.732,2.732,0,0,0-.144.462.147.147,0,0,1-.009.029H1.11Zm0,0" transform="translate(0 -0.488)" fill="#3c4b5a" />
-								<path d="M230.4,202.09h11.1v1.11H230.4Zm0,0" transform="translate(-217.079 -190.435)" fill="#3c4b5a" />
-							</svg>
-						</div>
-						<div class="map-block__text">
-							<div class="map-block__title">На электричке:</div>
-							<div class="map-block__info"><b><?=$arResult['PROPERTIES']['TRAIN_TRAVEL_TIME']['VALUE'] // Электричка (время в пути)?></b> от вокзала: <?=$arResult['PROPERTIES']['TRAIN_VOKZAL']['VALUE'] // Электричка (вокзал)?></div>
-						</div>
-					</div>
-					<?endif;?>
-					<div class="map-block">
-						<div class="map-block__icon">
-							<svg xmlns="http://www.w3.org/2000/svg" width="33.298" height="13.32" viewBox="0 0 33.298 13.32" class="inline-svg">
-								<path d="M242.22,86.891H240V88h2.22Zm0,0" transform="translate(-222.796 -81.896)" fill="#3c4b5a" />
-								<path d="M.476,3.827l3.77-.538A19.021,19.021,0,0,1,6.382,2.157,18.689,18.689,0,0,1,14.114.492h.655a18.864,18.864,0,0,1,9.008,2.3l1.9,1.038a13.113,13.113,0,0,1,6.346,1.72A2.534,2.534,0,0,1,33.3,7.741v3.3a.555.555,0,0,1-.555.555H30.88a3.318,3.318,0,0,1-6.262,0H9.791a3.318,3.318,0,0,1-6.262,0h-.2a.557.557,0,0,1-.206-.04l-1.8-.721A2.1,2.1,0,0,1,0,8.872v-4.5A.555.555,0,0,1,.476,3.827Zm25.1,7.1a2.22,2.22,0,1,0-.045-.444A2.22,2.22,0,0,0,25.574,10.925Zm-10.034-.444h8.88a3.33,3.33,0,1,1,6.66,0h1.11V7.741a1.42,1.42,0,0,0-.714-1.23,12,12,0,0,0-5.945-1.579H15.539Zm0-6.66h7.813l-.107-.058a17.745,17.745,0,0,0-7.706-2.137ZM14.429,1.6h-.314a17.565,17.565,0,0,0-6.53,1.251l.969.969h5.875ZM4.485,10.925a2.22,2.22,0,1,0-.045-.444A2.22,2.22,0,0,0,4.485,10.925ZM1.11,5.487H2.775V6.6H1.11V8.872a.993.993,0,0,0,.628.927l1.592.639c0-.051.007-.1.01-.153s0-.111.01-.166.017-.111.026-.166.016-.111.027-.161.027-.107.042-.159.026-.106.042-.158.037-.1.055-.152.036-.1.056-.153.046-.1.069-.142.046-.1.072-.147.056-.088.081-.133.055-.1.087-.14.061-.082.092-.123.065-.089.1-.132.069-.076.1-.111.073-.082.111-.121.076-.07.114-.1.079-.075.122-.111.085-.064.127-.1.084-.065.129-.1.094-.055.142-.086.087-.056.132-.079.1-.049.152-.073.091-.046.138-.066.111-.041.166-.061.092-.036.139-.051c.063-.019.128-.033.193-.049.042-.01.083-.023.125-.032.068-.014.138-.022.208-.032.041-.005.08-.014.121-.018a3.383,3.383,0,0,1,.338-.017,3.333,3.333,0,0,1,3.33,3.33h4.441V4.932h-6.1a.554.554,0,0,1-.392-.163L6.493,3.33a17.8,17.8,0,0,0-1.759.962.557.557,0,0,1-.215.079L1.11,4.858Zm0,0" transform="translate(0 -0.492)" fill="#3c4b5a" />
-							</svg>
-						</div>
-						<div class="map-block__text">
-							<div class="map-block__title">На автомобиле:</div>
-							<div class="map-block__info"><b><?=$arResult['PROPERTIES']['AUTO_NO_JAMS']['VALUE'] // Авто (Время в пути от МКАД без пробок)?></b> от МКАДа без пробок</div>
-						</div>
-					</div>
 					<div class="footer-card d-flex align-items-center">
 						<div class="footer-card__price"><span class="split-number"><?=$plot['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
-						<a class="btn btn-outline-warning rounded-pill" href="/uchastki/uchastok-<?=$plot['ID']?>/">Подробнее</a>
+						<a class="btn btn-outline-warning rounded-pill" href="/kupit-uchastki/uchastok-<?=$plot['ID']?>/">Подробнее</a>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,28 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 echo 'ok<br>';
 
+use Bitrix\Main\Loader;
+use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
+	Loader::includeModule('highloadblock');
+  Loader::includeModule('iblock');
+
+$hlblock_id = 17; // id HL
+$hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+$entity = HL\HighloadBlockTable::compileEntity($hlblock);
+$entity_data_class = $entity->getDataClass();
+
+$property_enums = CIBlockPropertyEnum::GetList(Array("ID"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>"REGION"));
+while($enum_fields = $property_enums->GetNext())
+{
+  dump($enum_fields);
+  $data =[
+		"UF_NAME" => $enum_fields['VALUE'],
+    "UF_XML_ID" => $enum_fields['XML_ID'],
+	];
+  // dump($data);
+	// $result = $entity_data_class::add($data);
+}
+
 // сортировка urlrewrite.php
 // $i = 0;
 // foreach ($arUrlRewrite as $value) {
@@ -28,11 +50,11 @@ echo 'ok<br>';
 // $arManager = array_values($arElHL)[0];
 // dump($arManager);
 
-$id = '1ixXs-GFnBLZ9V91dzUaimCeG6lYqWTnvzJU97yZPV8U';
-$gid = '0';
-
-$csv = file_get_contents('https://docs.google.com/spreadsheets/d/' . $id . '/export?format=csv&gid=' . $gid);
-$csv = explode("\r\n", $csv);
-$array = array_map('str_getcsv', $csv);
-
-print_r($array);
+// $id = '1ixXs-GFnBLZ9V91dzUaimCeG6lYqWTnvzJU97yZPV8U';
+// $gid = '0';
+//
+// $csv = file_get_contents('https://docs.google.com/spreadsheets/d/' . $id . '/export?format=csv&gid=' . $gid);
+// $csv = explode("\r\n", $csv);
+// $array = array_map('str_getcsv', $csv);
+//
+// print_r($array);

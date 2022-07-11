@@ -23,7 +23,7 @@ $this->setFrameMode(true);
 
 				 	<div class="filter__region">
 						<?$activeAreas = ''; // ставим активность если надо
-							foreach ($arResult["ITEMS"][183]["VALUES"] as $val => $ar) //dump($ar); // Район
+							foreach ($arResult["ITEMS"][193]["VALUES"] as $val => $ar) //dump($ar); // Район
 								if ($ar["CHECKED"]) $activeAreas = 'active';
 						?>
 				 		<a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
@@ -31,7 +31,7 @@ $this->setFrameMode(true);
 
 					<div class="filter__highway">
 						<?$activeHighway = '';// ставим активность если надо
-			       foreach($arResult["ITEMS"][184]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
+			       foreach($arResult["ITEMS"][194]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
 			        if ($ar["CHECKED"]) $activeHighway = 'active';
 			       }?>
 						<button class="btn btn-outline-warning rounded-pill Highway <?=$activeHighway?>" type="button" data-toggle="modal" data-target="#highwayModal">Шоссе</button>
@@ -42,7 +42,7 @@ $this->setFrameMode(true);
 			<div class="order-1 col-xl-3 col-lg-4 col-sm-6 mt-4 mt-sm-0">
 				<div class="filter__mkad">
 					<div class="form-group form-group-inline justify-content-sm-end justify-content-lg-start">
-						<?$arItem = $arResult["ITEMS"][185]; //dump($arItem); // Удаленность от МКАД
+						<?$arItem = $arResult["ITEMS"][195]; //dump($arItem); // Удаленность от МКАД
 			      $placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
 			      $placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';?>
 						<label>от МКАД, км</label>
@@ -144,7 +144,7 @@ $this->setFrameMode(true);
 					<div class="row">
 						<div class="col-lg-8 mt-40">
 							<div class="d-flex align-items-center flex-wrap">
-								<?foreach($arResult["ITEMS"][324]["VALUES"] as $val => $ar): //dump($ar); // Тип поселка
+								<?foreach($arResult["ITEMS"][196]["VALUES"] as $val => $ar): //dump($ar); // Тип поселка
 						      if($ar["URL_ID"] == 'dacha')$ar["VALUE"] = 'Дачный';
 						      if($ar["URL_ID"] == 'cottage')$ar["VALUE"] = 'ИЖС';
 						    ?>
@@ -161,7 +161,7 @@ $this->setFrameMode(true);
 							      <label class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled': '' ?>" data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>"><?=$ar["VALUE"];?></label>
 									</div>
 						    <?endforeach;?>
-								<?foreach($arResult["ITEMS"][182]["VALUES"] as $val => $ar): //dump($ar); // Акция?>
+								<?foreach($arResult["ITEMS"][192]["VALUES"] as $val => $ar): //dump($ar); // Акция?>
 									<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
 										<input
 											type="checkbox"
@@ -181,7 +181,7 @@ $this->setFrameMode(true);
 					<div class="row extra-options__parameters">
 						<div class="order-lg-1 col-md-3 col-lg-2 col-sm-4">
 							<div class="extra-options__parameters-title">Коммуникация</div>
-							<?foreach($arResult["ITEMS"][325]["VALUES"] as $val => $ar): //dump($ar); // Электричество
+							<?foreach($arResult["ITEMS"][197]["VALUES"] as $val => $ar): //dump($ar); // Электричество
 				        if($ar["URL_ID"] == 'y'):?>
 								<div class="extra-options__parameters-input">
 									<input
@@ -202,7 +202,7 @@ $this->setFrameMode(true);
 								</div>
 							<?endif;
 				      endforeach;?>
-							<?foreach($arResult["ITEMS"][326]["VALUES"] as $val => $ar): //dump($ar); // Водопровод
+							<?foreach($arResult["ITEMS"][198]["VALUES"] as $val => $ar): //dump($ar); // Водопровод
 				        if($ar["URL_ID"] == 'y'):?>
 								<div class="extra-options__parameters-input">
 									<input
@@ -225,7 +225,7 @@ $this->setFrameMode(true);
 								</div>
 							<?endif;
 				      endforeach;?>
-							<?foreach($arResult["ITEMS"][327]["VALUES"] as $val => $ar): //dump($ar); // Газ
+							<?foreach($arResult["ITEMS"][199]["VALUES"] as $val => $ar): //dump($ar); // Газ
 				        if($ar["URL_ID"] == 'y'):?>
 								<div class="extra-options__parameters-input">
 									<input
@@ -254,7 +254,7 @@ $this->setFrameMode(true);
 							<div class="row">
 								<div class="col-sm-6 col-lg-12">
 									<div class="extra-options__parameters-title">Как добраться</div>
-									<?foreach($arResult["ITEMS"][328]["VALUES"] as $val => $ar): //dump($ar); // Автобус
+									<?foreach($arResult["ITEMS"][200]["VALUES"] as $val => $ar): //dump($ar); // Автобус
 						        if($ar["URL_ID"] == 'y'):?>
 						        <div class="extra-options__parameters-input">
 											<input
@@ -274,7 +274,7 @@ $this->setFrameMode(true);
 										</div>
 									<?endif;
 						      endforeach;?>
-									<?foreach($arResult["ITEMS"][329]["VALUES"] as $val => $ar): //dump($ar); // Электричка
+									<?foreach($arResult["ITEMS"][201]["VALUES"] as $val => $ar): //dump($ar); // Электричка
 						        if($ar["URL_ID"] == 'y'):?>
 						        <div class="extra-options__parameters-input">
 											<input
@@ -311,7 +311,7 @@ $this->setFrameMode(true);
 							<div class="extra-options__parameters-title">Природа</div>
 							<div class="extra-options__parameters-input">
 								<div class="hide">
-									<?foreach($arResult["ITEMS"][330]["VALUES"] as $val => $ar): //dump($ar); // Водоем
+									<?foreach($arResult["ITEMS"][202]["VALUES"] as $val => $ar): //dump($ar); // Водоем
 					        if($ar["URL_ID"] != 'no'):?>
 				          <input
 				            type="checkbox"
@@ -323,7 +323,7 @@ $this->setFrameMode(true);
 				          /> <?=$ar["VALUE"];?>
 					      <?endif;
 					      endforeach;?></div>
-								<input class="sr-only iconDouble" type="checkbox" id="vodoem" data-id1="<?=$arResult["ITEMS"][330]["VALUES"][518]["CONTROL_ID"]?>" data-id2="<?=$arResult["ITEMS"][330]["VALUES"][519]["CONTROL_ID"]?>" data-id3="<?=$arResult["ITEMS"][330]["VALUES"][520]["CONTROL_ID"]?>">
+								<input class="sr-only iconDouble" type="checkbox" id="vodoem" data-id1="<?=$arResult["ITEMS"][202]["VALUES"][293]["CONTROL_ID"]?>" data-id2="<?=$arResult["ITEMS"][202]["VALUES"][294]["CONTROL_ID"]?>" data-id3="<?=$arResult["ITEMS"][202]["VALUES"][295]["CONTROL_ID"]?>">
 								<label class="d-flex w-100 align-items-center" for="vodoem"><span class="icon icon--vodoem">
 									<svg xmlns="http://www.w3.org/2000/svg" width="23.111" height="14.182" viewBox="0 0 23.111 14.182" class="inline-svg">
 										<g transform="translate(0 -98.909)">
@@ -350,7 +350,7 @@ $this->setFrameMode(true);
 							</div>
 							<div class="extra-options__parameters-input">
 								<div class="hide">
-									<?foreach($arResult["ITEMS"][331]["VALUES"] as $val => $ar): //dump($ar); // Лес
+									<?foreach($arResult["ITEMS"][203]["VALUES"] as $val => $ar): //dump($ar); // Лес
 					        if($ar["URL_ID"] != 'no'):?>
 				          <input
 				            type="checkbox"
@@ -362,14 +362,14 @@ $this->setFrameMode(true);
 				          /> <?=$ar["VALUE"];?> лес
 					      <?endif;
 					      endforeach;?></div>
-								<input class="sr-only iconDouble" type="checkbox" id="les" data-id1="<?=$arResult["ITEMS"][331]["VALUES"][521]["CONTROL_ID"]?>" data-id2="<?=$arResult["ITEMS"][331]["VALUES"][522]["CONTROL_ID"]?>" data-id3="<?=$arResult["ITEMS"][331]["VALUES"][523]["CONTROL_ID"]?>" data-id4="<?=$arResult["ITEMS"][331]["VALUES"][524]["CONTROL_ID"]?>">
+								<input class="sr-only iconDouble" type="checkbox" id="les" data-id1="<?=$arResult["ITEMS"][203]["VALUES"][296]["CONTROL_ID"]?>" data-id2="<?=$arResult["ITEMS"][203]["VALUES"][297]["CONTROL_ID"]?>" data-id3="<?=$arResult["ITEMS"][203]["VALUES"][298]["CONTROL_ID"]?>" data-id4="<?=$arResult["ITEMS"][203]["VALUES"][299]["CONTROL_ID"]?>">
 								<label class="d-flex w-100 align-items-center" for="les"><span class="icon icon--les">
 									<svg xmlns="http://www.w3.org/2000/svg" width="17.38" height="24.833" viewBox="0 0 17.38 24.833" class="inline-svg">
 										<path d="M72.266,7.657a4.88,4.88,0,0,0-.51-.475,2.01,2.01,0,0,0-1.871-2.747c-.065,0-.13,0-.194.009a4.838,4.838,0,0,0-8.9-2.2,3.412,3.412,0,0,0-3.306,5.4l-.012.013a4.841,4.841,0,0,0,3.549,8.133,4.93,4.93,0,0,0,.743-.056l1.787,2.76-.871,5.642a.6.6,0,0,0,.133.486.623.623,0,0,0,.476.211h3.186a.623.623,0,0,0,.476-.211.6.6,0,0,0,.133-.486l-.856-5.547,1.84-2.842a4.932,4.932,0,0,0,.652.044,4.841,4.841,0,0,0,3.549-8.133Zm-7.349,9.29-1.254-1.938a4.829,4.829,0,0,0,1.2-1.123,4.826,4.826,0,0,0,1.275,1.167Z"
 											transform="translate(-56.177)" class="color-fill" />
 									</svg></span><span class="text"><span>Лес</span></span></label>
 							</div>
-							<?foreach($arResult["ITEMS"][332]["VALUES"] as $val => $ar): //dump($ar); // Пляж для купания
+							<?foreach($arResult["ITEMS"][204]["VALUES"] as $val => $ar): //dump($ar); // Пляж для купания
 				        if($ar["URL_ID"] == 'y'):?>
 								<div class="extra-options__parameters-input">
 									<input
@@ -431,7 +431,7 @@ $this->setFrameMode(true);
 		          $arShosse['vostok']['NAME'] = 'Восток';
 		          $arShosse['zapad']['NAME'] = 'Запад';
 		          $arShosse['other']['NAME'] = 'Другие';
-		          foreach($arResult["ITEMS"][184]["VALUES"] as $val => $ar){
+		          foreach($arResult["ITEMS"][194]["VALUES"] as $val => $ar){
 		            // echo $ar['VALUE'].' - '.$ar['URL_ID'].'<br>';
 		            switch ($ar['URL_ID']) {
 		              case 'dmitrovskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
@@ -499,7 +499,7 @@ $this->setFrameMode(true);
 		        <div class="row">
 							<? // Группируем районы по первым буквам названий
 			        $prevLetter = '';
-			        foreach ($arResult["ITEMS"][183]["VALUES"] as $key => $value) {
+			        foreach ($arResult["ITEMS"][193]["VALUES"] as $key => $value) {
 			          $firstLetter = mb_strtoupper(mb_substr($value['VALUE'], 0, 1));
 			          if ($firstLetter != $prevLetter) $prevLetter = $firstLetter;
 			          $arRegion[$firstLetter][] = $value;

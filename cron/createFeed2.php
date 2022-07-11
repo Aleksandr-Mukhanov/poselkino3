@@ -16,6 +16,9 @@ foreach ($arFile as $key => $arStr)
 {
 	if ($key == 0 || $key == 1) continue; // dump($arStr);
 
+	$description = str_replace('&nbsp;',' ',$arStr[6]);
+	$description = trim(strip_tags($arStr[6]));
+
 	$xml_content .= '<offer internal-id="'.$arStr[0].'">';
 
     $xml_content .= '<type>'.$arStr[1].'</type>';
@@ -23,7 +26,7 @@ foreach ($arFile as $key => $arStr)
     $xml_content .= '<category>'.$arStr[3].'</category>';
     $xml_content .= '<url>'.$arStr[4].'</url>';
     $xml_content .= '<creation-date>'.$arStr[5].'</creation-date>';
-		$xml_content .= '<description>'.$arStr[6].'</description>';
+		$xml_content .= '<description>'.$description.'</description>';
 
     $xml_content .= '<location>';
       $xml_content .= '<country>'.$arStr[7].'</country>';

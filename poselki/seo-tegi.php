@@ -6,7 +6,7 @@ $arFilter = Array('IBLOCK_ID' => 1,'ACTIVE' => 'Y','!PROPERTY_SALES_PHASE' => [2
 if ($arrFilter) array_push($arFilter, $arrFilter); // dump($arrFilter);
 $arSelect = Array('ID','NAME','PROPERTY_5','PROPERTY_6','PROPERTY_PROVEDEN_GAZ','PROPERTY_ELECTRO_DONE','PROPERTY_PROVEDENA_VODA','PROPERTY_33','PROPERTY_45','PROPERTY_47','PROPERTY_8','PROPERTY_20','PROPERTY_77','PROPERTY_79','PROPERTY_2','PROPERTY_17','PROPERTY_120');
 $rsElements = CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSelect);
-while ($arElement = $rsElements->GetNext()) { // dump($arElement['NAME']);
+while ($arElement = $rsElements->GetNext()) {
 
     if (!$shosse) {// шоссе
         if (array_key_exists(179, $arElement['PROPERTY_5_VALUE'])) { // Дмитровское - север

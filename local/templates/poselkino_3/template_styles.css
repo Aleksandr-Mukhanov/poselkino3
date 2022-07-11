@@ -5,7 +5,7 @@
        url('/assets/fonts/rouble/rouble-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
-font-display: swap;
+  font-display: swap;
 }
 
 .hide{
@@ -13,6 +13,14 @@ font-display: swap;
 }
 .cost_home{
 	display: none;
+}
+
+.filter__region{
+  margin-right: 20px;
+}
+
+.page-va-list .metro_no_top .metro{
+  margin-top: 0;
 }
 
 .home-description{
@@ -60,6 +68,14 @@ font-display: swap;
   font-weight: 500;
   line-height: 1.2;
   margin-top: 0;
+}
+
+.page-va-list .area-in-village.offers__index{
+  padding-top: 0;
+}
+
+#block_url_houses, #block_url_plots{
+  display: none;
 }
 
 /* цвета шоссе */
@@ -116,6 +132,9 @@ font-display: swap;
   #regionModal .highway-block__title{
     top: -7px;
     left: 20px;
+  }
+  .page-va-list .metro-other{
+    margin-left: 0;
   }
 }
 
@@ -533,6 +552,9 @@ font-display: swap;
 	   width: auto;
 		 margin-left: auto;
 	 }
+  .list--grid .card-house__inline-value span {
+ 		display: inline;
+ 	}
 	.list--grid .card-house__inline svg {
 		margin-right: 7px;
 		width: 36px!important;
@@ -1166,6 +1188,21 @@ p.mesOk {
 	#modalFeedbackSale .modal-header h5 {
 		padding: 0 15px;
 	}
+
+  /* табы в сео блоке */
+  .filter__tab .nav{
+    justify-content: space-around;
+  }
+  .filter__tab .nav-link{
+    width: 100px;
+  }
+  .filter__tab .nav-link.btn{
+    font-size: 12px;
+    padding: 10px;
+  }
+  .filter__tab .nav-link svg{
+    margin-right: 5px;
+  }
 }
 
 /* увеличение размера */
@@ -1236,13 +1273,12 @@ p.mesOk {
 .content__tag-line a{
   font-size: 14px;
 }
+
 .page__sort .selectric {
 	border: none;
 }
 
-.selectric-select-bg-white span.label,
-.selectric .button,
-.selectric .label {
+.selectric-select-bg-white span.label, .selectric .button, .selectric .label {
     line-height: initial;
 }
 

@@ -13,6 +13,9 @@ use Bitrix\Main\Page\Asset,
   // получим наш поселок
   switch (SITE_SERVER_NAME) {
     case 'kp-koledino.ru': $villageID = 3487; break;
+    case 'kp-skurygino.ru': $villageID = 3596; break;
+    case 'hodaevskie-dachi.ru': $villageID = 3598; break;
+    // case '': $villageID = ; break;
   }
 
   $arOrder = Array('SORT'=>'ASC');

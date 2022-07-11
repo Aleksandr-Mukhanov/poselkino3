@@ -111,6 +111,36 @@ $(document).ready(function() {
   $('#raiting-area-slick').not('.slick-initialized').slick(getCard());
   $('#addressTab').not('.slick-initialized').slick(getCard());
   $('#addressTab').not('.slick-initialized').slick(getAddress());
+
+  $('#addressTabHouses, #addressTabPlots').not('.slick-initialized').slick(
+    {
+      infinite: false,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      arrows: false,
+      touchMove: false,
+      variableWidth: true,
+      responsive: [
+        {
+          breakpoint: 1366,
+          settings: {
+            slidesToShow: 2,
+          }
+        },{
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 2,
+          }
+        },{
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+          }
+        }
+      ]
+    }
+  );
+
   $('#similar_houses').not('.slick-initialized').slick(getCard());
   $('#house_in_village').not('.slick-initialized').slick(getCard());
 

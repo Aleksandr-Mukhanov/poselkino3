@@ -26,6 +26,24 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 	$cntAllVil++;
 }
 
+// получим кол-во участков
+$cntPlots = 0;
+$arOrder = Array("SORT"=>"ASC");
+$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y");
+$arSelect = Array("ID");
+$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+while($arElement = $rsElements->Fetch())
+	$cntAllPlots++;
+
+// получим кол-во домов
+$cntPlots = 0;
+$arOrder = Array("SORT"=>"ASC");
+$arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y");
+$arSelect = Array("ID");
+$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+while($arElement = $rsElements->Fetch())
+	$cntAllHouse++;
+
 // кнопочка обновления рейтинга
 $APPLICATION->AddPanelButton(
 	Array(

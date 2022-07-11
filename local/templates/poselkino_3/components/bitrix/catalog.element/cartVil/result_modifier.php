@@ -138,13 +138,13 @@
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
-		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
-		if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
-			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
-				$arPhoto[] = ResizeImage($val);
-			}
-		}
-		shuffle($arPhoto);
+		if($arElement["PREVIEW_PICTURE"])$arPhoto = ResizeImage($arElement["PREVIEW_PICTURE"]);
+		// if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
+		// 	foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
+		// 		$arPhoto[] = ResizeImage($val);
+		// 	}
+		// }
+		// shuffle($arPhoto);
 		// соберем участки
 		$arPlots[$arElement["ID"]] = [
 			"ID" => $arElement["ID"],

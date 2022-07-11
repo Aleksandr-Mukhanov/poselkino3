@@ -19,6 +19,7 @@ use Bitrix\Main\Page\Asset;
   $typeURL = $_REQUEST['TYPE_URL'];
   $plottage = $_REQUEST['PLOTTAGE'];
   $developerCode = $_REQUEST['DEVELOPER_CODE'];
+  $offerType = $_REQUEST['OFFER_TYPE'];
 
   // переопределим
   global $APPLICATION;
@@ -48,6 +49,19 @@ use Bitrix\Main\Page\Asset;
    $arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
 
   require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
+
+  if ($offerType == 'plots')
+  {
+    // получим участки
+    $arOrder = Array("SORT"=>"ASC");
+    $arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y");
+    $arSelect = Array("ID","PROPERTY_VILLAGE");
+    $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+    while ($arElement = $rsElements->Fetch())
+      $arVillageIDs[] = $arElement['PROPERTY_VILLAGE_VALUE'];
+    $arVillageIDs = array_unique($arVillageIDs);
+    $arrFilter['ID'] = $arVillageIDs;
+  }
 
   $arOurPage = explode('/map/',$ourPage);
   $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$arOurPage[0].'/');
@@ -227,6 +241,7 @@ use Bitrix\Main\Page\Asset;
       		"USE_PRODUCT_QUANTITY" => "N",
       		"TYPE_CARD" => 'list change_type',
       		"TEMPLATE_CARD" => 'map', // карточки для карта
+          "OFFER_TYPE" => $offerType, // участок, дом
       	),
       	false
       );?>

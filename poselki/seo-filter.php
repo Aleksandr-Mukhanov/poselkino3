@@ -20,6 +20,7 @@ if ($shosse) { // шоссе
   $urlNoDom = '/poselki/'.$shosse.'-shosse/kupit-uchastok/';
   $urlWithDom = '/poselki/'.$shosse.'-shosse/kupit-dom/';
   if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе'; // если пагинация
+  
   // url для км от МКАД
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
@@ -35,6 +36,7 @@ if ($shosse) { // шоссе
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
   }
+
   $arNameTeg = ['gaz','voda','do-1-milliona','do-2-milliona','izhs','snt','ryadom-s-lesom','u-vody'];
   foreach ($arNameTeg as $nameTeg) {
     switch ($domPos) {

@@ -74,8 +74,8 @@ switch (SITE_SERVER_NAME) {
   case 'eco-razdolie.ru': $phone = '+7(905)587-70-94'; break;
   case 'kp-koledino.ru': $phone = '+7(977)133-31-24'; break;
   case 'kp-ivanovka.ru': $phone = '+7(977)133-31-24'; break;
-  // case '': $phone = '+7(977)133-31-24'; break;
-  // case '': $phone = '+7(977)133-31-24'; break;
+  case 'kp-skurygino.ru': $phone = '+7(977)133-31-24'; break;
+  case 'hodaevskie-dachi.ru': $phone = '+7(977)133-31-24'; break;
   // case '': $phone = '+7(977)133-31-24'; break;
   // case '': $phone = ''; break;
 }

@@ -53,6 +53,29 @@ $(document).ready(function(){
   // замена рубля
 	$('.rep_rubl').html('<span class="rubl">a</span>');
 
+  // переключение в карте ссылок
+  $('.block_url__switch').on('click','.nav-item',function(){
+    event.preventDefault();
+    $('.nav-item a').removeClass('btn-success').addClass('btn-outline-secondary');
+    $(this).find('a').removeClass('btn-outline-secondary').addClass('btn-success');
+    blockUrl = $(this).attr('data-url');
+    $('.block_url').hide();
+    $('#'+blockUrl).show();
+  });
+
+  // изменение фильтров на главной
+  $('.changeFilterIndex').change(function(){
+    filterType = $(this).val();
+    $('.formFilterIndex').hide();
+    $('#'+filterType).show();
+    // $.post("/filterPlots.php",{
+		// 		filterType: filterType,
+		// 	},function(data){
+		// 		$('#filterLoading').html(data);
+		// 	}
+		// );
+  });
+
   // выбор типа в фильтре
   $('.changeTypeSelect').change(function(){
 
@@ -125,10 +148,10 @@ $(document).ready(function(){
 		id2 = $(this).attr('data-id2');
 		id3 = $(this).attr('data-id3');
 		id4 = $(this).attr('data-id4');
-		$('#'+id1).trigger("click");
-		$('#'+id2).trigger("click");
-		$('#'+id3).trigger("click");
-		$('#'+id4).trigger("click");
+		if (id1) $('#'+id1).trigger("click");
+		if (id2) $('#'+id2).trigger("click");
+		if (id3) $('#'+id3).trigger("click");
+		if (id4) $('#'+id4).trigger("click");
 	});
 
   // сортировка

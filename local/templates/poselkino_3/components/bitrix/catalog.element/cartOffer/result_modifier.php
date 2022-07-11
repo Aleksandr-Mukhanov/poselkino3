@@ -47,7 +47,7 @@ if ($villageCode)
 else
 	$arFilter = ['IBLOCK_ID'=>1,'ID'=>$villageID];
 
-$arSelect = Array('ID','NAME','CODE','PROPERTY_MKAD','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_TYPE','PROPERTY_SETTLEM','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_ELECTRO_DONE','PROPERTY_ELECTRO_KVT','PROPERTY_PROVEDEN_GAZ','PROPERTY_PROVEDENA_VODA','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_DEVELOPER_ID','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_UP_TO_VIEW','PROPERTY_CONTACTS','PROPERTY_PHONE','PROPERTY_PHONE','PROPERTY_PRICE_ARRANGE_INT','PROPERTY_SRC_MAP','PROPERTY_SITE','PROPERTY_RATING');
+$arSelect = Array('ID','NAME','CODE','PROPERTY_MKAD','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_TYPE','PROPERTY_SETTLEM','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_ELECTRO_DONE','PROPERTY_ELECTRO_KVT','PROPERTY_PROVEDEN_GAZ','PROPERTY_PROVEDENA_VODA','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_DEVELOPER_ID','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_UP_TO_VIEW','PROPERTY_CONTACTS','PROPERTY_PHONE','PROPERTY_PHONE','PROPERTY_PRICE_ARRANGE_INT','PROPERTY_SRC_MAP','PROPERTY_SITE','PROPERTY_RATING','PROPERTY_DOP_FOTO');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 if ($arElement = $rsElements->GetNext())
 {
@@ -132,7 +132,9 @@ if ($arElement = $rsElements->GetNext())
 		'RATING' => $arElement['PROPERTY_RATING_VALUE'],
 		'CNT_REVIEWS' => $reviewsText,
   ];
-} // dump($arVillage);
+
+	$arResult['PHOTO_VILLAGE'] = $arElement['PROPERTY_DOP_FOTO_VALUE'];
+}
 
 if ($offerType == 'plots') // если участки
 {
@@ -145,15 +147,15 @@ if ($offerType == 'plots') // если участки
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
 		if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
-		if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
-			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
+		if($arResult['PHOTO_VILLAGE']){
+			foreach ($arResult['PHOTO_VILLAGE'] as $val)
 				$arPhoto[] = ResizeImage($val);
-			}
+			shuffle($arPhoto);
 		}
 		// соберем участки
 		$arOffers[$arElement["ID"]] = [
 			"NAME" => $arElement["NAME"],
-      "CODE" => 'uchastki/'.$arElement["CODE"],
+      "URL" => '/kupit-uchastki/uchastok-'.$arElement["ID"].'/',
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
@@ -171,15 +173,15 @@ if ($offerType == 'plots') // если участки
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
 		if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
-		if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
-			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
+		if($arResult['PHOTO_VILLAGE']){
+			foreach ($arResult['PHOTO_VILLAGE'] as $val)
 				$arPhoto[] = ResizeImage($val);
-			}
+			shuffle($arPhoto);
 		}
 		// соберем участки
 		$arOffers[$arElement["ID"]] = [
 			"NAME" => $arElement["NAME"],
-      "CODE" => 'uchastki/'.$arElement["CODE"],
+      "URL" => '/kupit-uchastki/uchastok-'.$arElement["ID"].'/',
 			"IMG" => $arPhoto,
 			"PLOTTAGE" => $arElement["PROPERTY_PLOTTAGE_VALUE"],
 			"PRICE" => formatPrice($arElement["PROPERTY_PRICE_VALUE"]),
@@ -188,12 +190,12 @@ if ($offerType == 'plots') // если участки
 		unset($arPhoto);
   }
 
-  // $seoTitle = 'Купить участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
-	$seoTitle = 'Продажа участка в поселке '.$arVillage['NAME'].' - '.$plottage.' соток, за '.$price.' руб.';
-  // $seoH1 = 'Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей в поселке '.$arVillage['NAME'].'';
+  // $seoTitle = 'Купить участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.formatPrice($price).' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
+	$seoTitle = 'Продажа участка в поселке '.$arVillage['NAME'].' - '.$plottage.' соток, за '.formatPrice($price).' руб.';
+  // $seoH1 = 'Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.formatPrice($price).' рублей в поселке '.$arVillage['NAME'].'';
 	$seoH1 = 'Продажа участка № '.$number.' в коттеджном поселке '.$arVillage['NAME'];
-  // $setDescription = '▶ Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
-	$setDescription = 'Продажа участка в КП '.$arVillage['NAME'].' на '.$arVillage['SHOSSE'].' шоссе в Московской области. '.$arVillage['MKAD'].' км от МКАД. Площадь участка '.$plottage.' соток, стоимость сотки от '.$price.' руб. Коммуникации: на участке, газ '.$arVillage['PROVEDEN_GAZ'].'. Рейтинг поселка - '.$arVillage['RATING'].'. Количество отзывов - '.$arVillage['CNT_REVIEWS'].'.';
+  // $setDescription = '▶ Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.formatPrice($price).' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+	$setDescription = 'Продажа участка в КП '.$arVillage['NAME'].' на '.$arVillage['SHOSSE'].' шоссе в Московской области. '.$arVillage['MKAD'].' км от МКАД. Площадь участка '.$plottage.' соток, стоимость сотки от '.formatPrice($price).' руб. Коммуникации: на участке, газ '.$arVillage['PROVEDEN_GAZ'].'. Рейтинг поселка - '.$arVillage['RATING'].'. Количество отзывов - '.$arVillage['CNT_REVIEWS'].'.';
 
 }else{ // если дома
 
@@ -251,9 +253,9 @@ if ($offerType == 'plots') // если участки
     unset($arPhoto);
   }
 
-  $seoTitle = 'Купить дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
-  $seoH1 = 'Дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.$price.' рублей в поселке '.$arVillage['NAME'];
-  $setDescription = '▶ Дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.$price.' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+  $seoTitle = 'Купить дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.formatPrice($price).' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район';
+  $seoH1 = 'Дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.formatPrice($price).' рублей в поселке '.$arVillage['NAME'];
+  $setDescription = '▶ Дом (коттедж) из '.$material.', '.$areaHouse.' метров, '.$arVillage['MKAD'].' км от МКАД, '.$floors.' этажа, цена '.formatPrice($price).' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
 }
 
 $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'] = $seoH1;

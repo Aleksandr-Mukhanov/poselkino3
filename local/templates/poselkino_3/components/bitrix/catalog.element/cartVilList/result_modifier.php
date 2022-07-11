@@ -82,14 +82,14 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
   $arResult["NAV_STRING"] = $rsElements->GetPageNavStringEx($navComponentObject, "", "poselkino_nav");
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
-		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
-		if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
-		if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
-			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
-				$arPhoto[] = ResizeImage($val);
-			}
-		}
-		shuffle($arPhoto);
+		if($arElement["PREVIEW_PICTURE"])$arPhoto = ResizeImage($arElement["PREVIEW_PICTURE"]);
+		// if($arElement["DETAIL_PICTURE"])$arPhoto[] = ResizeImage($arElement["DETAIL_PICTURE"]);
+		// if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
+		// 	foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
+		// 		$arPhoto[] = ResizeImage($val);
+		// 	}
+		// }
+		// shuffle($arPhoto);
     // мин и макс площадь
     $plottage = $arElement["PROPERTY_PLOTTAGE_VALUE"];
     $minArea = ($minArea < $plottage) ? $plottage : $minArea;
@@ -157,8 +157,7 @@ $arResult["minArea"] = $minArea;
 $arResult["maxArea"] = $maxArea;
 
 // SET BROWSER TITLE
-$poselokName = "";
-$tempposelokName = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'])
+$poselokName = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'])
 	? $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']
 	: $arResult['NAME'];
 switch ($arResult['PROPERTIES']['TYPE']['VALUE_ENUM_ID']) {
@@ -218,11 +217,11 @@ if (formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0])==0) {
 }
 
 if($_REQUEST['OFFER_TYPE'] == 'plots'){
-  $seoTitle = 'Купить участок в '.$typeShort.' '.$tempposelokName.' ('.$typeLong.'), цены участков земли';
-  $setDescription = '▶ Земельные участки в '.$typeLong2.' '.$tempposelokName.' ▶ Купить участок под строительство в '.$typeShort.' '.$tempposelokName.' от '.$minPrice.' рублей ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+  $seoTitle = 'Купить участок в коттеджном поселке '.$poselokName.', цены';
+	$setDescription = '▶Участки в коттеджном поселке '.$poselokName.' Московской области. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
 }else{
-  $seoTitle = 'Купить дом в '.$typeShort.' '.$tempposelokName.' ('.$typeLong.'), цены на дома и коттеджи';
-  $setDescription = '▶ Дома и коттеджи в '.$typeLong2.' '.$tempposelokName.' ▶ Купить готовый дом в '.$typeShort.' '.$tempposelokName.' ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
+  $seoTitle = 'Купить дом в '.$typeShort.' '.$poselokName.' ('.$typeLong.'), цены на дома и коттеджи';
+  $setDescription = '▶ Дома и коттеджи в '.$typeLong2.' '.$poselokName.' ▶ Купить готовый дом в '.$typeShort.' '.$poselokName.' ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
 }
 
 $arResult['OFFER_TYPE'] = ($_REQUEST['OFFER_TYPE'] == 'plots') ? 'Участки' : 'Дома';
