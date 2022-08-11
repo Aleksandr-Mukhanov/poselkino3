@@ -1202,7 +1202,7 @@ $this->setFrameMode(true);
                                     $arShosse['ug-vostok']['SHOSSE'][] = $ar;
                                     break;
                                 case 'kashirskoe':
-                                    $arShosse['ug-vostok']['SHOSSE'][] = $ar;
+                                    $arShosse['ug']['SHOSSE'][] = $ar;
                                     break;
                                 case 'novoryazanskoe':
                                     $arShosse['ug-vostok']['SHOSSE'][] = $ar;

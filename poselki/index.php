@@ -31,7 +31,7 @@ $h1 = 'Поселки в Московской области';
 $h2 = '<h2 class="h2">Земельные участки под дом и дачу с хорошим месторасположением</h2>';
 $SEO_text = '<p>База коттеджных и дачных поселков в Московской области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
-$urlNoDom = '/poselki/kupit-uchastok/';
+$urlNoDom = '/kupit-uchastki/';
 $urlWithDom = '/poselki/kupit-dom/';
 if ($pagen) $pageTitleDesc = 'Поселки';
 
@@ -85,7 +85,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                     array(
                         "CACHE_GROUPS" => "Y",
                         "CACHE_TIME" => "36000000",
-                        "CACHE_TYPE" => "N",
+                        "CACHE_TYPE" => "A",
                         "CONVERT_CURRENCY" => "N",
                         "DISPLAY_ELEMENT_COUNT" => "Y",
                         "FILTER_NAME" => "arrFilter",
@@ -153,8 +153,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-7 col-lg-6">
-                    <h1 class="h2"><?= $h1 ?> <span
-                                class="text-secondary"><? $APPLICATION->ShowViewContent('COUNT_POS'); ?></span></h1>
+                    <h1 class="h2"><?= $h1 ?> <span class="text-secondary"><?$APPLICATION->ShowViewContent('COUNT_POS');?></span></h1>
                 </div>
                 <div class="col-xl-5 col-lg-6 filter__tab d-none mb-3 mb-md-0 d-sm-block">
                     <ul class="nav justify-content-lg-end mt-lg-0 mt-2">
@@ -166,30 +165,24 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                         if ($arrFilter['=PROPERTY_2'][0] == 4) $posWithDom = true;
                         ?>
                         <? if (!$priceURL && !$areaUrl): // убираем для цены и площади?>
-                            <li class="nav-item"><a
-                                        class="nav-link btn <?= (!$posNoDom && !$posWithDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill"
-                                        href="<?= htmlspecialcharsbx($urlAll) ?>">Поселки</a></li>
+                            <li class="nav-item"><a class="nav-link btn <?= (!$posNoDom && !$posWithDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill" href="<?= htmlspecialcharsbx($urlAll) ?>">Поселки</a></li>
                         <? endif; ?>
                         <? if ($urlWithDom): // убираем у цены, если участки?>
-                            <li class="nav-item"><a
-                                        class="nav-link btn <?= ($posWithDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill"
-                                        href="<?= htmlspecialcharsbx($urlWithDom) ?>">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8"
-                                         viewBox="0 0 17.323 15.8" class="inline-svg">
-                                        <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z"
-                                              transform="translate(.15 -22.745)"/>
-                                    </svg>
-                                    Дома</a></li>
+                            <li class="nav-item">
+                              <a class="nav-link btn <?= ($posWithDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill" href="<?= htmlspecialcharsbx($urlWithDom) ?>">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8"
+                                     viewBox="0 0 17.323 15.8" class="inline-svg">
+                                    <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"/>
+                                </svg>
+                                Дома</a></li>
                         <? endif; ?>
                         <? if ($urlNoDom): // убираем у цены, если дома?>
-                            <li class="nav-item"><a
-                                        class="nav-link btn <?= ($posNoDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill"
-                                        href="<?= htmlspecialcharsbx($urlNoDom) ?>">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523"
-                                         viewBox="0 0 16.523 16.523" class="inline-svg">
-                                        <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
-                                    </svg>
-                                    Участки</a></li>
+                            <li class="nav-item"><a class="nav-link btn <?= ($posNoDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill" href="<?= htmlspecialcharsbx($urlNoDom) ?>">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523"
+                                   viewBox="0 0 16.523 16.523" class="inline-svg">
+                                  <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
+                              </svg>
+                              Участки</a></li>
                         <? endif; ?>
                     </ul>
                 </div>
@@ -205,19 +198,19 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                 <div class="text-secondary">Сортировать:</div>
                 <div class="ml-2 ml-md-3 ml-lg-4">
                     <select class="select-success select-bold hover-white" id="sortinng">
-                        <option value="sort" <? if ($_REQUEST['sort'] == 'sort') echo 'selected' ?>>По релевантности
-                        </option>
-                        <option value="rating" <? if ($_REQUEST['sort'] == 'rating') echo 'selected' ?>>По рейтингу
-                        </option>
-                        <option value="cost_ask" <? if ($_REQUEST['sort'] == 'cost_ask') echo 'selected' ?>>Сначала
-                            дешевле
-                        </option>
-                        <option value="cost_desc" <? if ($_REQUEST['sort'] == 'cost_desc') echo 'selected' ?>>Сначала
-                            дороже
-                        </option>
-                        <option value="mkad" <? if ($_REQUEST['sort'] == 'mkad') echo 'selected' ?>>Удаленность от
-                            МКАД
-                        </option>
+                      <option value="sort" <? if ($_REQUEST['sort'] == 'sort') echo 'selected' ?>>По релевантности
+                      </option>
+                      <option value="rating" <? if ($_REQUEST['sort'] == 'rating') echo 'selected' ?>>По рейтингу
+                      </option>
+                      <option value="cost_ask" <? if ($_REQUEST['sort'] == 'cost_ask') echo 'selected' ?>>Сначала
+                          дешевле
+                      </option>
+                      <option value="cost_desc" <? if ($_REQUEST['sort'] == 'cost_desc') echo 'selected' ?>>Сначала
+                          дороже
+                      </option>
+                      <option value="mkad" <? if ($_REQUEST['sort'] == 'mkad') echo 'selected' ?>>Удаленность от
+                          МКАД
+                      </option>
                     </select>
                 </div>
             </div>
@@ -269,8 +262,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="31.844" height="45.466"
                              viewBox="0 0 31.844 45.466" class="inline-svg">
-                            <path d="M35.385,4.664a15.922,15.922,0,0,0-22.519,0C7.3,10.229,6.61,20.7,11.369,27.043L24.126,45.466l12.738-18.4A17.294,17.294,0,0,0,40.046,16.7,17.169,17.169,0,0,0,35.385,4.664ZM24.273,21.589a5.812,5.812,0,1,1,5.812-5.812A5.82,5.82,0,0,1,24.273,21.589Z"
-                                  transform="translate(-8.203)"/>
+                            <path d="M35.385,4.664a15.922,15.922,0,0,0-22.519,0C7.3,10.229,6.61,20.7,11.369,27.043L24.126,45.466l12.738-18.4A17.294,17.294,0,0,0,40.046,16.7,17.169,17.169,0,0,0,35.385,4.664ZM24.273,21.589a5.812,5.812,0,1,1,5.812-5.812A5.82,5.82,0,0,1,24.273,21.589Z" transform="translate(-8.203)"/>
                         </svg>
                     </div>
                     <div class="h1">Поиск по карте</div>
@@ -283,11 +275,9 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
         <div class="container">
             <div class="block-page__title block-page__title--icon">
                 <div class="icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="23.751" height="21.602" viewBox="0 0 23.751 21.602"
-                         class="inline-svg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="23.751" height="21.602" viewBox="0 0 23.751 21.602" class="inline-svg">
                         <g transform="translate(225.776 -396.448)" opacity="0.5">
-                            <path d="M19.67,2.7c3.766,0,5.306-2.859,5.306-5.443a4.968,4.968,0,0,0-5.2-5.031,5.131,5.131,0,0,0-5.388,5.443A5.093,5.093,0,0,0,19.67,2.7Zm.137-1.237c-1.539,0-2.419-2.172-2.419-4.151,0-2.089.6-3.849,2.2-3.849,1.649,0,2.392,2.172,2.392,4.151C21.979-.3,21.374,1.461,19.807,1.461ZM9.663,2.808c.137-.027.165-.082.275-.33l8.055-20.04a3.975,3.975,0,0,0,.3-.825c0-.082-.082-.165-.275-.165-.715,0-5.965.632-11.243.632a5.27,5.27,0,0,0-5.553,5.443,5,5,0,0,0,5.2,5.058,5.223,5.223,0,0,0,5.388-5.443,4.945,4.945,0,0,0-1.512-3.6v-.055c.825-.082,4.069-.3,5.8-.412-.247.577-5.828,13.608-8.494,19.655-.137.33,0,.357.3.3ZM6.64-8.656c-1.622,0-2.392-2.2-2.392-4.178,0-2.034.66-3.849,2.227-3.849,1.512,0,2.337,1.814,2.337,4.178C8.811-10.36,8.234-8.656,6.64-8.656Z"
-                                  transform="translate(-227 415)" fill="#919fa3"/>
+                            <path d="M19.67,2.7c3.766,0,5.306-2.859,5.306-5.443a4.968,4.968,0,0,0-5.2-5.031,5.131,5.131,0,0,0-5.388,5.443A5.093,5.093,0,0,0,19.67,2.7Zm.137-1.237c-1.539,0-2.419-2.172-2.419-4.151,0-2.089.6-3.849,2.2-3.849,1.649,0,2.392,2.172,2.392,4.151C21.979-.3,21.374,1.461,19.807,1.461ZM9.663,2.808c.137-.027.165-.082.275-.33l8.055-20.04a3.975,3.975,0,0,0,.3-.825c0-.082-.082-.165-.275-.165-.715,0-5.965.632-11.243.632a5.27,5.27,0,0,0-5.553,5.443,5,5,0,0,0,5.2,5.058,5.223,5.223,0,0,0,5.388-5.443,4.945,4.945,0,0,0-1.512-3.6v-.055c.825-.082,4.069-.3,5.8-.412-.247.577-5.828,13.608-8.494,19.655-.137.33,0,.357.3.3ZM6.64-8.656c-1.622,0-2.392-2.2-2.392-4.178,0-2.034.66-3.849,2.227-3.849,1.512,0,2.337,1.814,2.337,4.178C8.811-10.36,8.234-8.656,6.64-8.656Z" transform="translate(-227 415)" fill="#919fa3"/>
                         </g>
                     </svg>
                 </div>
@@ -343,11 +333,10 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                         <div class="footer-feedback__wrap">
                             <div class="row align-items-center text-center text-lg-left">
                                 <div class="offset-lg-1 col-lg-6 offset-xl-2 col-xl-5">
-                                    <h3>Нашли ошибку или неактуальную информацию?</h3>
+                                  <h3>Нашли ошибку или неактуальную информацию?</h3>
                                 </div>
-                                <div class="col-xl-3 col-lg-4 px-3 mt-3 mt-lg-0"><a
-                                            class="btn btn-outline-secondary rounded-pill" href="#" data-toggle="modal"
-                                            data-target="#sendError" data-id-button="SEND_ERROR">Сообщить об ошибке</a>
+                                <div class="col-xl-3 col-lg-4 px-3 mt-3 mt-lg-0">
+                                  <a class="btn btn-outline-secondary rounded-pill" href="#" data-toggle="modal" data-target="#sendError" data-id-button="SEND_ERROR">Сообщить об ошибке</a>
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,6 @@ Disallow: /*?view_result=
 Disallow: /*&view_result=
 Disallow: /poselki/filter
 Disallow: /*DIFFERENT
-Disallow: /kupit-uchastki
 Disallow: /doma
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel
@@ -90,7 +89,6 @@ Disallow: /*&view_result=
 Disallow: /poselki/filter
 Disallow: /*DIFFERENT
 Disallow: /null_price.php
-Disallow: /kupit-uchastki
 Disallow: /doma
 Disallow: /test_feed*
 Disallow: /bitrix_my_panel

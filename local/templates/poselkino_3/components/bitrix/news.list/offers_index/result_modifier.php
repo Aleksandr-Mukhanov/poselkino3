@@ -11,11 +11,11 @@ foreach($arResult["ITEMS"] as $key => $arOffer)
 	// сформируем фото
 	if ($arOffer["PREVIEW_PICTURE"]) $arPhoto[] = ResizeIMG($arOffer["PREVIEW_PICTURE"]);
 	if ($arOffer["DETAIL_PICTURE"]) $arPhoto[] = ResizeIMG($arOffer["DETAIL_PICTURE"]);
-	if ($arOffer['PROPERTIES']['DOP_PHOTO']['VALUE']){
-		foreach ($arOffer['PROPERTIES']['DOP_PHOTO']['VALUE'] as $val)
-			$arPhoto[] = ResizeIMG($val);
-		shuffle($arPhoto);
-	}
+	// if ($arOffer['PROPERTIES']['DOP_PHOTO']['VALUE']){
+	// 	foreach ($arOffer['PROPERTIES']['DOP_PHOTO']['VALUE'] as $val)
+	// 		$arPhoto[] = ResizeIMG($val);
+	// 	shuffle($arPhoto);
+	// }
 	$arResult["ITEMS"][$key]['IMG'] = $arPhoto;
 
 	$arResult["ITEMS"][$key]['URL'] = '/kupit-uchastki/uchastok-'.$arOffer['ID'].'/';

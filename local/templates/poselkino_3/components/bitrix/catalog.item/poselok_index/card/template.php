@@ -24,6 +24,8 @@ use Bitrix\Main\Grid\Declension;
 
 $domPos = $_REQUEST['DOMA_CODE'];
 
+if ($item['PROPERTIES']['NAME_OTHER']['VALUE']) $productTitle = $item['PROPERTIES']['NAME_OTHER']['VALUE'];
+
 // тип поселка
 $idTypePos = $item['PROPERTIES']['TYPE']['VALUE_ENUM_ID'];
 if($domPos){

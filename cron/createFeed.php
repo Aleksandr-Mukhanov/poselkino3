@@ -24,12 +24,14 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 	// if($arElement['PROPERTY_DEVELOPER_ID_VALUE'])
 	// 	$arDeveloper = getElHL(5,[],['UF_XML_ID'=>$arElement['PROPERTY_DEVELOPER_ID_VALUE']],['ID','UF_NAME','UF_PHONE']);
 
-  $category = ($arElement['PROPERTY_DOMA_ENUM_ID'] == 3) ? 'участок' : 'дом';
+	$villageTypeID = $arElement['PROPERTY_DOMA_ENUM_ID']; // Наличие домов: 3 - Участки, 256 - Дома и участки
+
+  $category = ($villageTypeID == 3 || $villageTypeID == 256) ? 'участок' : 'дом';
   $creation_date = strtotime($arElement['DATE_CREATE']);
-  // $price = ($arElement['PROPERTY_DOMA_ENUM_ID'] == 3) ? $arElement['PROPERTY_PRICE_SOTKA_VALUE'][0] : $arElement['PROPERTY_HOME_VALUE_VALUE'][0];
+  // $price = ($villageTypeID == 3 || $villageTypeID == 256) ? $arElement['PROPERTY_PRICE_SOTKA_VALUE'][0] : $arElement['PROPERTY_HOME_VALUE_VALUE'][0];
 	$price = $arElement['PROPERTY_COST_LAND_IN_CART_VALUE'][0];
-  $unit = ($arElement['PROPERTY_DOMA_ENUM_ID'] == 3) ? 'сотка' : 'кв. м';
-  $area = ($arElement['PROPERTY_DOMA_ENUM_ID'] == 3) ? '<lot-area><value>'.$arElement['PROPERTY_PLOTTAGE_VALUE'][0].'</value><unit>сотка</unit></lot-area>' : '<area><value>'.$arElement['PROPERTY_HOUSE_AREA_VALUE'][0].'</value><unit>кв. м</unit></area>';
+  $unit = ($villageTypeID == 3 || $villageTypeID == 256) ? 'сотка' : 'кв. м';
+  $area = ($villageTypeID == 3 || $villageTypeID == 256) ? '<lot-area><value>'.$arElement['PROPERTY_PLOTTAGE_VALUE'][0].'</value><unit>сотка</unit></lot-area>' : '<area><value>'.$arElement['PROPERTY_HOUSE_AREA_VALUE'][0].'</value><unit>кв. м</unit></area>';
 
 	// разбивка по шоссе
 	$highway = array_values($arElement['PROPERTY_SHOSSE_VALUE'])[0];

@@ -17,15 +17,15 @@ if ($shosse) { // шоссе
   $UF_Code = $shosse;
   $APPLICATION->AddChainItem($arNames['NAME'].' шоссе',"/poselki/".$shosse."-shosse/",true);
   $urlAll = '/poselki/'.$shosse.'-shosse/';
-  $urlNoDom = '/poselki/'.$shosse.'-shosse/kupit-uchastok/';
+  $urlNoDom = '/kupit-uchastki/'.$shosse.'-shosse/';
   $urlWithDom = '/poselki/'.$shosse.'-shosse/kupit-dom/';
   if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе'; // если пагинация
-  
+
   // url для км от МКАД
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
         $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
@@ -41,7 +41,7 @@ if ($shosse) { // шоссе
   foreach ($arNameTeg as $nameTeg) {
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$shosse.'-shosse-'.$nameTeg.'/';
+        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-'.$nameTeg.'/';
         break;
       case 'withDom': // Дома
         $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-'.$nameTeg.'/';
@@ -50,7 +50,7 @@ if ($shosse) { // шоссе
         $urlTeg = '/poselki/'.$shosse.'-shosse-'.$nameTeg.'/';
         break;
     }
-    if (!$domPos) $urlTeg = str_replace('/poselki/','/poselki/kupit-uchastok/',$urlTeg); // у поселков нет
+    if (!$domPos) $urlTeg = str_replace('/poselki/','/kupit-uchastki/',$urlTeg); // у поселков нет
     $arTegs[$nameTeg]['url'] = $urlTeg;
   }
 
@@ -69,14 +69,14 @@ if ($rayon) { // район
   $UF_Code = $rayon;
   $APPLICATION->AddChainItem($arNames['NAME'].' район',"/poselki/".$rayon."-rayon/",true);
   $urlAll = '/poselki/'.$rayon.'-rayon/';
-  $urlNoDom = '/poselki/'.$rayon.'-rayon/kupit-uchastok/';
+  $urlNoDom = '/kupit-uchastki/'.$rayon.'-rayon/';
   $urlWithDom = '/poselki/'.$rayon.'-rayon/kupit-dom/';
   if ($pagen) $pageTitleDesc = $arNames['NAME'].' район поселки'; // если пагинация
 
   // url для С газом
   switch ($domPos) {
     case 'noDom': // Участки
-      $urlTeg = "/poselki/kupit-uchastok/".$rayon."-rayon-gaz/";
+      $urlTeg = "/kupit-uchastki/".$rayon."-rayon-gaz/";
       break;
     case 'withDom': // Дома
       $urlTeg = "/poselki/kupit-dom/".$rayon."-rayon-gaz/";
@@ -137,7 +137,7 @@ if ($domPos) { // если выбор с домом или без
       $UF_Code = 'kupit-uchastok';
       $propFilter = 'PROPERTY_120';
       $nameDomPos = 'Купить участок';
-      $APPLICATION->AddChainItem('Участки',"/poselki/kupit-uchastok/",true);
+      $APPLICATION->AddChainItem('Участки',"/kupit-uchastki/",true);
       break;
     case 'withDom':
       $arrFilter['=PROPERTY_2'] = [4,256];
@@ -207,7 +207,7 @@ if ($mkadKM) { // выбор по км от мкад
     foreach ($onlyShosse as $key => $val) {
       switch ($domPos) {
         case 'noDom': // Участки
-          $urlTeg = '/poselki/kupit-uchastok/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
           break;
         case 'withDom': // Дома
           $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
@@ -221,7 +221,7 @@ if ($mkadKM) { // выбор по км от мкад
     // url для С газом
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/poselki/kupit-uchastok/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-mkad/";
         break;
       case 'withDom': // Дома
         $urlTeg = "/poselki/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
@@ -234,7 +234,7 @@ if ($mkadKM) { // выбор по км от мкад
     // url для ИЖС
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/poselki/kupit-uchastok/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-mkad-izhs/";
         break;
       case 'withDom': // Дома
         $urlTeg = "/poselki/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
@@ -336,7 +336,7 @@ if($priceURL){ // выборка по цене
   foreach ($onlyShosse as $key => $val) {
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
+        $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
         break;
       case 'withDom': // Дома
         $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
@@ -483,7 +483,7 @@ if($commun){ // коммуникации
   foreach ($onlyShosse as $key => $val) {
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$val.'-shosse-'.$commun2.'/';
+        $urlTeg = '/kupit-uchastki/'.$val.'-shosse-'.$commun2.'/';
         break;
       case 'withDom': // Дома
         $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-'.$commun2.'/';
@@ -498,7 +498,7 @@ if($commun){ // коммуникации
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/poselki/kupit-uchastok/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
         $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
@@ -633,7 +633,7 @@ if($typeURL){ // другие URL
   $UF_Code = ($domPos) ? $UF_Code.'-'.$typeURL : $typeURL; // для выборки
   $urlAll = "/poselki/".$typeURL."/";
   // if($typeURL != 'ryadom-avtobusnaya-ostanovka'){
-    $urlNoDom = "/poselki/kupit-uchastok-".$typeURL."/";
+    $urlNoDom = "/kupit-uchastki/".$typeURL."/";
     $urlWithDom = "/poselki/kupit-dom-".$typeURL."/";
   // }
   if($typeURL == 'kupit-letnij-dom' || $typeURL == 'kupit-zimnij-dom'){
@@ -649,7 +649,7 @@ if($typeURL){ // другие URL
       for ($i=10; $i < 60; $i+=10) { // до МКАД
         switch ($domPos) {
           case 'noDom': // Участки
-            $urlTeg = '/poselki/kupit-uchastok/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
             break;
           case 'withDom': // Дома
             $urlTeg = '/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/';

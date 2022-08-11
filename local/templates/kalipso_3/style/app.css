@@ -2364,11 +2364,11 @@ button {
 
 .reviews-index {
     padding: 110px 0 118px;
-    background-color: #fffcf6;
+    background-color: #fff;
 }
 
 .reviews-index .review {
-    border: 0;
+    border: 1px solid #D5D5D5;
 }
 
 #thanks p {

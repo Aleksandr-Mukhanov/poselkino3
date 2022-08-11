@@ -1,7 +1,7 @@
 <?
 use Bitrix\Main\Grid\Declension;
 $arrFilterVillage['IBLOCK_ID'] = 1;
-$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe'];
+$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
 $nameShosseDir = ['north','east','south','west'];
 
 if ($shosse)
@@ -357,9 +357,21 @@ if ($typeURL) // другие URL
       $arrFilterVillage['=PROPERTY_47'] = [39,40,41]; // Водоем
       $inChainItem = 'у воды';
       break;
+    case 'u-ozera':
+      $arrFilterVillage['=PROPERTY_47'] = [40]; // Водоем = Озеро
+      $inChainItem = 'У озера';
+      break;
+    case 'u-reki':
+      $arrFilterVillage['=PROPERTY_47'] = [39]; // Водоем = Река
+      $inChainItem = 'У реки';
+      break;
     case 'ryadom-zhd-stanciya':
       $arrFilterVillage['<=PROPERTY_71'] = 5; // Ближайшая ж/д станция расстояние до поселка, км
       $inChainItem = 'рядом с Ж/Д станцией';
+      break;
+    case 'ryadom-avtobusnaya-ostanovka':
+      $arrFilterVillage['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      $inChainItem = 'Рядом автобусная остановка';
       break;
     default:
       CHTTP::SetStatus("404 Not Found");

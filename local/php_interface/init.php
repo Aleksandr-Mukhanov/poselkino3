@@ -360,6 +360,7 @@ class MyClass
 {
   public function OnBeforeIBlockElementHandler(&$arFields)
   {
+		// dump($arFields);die();
 		if($arFields['PROPERTY_VALUES'][58])
 		{
 			foreach ($arFields['PROPERTY_VALUES'][58] as $value) {
@@ -372,6 +373,38 @@ class MyClass
           $APPLICATION->throwException('Не правильно введены координаты поселка! Нужно в формате: 99.99,99.99');
           return false;
 				}
+			}
+		}
+
+		if ($arFields['IBLOCK_ID'] == 1) // История стоимость сотки
+		{
+			$firstKey = array_key_first($arFields['PROPERTY_VALUES'][8]);
+			$priceMin = $arFields['PROPERTY_VALUES'][8][$firstKey]['VALUE'];
+
+			$idHL = 19;
+			$hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById($idHL)->fetch();
+			$entity = \Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock);
+			$entity_data_class = $entity->getDataClass();
+			$entity_table_name = $hlblock['TABLE_NAME'];
+			$sTableID = 'tbl_'.$entity_table_name;
+
+			$rsData = $entity_data_class::getList([
+				'order' => ['ID'=>'DESC'],
+			  'filter' => ['UF_VILLAGE' => $arFields['ID']],
+				'select' => ['UF_PRICE']
+			]);
+			$rsData = new CDBResult($rsData, $sTableID);
+			if ($arRes = $rsData->Fetch())
+				$priceMinOld = $arRes['UF_PRICE'];
+
+			if (!$priceMinOld || $priceMinOld != $priceMin)
+			{
+				$data =[
+					"UF_VILLAGE" => $arFields['ID'],
+			    "UF_PRICE" => $priceMin,
+					"UF_DATE" => date('d.m.Y')
+				];
+				$result = $entity_data_class::add($data);
 			}
 		}
   }

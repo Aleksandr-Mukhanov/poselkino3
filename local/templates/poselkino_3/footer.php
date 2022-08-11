@@ -34,8 +34,8 @@
       <div class="row">
         <div class="col-xl-9 col-lg-8 pr-xl-5">
           <div class="footer__nav">
-            <div class="footer__nav-item"><a href="/poselki/kottedzhnye/">Коттеджные поселки</a></div>
-            <div class="footer__nav-item"><a href="/poselki/dachnye/">Дачные поселки</a></div>
+            <div class="footer__nav-item"><a href="/poselki/">Коттеджные поселки</a></div>
+            <div class="footer__nav-item"><a href="/kupit-uchastki/">Земельные участки</a></div>
             <div class="footer__nav-item"><a href="/poselki/#shosse_rayon">По шоссе</a></div>
             <div class="footer__nav-item"><a href="/poselki/?show_rayon=y#shosse_rayon">По районам</a></div>
             <div class="footer__nav-item"><a href="/o-proekte/">О проекте</a></div>

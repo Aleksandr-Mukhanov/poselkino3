@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 CUtil::InitJSCore(array('fx'));
-// dump($arResult);
+dump($arResult['PROPERTIES']);
 ?>
 <div class="content" id="<?=$this->GetEditAreaId($arResult['ID'])?>">
   <div class="content__title">
@@ -35,3 +35,6 @@ CUtil::InitJSCore(array('fx'));
     </div>
   </div>
 </div>
+<?$this->SetViewTarget('blog_feedback__name');
+  echo $formName = ($arResult['PROPERTIES']['FORM_NAME']['VALUE']) ? $arResult['PROPERTIES']['FORM_NAME']['VALUE']: 'Хотите первыми узнавать об&nbsp;акциях и&nbsp;спецпредложениях по&nbsp;поселку?';
+$this->EndViewTarget();?>

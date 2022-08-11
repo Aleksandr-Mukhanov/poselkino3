@@ -15,6 +15,7 @@ use Bitrix\Main\Page\Asset,
     case 'kp-koledino.ru': $villageID = 3487; break;
     case 'kp-skurygino.ru': $villageID = 3596; break;
     case 'hodaevskie-dachi.ru': $villageID = 3598; break;
+    case 'gzelskoe-ozero.ru': $villageID = 4075; break;
     // case '': $villageID = ; break;
   }
 
@@ -55,6 +56,7 @@ use Bitrix\Main\Page\Asset,
 
   $arVideo = explode('https://youtu.be/',$arVillage['PROPERTY_VIDEO_VALUE']);
   $arCoordinates = explode(',',$arVillage['PROPERTY_COORDINATES_VALUE']);
+  $villageText = ($arVillage['PROPERTY_LEND_TEXT_VALUE']['TEXT']) ? $arVillage['~PROPERTY_LEND_TEXT_VALUE']['TEXT'] : '<p>'.$arVillage['PREVIEW_TEXT'].'</p>';
 
   // получим участки
   $arPlots = getElHL(15,['UF_SORT'=>'ASC'],['UF_VILLAGE'=>$arVillage['ID']],['*']);

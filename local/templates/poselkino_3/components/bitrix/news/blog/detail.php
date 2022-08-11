@@ -13,7 +13,7 @@
 $this->setFrameMode(true);
 
 use Bitrix\Main\Page\Asset;
- // ������.����������
+ // Яндекс.Поделиться
  Asset::getInstance()->addJs("//yastatic.net/es5-shims/0.0.2/es5-shims.min.js");
  Asset::getInstance()->addJs("//yastatic.net/share2/share.js");
 ?>
@@ -40,7 +40,7 @@ use Bitrix\Main\Page\Asset;
 	                <g transform="translate(0 -75.914)">
 	                  <path d="M14.517,79.964H2.243l2.929-2.929a.657.657,0,1,0-.929-.929l-4.05,4.05a.657.657,0,0,0,0,.929l4.05,4.051a.657.657,0,1,0,.929-.929L2.243,81.278H14.517a.657.657,0,1,0,0-1.314Z" transform="translate(0 0)" fill="#3c4b5a" />
 	                </g>
-	              </svg>��������� �����</a>
+	              </svg>Вернуться назад</a>
 	          </div>
 						<?$ElementID = $APPLICATION->IncludeComponent(
 							"bitrix:news.detail",
@@ -110,12 +110,10 @@ use Bitrix\Main\Page\Asset;
 			</div>
 			<div class="content__tag-line">
 				<span>#</span>
-				<?
-        /* ������� ��� ������� */
+				<? /* получим все разделы */
         $dbGroups = CIBlockElement::GetElementGroups($ElementID,true,["NAME","CODE"]);
-        while($arGroups = $dbGroups->Fetch()){
+        while($arGroups = $dbGroups->Fetch())
         	$GROUPS[] = $arGroups;
-        } // dump($GROUPS);
 
         foreach($GROUPS as $label){?>
 					<a href="/blog/<?=$label["CODE"]?>/"><?=$label["NAME"]?></a>
@@ -125,9 +123,94 @@ use Bitrix\Main\Page\Asset;
 	</div>
 </div>
 
+<div class="feedback-sale-form blog__feedback">
+    <div class="container">
+        <div class="feedback-form">
+            <div class="feedback-form__title pt-0 text-center text-lg-left">
+                <h2><?$APPLICATION->ShowViewContent('blog_feedback__name');?></h2>
+                <p>Подпишитесь на обновление цены участков</p>
+            </div>
+            <div class="feedback-form__body">
+                <form class="formSignToView" data-formID="sale_poselkino">
+                    <div class="row">
+                        <div class="col-lg-4 d-none d-lg-block">
+                            <div class="form-group">
+                                <input class="form-control nameSignToView" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 d-none d-lg-block">
+                            <div class="form-group">
+                                <input class="form-control phone telSignToView" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <button class="btn btn-warning rounded-pill btn-submit d-none d-lg-inline" type="submit">Хочу знать о скидках</button>
+                            <button class="btn btn-warning rounded-pill btn-submit d-inline d-lg-none" type="button" data-toggle="modal" data-target="#modalFeedbackSale">Хочу знать о скидках</button>
+                        </div>
+                        <div class="col-lg-12 d-none d-lg-block">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input class="custom-control-input" id="form-sale-policy" type="checkbox" name="form-sale-policy" checked="checked" required>
+                                <label class="custom-control-label" for="form-sale-policy">
+                                    Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp;
+                                    <a href="/politika-konfidentsialnosti/" class="font-weight-bold" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalFeedbackSale" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-light">
+            <div class="modal-header">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="text-uppercase" id="writeToUsLabel">Подписаться на обновление цены участков</h5>
+                    <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form class="formSignToView" data-formID="sale_poselkino">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input class="form-control nameSignToView" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input class="form-control phone telSignToView" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-warning rounded-pill btn-submit w-100" type="submit">Подписаться</button>
+                        </div>
+                        <div class="col-12">
+                            <div class="custom-control custom-checkbox custom-control-inline">
+                                <input class="custom-control-input" id="form-sale-policy" type="checkbox" name="form-sale-policy" checked="checked" required>
+                                <label class="custom-control-label" for="form-sale-policy">
+                                    Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp;
+                                    <a href="/politika-konfidentsialnosti/" class="font-weight-bold" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?global $otherFilter;
 $otherFilter = [
-	"!ID" => $ElementID // �� ���������� ���������
+	"!ID" => $ElementID // не показывать имеющийся
 ];?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:news.list",

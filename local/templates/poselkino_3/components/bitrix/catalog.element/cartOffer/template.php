@@ -91,8 +91,6 @@ $oneKVMetr = round($arResult['PROPERTIES']['PRICE']['VALUE'] / $arResult['PROPER
 $plottageDeclension = new Declension('сотка', 'сотки', 'соток');
 $plottageText = ($offerType == 'plots') ? $plottageDeclension->get($arResult['PROPERTIES'][$plottage]['VALUE']) : 'кв.м.';
 
-$finish = $arResult['PROPERTIES']['FINISH']['VALUE'];
-
 // План поселка
 $nProp = '';
 if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
@@ -103,7 +101,8 @@ if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
 	$frame = '';
 }
 
-$priceArrange = ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) ? $arResult['PROPERTIES']['ARRANGEMENT']['VALUE'] : $arResult['arVillage']['PRICE_ARRANGE'];
+if ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) $priceArrange = formatPriceSite($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']).' <span class="rep_rubl">руб.</span>';
+$priceArrange = ($priceArrange) ? $priceArrange : $arResult['arVillage']['PRICE_ARRANGE'];
 if (!$priceArrange) $priceArrange = 'Включено';
 
 if ($offerType == 'plots')
@@ -111,8 +110,12 @@ if ($offerType == 'plots')
 else
 	$h1 = $arResult['NAME'];
 
-$house_disclaimer = $arResult['PROPERTIES']['TYPE']['VALUE'];
-$house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'ready') ? 'В стоимость входит дом и участок' : 'Цена указана за дом без участка';
+if($offerType != 'plots')
+{
+	$finish = $arResult['PROPERTIES']['FINISH']['VALUE'];
+	$house_disclaimer = $arResult['PROPERTIES']['TYPE']['VALUE'];
+	$house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'ready') ? 'В стоимость входит дом и участок' : 'Цена указана за дом без участка';
+}
 ?>
 <div class="container mt-md-5">
 	<div class="row">
@@ -161,7 +164,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 		 <?if($offerType == 'plots'): // если участок?>
 			 <div class="home-info__slider-bottom justify-content-start">
 				 <div class="home-info-col">
-					 <div class="home-info-col__value"><?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE']?> м<sup>2</sup></div>
+					 <div class="home-info-col__value"><?=$arResult['PROPERTIES']['PLOTTAGE']['VALUE']?> соток</div>
 					 <div class="home-info-col__title">Площадь</div>
 				 </div>
 				 <div class="home-info-col">
@@ -238,7 +241,7 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 					<p class="house_disclaimer"><img src="/assets/img/svg/alert-triangle.svg" alt=""><?=$house_disclaimer_txt?></p>
 				<?endif;?>
 				<p>Поселок <a href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank" class="text-success a__bold"><?=$arResult['arVillage']['NAME']?></a></p>
-				<p>Поселок расположен в <?=$km_MKAD?> км от МКАД по <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
+				<p>Поселок расположен в <?=$km_MKAD?> км от МКАД - <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
 				<p><?=$arResult['PREVIEW_TEXT']?></p>
 			</div>
 			<div class="home-communication">
@@ -318,14 +321,12 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 			</div>
 			<div class="home-legal-information">
 				<h2>Юридическая информация</h2>
-				<p>
-					Категория замель: <?=$arResult['arVillage']['LAND_CAT']?><br>
-					Вид разрешенного использования: <?=$arResult['arVillage']['TYPE_USE']?><br>
-					Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?><br>
-					<?if($arResult['PROPERTIES']['CADASTRAL']['VALUE']):?>
-						Кадастровый номер: <?=$arResult['PROPERTIES']['CADASTRAL']['VALUE']?>
-					<?endif;?>
-				</p>
+				<p>Категория замель: <?=$arResult['arVillage']['LAND_CAT']?></p>
+				<p>Вид разрешенного использования: <?=$arResult['arVillage']['TYPE_USE']?></p>
+				<p>Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?></p>
+				<?if($arResult['PROPERTIES']['CADASTRAL']['VALUE']):?>
+					<p>Кадастровый номер: <?=$arResult['PROPERTIES']['CADASTRAL']['VALUE']?></p>
+				<?endif;?>
 				<p class="mt-2"><a class="font-weight-bold text-success text-decoration-none" href="<?=$arResult['arVillage']['SRC_MAP'] // Ссылка на публичную карту?>" target="_blank" rel="nofollow">
 					Посёлок на карте Росреестра&nbsp;
 					<svg xmlns="http://www.w3.org/2000/svg" width="6.847" height="11.883" viewBox="0 0 6.847 11.883" class="inline-svg">
@@ -364,10 +365,10 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 				);*/?>
 				<div class="d-flex flex-wrap flex-md-nowrap text-left justify-content-start mt-3 mt-md-5 align-items-center">
 				  <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-left width-md-auto">
-				    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="250"></a>
+				    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
 				  </div>
 				  <a class="btn btn-warning rounded-pill mb-3 mr-5" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с нами</a>
-				  <a class="d-none d-md-inline developer-logo" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="250"></a>
+				  <a class="d-none d-md-inline developer-logo" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
 				</div>
 			</div>
 			<div class="village-map page-map bg-white">
@@ -527,7 +528,9 @@ $house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'rea
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#writeToUs" data-id-button="WRITE_TO_US_FOOT">Задать вопрос</a>
 					<?}?>
-					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>'>
+
+					<input type="hidden" id="posInfo" data-namePos='<?=$arResult['arVillage']['NAME']?>' data-codePos='<?=$arResult['arVillage']['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['arVillage']['ID']?>' data-cntPos='<?=$arResult['arVillage']['UP_TO_VIEW']?>' data-manager='<?=$arResult['arVillage']['MANAGER']?>'>
+
 				</div>
 			</div>
 		</div>

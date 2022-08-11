@@ -8,7 +8,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 		<div class="container-fluid">
 			<h1 class="section-1__title">Коттеджный поселок <?=$arVillage['NAME']?></h1>
 			<div class="section-1__desc">Поселок с центральными коммуникациями в <?=$arVillage['PROPERTY_MKAD_VALUE']?> км от МКАД по <?=$shosseNameKomu?> шоссе</div>
-			<button class="button section-1__button" data-bs-toggle="modal" data-bs-target="#exampleModal2">Записаться на просмотр</button>
+			<button class="button section-1__button" data-bs-toggle="modal" data-bs-target="#exampleModal2">Узнать о скидках</button>
 		</div>
 	</div>
 </section>
@@ -18,7 +18,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<div class="col-lg-11">
 				<h2 class="section-title">О поселке</h2>
 				<div class="section-text">
-					<p><?=$arVillage['PREVIEW_TEXT']?></p>
+					<?=$villageText?>
 				</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 							</div>
 							<div class="card__title">Коммуникации</div>
 							<div class="card__desc">
-								<p>Подведено электричество <?=$arVillage['PROPERTY_ELECTRO_KVT_VALUE']?> кВт<?if($arVillage['PROPERTY_GAS_ENUM_ID'] == 15): // есть газ?>, магистральный газ по госпрограмме<?endif;?></p>
+								<p>Электричество <?=$arVillage['PROPERTY_ELECTRO_KVT_VALUE']?> кВт<?if($arVillage['PROPERTY_GAS_ENUM_ID'] == 15): // есть газ?>, магистральный газ по госпрограмме<?endif;?></p>
 							</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<div class="col-md mb-3">
 				<div class="advg">
 					<div class="advg__mark"> </div>
-					<p>Земельные участки от <?=formatPriceSite($arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0])?> ₽</p>
+					<p>Земельные участки от <?=formatPriceSite($arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0])?> ₽ за сотку</p>
 				</div>
 			</div>
 			<div class="col-lg mb-3">
@@ -153,14 +153,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
 				<div class="col-12 col-md mb-2">
 					<div class="input">
-						<input class="input__controll nameSignToView" type="text" placeholder="Ваше имя" />
+						<input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
 					</div>
 				</div>
 				<div class="col appeal-form__col-input lastNameSpam">
 					<input class="input-el lnameSignToView" type="text" name="lname" placeholder="Ваша фамилия">
 				</div>
 				<div class="col-12 col-md mb-2">
-					<input class="input__controll telSignToView" type="tel" placeholder="Номер телефона" />
+					<input class="input__controll telSignToView ym-record-keys" type="tel" placeholder="Номер телефона" required/>
 				</div>
 				<div class="col-12 col-lg mb-2">
 					<button class="button w-100">Записаться на экскурсию</button>
@@ -437,14 +437,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
 				<div class="col-12 col-md mb-2">
 					<div class="input">
-						<input class="input__controll nameSignToView" type="text" placeholder="Ваше имя" />
+						<input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
 					</div>
 				</div>
 				<div class="col appeal-form__col-input lastNameSpam">
 					<input class="input-el lnameSignToView" type="text" name="lname" placeholder="Ваша фамилия">
 				</div>
 				<div class="col-12 col-md mb-2">
-					<input class="input__controll telSignToView" type="tel" placeholder="Номер телефона" />
+					<input class="input__controll telSignToView ym-record-keys" type="tel" placeholder="Номер телефона" required/>
 				</div>
 				<div class="col-12 col-lg mb-2">
 					<button class="button w-100">Отправить заявку</button>

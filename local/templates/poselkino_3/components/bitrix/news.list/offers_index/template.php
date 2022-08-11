@@ -18,7 +18,10 @@ $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 ?>
 <div class="card-house-carousel house-in-village area-in-village">
 	<?foreach($arResult["ITEMS"] as $arOffer):
-		$arVillage = $arResult['arVillage'][$arOffer['PROPERTIES']['VILLAGE']['VALUE']];?>
+		$arVillage = $arResult['arVillage'][$arOffer['PROPERTIES']['VILLAGE']['VALUE']];
+		foreach ($arVillage['PROPERTY_DOP_FOTO_VALUE'] as $value)
+			$arOffer['IMG'][] = ['src' => CFile::GetPath($value)];
+		shuffle($arOffer['IMG']);?>
 		<div class="item mr-4">
 			<!-- Ссылка карточки-->
 			<div class="offer-house__item card-house house-in-village">

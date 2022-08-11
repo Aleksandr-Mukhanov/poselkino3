@@ -28,6 +28,8 @@ $ourDir = $APPLICATION->GetCurDir();
 
 $domPos = $_REQUEST['DOMA_CODE'];
 
+if ($item['PROPERTIES']['NAME_OTHER']['VALUE']) $productTitle = $item['PROPERTIES']['NAME_OTHER']['VALUE'];
+
 // тип поселка
 $idTypePos = $item['DISPLAY_PROPERTIES']['TYPE']['VALUE_ENUM_ID'];
 if ($domPos) {
@@ -279,12 +281,25 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                 </a>
               </div>
           <? endif; ?>
-          <? if ($item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть шоссе
+          <? if ($item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть 2-е шоссе
               $idEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1];
               $valEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_XML_ID'][1];
               $colorHW = getColorRoad($idEnumHW);
               $nameHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE'][1];
-              ?>
+          ?>
+              <div class="d-flex w-100 mt-1 mt-lg-2">
+                <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
+                  <span class="metro-color <?= $colorHW ?>"></span>
+                  <span class="metro-name"><?= $nameHW ?> шоссе</span>
+                </a>
+              </div>
+          <? endif; ?>
+          <? if ($item['PROPERTIES']['SHOSSE_DOP']['VALUE'][0]): // если есть доп. шоссе
+              $valEnumHW = $item['PROPERTIES']['SHOSSE_DOP']['VALUE'][0];
+              $idEnumHW = getNamesList($valEnumHW,'SHOSSE')['ID'];
+              $colorHW = getColorRoad($idEnumHW);
+              $nameHW = getNamesList($valEnumHW,'SHOSSE')['NAME'];
+          ?>
               <div class="d-flex w-100 mt-1 mt-lg-2">
                 <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
                   <span class="metro-color <?= $colorHW ?>"></span>
@@ -341,9 +356,9 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     <? } ?>
                 </div>
             </div>
-            <div class="col-md-4 justify-content-end text-right"><a
-                        class="card-house__view btn btn-outline-warning w-100 rounded-pill"
-                        href="<?= $item['DETAIL_PAGE_URL'] ?>">Подробнее</a></div>
+            <div class="col-md-4 justify-content-end text-right">
+              <a class="card-house__view btn btn-outline-warning w-100 rounded-pill" href="<?= $item['DETAIL_PAGE_URL'] ?>">Подробнее</a>
+            </div>
         </div>
     </div>
     <div class="container d-md-none">
@@ -381,8 +396,8 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     <? } ?>
                 </div>
             </div>
-            <div class="col-sm-4 mt-1 mt-sm-0 pb-3 mb-0 mb-sm-3"><a class="btn btn-outline-warning w-100 rounded-pill"
-                                                                    href="<?= $item['DETAIL_PAGE_URL'] ?>">Подробнее</a>
+            <div class="col-sm-4 mt-1 mt-sm-0 pb-3 mb-0 mb-sm-3">
+              <a class="btn btn-outline-warning w-100 rounded-pill" href="<?=$item['DETAIL_PAGE_URL']?>">Подробнее</a>
             </div>
         </div>
     </div>

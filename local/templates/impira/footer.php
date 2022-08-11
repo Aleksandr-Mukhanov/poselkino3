@@ -41,14 +41,14 @@
         <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
           <div class="col-12 mb-2">
             <div class="input">
-              <input class="input__controll nameSignToView" type="text" placeholder="Ваше имя" />
+              <input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
             </div>
           </div>
           <div class="col appeal-form__col-input lastNameSpam">
             <input class="input-el lnameSignToView" type="text" name="lname" placeholder="Ваша фамилия">
           </div>
           <div class="col-12 mb-2">
-            <input class="input__controll telSignToView" type="tel" placeholder="Номер телефона" />
+            <input class="input__controll telSignToView ym-record-keys" type="tel" placeholder="Номер телефона" required/>
           </div>
           <div class="col-12 mb-2">
             <button class="button w-100">Забронировать участок</button>
@@ -79,14 +79,14 @@
         <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
           <div class="col-12 mb-2">
             <div class="input">
-              <input class="input__controll nameSignToView" type="text" placeholder="Ваше имя" />
+              <input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
             </div>
           </div>
           <div class="col appeal-form__col-input lastNameSpam">
             <input class="input-el lnameSignToView" type="text" name="lname" placeholder="Ваша фамилия">
           </div>
           <div class="col-12 mb-2">
-            <input class="input__controll telSignToView" type="tel" placeholder="Номер телефона" />
+            <input class="input__controll telSignToView ym-record-keys" type="tel" placeholder="Номер телефона" required/>
           </div>
           <div class="col-12 mb-2">
             <button class="button w-100">Записаться на просмотр</button>
@@ -112,7 +112,9 @@
     (function(w,d,n,c){w.CalltouchDataObject=n;w[n]=function(){w[n]["callbacks"].push(arguments)};if(!w[n]["callbacks"]){w[n]["callbacks"]=[]}w[n]["loaded"]=false;if(typeof c!=="object"){c=[c]}w[n]["counters"]=c;for(var i=0;i<c.length;i+=1){p(c[i])}function p(cId){var a=d.getElementsByTagName("script")[0],s=d.createElement("script"),i=function(){a.parentNode.insertBefore(s,a)},m=typeof Array.prototype.find === 'function',n=m?"init-min.js":"init.js";s.type="text/javascript";s.async=true;s.src="https://mod.calltouch.ru/"+n+"?id="+cId;if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",i,false)}else{i()}}})(window,document,"ct","acjsv0co");
     </script>
     <!-- calltouch -->
-    
+
+    <?require_once $_SERVER["DOCUMENT_ROOT"] . '/inc/counters.php';?>
+
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

@@ -35,7 +35,7 @@ $this->setFrameMode(true);
             </g>
           </g>
         </svg>
-        228
+        <?=($arItem["SHOW_COUNTER"]) ? $arItem["SHOW_COUNTER"] : 0?>
       </div>
     </div>
   </a>

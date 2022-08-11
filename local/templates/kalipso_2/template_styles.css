@@ -30,3 +30,23 @@
 .lastNameSpam{
   display: none;
 }
+
+/* второй план */
+
+.index-plan .card__row{
+  justify-content: center;
+}
+
+.info-count__row{
+  margin-top: 50px;
+}
+
+.info-count-item{
+  background: #fff;
+  padding: 20px;
+}
+
+.card__picture img, .card__picture object, .card__picture image{
+  max-width: 100%;
+  height: 100%;
+}

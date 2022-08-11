@@ -11,6 +11,23 @@ ErrorDocument 404 /404.php
   Options +FollowSymLinks
   RewriteEngine On
 
+  # редирект на раздел участков
+  #RewriteRule ^poselki/kupit-uchastok-(.*)-sotki/$ /kupit-uchastki/$1-sotki/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-(.*)-sotok/$ /kupit-uchastki/$1-sotok/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-km-ot-mkad/$ /kupit-uchastki/do-$1-km-ot-mkad/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-tys-rub/$ /kupit-uchastki/do-$1-tys-rub/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-mln-rub/$ /kupit-uchastki/do-$1-mln-rub/ [R=301,L]
+
+  #RewriteRule ^poselki/kupit-uchastok-econom-class/$ /kupit-uchastki/econom-class/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-izhs/$ /kupit-uchastki/izhs/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-ryadom-s-lesom/$ /kupit-uchastki/ryadom-s-lesom/ [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-ryadom-zhd-stanciya/$ /kupit-uchastki/ryadom-zhd-stanciya/ [R=301,L]
+
+  RewriteRule ^poselki/kupit-uchastok-(.*)/$ /kupit-uchastki/$1/ [R=301,L]
+  RewriteRule ^poselki/kupit-uchastok/(.*)/$ /kupit-uchastki/$1/ [R=301,L]
+
+  #RewriteRule ^poselki/kupit-uchastok-/$ /kupit-uchastki// [R=301,L]
+
   #del www
   RewriteCond %{HTTP_HOST} ^www\.(.*)$
   RewriteRule ^(.*)$ https://%1/$1 [L,R=301]

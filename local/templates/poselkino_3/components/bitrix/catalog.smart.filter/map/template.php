@@ -83,7 +83,7 @@ $this->setFrameMode(true);
             case 'varshavskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
             case 'simferopolskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
             case 'egorievskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
-            case 'kashirskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
+            case 'kashirskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
             case 'novoryazanskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
             case 'kievskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;
             case 'kalujskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;

@@ -27,6 +27,18 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 		];
 	}
 $showAddIcon = false; // показ доп. иконки
+
+$planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
+$planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
+if ($planIFrame) $planIMG = $planIFrame;
+$frame = ($planIFrame) ? 'data-iframe="true"' : '';
+$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+
+$planIFrame2 = $arVillage['PROPERTY_PLAN_IMG_IFRAME_2_VALUE'];
+$planIMG2 = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_2_VALUE']);
+if ($planIFrame2) $planIMG2 = $planIFrame2;
+$frame2 = ($planIFrame2) ? 'data-iframe="true"' : '';
+$planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
 ?>
 <div class="advantages">
   <div class="container">
@@ -105,6 +117,174 @@ $showAddIcon = false; // показ доп. иконки
     </div>
   </div>
 </div>
+
+<section class="index-plan">
+  <div class="container">
+    <h2 class="title--size_2 section-title page__title">План и цены “<?=$arVillage['NAME']?>”</h2>
+    <div class="card">
+      <div class="row card__row">
+        <div class="row__col-12 card__col-picture">
+					<div class="card__picture">
+						<a href="<?=$planIMG?>" data-fancybox <?=$frame?>>
+							<picture>
+								<source type="image/webp" srcset="<?=$planIMG_res['src']?>">
+									<img src="<?=$planIMG_res['src']?>" alt="План и цены КП <?=$arVillage['NAME']?>" title="План и цены поселок <?=$arVillage['NAME']?>" loading="lazy" decoding="async">
+							</picture></a>
+					</div>
+        </div>
+        <!-- <div class="row__col-5 card__col-content">
+          <div class="card__content">
+            <div class="info-count card__info-count">
+              <div class="row info-count__row">
+                <div class="row__col-6 info-count__col">
+                  <div class="info-count-item">
+                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_AREA_VIL_VALUE']?> Га</div>
+                    <div class="info-count-item__description">Общая площадь поселка</div>
+                  </div>
+                </div>
+                <div class="row__col-6 info-count__col">
+                  <div class="info-count-item">
+                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_VALUE']?></div>
+                    <div class="info-count-item__description">Количество участков</div>
+                  </div>
+                </div>
+                <div class="row__col-6 info-count__col">
+                  <div class="info-count-item">
+                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SOLD_VALUE']?></div>
+                    <div class="info-count-item__description">Участков продано</div>
+                  </div>
+                </div>
+                <div class="row__col-6 info-count__col">
+                  <div class="info-count-item">
+                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SALE_VALUE']?></div>
+                    <div class="info-count-item__description">Участков в продаже</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="info-list card__info-list">
+              <div class="info-list__line">
+                <div class="info-list__description">
+                  <div class="info-list__picture"><img class="info-list__icon" src="<?=SITE_TEMPLATE_PATH?>/images/icon/info-area.png" alt=""></div>
+                  <div class="info-list__title">Площадь участков:</div>
+                </div>
+                <div class="info-list__text">от <?=$arVillage['PROPERTY_PLOTTAGE_VALUE'][0]?> до <?=$arVillage['PROPERTY_PLOTTAGE_VALUE'][1]?> соток</div>
+              </div>
+              <div class="info-list__line">
+                <div class="info-list__description">
+                  <div class="info-list__picture"><img class="info-list__icon" src="<?=SITE_TEMPLATE_PATH?>/images/icon/info-price.png" alt=""></div>
+                  <div class="info-list__title">Стоимость участков:</div>
+                </div>
+                <div class="info-list__text">от <?=formatPriceSite($arVillage['PROPERTY_COST_LAND_IN_CART_VALUE'][0])?> ₽ до <?=formatPriceSite($arVillage['PROPERTY_COST_LAND_IN_CART_VALUE'][1])?> ₽</div>
+              </div>
+            </div>
+            <div class="d-none d-xl-block"><a class="btn btn--large btn--theme_blue" href="/plan-i-ceny/">План и цены</a></div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+		<div class="row info-count__row">
+			<div class="row__col-3 info-count__col">
+				<div class="info-count-item">
+					<div class="info-count-item__number"><?=$arVillage['PROPERTY_AREA_VIL_VALUE']?> Га</div>
+					<div class="info-count-item__description">Общая площадь поселка</div>
+				</div>
+			</div>
+			<div class="row__col-3 info-count__col">
+				<div class="info-count-item">
+					<div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_VALUE']?></div>
+					<div class="info-count-item__description">Количество участков</div>
+				</div>
+			</div>
+			<div class="row__col-3 info-count__col">
+				<div class="info-count-item">
+					<div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SOLD_VALUE']?></div>
+					<div class="info-count-item__description">Участков продано</div>
+				</div>
+			</div>
+			<div class="row__col-3 info-count__col">
+				<div class="info-count-item">
+					<div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SALE_VALUE']?></div>
+					<div class="info-count-item__description">Участков в продаже</div>
+				</div>
+			</div>
+		</div>
+
+		<?if($planIMG2):?>
+			<h2 class="title--size_2 section-title page__title">Планы и цены “<?=$arVillage['NAME']?> 2”</h2>
+			<div class="card">
+	      <div class="row card__row">
+	        <div class="row__col-12 card__col-picture">
+						<div class="card__picture">
+							<a href="<?=$planIMG2?>" data-fancybox <?=$frame2?>>
+								<picture>
+									<source type="image/webp" srcset="<?=$planIMG_res2['src']?>">
+										<img src="<?=$planIMG_res2['src']?>" alt="План и цены КП <?=$arVillage['NAME']?> 2" title="План и цены поселок <?=$arVillage['NAME']?> 2" loading="lazy" decoding="async">
+								</picture></a>
+						</div>
+	        </div>
+	      </div>
+	    </div>
+		<?endif;?>
+
+    <div class="d-block mt-5">
+      <div class="center"><a class="btn btn--large btn--theme_blue" href="/plan-i-ceny/">План и цены</a></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="location">
+  <div class="container">
+    <h2 class="title--size_2 page__title">Удобное расположение</h2>
+    <p>Поселок <?=$arVillage['NAME']?> находится по <?=$shosseNameKomu?> шоссе в <?=$arVillage['PROPERTY_MKAD_VALUE']?> км от МКАД. Добраться можно на собственном и общественном транспорте - есть возможность доехать на электричке. Транспортная доступность поселка, позволяет выбрать вам любой удобный транспорт</p>
+    <?$arCoordinates = explode(',',$arVillage['PROPERTY_COORDINATES_VALUE']);?>
+    <div class="location-map" id="map" data-lon="<?=trim($arCoordinates[1])?>" data-lat="<?=trim($arCoordinates[0])?>"></div>
+    <div class="row mb-4">
+      <div class="col-md-4">
+        <div class="get_item">
+          <div class="get_item__icon">
+            <svg class="icon icon-car">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-car"> </use>
+            </svg>
+          </div>
+          <div class="get_item__content">
+            <div class="get_item__title">На автомобиле <?=$arVillage['PROPERTY_AUTO_NO_JAMS_VALUE'] // Авто (Время в пути от МКАД без пробок)?></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="get_item">
+          <div class="get_item__icon">
+            <svg class="icon icon-train">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-train"> </use>
+            </svg>
+          </div>
+          <div class="get_item__content">
+            <div class="get_item__title">На электричке <?=$arVillage['PROPERTY_TRAIN_TRAVEL_TIME_VALUE'] // Электричка (время в пути)?></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="get_item">
+          <div class="get_item__icon">
+            <svg class="icon icon-bus">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-bus"> </use>
+            </svg>
+          </div>
+          <div class="get_item__content">
+            <div class="get_item__title">На автобусе, <?$BUS_TIME_KM = $arVillage['PROPERTY_BUS_TIME_KM_VALUE'];?><?=($BUS_TIME_KM < 1) ? ($BUS_TIME_KM*1000).' м' : $BUS_TIME_KM.' км' // Автобус (расстояние от остановки, км)?> от остановки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="center"><a class="btn btn--large btn--theme_blue" href="/na-karte/">Как добраться</a></div>
+  </div>
+</section>
+
+<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
+
 <section class="block_2">
   <div class="container">
     <h2 class="title--size_2 section-title page__title">"<?=$arVillage['NAME']?>" - поселок №1 для вашего выбора</h2>
@@ -218,82 +398,7 @@ $showAddIcon = false; // показ доп. иконки
     <div class="center"><a class="btn btn--large btn--theme_blue" href="/infrastruktura/">Вся инфраструктура</a></div>
   </div>
 </section>
-<section class="index-plan">
-  <div class="container">
-    <h2 class="title--size_2 section-title page__title">Планы и цены “<?=$arVillage['NAME']?>”</h2>
-    <div class="card">
-      <div class="row card__row">
-        <div class="row__col-7 card__col-picture">
-					<?
-					$planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
-					$planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
-					if ($planIFrame) $planIMG = $planIFrame;
-					$frame = ($planIFrame) ? 'data-iframe="true"' : '';
-					$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
-					?>
-					<div class="card__picture">
-						<a href="<?=$planIMG?>" data-fancybox <?=$frame?>>
-							<picture>
-								<source type="image/webp" srcset="<?=$planIMG_res['src']?>">
-									<img src="<?=$planIMG_res['src']?>" alt="План и цены КП <?=$arVillage['NAME']?>" title="План и цены поселок <?=$arVillage['NAME']?>" loading="lazy" decoding="async">
-							</picture></a></div>
-        </div>
-        <div class="row__col-5 card__col-content">
-          <div class="card__content">
-            <div class="info-count card__info-count">
-              <div class="row info-count__row">
-                <div class="row__col-6 info-count__col">
-                  <div class="info-count-item">
-                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_AREA_VIL_VALUE']?> Га</div>
-                    <div class="info-count-item__description">Общая площадь поселка</div>
-                  </div>
-                </div>
-                <div class="row__col-6 info-count__col">
-                  <div class="info-count-item">
-                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_VALUE']?></div>
-                    <div class="info-count-item__description">Количество участков</div>
-                  </div>
-                </div>
-                <div class="row__col-6 info-count__col">
-                  <div class="info-count-item">
-                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SOLD_VALUE']?></div>
-                    <div class="info-count-item__description">Участков продано</div>
-                  </div>
-                </div>
-                <div class="row__col-6 info-count__col">
-                  <div class="info-count-item">
-                    <div class="info-count-item__number"><?=$arVillage['PROPERTY_COUNT_PLOTS_SALE_VALUE']?></div>
-                    <div class="info-count-item__description">Участков в продаже</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="info-list card__info-list">
-              <div class="info-list__line">
-                <div class="info-list__description">
-                  <div class="info-list__picture"><img class="info-list__icon" src="<?=SITE_TEMPLATE_PATH?>/images/icon/info-area.png" alt=""></div>
-                  <div class="info-list__title">Площадь участков:</div>
-                </div>
-                <div class="info-list__text">от <?=$arVillage['PROPERTY_PLOTTAGE_VALUE'][0]?> до <?=$arVillage['PROPERTY_PLOTTAGE_VALUE'][1]?> соток</div>
-              </div>
-              <div class="info-list__line">
-                <div class="info-list__description">
-                  <div class="info-list__picture"><img class="info-list__icon" src="<?=SITE_TEMPLATE_PATH?>/images/icon/info-price.png" alt=""></div>
-                  <div class="info-list__title">Стоимость участков:</div>
-                </div>
-                <div class="info-list__text">от <?=formatPriceSite($arVillage['PROPERTY_COST_LAND_IN_CART_VALUE'][0])?> ₽ до <?=formatPriceSite($arVillage['PROPERTY_COST_LAND_IN_CART_VALUE'][1])?> ₽</div>
-              </div>
-            </div>
-            <div class="d-none d-xl-block"><a class="btn btn--large btn--theme_blue" href="/plan-i-ceny/">План и цены</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="d-block d-xl-none">
-      <div class="center"><a class="btn btn--large btn--theme_blue" href="/plan-i-ceny/">План и цены</a></div>
-    </div>
-  </div>
-</section>
+
 <?if($arVillage['PROPERTY_ON_SITE_VALUE']):?>
 	<section class="text-block">
 		<div class="container text-block__container">
@@ -304,7 +409,7 @@ $showAddIcon = false; // показ доп. иконки
 		</div>
 	</section>
 <?endif?>
-<?require_once $mainUrl.'/include/sites/appeal-form.php';?>
+
 <section class="ecology-index">
   <div class="container">
     <h2 class="title--size_2 ecology__title page__title section-title">Экология и природа</h2>
@@ -346,53 +451,7 @@ $showAddIcon = false; // показ доп. иконки
     </div>
   </div>
 </section>
-<section class="location">
-  <div class="container">
-    <h2 class="title--size_2 page__title">Удобное расположение</h2>
-    <p>Поселок <?=$arVillage['NAME']?> находится по <?=$shosseNameKomu?> шоссе в <?=$arVillage['PROPERTY_MKAD_VALUE']?> км от МКАД. Добраться можно на собственном и общественном транспорте - есть возможность доехать на электричке. Транспортная доступность поселка, позволяет выбрать вам любой удобный транспорт</p>
-    <?$arCoordinates = explode(',',$arVillage['PROPERTY_COORDINATES_VALUE']);?>
-    <div class="location-map" id="map" data-lon="<?=trim($arCoordinates[1])?>" data-lat="<?=trim($arCoordinates[0])?>"></div>
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <div class="get_item">
-          <div class="get_item__icon">
-            <svg class="icon icon-car">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-car"> </use>
-            </svg>
-          </div>
-          <div class="get_item__content">
-            <div class="get_item__title">На автомобиле <?=$arVillage['PROPERTY_AUTO_NO_JAMS_VALUE'] // Авто (Время в пути от МКАД без пробок)?></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="get_item">
-          <div class="get_item__icon">
-            <svg class="icon icon-train">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-train"> </use>
-            </svg>
-          </div>
-          <div class="get_item__content">
-            <div class="get_item__title">На электричке <?=$arVillage['PROPERTY_TRAIN_TRAVEL_TIME_VALUE'] // Электричка (время в пути)?></div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="get_item">
-          <div class="get_item__icon">
-            <svg class="icon icon-bus">
-              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-bus"> </use>
-            </svg>
-          </div>
-          <div class="get_item__content">
-            <div class="get_item__title">На автобусе, <?$BUS_TIME_KM = $arVillage['PROPERTY_BUS_TIME_KM_VALUE'];?><?=($BUS_TIME_KM < 1) ? ($BUS_TIME_KM*1000).' м' : $BUS_TIME_KM.' км' // Автобус (расстояние от остановки, км)?> от остановки</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="center"><a class="btn btn--large btn--theme_blue" href="/na-karte/">Как добраться</a></div>
-  </div>
-</section>
+
 <section class="reviews-index">
   <div class="container">
     <h2 class="title--size_2 page__title section-title">Отзывы о поселке “<?=$arVillage['NAME']?>”</h2>

@@ -14,9 +14,9 @@ $arFile = array_map('str_getcsv', $gDocFile);
 
 foreach ($arFile as $key => $arStr)
 {
-	if ($key == 0 || $key == 1) continue; // dump($arStr);
+	if ($key == 0 || $key == 1) continue;  dump($arStr);
 
-	$description = str_replace('&nbsp;',' ',$arStr[6]);
+	$description = str_replace(['&nbsp;','/n'],' ',$arStr[6]);
 	$description = trim(strip_tags($arStr[6]));
 
 	$xml_content .= '<offer internal-id="'.$arStr[0].'">';

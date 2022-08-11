@@ -1,6 +1,10 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
-use Bitrix\Main\Grid\Declension;
+use Bitrix\Main\Grid\Declension,
+		Bitrix\Main\Page\Asset;
+
+Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js");
+Asset::getInstance()->addCss("https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css");
 
 $this->setFrameMode(true);
 
@@ -16,6 +20,8 @@ $title = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_TITLE
 $alt = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT'])
 	? $arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT']
 	: $arResult['NAME'];
+
+if ($arResult['PROPERTIES']['NAME_OTHER']['VALUE']) $name = $arResult['PROPERTIES']['NAME_OTHER']['VALUE'];
 
 // добавим превьюшку в фото
 if($arResult["PREVIEW_PICTURE"]){
@@ -185,7 +191,7 @@ switch ($km_MKAD) {
 			$colorIcon = '78a86d'; $colorBG = 'edf8ea'; break;
 	}
 
-// dump($arResult);?>
+// dump($arResult['PROPERTIES']);?>
 <div class="container mt-md-5">
 	<div class="row">
 		<div class="order-0 order-md-0 col-xl-8 col-md-7">
@@ -388,14 +394,16 @@ switch ($km_MKAD) {
 
 			    if($arResult['PROPERTIES']['PLAN_IMG_IFRAME'.$nProp]['VALUE']){
 		        $planIMG = $arResult['PROPERTIES']['PLAN_IMG_IFRAME'.$nProp]['VALUE'];
-		        $frame = 'data-iframe="true"';
+		        // $frame = 'data-iframe="true"';
+						$frame = 'data-type="iframe"';
 			    }else{
 		        $planIMG = CFile::GetPath($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE']);
 		        $frame = '';
 			    }
 			  ?>
-			  <div class="openPlan w-100">
-			    <a href="<?=$planIMG?>" <?=$frame?>>
+				<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-zoom/1.3.0/lg-zoom.js"></script> openPlan -->
+			  <div class="w-100">
+			    <a href="<?=$planIMG?>" data-fancybox <?=$frame?>>
 			      <img class="w-100 mt-4" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$name?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
 			    </a>
 			  </div>
@@ -429,6 +437,17 @@ switch ($km_MKAD) {
                       $valEnumHW2 = $arResult['PROPERTIES']['SHOSSE']['VALUE_XML_ID'][1];
                       $colorHW2 = getColorRoad($idEnumHW2);
                       $nameHW2 = $arResult['PROPERTIES']['SHOSSE']['VALUE'][1];
+                  ?>
+                    <a class="metro z-index-1 highway-color pl-0" href="/poselki/<?=$valEnumHW2?>-shosse/">
+                        <span class="metro-color <?=$colorHW2?>"></span>
+                        <span class="metro-name"><?=$nameHW2?> шоссе</span>
+                    </a>
+                  <?endif;?>
+									<?if($arResult['PROPERTIES']['SHOSSE_DOP']['VALUE'][0]): // если есть доп. шоссе
+                      $valEnumHW2 = $arResult['PROPERTIES']['SHOSSE_DOP']['VALUE'][0];
+											$idEnumHW2 = getNamesList($valEnumHW2,'SHOSSE')['ID'];
+                      $colorHW2 = getColorRoad($idEnumHW2);
+                      $nameHW2 = getNamesList($valEnumHW2,'SHOSSE')['NAME'];
                   ?>
                     <a class="metro z-index-1 highway-color pl-0" href="/poselki/<?=$valEnumHW2?>-shosse/">
                         <span class="metro-color <?=$colorHW2?>"></span>
@@ -531,7 +550,12 @@ switch ($km_MKAD) {
 										<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 								<?endif;?>
 								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть шоссе ?>
-									<a href="/poselki/<?=$valEnumHW2?>-shosse/" class="highway-color">
+									<br><a href="/poselki/<?=$valEnumHW2?>-shosse/" class="highway-color">
+										<span class="metro-color <?=$colorHW2?>"></span>
+										<span class="metro-name"><?=$nameHW2?> шоссе</span></a>
+								<?endif;?>
+								<?if($arResult['PROPERTIES']['SHOSSE_DOP']['VALUE'][0]): // если есть шоссе ?>
+									<br><a href="/poselki/<?=$valEnumHW2?>-shosse/" class="highway-color">
 										<span class="metro-color <?=$colorHW2?>"></span>
 										<span class="metro-name"><?=$nameHW2?> шоссе</span></a>
 								<?endif;?>
@@ -860,6 +884,7 @@ switch ($km_MKAD) {
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="modalFeedbackSale" tabindex="-1" aria-labelledby="" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-light">
@@ -1093,6 +1118,7 @@ switch ($km_MKAD) {
 		<?endif;?>
 	</div>
 </div>
+
 <div class="ecology bg-white d-none d-md-block" id="ecologyBlock">
 	<div class="container">
 		<h2>Экология и природа</h2>

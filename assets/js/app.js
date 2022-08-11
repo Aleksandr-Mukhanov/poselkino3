@@ -215,7 +215,8 @@ $(document).ready(function() {
   })
 
   // Plan
-  $(".openPlan").lightGallery({'iframeMaxWidth': '80%'});
+  $(".openPlan").lightGallery();
+  // $(".openPlan").lightGallery({'iframeMaxWidth': '80%'});
   // $(".openPlan").lightGallery({zoom: true});
 
   // Work steps

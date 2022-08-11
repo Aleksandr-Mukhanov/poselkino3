@@ -38,6 +38,10 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement);
             $arTegs['west']['cnt'] += 1;
             $arTegs['west']['villages'][] = $arElement['ID'];
         }
+        if (array_key_exists(130, $arElement['PROPERTY_5_VALUE'])) { // Каширское шоссе
+            $arTegs['kashirskoe']['cnt'] += 1;
+            $arTegs['kashirskoe']['villages'][] = $arElement['ID'];
+        }
     }
 
     for ($i = 10; $i < 60; $i += 10) { // до МКАД
@@ -159,6 +163,21 @@ if (!$arTegs['west']['url']) {
             break;
     }
     $arTegs['west']['url'] = $urlTeg;
+}
+$arTegs['kashirskoe']['name'] = 'Каширское ш.';
+if (!$arTegs['kashirskoe']['url']) {
+    switch ($domPos) {
+        case 'noDom': // Участки
+            $urlTeg = '/poselki/kashirskoe-shosse/kupit-uchastok/';
+            break;
+        case 'withDom': // Дома
+            $urlTeg = '/poselki/kashirskoe-shosse/kupit-dom/';
+            break;
+        default: // Поселки
+            $urlTeg = '/kupit-uchastki/kashirskoe-shosse/';
+            break;
+    }
+    $arTegs['kashirskoe']['url'] = $urlTeg;
 }
 
 for ($i = 10; $i < 60; $i += 10) { // до МКАД
@@ -310,7 +329,7 @@ if (!$arTegs['komfort']['url']) {
 }
 
 // какие теги выводить
-if (!$arTegsShow) $arTegsShow = ['north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
+if (!$arTegsShow) $arTegsShow = ['kashirskoe', 'north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
 // dump($arTegsShow);
 
 if ($onlyParam) { // если не нужен url тега (3 уровень)
@@ -328,6 +347,9 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
             break;
         case 'west':
             $arrFilterVillage['=PROPERTY_5'] = [205]; // Новорижское
+            break;
+        case 'kashirskoe':
+            $arrFilterVillage['=PROPERTY_5'] = [130]; // Каширское
             break;
         case 'mkad_20':
             $arrFilterVillage['><PROPERTY_6'] = [0, 30];

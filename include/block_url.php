@@ -1,240 +1,59 @@
 <?
-// получим список шоссе
-$propEnums = CIBlockPropertyEnum::GetList(
-  ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"SHOSSE"]
-);
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
-  $arShosse[$enumFields['XML_ID']] = [
-    'ID' => $enumFields['ID'],
-    'NAME' => $enumFields['VALUE'],
-  ];
-}
-
-// получим список районов
-$propEnums = CIBlockPropertyEnum::GetList(
-  ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"REGION"]
-);
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
-  $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
-}
-
-// url для страниц
-$curPage = $APPLICATION->GetCurPage();
-switch ($curPage) {
-  case '/poselki/kupit-uchastok/':
-    $toUrl1 = 'kupit-uchastok/'; $toUrl2 = 'kupit-uchastok-'; break;
-  case '/poselki/kupit-dom/':
-    $toUrl1 = 'kupit-dom/'; $toUrl2 = ''; break;
-  default:
-    $toUrl1 = $toUrl2 = ''; break;
-}
+$urlVillageActive = (CSite::InDir('/poselki/')) ? 'btn-success' : 'btn-outline-secondary';
+$urlPlotsActive = (CSite::InDir('/kupit-uchastki/')) ? 'btn-success' : 'btn-outline-secondary';
 ?>
 <div class="address__tab bg-white" id="shosse_rayon">
   <div class="container">
-    <ul class="nav nav-tabs" id="addressTab" role="tablist">
-      <li class="nav-item"><a class="nav-link <?if(!$_REQUEST['show_rayon'])echo'active';?>" id="highwayTab-tab" data-toggle="tab" href="#highwayTab" role="tab" aria-controls="highwayTab" aria-selected="true">Шоссе</a></li>
-      <li class="nav-item"><a class="nav-link <?if($_REQUEST['show_rayon'])echo'active';?>" id="areaTab-tab" data-toggle="tab" href="#areaTab" role="tab" aria-controls="areaTab" aria-selected="false">Районы</a></li>
-      <li class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTab" role="tab" aria-controls="mkadTab" aria-selected="false">от МКАД</a></li>
-      <li class="nav-item"><a class="nav-link" id="priceTab-tab" data-toggle="tab" href="#priceTab" role="tab" aria-controls="priceTab" aria-selected="false">Цена</a></li>
-      <li class="nav-item"><a class="nav-link" id="sizeTab-tab" data-toggle="tab" href="#sizeTab" role="tab" aria-controls="sizeTab" aria-selected="false">Площадь</a></li>
-      <li class="nav-item"><a class="nav-link" id="classTab-tab" data-toggle="tab" href="#classTab" role="tab" aria-controls="classTab" aria-selected="false">Класс</a></li>
-      <li class="nav-item"><a class="nav-link" id="communicationsTab-tab" data-toggle="tab" href="#communicationsTab" role="tab" aria-controls="communicationsTab" aria-selected="false">Коммуникации</a></li>
-      <li class="nav-item"><a class="nav-link" id="infrastructureTab-tab" data-toggle="tab" href="#infrastructureTab" role="tab" aria-controls="infrastructureTab" aria-selected="false">Инфраструктура</a></li>
-      <li class="nav-item"><a class="nav-link" id="natureTab-tab" data-toggle="tab" href="#natureTab" role="tab" aria-controls="natureTab" aria-selected="false">Природа</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade <?if(!$_REQUEST['show_rayon'])echo'show active';?>" id="highwayTab" role="tabpanel" aria-labelledby="highwayTab-tab">
-        <div class="row">
-          <?foreach ($arShosse as $key => $value):
-            $colorHW = getColorRoad($value['ID']);?>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <a class="metro-title highway-color" href="/poselki/<?=$key?>-shosse/<?=$toUrl1?>">
-                <div class="metro-title__color <?=$colorHW?>"></div>
-                <div class="metro-title__title"><?=$value['NAME']?></div>
-              </a>
-            </div>
-          <?endforeach;?>
-        </div>
-      </div>
-      <div class="tab-pane fade <?if($_REQUEST['show_rayon'])echo'show active';?>" id="areaTab" role="tabpanel" aria-labelledby="areaTab-tab">
-        <div class="row">
-          <?foreach ($arRegion as $key => $value): $i++;?>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <a class="metro-title" href="/poselki/<?=$key?>-rayon/<?=$toUrl1?>">
-                <div class="metro-title__title"><?=$value?></div>
-              </a>
-            </div>
-          <?endforeach;?>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="mkadTab" role="tabpanel" aria-labelledby="mkadTab-tab">
-        <div class="row">
-          <?for($x=10; $x<=80; $x+=5){?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-<?=$x?>-km-ot-mkad/">
-                <div class="metro-title__title">до <?=$x?> км</div>
-              </a></div>
-          <?}?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-100-km-ot-mkad/">
-              <div class="metro-title__title">до 100 км</div>
-            </a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/<?=$toUrl2?>do-120-km-ot-mkad/">
-              <div class="metro-title__title">до 120 км</div>
-            </a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="priceTab" role="tabpanel" aria-labelledby="priceTab-tab">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-100-tys-rub/"><div class="metro-title__title">Участки 100 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-150-tys-rub/"><div class="metro-title__title">Участки 150 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-200-tys-rub/"><div class="metro-title__title">Участки 200 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-300-tys-rub/"><div class="metro-title__title">Участки 300 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-400-tys-rub/"><div class="metro-title__title">Участки 400 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-500-tys-rub/"><div class="metro-title__title">Участки 500 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-600-tys-rub/"><div class="metro-title__title">Участки 600 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-700-tys-rub/"><div class="metro-title__title">Участки 700 тыс руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-1-mln-rub/"><div class="metro-title__title">Участки 1 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-1,5-mln-rub/"><div class="metro-title__title">Участки 1,5 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-2-mln-rub/"><div class="metro-title__title">Участки 2 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-3-mln-rub/"><div class="metro-title__title">Участки 3 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-4-mln-rub/"><div class="metro-title__title">Участки 4 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-5-mln-rub/"><div class="metro-title__title">Участки 5 млн руб</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-1-mln-rub/"><div class="metro-title__title">Дома 1 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-1,5-mln-rub/"><div class="metro-title__title">Дома 1,5 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-2-mln-rub/"><div class="metro-title__title">Дома 2 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-3-mln-rub/"><div class="metro-title__title">Дома 3 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-4-mln-rub/"><div class="metro-title__title">Дома 4 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-5-mln-rub/"><div class="metro-title__title">Дома 5 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-6-mln-rub/"><div class="metro-title__title">Дома 6 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-7-mln-rub/"><div class="metro-title__title">Дома 7 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-8-mln-rub/"><div class="metro-title__title">Дома 8 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-9-mln-rub/"><div class="metro-title__title">Дома 9 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-10-mln-rub/"><div class="metro-title__title">Дома 10 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-15-mln-rub/"><div class="metro-title__title">Дома 15 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-20-mln-rub/"><div class="metro-title__title">Дома 20 млн руб</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-30-mln-rub/"><div class="metro-title__title">Дома 30 млн руб</div></a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="sizeTab" role="tabpanel" aria-labelledby="sizeTab-tab">
-        <div class="row">
-          <?for ($i=2; $i <= 20; $i++) { // участки?>
-            <?if($i == 2 || $i == 3 || $i == 4){
-              $nameSot = 'сотки'; $urlSot = 'sotki';
-            }else{
-              $nameSot = 'соток'; $urlSot = 'sotok';
-            }?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-<?=$i?>-<?=$urlSot?>/"><div class="metro-title__title">Участок <?=$i?> <?=$nameSot?></div></a></div>
-          <?}?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-25-sotok/"><div class="metro-title__title">Участок 25 соток</div></a></div>
-          <?for ($i=30; $i <= 100; $i+=10) {?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-<?=$i?>-sotok/"><div class="metro-title__title">Участок <?=$i?> соток</div></a></div>
-          <?}?>
-
-          <?for ($i=2; $i <= 20; $i++) { // дома?>
-            <?if($i == 2 || $i == 3 || $i == 4){
-              $nameSot = 'сотки'; $urlSot = 'sotki';
-            }else{
-              $nameSot = 'соток'; $urlSot = 'sotok';
-            }?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-na-<?=$i?>-sotkah/"><div class="metro-title__title">Дом на <?=$i?> сотках</div></a></div>
-          <?}?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-na-25-sotkah/"><div class="metro-title__title">Дом на 25 сотках</div></a></div>
-          <?for ($i=30; $i <= 100; $i+=10) {?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-na-<?=$i?>-sotkah/"><div class="metro-title__title">Дом на <?=$i?> сотках</div></a></div>
-          <?}?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-100-kv-m/"><div class="metro-title__title">Купить дом 100 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-120-kv-m/"><div class="metro-title__title">Купить дом 120 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-150-kv-m/"><div class="metro-title__title">Купить дом 150 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-200-kv-m/"><div class="metro-title__title">Купить дом 200 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-250-kv-m/"><div class="metro-title__title">Купить дом 250 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-300-kv-m/"><div class="metro-title__title">Купить дом 300 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-400-kv-m/"><div class="metro-title__title">Купить дом 400 кв.м.</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-500-kv-m/"><div class="metro-title__title">Купить дом 500 кв.м.</div></a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="classTab" role="tabpanel" aria-labelledby="classTab-tab">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/econom-class/"><div class="metro-title__title">Эконом класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/biznes-class/"><div class="metro-title__title">Бизнес класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/komfort-class/"><div class="metro-title__title">Комфорт класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/elit-class/"><div class="metro-title__title">Элитного класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/premium-class/"><div class="metro-title__title">Премиум класса</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-econom-class/"><div class="metro-title__title">Участки эконом класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-biznes-class/"><div class="metro-title__title">Участки бизнес класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-komfort-class/"><div class="metro-title__title">Участки комфорт класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-elit-class/"><div class="metro-title__title">Участки элитного класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-premium-class/"><div class="metro-title__title">Участки премиум класса</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-econom-class/"><div class="metro-title__title">Дома эконом класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-biznes-class/"><div class="metro-title__title">Дома бизнес класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-komfort-class/"><div class="metro-title__title">Дома комфорт класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-elit-class/"><div class="metro-title__title">Дома элитного класса</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-premium-class/"><div class="metro-title__title">Дома премиум класса</div></a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="communicationsTab" role="tabpanel" aria-labelledby="communicationsTab-tab">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/s-elektrichestvom/"><div class="metro-title__title">Поселки с электричеством</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/s-vodoprovodom/"><div class="metro-title__title">Поселки с водопроводом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/s-gazom/"><div class="metro-title__title">Поселки с газом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/s-kommunikaciyami/"><div class="metro-title__title">Поселки с коммуникациями</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-elektrichestvom/"><div class="metro-title__title">Участки с электричеством</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-vodoprovodom/"><div class="metro-title__title">Участки с водопроводом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-gazom/"><div class="metro-title__title">Участки с газом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-kommunikaciyami/"><div class="metro-title__title">Участки с коммуникациями</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-elektrichestvom/"><div class="metro-title__title">Дома с электричеством</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-vodoprovodom/"><div class="metro-title__title">Дома с водопроводом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-gazom/"><div class="metro-title__title">Дома с газом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-kommunikaciyami/"><div class="metro-title__title">Дома с коммуникациями</div></a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="infrastructureTab" role="tabpanel" aria-labelledby="infrastructureTab-tab">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/snt/"><div class="metro-title__title">Поселки СНТ</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/izhs/"><div class="metro-title__title">Поселки ИЖС</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/ryadom-zhd-stanciya/"><div class="metro-title__title">Поселки рядом с Ж/Д станцией</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/ryadom-avtobusnaya-ostanovka/"><div class="metro-title__title">Поселки с автобусной остановкой</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-snt/"><div class="metro-title__title">Участки СНТ</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-izhs/"><div class="metro-title__title">Участки ИЖС</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-ryadom-zhd-stanciya/"><div class="metro-title__title">Участки рядом с Ж/Д станцией</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-snt/"><div class="metro-title__title">Дома СНТ</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-izhs/"><div class="metro-title__title">Дома ИЖС</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-ryadom-zhd-stanciya/"><div class="metro-title__title">Дома рядом с Ж/Д станцией</div></a></div>
-        </div>
-      </div>
-      <div class="tab-pane fade" id="natureTab" role="tabpanel" aria-labelledby="natureTab-tab">
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/ryadom-s-lesom/"><div class="metro-title__title">Поселки рядом с лесом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/u-vody/"><div class="metro-title__title">Поселки у воды</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/u-ozera/"><div class="metro-title__title">Поселки у озера</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/u-reki/"><div class="metro-title__title">Поселки у реки</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-ryadom-s-lesom/"><div class="metro-title__title">Участки рядом с лесом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-vody/"><div class="metro-title__title">Участки у воды</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-ozera/"><div class="metro-title__title">Участки у озера</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-reki/"><div class="metro-title__title">Участки у реки</div></a></div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-ryadom-s-lesom/"><div class="metro-title__title">Дома рядом с лесом</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-vody/"><div class="metro-title__title">Дома у воды</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-ozera/"><div class="metro-title__title">Дома у озера</div></a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-reki/"><div class="metro-title__title">Дома у реки</div></a></div>
-        </div>
-      </div>
+    <div class="filter__tab mb-4 d-sm-block block_url__switch">
+      <ul class="nav mt-lg-0 mt-2">
+        <li class="nav-item" data-url="block_url_village">
+          <a class="nav-link btn <?=$urlVillageActive?> rounded-pill" href="/poselki/">Поселки</a>
+        </li>
+        <!-- <li class="nav-item" data-url="block_url_houses">
+          <a class="nav-link btn btn-outline-secondary rounded-pill" href="/doma/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
+              <path d="M16.524 29.385q-.558 0-1.109.036-.186-.128-.4-.258v-1.35a1.5 1.5 0 0 0 1-1.415v-2a1.5 1.5 0 0 0-3 0v2a1.5 1.5 0 0 0 1 1.415v.8a12.065 12.065 0 0 0-3.009-1V26.01a.5.5 0 0 0 .468-.868l-2.671-2a.5.5 0 0 0-.6 0l-2.671 2A.5.5 0 0 0 6 26.01v1.606a12.066 12.066 0 0 0-3.009 1v-.8A1.5 1.5 0 0 0 4 26.4v-2a1.5 1.5 0 1 0-3 0v2a1.5 1.5 0 0 0 1 1.415v1.35q-.209.13-.4.258-.543-.037-1.1-.038a.5.5 0 0 0-.5.5V37.9a.5.5 0 0 0 .5.5h16.024a.5.5 0 0 0 .5-.5v-8.016a.5.5 0 0 0-.5-.499zm-.5 8.013h-2.253a11 11 0 0 0-1.816-3.028 12.807 12.807 0 0 0-2.48-2.26 14.967 14.967 0 0 1 6.55-1.72zm-3.335 0H7.632a7.556 7.556 0 0 0-2.569-3.49A7.524 7.524 0 0 0 1 32.406v-2.015c5.242.168 9.9 2.971 11.693 7.007zm-8.358 0H1v-3.992A6.6 6.6 0 0 1 6.564 37.4H4.332zm9.686-13a.5.5 0 1 1 1.006 0v2a.5.5 0 1 1-1.006 0zm-7.011.894l1.5-1.128 1.5 1.128v2.176A13.2 13.2 0 0 0 9 27.394v-.749a.5.5 0 0 0-1 0v.749c-.347.013-.682.038-1.006.074zM2 24.4a.5.5 0 1 1 1 0v2a.5.5 0 1 1-1 0zm6.512 3.984a11.459 11.459 0 0 1 5.272 1.229 15.351 15.351 0 0 0-5.272 1.884 15.351 15.351 0 0 0-5.272-1.884 11.459 11.459 0 0 1 5.271-1.234z" transform="translate(.15 -22.745)"/>
+            </svg>
+          Дома</a>
+        </li> -->
+        <li class="nav-item" data-url="block_url_plots">
+          <a class="nav-link btn <?=$urlPlotsActive?> rounded-pill" href="/kupit-uchastki/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
+              <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
+            </svg>
+          Участки</a>
+        </li>
+      </ul>
     </div>
-    <button class="d-md-none btn btn-outline-secondary w-100 font-weight-normal" id="showCollapseAddress" type="button">
-      Ещё &nbsp;
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" class="inline-svg">
-        <g transform="rotate(-90 59.656 59.156)">
-          <path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z" />
-        </g>
-      </svg>
-    </button>
   </div>
+  <?$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		"",
+		Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/include/block_url_village.php"
+		)
+	);?>
+  <?/*$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		"",
+		Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/include/block_url_houses.php"
+		)
+	);*/?>
+  <?$APPLICATION->IncludeComponent(
+		"bitrix:main.include",
+		"",
+		Array(
+				"AREA_FILE_SHOW" => "file",
+				"AREA_FILE_SUFFIX" => "inc",
+				"EDIT_TEMPLATE" => "",
+				"PATH" => "/include/block_url_plots.php"
+		)
+	);?>
 </div>
