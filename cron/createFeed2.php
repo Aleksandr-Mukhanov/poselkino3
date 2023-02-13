@@ -14,7 +14,8 @@ $arFile = array_map('str_getcsv', $gDocFile);
 
 foreach ($arFile as $key => $arStr)
 {
-	if ($key == 0 || $key == 1) continue;  dump($arStr);
+	if ($key == 0 || $key == 1) continue; // dump($arStr);
+	echo "<pre>";print_r($arStr);echo "</pre>";
 
 	$description = str_replace(['&nbsp;','/n'],' ',$arStr[6]);
 	$description = trim(strip_tags($arStr[6]));
@@ -29,32 +30,35 @@ foreach ($arFile as $key => $arStr)
 		$xml_content .= '<description>'.$description.'</description>';
 
     $xml_content .= '<location>';
-      $xml_content .= '<country>'.$arStr[7].'</country>';
-			$xml_content .= '<region>'.$arStr[8].'</region>';
-      $xml_content .= '<district>'.$arStr[9].'</district>';
-      $xml_content .= '<locality-name>'.$arStr[10].'</locality-name>';
+			$xml_content .= '<address>'.$arStr[7].'</address>';
+			$xml_content .= '<latitude>'.$arStr[8].'</latitude>';
+			$xml_content .= '<longitude>'.$arStr[9].'</longitude>';
+      // $xml_content .= '<country>'.$arStr[7].'</country>';
+			// $xml_content .= '<region>'.$arStr[8].'</region>';
+      // $xml_content .= '<district>'.$arStr[9].'</district>';
+      // $xml_content .= '<locality-name>'.$arStr[10].'</locality-name>';
     $xml_content .= '</location>';
 
 		$xml_content .= '<sales-agent>';
-			$xml_content .= '<name>'.$arStr[11].'</name>';
-			$xml_content .= '<phone>'.$arStr[12].'</phone>';
-			$xml_content .= '<category>'.$arStr[13].'</category>';
+			$xml_content .= '<name>'.$arStr[10].'</name>';
+			$xml_content .= '<phone>'.$arStr[11].'</phone>';
+			$xml_content .= '<category>'.$arStr[12].'</category>';
 		$xml_content .= '</sales-agent>';
 
     $xml_content .= '<price>';
-      $xml_content .= '<value>'.$arStr[14].'</value>';
-      $xml_content .= '<currency>'.$arStr[15].'</currency>';
+      $xml_content .= '<value>'.$arStr[13].'</value>';
+      $xml_content .= '<currency>'.$arStr[14].'</currency>';
     $xml_content .= '</price>';
 
 		$xml_content .= '<lot-area>';
-      $xml_content .= '<value>'.$arStr[16].'</value>';
-      $xml_content .= '<unit>'.$arStr[17].'</unit>';
+      $xml_content .= '<value>'.$arStr[15].'</value>';
+      $xml_content .= '<unit>'.$arStr[16].'</unit>';
     $xml_content .= '</lot-area>';
 
-		if ($arStr[18]) $xml_content .= '<image>'.$arStr[18].'</image>';
-		if ($arStr[19]) $xml_content .= '<image>'.$arStr[19].'</image>';
-		if ($arStr[20]) $xml_content .= '<image>'.$arStr[20].'</image>';
-		if ($arStr[21]) $xml_content .= '<image>'.$arStr[21].'</image>';
+		if ($arStr[18]) $xml_content .= '<image>'.$arStr[17].'</image>';
+		if ($arStr[19]) $xml_content .= '<image>'.$arStr[18].'</image>';
+		if ($arStr[20]) $xml_content .= '<image>'.$arStr[19].'</image>';
+		if ($arStr[21]) $xml_content .= '<image>'.$arStr[20].'</image>';
 
   $xml_content .= '</offer>'; $i++;
 }

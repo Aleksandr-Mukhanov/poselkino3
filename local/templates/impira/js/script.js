@@ -14,11 +14,11 @@ $(document).ready(function()
 {
   $("input[type=tel]").mask("+7 000 000 00 00");
 
-  $('.section-1__button').on("click", function(){
-    $('#exampleModal2 .modal-title').text('Узнайте о спецпредложениях и скидках');
-    $('#exampleModal2 .modal-desc').html('Позвоните по телефону <a href="tel:+74954630565">+7(495)463-05-65</a> или заполните форму ниже');
-    $('#exampleModal2 .button').text('Отправить');
-  });
+  // $('.section-1__button').on("click", function(){
+  //   $('#exampleModal2 .modal-title').text('Узнайте о спецпредложениях и скидках');
+  //   $('#exampleModal2 .modal-desc').html('Позвоните по телефону <a href="tel:+74954630565">+7(495)463-05-65</a> или заполните форму ниже');
+  //   $('#exampleModal2 .button').text('Отправить');
+  // });
 
   var swiper = new Swiper(".mySwiper", {
     slidesPerView: "auto",
@@ -123,6 +123,7 @@ $(document).ready(function()
                 manager: manager
               },function(data){
                 $('.formSignToView').html(data);
+                $('.modal-body .modal-desc').hide();
                 fbq('track', 'Lead');
               }
             );

@@ -47,13 +47,13 @@ if ($domPos) {
     }
     // свое склонение
     switch ($idTypePos) {
-        case 1:
+        case PROP_DACHA:
             $nameTypePos = 'дачном поселке';
             break;
-        case 2:
+        case PROP_COTTAGE:
             $nameTypePos = 'коттеджном поселке';
             break;
-        case 171:
+        case PROP_FARMING:
             $nameTypePos = 'фермерстве';
             break;
         default:
@@ -64,13 +64,13 @@ if ($domPos) {
     $nameDomPos = $nameDomPos . ' ' . $nameTypePos;
 } else {
     switch ($idTypePos) {
-        case 1:
+        case PROP_DACHA:
             $nameTypePos = 'Дачный поселок';
             break;
-        case 2:
+        case PROP_COTTAGE:
             $nameTypePos = 'Коттеджный поселок';
             break;
-        case 171:
+        case PROP_FARMING:
             $nameTypePos = 'Фермерство';
             break;
         default:
@@ -277,7 +277,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                     <span class="metro-name"><?= $nameHW ?> шоссе</span>
                   <?=$closeTag?>
                 <a class="metro ml-0 z-index-1" href="/poselki/<?= $url_km_MKAD ?>/">
-                  <span class="metro-other"><?= $km_MKAD ?> км от МКАД</span>
+                  <span class="metro-other"><?= $km_MKAD ?> км от <?=ROAD?></span>
                 </a>
               </div>
           <? endif; ?>
@@ -309,12 +309,12 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
           <? endif; ?>
         </div>
         <div class="card-house__price mt-1 mt-lg-2">
-            <? if ($housesValEnum == 3) { // Только участки ?>
+            <? if ($housesValEnum == PROP_NO_DOM) { // Только участки ?>
                 <div class="card-house__price-title"><span class="rub">a</span>Сотка:&nbsp;</div>
                 <div class="card-house__price-number">от <span
                             class="split-number"><?= formatPrice($item['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]) ?></span>
                     <span class="rep_rubl">руб.</span></div>
-            <? } elseif ($housesValEnum == 4 || $housesValEnum == 256) { // Участки с домами ?>
+            <? } elseif ($housesValEnum == PROP_WITH_DOM || $housesValEnum == PROP_HOUSE_PLOT) { // Участки с домами ?>
                 <div class="card-house__price-title"><span class="rub">a</span>Дома:&nbsp;</div>
                 <div class="card-house__price-number">от <span
                             class="split-number"><?= formatPrice($item['PROPERTIES']['HOME_VALUE']['VALUE'][0]) ?></span>
@@ -341,7 +341,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                          class="inline-svg">
                         <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
                     </svg>
-                    <? if ($housesValEnum == 3) { // если только участок?>
+                    <? if ($housesValEnum == PROP_NO_DOM) { // если только участок?>
                         <div class="card-house__inline-title">Стоимость:&nbsp;</div>
                         <div class="card-house__inline-value">от&nbsp;
                           <span class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>
@@ -381,7 +381,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                          class="inline-svg">
                         <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
                     </svg>
-                    <? if ($housesValEnum == 3) { // если только участок?>
+                    <? if ($housesValEnum == PROP_NO_DOM) { // если только участок?>
                         <div class="card-house__inline-title">Стоимость:&nbsp;</div>
                         <div class="card-house__inline-value">от&nbsp;
                           <span class="split-number"><?= $item['PROPERTIES']['COST_LAND_IN_CART']['VALUE'][0] ?></span>

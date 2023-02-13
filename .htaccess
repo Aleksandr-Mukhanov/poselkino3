@@ -25,6 +25,8 @@ ErrorDocument 404 /404.php
 
   RewriteRule ^poselki/kupit-uchastok-(.*)/$ /kupit-uchastki/$1/ [R=301,L]
   RewriteRule ^poselki/kupit-uchastok/(.*)/$ /kupit-uchastki/$1/ [R=301,L]
+  RewriteRule ^poselki/(.*)-shosse/kupit-uchastok/$ /kupit-uchastki/$1-shosse/ [R=301,L]
+  RewriteRule ^poselki/(.*)-rayon/kupit-uchastok/$ /kupit-uchastki/$1-rayon/ [R=301,L]
 
   #RewriteRule ^poselki/kupit-uchastok-/$ /kupit-uchastki// [R=301,L]
 
@@ -217,3 +219,6 @@ ErrorDocument 404 /404.php
   Redirect 301 "/poselki/dolina ozer2/" /poselki/dolina-ozer-2/
 
   Redirect 301 /poselki/bor-izhs/ /404.php
+
+# девелоперы
+  Redirect 301 /developery/ZS-Group/reviews/ /developery/zs-group/reviews/

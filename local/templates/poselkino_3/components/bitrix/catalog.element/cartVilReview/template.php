@@ -214,7 +214,7 @@ switch ($km_MKAD) {
 							</a>
 							<?endif;?>
 						</div>
-						<a class="metro-other" href="/poselki/<?=$url_km_MKAD?>/"><?=$km_MKAD?> км от МКАД</a>
+						<a class="metro-other" href="/poselki/<?=$url_km_MKAD?>/"><?=$km_MKAD?> км от <?=ROAD?></a>
 					</div>
 					<div class="col-xl-6">
 						<div class="card-house__inline d-flex">

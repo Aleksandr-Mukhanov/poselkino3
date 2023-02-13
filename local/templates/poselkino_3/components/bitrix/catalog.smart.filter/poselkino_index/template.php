@@ -58,7 +58,7 @@ $this->setFrameMode(true);
             $placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"] : 'От';
             $placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"] : 'До'; ?>
             <div class="form-group form-group-inline">
-                <label>от МКАД, км</label>
+                <label>от <?=ROAD?>, км</label>
             </div>
             <div class="row">
                 <div class="col-6 pr-2">

@@ -1,7 +1,8 @@
 <?
 $APPLICATION->SetTitle($arVillage['NAME']);
 $APPLICATION->SetPageProperty("title", "Коттеджный поселок ".$arVillage['NAME'].", ".$regionName." район - официальный сайт");
-$APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0])." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от МКАД. ИЖС, охрана, свет, газ, ".$regionName." район");
+$priceSotka = ($arVillage['PROPERTY_PRICE_SOTKA_2_VALUE']) ? $arVillage['PROPERTY_PRICE_SOTKA_2_VALUE'] : $arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0];
+$APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($priceSotka)." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от МКАД. ИЖС, охрана, свет, газ, ".$regionName." район");
 ?>
 <section class="section-1" style="background-image: url(<?=$prevSrc['src']?>);">
 	<div class="section-1-main">
@@ -12,14 +13,11 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 		</div>
 	</div>
 </section>
-<section class="section-2 section" id="section-2">
+<section class="section-1-2 section" id="section-1-2">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-11">
-				<h2 class="section-title">О поселке</h2>
-				<div class="section-text">
-					<?=$villageText?>
-				</div>
+				<h2 class="section-title">Коммуникации в поселке</h2>
 			</div>
 		</div>
 		<div class="about-desc">
@@ -117,7 +115,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<div class="col-md mb-3">
 				<div class="advg">
 					<div class="advg__mark"> </div>
-					<p>Земельные участки от <?=formatPriceSite($arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0])?> ₽ за сотку</p>
+					<p>Земельные участки от <?=formatPriceSite($priceSotka)?> ₽ за сотку</p>
 				</div>
 			</div>
 			<div class="col-lg mb-3">
@@ -145,12 +143,24 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 		</div>
 	</div>
 </section>
+<section class="section-2 section" id="section-2">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-11">
+				<h2 class="section-title">О поселке <?=$arVillage['NAME']?></h2>
+				<div class="section-text">
+					<?=$villageText?>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <section class="section-5 section">
 	<div class="container-fluid">
 		<div class="form mb-4 mb-xl-5">
 			<div class="section-title">Приглашаем на экскурсию по поселку</div>
 			<div class="form-subtitle">Просто заполните форму для обратной связи или позвоните по телефону: <strong class="d-inline-block"><a href="tel:<?=$phoneClear?>"><?=$phone?></a></strong></div>
-			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
+			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view" onsubmit="ym(88004170,'reachGoal','prosmotr');return true;">
 				<div class="col-12 col-md mb-2">
 					<div class="input">
 						<input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
@@ -180,6 +190,36 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<h2 class="section-title mb-4">Все для комфортного отдыха и проживания</h2>
 			<div class="row">
 				<?$i = 0;
+					dump($arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE']);
+					// dump($arVillage['PROPERTY_BLOCK_COMFORT_DESCRIPTION']);
+					foreach ($arVillage['PROPERTY_BLOCK_COMFORT_DESCRIPTION'] as $key => $value) {
+						if ($value == 'Лес') $textLes = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Река') $textWater = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Пляж') $textBeach = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Детская площадка') $textPlayground = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Магазин') $textShop = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Парк') $textPark = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Охрана') $textSecurity = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Школа') $textSchool = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Детский сад') $textKindergarten = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Кафе') $textCafe = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'Аптека') $textPharmacy = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+						if ($value == 'АЗС') $textGas = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];
+					}
+					foreach ($arVillage['PROPERTY_BLOCK_COMFORT_RENAME_DESCRIPTION'] as $key => $value) {
+						if ($value == 'Лес') $titleLes = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Река') $titleWater = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Пляж') $titleBeach = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Детская площадка') $titlePlayground = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Магазин') $titleShop = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Парк') $titlePark = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Охрана') $titleSecurity = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Школа') $titleSchool = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Детский сад') $titleKindergarten = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Кафе') $titleCafe = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'Аптека') $titlePharmacy = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+						if ($value == 'АЗС') $titleGas = $arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE'][$key];
+					}
 					if ($LES && mb_strtolower($LES) != 'нет'): $i++;?>
 					<div class="col-lg-4 col-md-6 mb-md-3 mb-2">
 						<div class="card">
@@ -189,9 +229,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-3"></use>
 									</svg>
 								</div>
-								<div class="card__title">Лес</div>
+								<div class="card__title"><?=($titleLes)?$titleLes:'Лес'?></div>
 								<div class="card__desc">
-									<p>В примыкающем к поселку лесном массиве приятно побродить в тишине или собрать грибов и ягод</p>
+									<p>
+										<?if($textLes): echo $textLes;?>
+										<?else:?>
+											В примыкающем к поселку лесном массиве приятно побродить в тишине или собрать грибов и ягод
+										<?endif;?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -206,9 +251,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#lake"></use>
 									</svg>
 								</div>
-								<div class="card__title">Озеро или река</div>
+								<div class="card__title"><?=($titleWater)?$titleWater:'Река'?></div>
 								<div class="card__desc">
-									<p>Семейный отдых у воды или рыбалка в утренней тишине прямо рядом с вашим домом</p>
+									<p><?if($textWater): echo $textWater;?>
+									<?else:?>
+										Семейный отдых у воды или рыбалка в утренней тишине прямо рядом с вашим домом
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -223,9 +271,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-9"></use>
 									</svg>
 								</div>
-								<div class="card__title">Пляж</div>
+								<div class="card__title"><?=($titleBeach)?$titleBeach:'Пляж'?></div>
 								<div class="card__desc">
-									<p>В жаркую погоду дети и взрослые с удовольствием отдохнут на берегу водоема</p>
+									<p>
+										<?if($textBeach): echo $textBeach;?>
+										<?else:?>
+											В жаркую погоду дети и взрослые с удовольствием отдохнут на берегу водоема
+										<?endif;?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -240,9 +293,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-5"></use>
 									</svg>
 								</div>
-								<div class="card__title">Детская площадка</div>
+								<div class="card__title"><?=($titlePlayground)?$titlePlayground:'Детская площадка'?></div>
 								<div class="card__desc">
-									<p>Маленькие жители весело проведут время и заведут новых друзей среди соседей</p>
+									<p>
+										<?if($textPlayground): echo $textPlayground;?>
+										<?else:?>
+											Маленькие жители весело проведут время и заведут новых друзей среди соседей
+										<?endif;?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -257,9 +315,14 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-6"></use>
 									</svg>
 								</div>
-								<div class="card__title">Магазин</div>
+								<div class="card__title"><?=($titleShop)?$titleShop:'Магазин'?></div>
 								<div class="card__desc">
-									<p>В шаговой доступности магазин продуктов и товаров первой необходимости</p>
+									<p>
+										<?if($textShop): echo $textShop;?>
+										<?else:?>
+											В шаговой доступности магазин продуктов и товаров первой необходимости
+										<?endif;?>
+									</p>
 								</div>
 							</div>
 						</div>
@@ -274,9 +337,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-10"></use>
 									</svg>
 								</div>
-								<div class="card__title">Парк (прогулки)</div>
+								<div class="card__title"><?=($titlePark)?$titlePark:'Парк'?></div>
 								<div class="card__desc">
-									<p>Дорожки для прогулок и катания на велосипеде, возможность устроить барбекю прямо в поселке</p>
+									<p><?if($textPark): echo $textPark;?>
+									<?else:?>
+										Дорожки для прогулок и катания на велосипеде, возможность устроить барбекю прямо в поселке
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -291,9 +357,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-4"></use>
 									</svg>
 								</div>
-								<div class="card__title">Охрана</div>
+								<div class="card__title"><?=($titleSecurity)?$titleSecurity:'Охрана'?></div>
 								<div class="card__desc">
-									<p>Круглосуточная охрана исключит посторонних на территории и гарантирует безопасность</p>
+									<p><?if($textSecurity): echo $textSecurity;?>
+									<?else:?>
+										Круглосуточная охрана исключит посторонних на территории и гарантирует безопасность
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -308,9 +377,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#school"></use>
 									</svg>
 								</div>
-								<div class="card__title">Школа</div>
+								<div class="card__title"><?=($titleSchool)?$titleSchool:'Школа'?></div>
 								<div class="card__desc">
-									<p>Средняя общеобразовательная школа расположена в соседнем населенном пункте</p>
+									<p><?if($textSchool): echo $textSchool;?>
+									<?else:?>
+										Средняя общеобразовательная школа расположена в соседнем населенном пункте
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -325,9 +397,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#arrangement-9"></use>
 									</svg>
 								</div>
-								<div class="card__title">Детский сад</div>
+								<div class="card__title"><?=($titleKindergarten)?$titleKindergarten:'Детский сад'?></div>
 								<div class="card__desc">
-									<p>Вам не придется утомлять малыша поездками по пробкам, детский сад находится совсем рядом</p>
+									<p><?if($textKindergarten): echo $textKindergarten;?>
+									<?else:?>
+										Вам не придется утомлять малыша поездками по пробкам, детский сад находится совсем рядом
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -342,9 +417,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#cafe"></use>
 									</svg>
 								</div>
-								<div class="card__title">Кафе</div>
+								<div class="card__title"><?=($titleCafe)?$titleCafe:'Кафе'?></div>
 								<div class="card__desc">
-									<p>Устроить дружескую встречу можно не только у мангала, но и за вкусным ужином в кафе</p>
+									<p><?if($textCafe): echo $textCafe;?>
+									<?else:?>
+										Устроить дружескую встречу можно не только у мангала, но и за вкусным ужином в кафе
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -359,9 +437,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#pharmacy"></use>
 									</svg>
 								</div>
-								<div class="card__title">Аптека</div>
+								<div class="card__title"><?=($titlePharmacy)?$titlePharmacy:'Аптека'?></div>
 								<div class="card__desc">
-									<p>Если кто-то заболеет, поездка за нужным лекарством не займет больше четверти часа</p>
+									<p><?if($textPharmacy): echo $textPharmacy;?>
+									<?else:?>
+										Если кто-то заболеет, поездка за нужным лекарством не займет больше четверти часа
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -376,9 +457,12 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 										<use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#gas"></use>
 									</svg>
 								</div>
-								<div class="card__title">АЗС</div>
+								<div class="card__title"><?=($titleGas)?$titleGas:'АЗС'?></div>
 								<div class="card__desc">
-									<p>Заботиться о запасе бензина не нужно - до АЗС всего несколько километров</p>
+									<p><?if($textGas): echo $textGas;?>
+									<?else:?>
+										Заботиться о запасе бензина не нужно - до АЗС всего несколько километров
+									<?endif;?></p>
 								</div>
 							</div>
 						</div>
@@ -434,7 +518,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 		<div class="form mb-4" id="contacts">
 			<div class="section-title">Остались вопросы?</div>
 			<div class="form-subtitle">Заполните форму и наш менеджер свяжется с вами в течение 5 минут</div>
-			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
+			<form class="form-section row formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view" onsubmit="ym(88004170,'reachGoal','prosmotr');return true;">
 				<div class="col-12 col-md mb-2">
 					<div class="input">
 						<input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>

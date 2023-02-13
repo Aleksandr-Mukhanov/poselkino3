@@ -128,10 +128,10 @@ use Bitrix\Main\Page\Asset;
         <div class="feedback-form">
             <div class="feedback-form__title pt-0 text-center text-lg-left">
                 <h2><?$APPLICATION->ShowViewContent('blog_feedback__name');?></h2>
-                <p>Подпишитесь на обновление цены участков</p>
+                <!-- <p>Подпишитесь на обновление цены участков</p> -->
             </div>
             <div class="feedback-form__body">
-                <form class="formSignToView" data-formID="sale_poselkino">
+                <form class="formSignToView" data-formID="blog_poselkino">
                     <div class="row">
                         <div class="col-lg-4 d-none d-lg-block">
                             <div class="form-group">
@@ -144,8 +144,8 @@ use Bitrix\Main\Page\Asset;
                             </div>
                         </div>
                         <div class="col-lg-4 text-center">
-                            <button class="btn btn-warning rounded-pill btn-submit d-none d-lg-inline" type="submit">Хочу знать о скидках</button>
-                            <button class="btn btn-warning rounded-pill btn-submit d-inline d-lg-none" type="button" data-toggle="modal" data-target="#modalFeedbackSale">Хочу знать о скидках</button>
+                            <button class="btn btn-warning rounded-pill btn-submit d-none d-lg-inline" type="submit"><?$APPLICATION->ShowViewContent('blog_feedback__btn');?></button>
+                            <button class="btn btn-warning rounded-pill btn-submit d-inline d-lg-none" type="button" data-toggle="modal" data-target="#modalFeedbackSale"><?$APPLICATION->ShowViewContent('blog_feedback__btn');?></button>
                         </div>
                         <div class="col-lg-12 d-none d-lg-block">
                             <div class="custom-control custom-checkbox custom-control-inline">
@@ -177,7 +177,7 @@ use Bitrix\Main\Page\Asset;
                 </div>
             </div>
             <div class="modal-body">
-                <form class="formSignToView" data-formID="sale_poselkino">
+                <form class="formSignToView" data-formID="blog_poselkino">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">

@@ -14,7 +14,7 @@ $arDeveloper = ['Zemelniy-Ekspress','Zemelniy-Format','meta_gruppa','Krasivaya-Z
 $arOrder = Array("SORT"=>"ASC");
 // $arFilter = Array("IBLOCK_ID"=>1,'ACTIVE'=>'Y','!PROPERTY_SALES_PHASE'=>254,'PROPERTY_DOMA'=>3,'<=SORT'=>200,'PROPERTY_DEVELOPER_ID'=>$arDeveloper); // проданные не выводим и только участки
 $arFilter = ["IBLOCK_ID"=>1,'PROPERTY_IN_YA_FEED'=>283]; // ,'ACTIVE'=>'Y','!PROPERTY_SALES_PHASE'=>254,'PROPERTY_DOMA'=>3
-$arSelect = Array("ID","NAME","PREVIEW_TEXT","PROPERTY_DOMA","DETAIL_PAGE_URL","DATE_CREATE","PROPERTY_REGION","PROPERTY_MKAD","PROPERTY_PRICE_SOTKA","PROPERTY_HOME_VALUE","PROPERTY_PLOTTAGE","PROPERTY_HOUSE_AREA",'PROPERTY_DEVELOPER_ID','PROPERTY_DOP_FOTO','PROPERTY_SHOSSE','PROPERTY_COST_LAND_IN_CART','PROPERTY_COORDINATES');
+$arSelect = Array("ID","NAME","PREVIEW_TEXT","PROPERTY_DOMA","DETAIL_PAGE_URL","DATE_CREATE","PROPERTY_REGION","PROPERTY_MKAD","PROPERTY_PRICE_SOTKA","PROPERTY_HOME_VALUE","PROPERTY_PLOTTAGE","PROPERTY_HOUSE_AREA",'PROPERTY_DEVELOPER_ID','PROPERTY_DOP_FOTO','PROPERTY_SHOSSE','PROPERTY_COST_LAND_IN_CART','PROPERTY_COORDINATES','PROPERTY_LOCATION_YA_REAL');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->GetNext()){ // dump($arElement);
 	echo 'Поселок: '.$arElement['NAME'].'<br>';
@@ -40,7 +40,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 			$toName = 'Иван';
 			$toPhone = '+74951860665';
 			break;
-		case 'Рогачевское':
+		case 'Рогачёвское':
 			$toName = 'Иван';
 			$toPhone = '+74951860665';
 			break;
@@ -134,7 +134,12 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
     $xml_content .= '<location>';
       $xml_content .= '<country>Россия</country>';
 			$xml_content .= '<region>Московская область</region>';
-      $xml_content .= '<district>'.$arElement['PROPERTY_REGION_VALUE'].' район</district>';
+
+			if ($arElement['PROPERTY_LOCATION_YA_REAL_VALUE'])
+				$xml_content .= '<district>'.$arElement['PROPERTY_LOCATION_YA_REAL_VALUE'].'</district>';
+			else
+      	$xml_content .= '<district>'.$arElement['PROPERTY_REGION_VALUE'].' район</district>';
+
       $xml_content .= '<locality-name>'.$arElement['NAME'].'</locality-name>';
       $xml_content .= '<distance>'.$arElement['PROPERTY_MKAD_VALUE'].'</distance>';
 			$xml_content .= '<direction>'.$highway.'</direction>';

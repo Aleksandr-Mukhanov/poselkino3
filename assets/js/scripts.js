@@ -37,11 +37,23 @@ $(document).ready(function(){
   // добавление в сравнение / избранное
   $(document).on('click','.comparison-click',function(){
     id_el = $(this).attr('data-id');
-    setCookie('comparison_vil',id_el,'compHeader');
+    cookie_name = $(this).attr('data-cookie');
+    if (!cookie_name) cookie_name = 'comparison_vil';
+    setCookie(cookie_name,id_el,'compHeader');
   });
   $(document).on('click','.favorites-click',function(){
     id_el = $(this).attr('data-id');
-    setCookie('favorites_vil',id_el,'favHeader');
+    cookie_name = $(this).attr('data-cookie');
+    if (!cookie_name) cookie_name = 'favorites_vil';
+    setCookie(cookie_name,id_el,'favHeader');
+  });
+
+  // фильтр в избранном
+  $('.chooseFav').on('click', 'li a', function () {
+    blockFav = $(this).attr('href');
+    $(blockFav).slideDown().siblings().slideUp();
+    $('.nav-link').removeClass('btn-success').addClass('btn-outline-secondary');
+    $(this).removeClass('btn-outline-secondary').addClass('btn-success');
   });
 
   // чтобы отделять 3 знака в числах
@@ -63,17 +75,30 @@ $(document).ready(function(){
     $('#'+blockUrl).show();
   });
 
+  // фильтр на главной
+  $('.filterCalc, .changeHighway, .changeAreas').change(function(){
+    console.log('filterCalc');
+    formData = $('#filterIndex').serializeArray();
+    console.log(formData);
+    $.post("/local/ajax/filterCalc.php",{
+				formData: formData,
+			},function(data){
+        console.log(data);
+        resultData = JSON.parse(data);
+        console.log(resultData);
+        $('#filterIndex').attr('action',resultData.filterURL);
+				$('#filterSend').val('Подобрать ('+resultData.cntElements+')').prop('disabled',false);
+        $('.add-filter__footer-button').text('Подобрать ('+resultData.cntElements+')').prop('disabled',false);
+			}
+		);
+  });
+
   // изменение фильтров на главной
-  $('.changeFilterIndex').change(function(){
+  $('.changeFilterType').change(function(){
     filterType = $(this).val();
-    $('.formFilterIndex').hide();
-    $('#'+filterType).show();
-    // $.post("/filterPlots.php",{
-		// 		filterType: filterType,
-		// 	},function(data){
-		// 		$('#filterLoading').html(data);
-		// 	}
-		// );
+    if (filterType == 'filterPlots') $('.other-parameters').attr('data-target','#plotsModal');
+    else if (filterType == 'filterHouse') $('.other-parameters').attr('data-target','#houseModal');
+    else $('.other-parameters').attr('data-target','#townshipModal');
   });
 
   // выбор типа в фильтре
@@ -142,6 +167,12 @@ $(document).ready(function(){
 		location.href = '/poisk/?q='+searchWord;
 	});
 
+  $('.searchButton').click(function(event){
+		event.preventDefault();
+		searchWord = $(this).parent().parent().find('.searchWord').val();
+		location.href = '/poisk/?q='+searchWord;
+	});
+
   // иконки в фильтре
   $('.iconDouble').on('click', function(){ //alert('ok');
 		id1 = $(this).attr('data-id1');
@@ -196,6 +227,11 @@ $(document).ready(function(){
     }
   });
 
+  // Асфальт и Асфальтовая крошка
+  $('#arrFilter_77_3169671233').click(function(){
+    if ($(this).is(':checked')) $('#arrFilter_77_3076719002').trigger("click");
+  });
+
   // выбор направлений
   $('.highway-block__title').click(function(){
     $(this).parent().find('input').trigger('click');
@@ -247,6 +283,24 @@ $(document).ready(function(){
 				ourForm: 'ToUs'
 			},function(data){
 				$('#formToUs').html(data);
+			}
+		);
+	});
+
+  // Заявки с лендинга
+  $('.formOrderLend').submit(function(event){
+		event.preventDefault();
+    var form = $(this);
+    formName = form.attr('data-form');
+    name = form.find('.nameOrderLend').val();
+		tel = form.find('.telOrderLend').val();
+		$.post("/local/ajax/sendForm.php",{
+        formName: formName,
+				name: name,
+				tel: tel,
+				ourForm: 'OrderLend'
+			},function(data){
+				form.html(data);
 			}
 		);
 	});

@@ -1,6 +1,33 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 echo 'ok<br>';
 
+// передадим в АМО
+$name = 'тест';
+$namePos = 'Фишер';
+$_POST['develName'] = 'тестовый';
+
+$arLead['add'] = [
+	[
+		'name' => $name.' ('.$namePos.') - с сайта', // имя сделки
+		'status_id' => '28709515', // статус 'Новый лид'
+		'created_at' => time(),
+		'custom_fields' => [
+			[
+				'id' => 650157, // Девелопер
+				'values' => [
+					[
+						'value' => $_POST['develName']
+					]
+				]
+			],
+		]
+	]
+];
+
+// $url = "/api/v2/leads";
+// $resultAmo = inAmo($arLead,$url);
+// dump($resultAmo);
+
 use Bitrix\Main\Loader;
 use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	Loader::includeModule('highloadblock');

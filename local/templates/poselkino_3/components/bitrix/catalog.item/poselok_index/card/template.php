@@ -43,11 +43,11 @@ if($domPos){
 	}
 	// свое склонение
 	switch ($idTypePos) {
-		case 1:
+		case PROP_DACHA:
 			$nameTypePos = 'дачном поселке'; break;
-		case 2:
+		case PROP_COTTAGE:
 			$nameTypePos = 'коттеджном поселке'; break;
-		case 171:
+		case PROP_FARMING:
 			$nameTypePos = 'фермерстве'; break;
 		default:
 			$nameTypePos = ''; break;
@@ -56,11 +56,11 @@ if($domPos){
 	$nameDomPos = $nameDomPos.' '.$nameTypePos;
 }else{
 	switch ($idTypePos) {
-		case 1:
+		case PROP_DACHA:
 			$nameTypePos = 'Дачный поселок'; break;
-		case 2:
+		case PROP_COTTAGE:
 			$nameTypePos = 'Коттеджный поселок'; break;
-		case 171:
+		case PROP_FARMING:
 			$nameTypePos = 'Фермерство'; break;
 		default:
 			$nameTypePos = ''; break;
@@ -205,15 +205,15 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
 				</a>
 			<?endif;?>
 			<a class="metro z-index-1" href="/poselki/<?=$url_km_MKAD?>/" style="padding-left: 15px">
-				<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
+				<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span></a>
 		</div>
 		<div class="offer-house__price">
-			<?if($housesValEnum == 3){ // Только участки ?>
+			<?if($housesValEnum == PROP_NO_DOM){ // Только участки ?>
 				<span class="rub">a</span>Сотка:
 					<span class="price">
 						От <span class="split-number"><?=formatPrice($item['PROPERTIES']['PRICE_SOTKA']['VALUE'][0])?></span> <span class="rep_rubl">руб.</span>
 					</span>
-			<?}elseif($housesValEnum == 4 || $housesValEnum == 256){ // Участки с домами ?>
+			<?}elseif($housesValEnum == PROP_WITH_DOM || $housesValEnum == PROP_HOUSE_PLOT){ // Участки с домами ?>
 				<span class="rub">a</span>Дома:
 					<span class="price">
 						От <span class="split-number"><?=formatPrice($item['PROPERTIES']['HOME_VALUE']['VALUE'][0])?></span> <span class="rep_rubl">руб.</span>
@@ -228,7 +228,7 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
 					Участки:</div>
 				<div class="card-house__inline-value">от <?=round($item['PROPERTIES']['PLOTTAGE']['VALUE'][0])?> до <?=round($item['PROPERTIES']['PLOTTAGE']['VALUE'][1])?> соток</div>
 			</div>
-			<?if($housesValEnum == 3){ // если только участок?>
+			<?if($housesValEnum == PROP_NO_DOM){ // если только участок?>
 				<div class="card-house__inline"><svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
                         <path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
                     </svg>

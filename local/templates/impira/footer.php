@@ -38,7 +38,7 @@
           <div class="modal-title">Забронировать участок</div>
           <div class="modal-desc">Заполните форму ниже, наши менеджеры свяжутся с вами в самое ближайшее время</div>
         </div>
-        <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
+        <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view" onsubmit="ym(88004170,'reachGoal','prosmotr');return true;">
           <div class="col-12 mb-2">
             <div class="input">
               <input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
@@ -72,11 +72,20 @@
           <use xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#close"></use>
         </svg></button>
       <div class="modal-body">
+
         <div class="text-center mb-2 mb-lg-3">
-          <div class="modal-title">Записаться на просмотр</div>
-          <div class="modal-desc">Заполните форму ниже, наши менеджеры свяжутся с вами в самое ближайшее время</div>
+          <div class="modal-title">Узнайте о спецпредложениях и скидках</div>
+          <?switch ($_SERVER['HTTP_HOST']) {
+            case 'podporinskie-dachi.ru':
+              $phoneForm = '+7(495)859-02-09'; break;
+            case 'gzelskoe-ozero.ru':
+              $phoneForm = '+7(495)154-16-73'; break;
+            default:
+              $phoneForm = '+7(495)463-05-65'; break;
+          }?>
+          <div class="modal-desc">Позвоните по телефону <a href="tel:<?=str_replace(['(',')','-'],'',$phoneForm)?>"><?=$phoneForm?></a> или заполните форму ниже</div>
         </div>
-        <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view">
+        <form class="form-section row p-0 formSignToView" action="/local/ajax/sendForm.php" method="post" data-formID="view" onsubmit="ym(88004170,'reachGoal','skidka');return true;">
           <div class="col-12 mb-2">
             <div class="input">
               <input class="input__controll nameSignToView ym-record-keys" type="text" placeholder="Ваше имя" required/>
@@ -89,7 +98,7 @@
             <input class="input__controll telSignToView ym-record-keys" type="tel" placeholder="Номер телефона" required/>
           </div>
           <div class="col-12 mb-2">
-            <button class="button w-100">Записаться на просмотр</button>
+            <button class="button w-100">Отправить</button>
           </div>
           <div class="col-12">
             <label class="checbox" for="check-4">

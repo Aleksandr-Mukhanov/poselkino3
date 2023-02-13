@@ -3,8 +3,10 @@ use Bitrix\Main\Page\Asset,
 	Bitrix\Main\Loader;
 Loader::includeModule("iblock");
 
+Asset::getInstance()->addCss("/assets/css/fancybox.css");
 Asset::getInstance()->addCss("/assets/css/vendor.min.css");
 Asset::getInstance()->addCss("/assets/css/style.min.css");
+Asset::getInstance()->addJs("/assets/js/fancybox.umd.js");
 Asset::getInstance()->addJs("/assets/js/vendor.min.js");
 Asset::getInstance()->addJs("/assets/js/app.js");
 Asset::getInstance()->addJs("/assets/js/jquery.cookie.js");
@@ -13,9 +15,9 @@ Asset::getInstance()->addJs("/assets/js/scripts.js");
 // получим кол-во поселков
 $cntAllVil=0;
 $arOrder = Array("SORT"=>"ASC");
-$arFilter = Array("IBLOCK_ID"=>1,"ACTIVE"=>"Y");
-$arFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
-$arFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+$arFilter = Array("IBLOCK_ID"=>IBLOCK_ID,"ACTIVE"=>"Y");
+$arFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
+$arFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
 $arSelect = Array("ID");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch())
@@ -53,9 +55,11 @@ $APPLICATION->AddPanelButton(
 );
 
 // canonical
-$canonical = 'https://poselkino.ru'.$APPLICATION->GetCurDir();
+$canonical = 'https://'.$_SERVER['HTTP_HOST'].$APPLICATION->GetCurDir();
 $ourPage = $APPLICATION->GetCurPage(false);
-if (strpos($ourPage, '/filter/') !== false) $canonical = 'https://poselkino.ru/poselki/';
+if (strpos($ourPage, '/filter/') !== false) $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/poselki/';
+if ($ourPage == '/poselki/kupit-uchastok/') $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/kupit-uchastki/';
+if ($ourPage == '/doma/') $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/poselki/kupit-dom/';
 if ($_REQUEST['PAGEN_1'] && !$_REQUEST['teg']) $canonical .= '?PAGEN_1='.$_REQUEST['PAGEN_1'];
 $APPLICATION->SetPageProperty('canonical', $canonical);
 
@@ -97,7 +101,9 @@ if(isset($_COOKIE['favorites_vil'])){
 					<ul class="nav navbar-top" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
 						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все поселки <span class="text-secondary"><?=$cntAllVil?></span></a></li>
 						<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/map/">На карте</a></li>
-						<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <span class="text-secondary"><?=$cntAllPlots?></span></a></li>
+						<?if(SHOW_PLOTS == 'Y'):?>
+							<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <span class="text-secondary"><?=$cntAllPlots?></span></a></li>
+						<?endif;?>
 						<!-- <li class="nav-item"><a class="nav-link" href="/doma/">Дома&nbsp;<span class="text-secondary"><?=$cntAllHouse?></span></a></li> -->
 					</ul>
 				</div>
@@ -145,8 +151,13 @@ if(isset($_COOKIE['favorites_vil'])){
 			<ul class="nav" itemscope itemtype="http://www.schema.org/SiteNavigationElement">
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/">Все поселки <?=$cntAllVil?></a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/map/">Поселки на карте</a></li>
-				<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <?=$cntAllPlots?></a></li>
+				<?if(SHOW_PLOTS == 'Y'):?>
+					<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <?=$cntAllPlots?></a></li>
+				<?endif;?>
 				<!-- <li class="nav-item"><a class="nav-link" href="/doma/">Дома <?=$cntAllHouse?></a></li> -->
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/promyshlennye/">Промышленные поселки</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/stroitelyam/">Застройщикам</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/investoram/">Инвесторам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/o-proekte/">О проекте</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/blog/">Блог</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/reklama/">Реклама и сотрудничество</a></li>

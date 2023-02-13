@@ -36,6 +36,9 @@
           <div class="footer__nav">
             <div class="footer__nav-item"><a href="/poselki/">Коттеджные поселки</a></div>
             <div class="footer__nav-item"><a href="/kupit-uchastki/">Земельные участки</a></div>
+            <div class="footer__nav-item"><a href="/poselki/promyshlennye/">Промышленные поселки</a></div>
+            <div class="footer__nav-item"><a href="/stroitelyam/">Застройщикам</a></div>
+            <div class="footer__nav-item"><a href="/investoram/">Инвесторам</a></div>
             <div class="footer__nav-item"><a href="/poselki/#shosse_rayon">По шоссе</a></div>
             <div class="footer__nav-item"><a href="/poselki/?show_rayon=y#shosse_rayon">По районам</a></div>
             <div class="footer__nav-item"><a href="/o-proekte/">О проекте</a></div>
@@ -89,14 +92,14 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <input class="form-control nameSignToView" id="nameSignToView" type="text" placeholder="Ваше имя" required>
+              <input class="form-control nameSignToView ym-record-keys" id="nameSignToView" type="text" placeholder="Ваше имя" required>
             </div>
             <div class="form-group">
-                <input class="phone form-control telSignToView" id="telSignToView" type="tel" placeholder="Номер телефон" autocomplete="off" required>
+                <input class="phone form-control telSignToView ym-record-keys" id="telSignToView" type="tel" placeholder="Номер телефон" autocomplete="off" required>
             </div>
-            <div class="form-group">
-                <input class="form-control emailSignToView" id="emailSignToView" type="email" placeholder="Email" required>
-            </div>
+            <!-- <div class="form-group">
+                <input class="form-control emailSignToView ym-record-keys" id="emailSignToView" type="email" placeholder="Email" required>
+            </div> -->
           </div>
           <div class="col-12 text-center">
             <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
@@ -130,14 +133,14 @@
           </div>
           <div class="col-12">
             <div class="form-group">
-              <input class="form-control" id="nameToUs" type="text" placeholder="Ваше имя" required>
+              <input class="form-control ym-record-keys" id="nameToUs" type="text" placeholder="Ваше имя" required>
             </div>
             <div class="form-group">
-              <input class="phone form-control" id="telToUs" type="tel" placeholder="Номер телефона" autocomplete="off" required>
+              <input class="phone form-control ym-record-keys" id="telToUs" type="tel" placeholder="Номер телефона" autocomplete="off" required>
             </div>
-            <div class="form-group">
-              <input class="form-control" id="emailToUs" type="email" placeholder="E-mail" required>
-            </div>
+            <!-- <div class="form-group">
+              <input class="form-control ym-record-keys" id="emailToUs" type="email" placeholder="E-mail" required>
+            </div> -->
             <div class="form-group">
               <textarea class="form-control" id="textToUs" placeholder="Текст обращения" required></textarea>
             </div>
@@ -148,6 +151,44 @@
               <div class="custom-control custom-checkbox custom-control-inline">
                 <input class="custom-control-input" id="privacy-policy-2" type="checkbox" name="privacy-policy" checked required>
                 <label class="custom-control-label" for="privacy-policy-2" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
+              </div>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Написать нам -->
+<div class="modal" id="openLendForm" tabindex="-1" role="dialog" aria-labelledby="writeToUsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <h5 class="text-uppercase" id="writeToUsLabel">Консультация специалиста</h5>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </div>
+      <div class="modal-body px-3 px-md-5">
+        <form class="row form-feedback-modal formOrderLend" action="" method="post" data-form="Строителям">
+          <div class="col-12">
+            <p class="text-center">Наш специалист перезвонит и проконсультирует вас по всем вопросам</p>
+          </div>
+          <div class="col-12">
+            <div class="form-group">
+              <input class="form-control nameOrderLend ym-record-keys" type="text" placeholder="Ваше имя" required>
+            </div>
+            <div class="form-group">
+              <input class="phone form-control telOrderLend ym-record-keys" type="tel" placeholder="Номер телефона" autocomplete="off" required>
+            </div>
+          </div>
+          <div class="col-12 text-center">
+            <button class="btn btn-warning px-5 w-100 rounded-pill" type="submit">Отправить</button>
+            <p class="mt-2">
+              <div class="custom-control custom-checkbox custom-control-inline">
+                <input class="custom-control-input" id="privacy-policy-lend" type="checkbox" name="privacy-policy" checked required>
+                <label class="custom-control-label" for="privacy-policy-lend" style="font-size: 13px; text-align: left;"> Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с&nbsp; <a href="/politika-konfidentsialnosti/" class="font-weight-bold color-body" onclick="window.open('/politika-konfidentsialnosti/', '_blank'); return false;" title="Ознакомиться с политикой конфиденциальности">Политикой Конфиденциальности</a></label>
               </div>
             </p>
           </div>
@@ -265,23 +306,61 @@ _tmr.push({id: "3252735", type: "pageView", start: (new Date()).getTime(), pid: 
 
 <!-- Marquiz -->
 <?
-if ($APPLICATION->GetCurDir() == '/poselki/kashirskoe-shosse/'):
+if ($APPLICATION->GetCurDir() == '/poselki/kashirskoe-shosse/')
   $marquizID = '62a357f6a6e0ac004fc9af1c';
-elseif ($APPLICATION->GetCurDir() == '/poselki/domodedovskiy-rayon/'):
+elseif ($APPLICATION->GetCurDir() == '/poselki/domodedovskiy-rayon/')
   $marquizID = '62ab57189c59e9004de9c31f';
-elseif ($APPLICATION->GetCurDir() == '/poselki/novoryazanskoe-shosse/'):
+elseif ($APPLICATION->GetCurDir() == '/poselki/novoryazanskoe-shosse/')
   $marquizID = '62ac6a702757cb00478e1bfd';
-elseif ($APPLICATION->GetCurDir() == '/poselki/ramenskiy-rayon/'):
+elseif ($APPLICATION->GetCurDir() == '/poselki/ramenskiy-rayon/')
   $marquizID = '62ac7ae202f177004fc566c6';
-elseif ($APPLICATION->GetCurDir() == '/poselki/noginskiy-rayon/'):
+elseif ($APPLICATION->GetCurDir() == '/poselki/noginskiy-rayon/')
   $marquizID = '62ac3e3302f177004fc55e84';
-elseif ($APPLICATION->GetCurDir() == '/poselki/gorkovskoe-shosse/'):
+elseif ($APPLICATION->GetCurDir() == '/poselki/gorkovskoe-shosse/')
   $marquizID = '62ac799302f177004fc56696';
-else:
+elseif ($APPLICATION->GetCurDir() == '/poselki/skhodnya-layf/' || $APPLICATION->GetCurDir() == '/poselki/shadrino/' || $APPLICATION->GetCurDir() == '/poselki/blagoveshchenskoe/')
+{
+  $marquizID = '62b33a5b8252e1004f773c3d';
+  $marquizTitle = 'Дмитровское шоссе:';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/grin-laundzh/' || $APPLICATION->GetCurDir() == '/poselki/rizhskie-zori/' || $APPLICATION->GetCurDir() == '/poselki/podporinskie-dachi/')
+{
+  $marquizID = '630dbfc62dd09f004f262fad';
+  $marquizTitle = 'Новорижское шоссе:';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/sosnovyy-bor-1-2/')
+{
+  $marquizID = '62ac7ae202f177004fc566c6';
+  $marquizTitle = 'Раменский район:';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/ekokvartal-razdole/')
+{
+  $marquizID = '62a1f1a227b327004eb065b1';
+  $marquizTitle = 'Подберите участок в поселке';
+  $marquizText = 'ЭкоКвартал Раздолье';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/malinki-park/')
+{
+  $marquizID = '62ac3e3302f177004fc55e84';
+  $marquizTitle = 'Ногинский район';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/regata/' || $APPLICATION->GetCurDir() == '/poselki/rublevo/')
+{
+  $marquizID = '62a357f6a6e0ac004fc9af1c';
+  $marquizTitle = 'Каширское шоссе:';
+}
+elseif ($APPLICATION->GetCurDir() == '/poselki/pakhra-river-park/')
+{
+  $marquizID = '630cada72dd09f004f26160f';
+  $marquizTitle = 'Подберите участок в поселке';
+  $marquizText = 'Пахра Ривер Парк';
+}
+else
   $marquizID = false;
-endif;
 
 if ($marquizID):
+  if (!$marquizTitle) $marquizTitle = 'Пройдите тест';
+  if (!$marquizText) $marquizText = '5 лучших участков по Вашим требованиям';
 ?>
   <script>
   (function(w, d, s, o){
@@ -303,7 +382,7 @@ if ($marquizID):
     }
   );
   </script>
-  <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Pop', {id: '<?=$marquizID?>', title: 'Пройдите тест', text: '5 лучших участков по Вашим требованиям', delay: 10, textColor: '#ffffff', bgColor: '#fbb358', svgColor: '#ffffff', closeColor: '#ffffff', bonusCount: 0, bonusText: '', type: 'side', position: 'position_bottom-left', rounded: true, shadow: 'rgba(251, 179, 88, 0)', blicked: true})</script>
+  <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Pop', {id: '<?=$marquizID?>', title: '<?=$marquizTitle?>', text: '<?=$marquizText?>', delay: 10, textColor: '#ffffff', bgColor: '#fbb358', svgColor: '#ffffff', closeColor: '#ffffff', bonusCount: 1, bonusText: 'Вам доступен бонус', type: 'side', position: 'position_bottom-left', rounded: true, shadow: 'rgba(251, 179, 88, 0)', blicked: true})</script>
 <?endif;?>
 
 <?php endif; ?>

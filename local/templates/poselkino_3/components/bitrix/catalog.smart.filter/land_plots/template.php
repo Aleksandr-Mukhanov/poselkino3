@@ -45,7 +45,7 @@ $this->setFrameMode(true);
 						<?$arItem = $arResult["ITEMS"][195]; //dump($arItem); // Удаленность от МКАД
 			      $placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
 			      $placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';?>
-						<label>от МКАД, км</label>
+						<label>от <?=ROAD?>, км</label>
 						<input
 		          placeholder="<?=$placeholderMin?>"
 		          data-min-val='<?echo $arItem["VALUES"]["MIN"]["VALUE"]?>'

@@ -38,6 +38,16 @@ global $arrFilter;
               </div>
             </div>
 						<?$APPLICATION->IncludeComponent(
+							 "bitrix:main.include",
+							 "",
+							 Array(
+								 "AREA_FILE_SHOW" => "file",
+								 "AREA_FILE_SUFFIX" => "inc",
+								 "EDIT_TEMPLATE" => "",
+								 "PATH" => "/include/new-filter.php"
+							)
+						);?>
+						<?/*$APPLICATION->IncludeComponent(
 		        	"bitrix:catalog.smart.filter",
 		        	"poselkino_index",
 		        	array(
@@ -67,7 +77,7 @@ global $arrFilter;
 		        		"COMPONENT_TEMPLATE" => "poselkino"
 		        	),
 		        	false
-		        );?>
+		        );*/?>
             <div class="row">
               <div class="col-4 hero__count">
                 <div class="hero__count-num"><?=$cntAllVil?></div>

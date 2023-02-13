@@ -178,7 +178,7 @@ $this->setFrameMode(true);
 					<?$arItem = $arResult["ITEMS"][6]; //dump($arItem); // Удаленность от МКАД
 					$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'От';
 					$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'До';?>
-					<label class="mt-2 mt-lg-0 col-lg-4 col-xl-5">от МКАД</label>
+					<label class="mt-2 mt-lg-0 col-lg-4 col-xl-5">от <?=ROAD?></label>
 					<div class="col-9 col-lg-6 col-xl-5 px-0">
 						<div class="d-flex justify-content-between">
 							<input

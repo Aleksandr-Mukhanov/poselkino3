@@ -1,11 +1,13 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
+$pagen = $_REQUEST['PAGEN_1'];
 $ourDir = $APPLICATION->GetCurDir();
 $h2 = '<h2 class="h2">Земельные участки под дом и дачу с хорошим месторасположением</h2>';
 $SEO_text = '<p>База коттеджных и дачных поселков в Московской области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
 $urlWithDom = '/poselki/kupit-dom/';
+$urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 
 // получим участки
 $cnt = 0; $minPrice = 999999999;
@@ -45,6 +47,11 @@ if ($shosse || $rayon || $mkadKM || $priceURL || $areaUrl || $classCode || $comm
 	require_once $_SERVER["DOCUMENT_ROOT"] . '/kupit-uchastki/inc/seo-text.php';
 	require_once $_SERVER["DOCUMENT_ROOT"] . '/kupit-uchastki/inc/seo-multi-tegi.php';
 }
+if ($pagen) { // дописываем страницу в пагинации
+	$newH1 .= ' - Страница - '.$pagen;
+	$newTitle .= ' - Страница - '.$pagen;
+	$newDesc .= ' - Страница - '.$pagen;
+}
 
 $APPLICATION->SetTitle($newH1);
 $APPLICATION->SetPageProperty("title", $newTitle);
@@ -60,7 +67,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 															<path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z"/>
 													</g>
 											</svg>
-									</a><a class="d-block d-sm-none btn btn-outline-warning show-map" href="<?=$ourDir?>map/">
+									</a><a class="d-block d-sm-none btn btn-outline-warning show-map" href="<?=$urlMap?>">
 											<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
 													<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)"/>
 											</svg>
@@ -118,7 +125,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 							<div class="order-0 order-sm-1 col-xl-6 col-lg-8 mt-3 mt-md-0">
 									<div class="d-flex justify-content-lg-end">
 											<a class="toggler-filter btn btn-warning d-none d-sm-block" href="#">Фильтр</a>
-											<a class="d-none d-sm-flex btn btn-outline-warning ml-4 show-map" href="<?=$ourDir?>map/">
+											<a class="d-none d-sm-flex btn btn-outline-warning ml-4 show-map" href="<?=$urlMap?>">
 													<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193"
 															 viewBox="0 0 9.24 13.193" class="inline-svg">
 															<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z"
@@ -376,7 +383,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 									</div>
 									<div class="h1">Поиск по карте</div>
 							</div>
-							<a class="btn btn-success rounded-pill" href="<?=$ourDir?>map/">Посмотреть на карте</a>
+							<a class="btn btn-success rounded-pill" href="<?=$urlMap?>">Посмотреть на карте</a>
 					</div>
 			</div>
 	</div>

@@ -41,13 +41,13 @@ $params = [
 $strCSV = " --- ".date('d.m.Y H:i:s')." --- \n";
 
 // получим поселки девелопера
-// $xmlDeveloper = 'Udacha';
-// $typeFeed = 'ydacha';
-// $urlFeed = 'https://www.ydacha.ru/local/ydacha/export/index.php?format=poselkino&token=tulYT78ysdk7T';
+$xmlDeveloper = 'Udacha';
+$typeFeed = 'ydacha';
+$urlFeed = 'https://www.ydacha.ru/local/ydacha/export/index.php?format=poselkino&token=tulYT78ysdk7T';
 
-$xmlDeveloper = 'Zemelniy-Ekspress';
-$typeFeed = 'zemexx';
-$urlFeed = 'https://zemexx.ru/yrl/?version=dealer';
+// $xmlDeveloper = 'Zemelniy-Ekspress';
+// $typeFeed = 'zemexx';
+// $urlFeed = 'https://zemexx.ru/yrl/?version=dealer';
 
 $strCSV .= "XML Developer: ".$xmlDeveloper."\n\n";
 

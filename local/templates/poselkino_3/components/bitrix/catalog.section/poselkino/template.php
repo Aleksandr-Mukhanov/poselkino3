@@ -239,6 +239,16 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 					$component,
 					array('HIDE_ICONS' => 'Y')
 				);?>
+				<?if ($i == 5):?>
+					<section class="banner">
+						<div class="container">
+							<div class="banner__wrap">
+								<h3 class="banner__title">Хотите сделать выгодные инвестиции в&nbsp;земельный участок до&nbsp;100% годовых?</h3>
+								<a href="/investoram/" class="btn btn-warning banner__button">Узнать подробнее</a>
+							</div>
+						</div>
+					</section>
+				<?endif;?>
 				<? // вставка формы
 				$nPos = ($cntPos > 5) ? $cntPos / 2 : $cntPos;
 				if($i == $nPos){ ?>
@@ -281,6 +291,17 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 			        </div>
 			    </div>
 				<?}?>
+				<?if ($i == 15):?>
+					<section class="banner">
+						<div class="container">
+							<div class="banner__wrap banner__wrap-2">
+								<h3 class="banner__title">Подберем участки под&nbsp;застройку
+									домами и&nbsp;коттеджами</h3>
+								<a href="/stroitelyam/" class="btn btn-warning banner__button">Узнать подробнее</a>
+							</div>
+						</div>
+					</section>
+				<?endif;?>
 			<?}
 		}
 }

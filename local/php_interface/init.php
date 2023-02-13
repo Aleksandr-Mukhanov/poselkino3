@@ -5,9 +5,9 @@ if(file_exists($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/amo.php"))
 // тест вывод
 function dump($el){
 	global $USER;
-	if($USER->IsAdmin()){
+	// if($USER->IsAdmin()){
 		echo "<pre>";print_r($el);echo "</pre>";
-	}
+	// }
 }
 
 // вывод ошибки
@@ -32,6 +32,42 @@ function formatPriceSite($price){
 function formatPricePoint($price){
 	$newPrice = number_format($price, 0, ',', '.');
 	return $newPrice;
+}
+
+// сопопоставим id
+switch ($_SERVER['HTTP_HOST']) {
+	case 'spb.poselkino.ru':
+		define('IBLOCK_ID', 7); // инфоблок Поселков
+		define('SHOW_PLOTS', 'N'); // показывать участки
+		define('ROAD', 'КАД'); // шоссе
+		define('PROP_SOLD_ID', 388); // проданные в SALES_PHASE
+		define('PROP_HIDE_ID', 310); // убрать из каталога в HIDE_POS
+		define('PROP_NO_DOM', 316); // Участки в DOMA
+		define('PROP_WITH_DOM', 317); // Дома в DOMA
+		define('PROP_HOUSE_PLOT', 318); // Дома и участки в DOMA
+		define('PROP_DACHA', 311); // Дачный поселок в TYPE
+		define('PROP_COTTAGE', 312); // Коттеджный поселок в TYPE
+		define('PROP_FARMING', 313); // Фермерство в TYPE
+		define('PROP_ELECTRO_Y', 392); // Электричество в ELECTRO
+		define('PROP_GAS_Y', 397); // Газ в GAS
+		define('PROP_PLUMBING_Y', 402); // Водопровод в PLUMBING
+		break;
+	default:
+		define('IBLOCK_ID', 1); // инфоблок Поселков
+		define('SHOW_PLOTS', 'Y'); // показывать участки
+		define('ROAD', 'МКАД'); // шоссе
+		define('PROP_SOLD_ID', 254); // проданные в SALES_PHASE
+		define('PROP_HIDE_ID', 273); // убрать из каталога в HIDE_POS
+		define('PROP_NO_DOM', 3); // Участки в DOMA
+		define('PROP_WITH_DOM', 4); // Дома в DOMA
+		define('PROP_HOUSE_PLOT', 256); // Дома и участки в DOMA
+		define('PROP_DACHA', 1); // Дачный поселок в TYPE
+		define('PROP_COTTAGE', 2); // Коттеджный поселок в TYPE
+		define('PROP_FARMING', 171); // Фермерство в TYPE
+		define('PROP_ELECTRO_Y', 12); // Электричество в ELECTRO
+		define('PROP_GAS_Y', 15); // Газ в GAS
+		define('PROP_PLUMBING_Y', 18); // Водопровод в PLUMBING
+		break;
 }
 
 // ресайз фото
@@ -160,6 +196,30 @@ function getColorRoad($id_enum){
 		case 179: $color = 'ten'; break; // Дмитровское
 		// case 129: $color = 'eleven'; break; //
 		// case 129: $color = 'twelve'; break; //
+		// СПБ
+		case 379: $color = 'two'; break; // Приморское
+		case 374: $color = 'two'; break; // Левашовское
+		case 369: $color = 'two'; break; // Гостилицкое
+		case 547: $color = 'seven'; break; // ЗСД
+		case 364: $color = 'seven'; break; // Белоостровское
+		case 362: $color = 'seven'; break; // Александровское
+		case 366: $color = 'three'; break; // Выборгское
+		case 368: $color = 'three'; break; // Горское
+		case 380: $color = 'three'; break; // Приозерское
+		case 548: $color = 'three'; break; // Новоприозерское
+		case 376: $color = 'three'; break; // Московское
+		case 372: $color = 'three'; break; // Киевское
+		case 381: $color = 'three'; break; // Пулковское
+		case 365: $color = 'three'; break; // Волхонское
+		case 383: $color = 'one'; break; // Рябовское
+		case 370: $color = 'one'; break; // Дорога жизни
+		case 549: $color = 'one'; break; // Е20
+		case 382: $color = 'one'; break; // Ропшинское
+		case 363: $color = 'one'; break; // Аннинское
+		case 367: $color = 'one'; break; // Гатчинское
+		case 373: $color = 'one'; break; // Красносельское
+		case 377: $color = 'six'; break; // Мурманское
+		case 378: $color = 'six'; break; // Петрозаводское
 	}
 	return $color;
 }
@@ -190,6 +250,31 @@ function getInfoHW($idEnum){
 		case 129: $color = 'nine'; $jivosite = 'nTstbLwJ2I'; break; // Симферопольское
 		case 265: $color = 'nine'; $jivosite = 'nTstbLwJ2I'; break; // Варшавское
 		case 179: $color = 'ten'; $jivosite = 'PBbaYrBnyt'; break; // Дмитровское
+		// СПБ
+		case 379: $color = 'two'; $jivosite = ''; break; // Приморское
+		case 374: $color = 'two'; $jivosite = ''; break; // Левашовское
+		case 369: $color = 'two'; $jivosite = ''; break; // Гостилицкое
+		case 547: $color = 'seven'; $jivosite = ''; break; // ЗСД
+		case 364: $color = 'seven'; $jivosite = ''; break; // Белоостровское
+		case 362: $color = 'seven'; $jivosite = ''; break; // Александровское
+		case 366: $color = 'three'; $jivosite = ''; break; // Выборгское
+		case 368: $color = 'three'; $jivosite = ''; break; // Горское
+		case 380: $color = 'three'; $jivosite = ''; break; // Приозерское
+		case 548: $color = 'three'; $jivosite = ''; break; // Новоприозерское
+		case 376: $color = 'three'; $jivosite = ''; break; // Московское
+		case 372: $color = 'three'; $jivosite = ''; break; // Киевское
+		case 381: $color = 'three'; $jivosite = ''; break; // Пулковское
+		case 365: $color = 'three'; $jivosite = ''; break; // Волхонское
+		case 383: $color = 'one'; $jivosite = ''; break; // Рябовское
+		case 370: $color = 'one'; $jivosite = ''; break; // Дорога жизни
+		case 549: $color = 'one'; $jivosite = ''; break; // Е20
+		case 382: $color = 'one'; $jivosite = ''; break; // Ропшинское
+		case 363: $color = 'one'; $jivosite = ''; break; // Аннинское
+		case 367: $color = 'one'; $jivosite = ''; break; // Гатчинское
+		case 373: $color = 'one'; $jivosite = ''; break; // Красносельское
+		case 377: $color = 'six'; $jivosite = ''; break; // Мурманское
+		case 378: $color = 'six'; $jivosite = ''; break; // Петрозаводское
+		default: $color = 'nine'; $jivosite = ''; break; // Остальные
 	}
 	$arInfoHW = [
 		'COLOR' => $color,
@@ -200,7 +285,10 @@ function getInfoHW($idEnum){
 
 // получим названия шоссе
 function getNameRoad($idRoad){
-	$property_enums = CIBlockPropertyEnum::GetList(Array("DEF"=>"DESC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>"SHOSSE"));
+	$property_enums = CIBlockPropertyEnum::GetList(
+		Array("DEF"=>"DESC", "SORT"=>"ASC"),
+		Array("IBLOCK_ID"=>IBLOCK_ID, "CODE"=>"SHOSSE")
+	);
 	while($enum_fields = $property_enums->GetNext())
 	{
 	  // echo $enum_fields["ID"]." - ".$enum_fields["VALUE"]."<br>";
@@ -226,8 +314,9 @@ function getRoadName($value){
 }
 
 // получим названия из списка для отдельных страниц
-function getNamesList($codeRoad,$codeProp){
-	$property_enums = CIBlockPropertyEnum::GetList(Array("DEF"=>"DESC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>$codeProp,"XML_ID" => $codeRoad));
+function getNamesList($codeRoad,$codeProp,$iblockID = 1){
+	$iblockID = IBLOCK_ID;
+	$property_enums = CIBlockPropertyEnum::GetList(Array("DEF"=>"DESC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>$iblockID, "CODE"=>$codeProp,"XML_ID" => $codeRoad));
 	if($enum_fields = $property_enums->GetNext()){
 		$nameKomu = str_replace(['кое','кий','кой'],'кому',$enum_fields["VALUE"]); // склонение
 		$nameKom = str_replace(['кое','кий','кой'],'ком',$enum_fields["VALUE"]); // склонение

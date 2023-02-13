@@ -60,6 +60,11 @@ $arURLFeed = [
 	3396 => 'https://zemst.ru/plan/xml/sokolniki.xml', // Сокольники
 	3333 => 'https://zemst.ru/plan/xml/nazaryevo.xml', // Назарьево
 	4077 => 'https://zemst.ru/plan/xml/malinki-park.xml', // Малинки Парк
+	4485 => 'https://zemst.ru/plan/xml/mishutinskaya-sloboda.xml', // Мишутинская слобода
+	3613 => 'https://zemst.ru/plan/xml/rizhskie-zori.xml', // Рижские зори
+	5350 => 'https://zemst.ru/plan/xml/yarkoe.xml', // Яркое
+	5639 => 'https://zemst.ru/plan/xml/lapino.xml', // Лапино
+	// 5639 => 'https://zemst.ru/plan/xml/kupavna.xml', // Купавна
 ];
 
 foreach ($arURLFeed as $idVil => $urlFeed)

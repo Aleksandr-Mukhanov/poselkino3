@@ -3,6 +3,24 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 $this->setFrameMode(true);
 
+/*** CustomPageNav start ***/
+$nPageWindow = 3; //количество отображаемых страниц
+if ($arResult["NavPageNomer"] > floor($nPageWindow/2) + 1 && $arResult["NavPageCount"] > $nPageWindow)
+	$nStartPage = $arResult["NavPageNomer"] - floor($nPageWindow/2);
+else
+	$nStartPage = 1;
+
+if ($arResult["NavPageNomer"] <= $arResult["NavPageCount"] - floor($nPageWindow/2) && $nStartPage + $nPageWindow-1 <= $arResult["NavPageCount"])
+	$nEndPage = $nStartPage + $nPageWindow - 1;
+else
+{
+	$nEndPage = $arResult["NavPageCount"];
+  if ($nEndPage - $nPageWindow + 1 >= 1) $nStartPage = $nEndPage - $nPageWindow + 1;
+}
+$arResult["nStartPage"] = $arResult["nStartPage"] = $nStartPage;
+$arResult["nEndPage"] = $arResult["nEndPage"] = $nEndPage;
+/*** CustomPageNav end ***/
+
 if(!$arResult["NavShowAlways"])
 {
 	if ($arResult["NavRecordCount"] == 0 || ($arResult["NavPageCount"] == 1 && $arResult["NavShowAll"] == false))

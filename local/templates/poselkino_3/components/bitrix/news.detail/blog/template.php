@@ -12,7 +12,7 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 CUtil::InitJSCore(array('fx'));
-dump($arResult['PROPERTIES']);
+// dump($arResult['PROPERTIES']);
 ?>
 <div class="content" id="<?=$this->GetEditAreaId($arResult['ID'])?>">
   <div class="content__title">
@@ -35,6 +35,11 @@ dump($arResult['PROPERTIES']);
     </div>
   </div>
 </div>
-<?$this->SetViewTarget('blog_feedback__name');
-  echo $formName = ($arResult['PROPERTIES']['FORM_NAME']['VALUE']) ? $arResult['PROPERTIES']['FORM_NAME']['VALUE']: 'Хотите первыми узнавать об&nbsp;акциях и&nbsp;спецпредложениях по&nbsp;поселку?';
-$this->EndViewTarget();?>
+<?
+  $this->SetViewTarget('blog_feedback__name');
+    echo $formName = ($arResult['PROPERTIES']['FORM_NAME']['VALUE']) ? $arResult['PROPERTIES']['FORM_NAME']['VALUE']: 'Хотите первыми узнавать об&nbsp;акциях и&nbsp;спецпредложениях по&nbsp;поселку?';
+  $this->EndViewTarget();
+  $this->SetViewTarget('blog_feedback__btn');
+    echo $btnName = ($arResult['PROPERTIES']['BTN_NAME']['VALUE']) ? $arResult['PROPERTIES']['BTN_NAME']['VALUE']: 'Хочу знать о скидках';
+  $this->EndViewTarget();
+?>

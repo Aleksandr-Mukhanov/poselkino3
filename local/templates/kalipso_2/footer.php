@@ -86,11 +86,12 @@
     <!-- End Facebook Pixel Code -->
 
     <? // jivosite
-    $shosseEnumId = array_key_first($arVillage["PROPERTY_SHOSSE_VALUE"]);
+    /*$shosseEnumId = array_key_first($arVillage["PROPERTY_SHOSSE_VALUE"]);
     $jivositeCode = getInfoHW($shosseEnumId)['JIVOSITE'];
     if($jivositeCode):?>
       <script src="//code-sb1.jivosite.com/widget/<?=$jivositeCode?>" async></script>
-    <?endif;?>
+    <?endif;*/
+    ?>
 
     <?require_once $_SERVER["DOCUMENT_ROOT"] . '/inc/counters.php';?>
 

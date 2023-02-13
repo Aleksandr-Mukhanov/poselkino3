@@ -96,7 +96,7 @@ foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $photo){
 							</a>
 						<?endif;?>
 						<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-							<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
+							<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span></a>
 					</div>
 					<?if($offerType == 'plots'){ // если участки?>
 						<div class="offer-house__inline-info">

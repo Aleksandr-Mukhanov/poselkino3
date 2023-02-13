@@ -69,7 +69,7 @@ $offerURL = '/kupit-uchastki/uchastok-'.$item['ID'].'/';
 									<span class="metro-name"><?=$value['nameHW']?> шоссе</span>
 								</a>
 								<a class="metro ml-0 z-index-1" href="/kupit-uchastki/<?=$arResult['VILLAGE']['url_km_MKAD']?>/">
-									<span class="metro-other"><?=$arResult['VILLAGE']['km_MKAD']?> км от МКАД</span>
+									<span class="metro-other"><?=$arResult['VILLAGE']['km_MKAD']?> км от <?=ROAD?></span>
 								</a>
 							</div>
 						<?else:?>

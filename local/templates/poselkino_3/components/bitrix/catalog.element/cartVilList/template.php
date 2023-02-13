@@ -214,7 +214,7 @@ switch ($km_MKAD) {
 						</a>
 						<?endif;?>
 					</div>
-					<a class="metro-other" href="/poselki/<?=$url_km_MKAD?>/"><?=$km_MKAD?> км от МКАД</a>
+					<a class="metro-other" href="/poselki/<?=$url_km_MKAD?>/"><?=$km_MKAD?> км от <?=ROAD?></a>
 				</div>
 				<div class="col-xl-6">
 					<div class="card-house__inline d-flex">
@@ -390,7 +390,7 @@ switch ($km_MKAD) {
 							</a>
 						<?endif;?>
 						<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-							<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+							<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span>
 						</a>
 					</div>
 					<div class="card-house__inline">

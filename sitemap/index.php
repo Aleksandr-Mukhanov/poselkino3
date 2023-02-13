@@ -40,11 +40,11 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				false
 			);?>
 		</div>
-		<div class="container my-5">
+		<div class="container my-3 sitemap">
 			<h1><?$APPLICATION->ShowTitle(false);?></h1>
 			<div class="row">
-				<div class="col-4">
-					<h3>Поселки</h3>
+				<div class="col-md-4 col-sm-12">
+					<h3 class="font-GPB">Поселки</h3>
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -56,8 +56,8 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 				</div>
-				<div class="col-4">
-					<h3>Шоссе</h3>
+				<div class="col-md-4 col-sm-12">
+					<h3 class="font-GPB">Шоссе</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -81,7 +81,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Районы</h3>
+					<h3 class="font-GPB">Районы</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -105,7 +105,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>От МКАД</h3>
+					<h3 class="font-GPB">От МКАД</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -123,24 +123,24 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Цена</h3>
+					<h3 class="font-GPB">Цена</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-uchastok-do-100-tys-rub/">Участки 100 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-150-tys-rub/">Участки 150 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-200-tys-rub/">Участки 200 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-300-tys-rub/">Участки 300 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-400-tys-rub/">Участки 400 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-500-tys-rub/">Участки 500 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-600-tys-rub/">Участки 600 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-700-tys-rub/">Участки 700 тыс руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-1-mln-rub/">Участки 1 млн руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-1,5-mln-rub/">Участки 1,5 млн руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-2-mln-rub/">Участки 2 млн руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-3-mln-rub/">Участки 3 млн руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-4-mln-rub/">Участки 4 млн руб</a></li>
-				        <li><a href="/poselki/kupit-uchastok-do-5-mln-rub/">Участки 5 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-100-tys-rub/">Участки 100 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-150-tys-rub/">Участки 150 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-200-tys-rub/">Участки 200 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-300-tys-rub/">Участки 300 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-400-tys-rub/">Участки 400 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-500-tys-rub/">Участки 500 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-600-tys-rub/">Участки 600 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-700-tys-rub/">Участки 700 тыс руб</a></li>
+				        <li><a href="/kupit-uchastki/do-1-mln-rub/">Участки 1 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-1,5-mln-rub/">Участки 1,5 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-2-mln-rub/">Участки 2 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-3-mln-rub/">Участки 3 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-4-mln-rub/">Участки 4 млн руб</a></li>
+				        <li><a href="/kupit-uchastki/do-5-mln-rub/">Участки 5 млн руб</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -163,7 +163,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Площадь</h3>
+					<h3 class="font-GPB">Площадь</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -173,12 +173,12 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				          }else{
 				            $nameSot = 'соток'; $urlSot = 'sotok';
 				          }?>
-				          <li><a href="/poselki/kupit-uchastok-<?=$i?>-<?=$urlSot?>/">Участок <?=$i?> <?=$nameSot?></a></li>
+				          <li><a href="/kupit-uchastki/<?=$i?>-<?=$urlSot?>/">Участок <?=$i?> <?=$nameSot?></a></li>
 				        <?}?>
-				        <li><a href="/poselki/kupit-uchastok-25-sotok/">Участок 25 соток</a></li>
+				        <li><a href="/kupit-uchastki/25-sotok/">Участок 25 соток</a></li>
 				      <?for ($i=30; $i <= 100; $i+=10) {?>
 				        <?if($i == 40)echo '</ul></div><div class="item"><ul>';?>
-				        <li><a href="/poselki/kupit-uchastok-<?=$i?>-sotok/">Участок <?=$i?> соток</a></li>
+				        <li><a href="/kupit-uchastki/<?=$i?>-sotok/">Участок <?=$i?> соток</a></li>
 				      <?}?>
 				        <?for ($i=2; $i <= 20; $i++) { // дома?>
 				          <?if($i == 2 || $i == 3 || $i == 4){
@@ -205,7 +205,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Класс</h3>
+					<h3 class="font-GPB">Класс</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -218,11 +218,11 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-uchastok-econom-class/">Участки эконом класса</a></li>
-				        <li><a href="/poselki/kupit-uchastok-biznes-class/">Участки бизнес класса</a></li>
-				        <li><a href="/poselki/kupit-uchastok-komfort-class/">Участки комфорт класса</a></li>
-				        <li><a href="/poselki/kupit-uchastok-elit-class/">Участки элитного класса</a></li>
-				        <li><a href="/poselki/kupit-uchastok-premium-class/">Участки премиум класса</a></li>
+				        <li><a href="/kupit-uchastki/econom-class/">Участки эконом класса</a></li>
+				        <li><a href="/kupit-uchastki/biznes-class/">Участки бизнес класса</a></li>
+				        <li><a href="/kupit-uchastki/komfort-class/">Участки комфорт класса</a></li>
+				        <li><a href="/kupit-uchastki/elit-class/">Участки элитного класса</a></li>
+				        <li><a href="/kupit-uchastki/premium-class/">Участки премиум класса</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -236,7 +236,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Коммуникации</h3>
+					<h3 class="font-GPB">Коммуникации</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -248,10 +248,10 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-uchastok-s-elektrichestvom/">Участки с электричеством</a></li>
-				        <li><a href="/poselki/kupit-uchastok-s-vodoprovodom/">Участки с водопроводом</a></li>
-				        <li><a href="/poselki/kupit-uchastok-s-gazom/">Участки с газом</a></li>
-				        <li><a href="/poselki/kupit-uchastok-s-kommunikaciyami/">Участки с коммуникациями</a></li>
+				        <li><a href="/kupit-uchastki/s-elektrichestvom/">Участки с электричеством</a></li>
+				        <li><a href="/kupit-uchastki/s-vodoprovodom/">Участки с водопроводом</a></li>
+				        <li><a href="/kupit-uchastki/s-gazom/">Участки с газом</a></li>
+				        <li><a href="/kupit-uchastki/s-kommunikaciyami/">Участки с коммуникациями</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -264,7 +264,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Инфраструктура</h3>
+					<h3 class="font-GPB">Инфраструктура</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -276,9 +276,9 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-uchastok-snt/">Участки СНТ</a></li>
-				        <li><a href="/poselki/kupit-uchastok-izhs/">Участки ИЖС</a></li>
-				        <li><a href="/poselki/kupit-uchastok-ryadom-zhd-stanciya/">Участки рядом с Ж/Д станцией</a></li>
+				        <li><a href="/kupit-uchastki/snt/">Участки СНТ</a></li>
+				        <li><a href="/kupit-uchastki/izhs/">Участки ИЖС</a></li>
+				        <li><a href="/kupit-uchastki/ryadom-zhd-stanciya/">Участки рядом с Ж/Д станцией</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -290,7 +290,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Природа</h3>
+					<h3 class="font-GPB">Природа</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -302,10 +302,10 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-uchastok-ryadom-s-lesom/">Участки рядом с лесом</a></li>
-				        <li><a href="/poselki/kupit-uchastok-u-vody/">Участки у воды</a></li>
-				        <li><a href="/poselki/kupit-uchastok-u-ozera/">Участки у озера</a></li>
-				        <li><a href="/poselki/kupit-uchastok-u-reki/">Участки у реки</a></li>
+				        <li><a href="/kupit-uchastki/ryadom-s-lesom/">Участки рядом с лесом</a></li>
+				        <li><a href="/kupit-uchastki/u-vody/">Участки у воды</a></li>
+				        <li><a href="/kupit-uchastki/u-ozera/">Участки у озера</a></li>
+				        <li><a href="/kupit-uchastki/u-reki/">Участки у реки</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -318,7 +318,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Девелоперы</h3>
+					<h3 class="font-GPB">Девелоперы</h3>
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -344,7 +344,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 						</div>
 					</div>
 
-					<h3>Остальное</h3>
+					<h3 class="font-GPB">Остальное</h3>
 				  <div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -359,12 +359,12 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				        <li><a href="/poselki/dachnye/">Дачные поселки</a></li>
 				        <li><a href="/poselki/kupit-dachnyj-uchastok/">Купить дачный участок</a></li>
 				        <li><a href="/poselki/kupit-dachnyj-dom/">Купить дачный дом</a></li>
-				        <li><a href="/poselki/kupit-uchastok/">Купить участок</a></li>
+				        <li><a href="/kupit-uchastki/">Купить участок</a></li>
 				      </ul>
 				    </div>
 				  </div>
 
-					<h3>Другие страницы</h3>
+					<h3 class="font-GPB">Другие страницы</h3>
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -393,7 +393,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    </div>
 				  </div>
 
-					<h3>Статьи блога</h3>
+					<h3 class="font-GPB">Статьи блога</h3>
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -406,9 +406,9 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				  </div>
 
 				</div>
-				<div class="col-4">
+				<div class="col-md-4 col-sm-12">
 
-					<h3>Теги</h3>
+					<h3 class="font-GPB">Теги</h3>
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
@@ -417,11 +417,11 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 						foreach ($arShosse as $shosse => $value) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД
 								?>
-								<li><a href="https://poselkino.ru/poselki/kupit-uchastok/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
 								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить дом <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
 								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Поселки <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
 							<?}?>
-							<li><a href="https://poselkino.ru/poselki/kupit-uchastok/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
+							<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
 							<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-gaz/">Купить дом <?=$value?> шоссе с газом</a></li>
 							<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-gaz/">Поселки <?=$value?> шоссе с газом</a></li>
 						<?}?>
@@ -433,7 +433,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				      <ul>
 					<?// район до МКАД и газ
 						foreach ($arRegion as $rayon => $value) {?>
-							<li><a href="https://poselkino.ru/poselki/kupit-uchastok/'.$rayon.'-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
+							<li><a href="https://poselkino.ru/kupit-uchastki/'.$rayon.'-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
 							<li><a href="https://poselkino.ru/poselki/kupit-dom/'.$rayon.'-rayon-gaz/">Купить дом <?=$value?> район с газом</a></li>
 							<li><a href="https://poselkino.ru/poselki/'.$rayon.'-rayon-gaz/">Поселки <?=$value?> с газом</a></li>
 						<?}?>
@@ -445,7 +445,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 							<ul>
 					<?// до МКАД газ
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/poselki/kupit-uchastok/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="https://poselkino.ru/kupit-uchastki/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
 							<li><a href="https://poselkino.ru/poselki/kupit-dom/gaz-do-<?=$i?>-km-mkad/">Купить дом с газом до <?=$i?> км от МКАД</a></li>
 							<li><a href="https://poselkino.ru/poselki/gaz-do-<?=$i?>-km-mkad/">Поселки с газом до <?=$i?> км от МКАД</a></li>
 						<?}?>
@@ -457,7 +457,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 							<ul>
 					<?// до МКАД ИЖС
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/poselki/kupit-uchastok/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="https://poselkino.ru/kupit-uchastki/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
 							<li><a href="https://poselkino.ru/poselki/kupit-dom/do-<?=$i?>-km-mkad-izhs/">Купить дом до <?=$i?> км от МКАД ИЖС</a></li>
 							<li><a href="https://poselkino.ru/poselki/do-<?=$i?>-km-mkad-izhs/">Поселки до <?=$i?> км от МКАД ИЖС</a></li>
 						<?}?>
@@ -512,7 +512,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 
 						foreach ($urlPriceShosse as $price) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/poselki/kupit-uchastok/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
+								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
 								<?if(!in_array($price,$noUrlPriceShosse)){?>
 									<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-<?=$price?>/">Купить дом <?=$value?> шоссе <?=$price?></a></li>
 								<?}
@@ -531,7 +531,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 
 						foreach ($commun2 as $key => $commun) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/poselki/kupit-uchastok/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
 								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-<?=$commun?>/">Купить дом <?=$value?> шоссе <?=$communName[$key]?></a></li>
 								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$value?> шоссе <?=$communName[$key]?></a></li>
 							<?}
@@ -546,7 +546,7 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 					// коммуникации и МКАД
 						foreach ($commun2 as $commun) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД?>
-								<li><a href="https://poselkino.ru/poselki/kupit-uchastok/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
 								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить дом <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
 								<li><a href="https://poselkino.ru/poselki/<?=$commun?>-do-<?=$i?>-km-mkad/">Поселки <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
 							<?}

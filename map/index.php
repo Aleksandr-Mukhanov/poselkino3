@@ -64,7 +64,8 @@ use Bitrix\Main\Page\Asset;
   }
 
   $arOurPage = explode('/map/',$ourPage);
-  $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$arOurPage[0].'/');
+  $canonicalURL = ($developerCode) ? '/developery' : $arOurPage[0];
+  $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$canonicalURL.'/');
   $APPLICATION->SetPageProperty('robots', 'noindex, follow');
 ?>
 <main class="page page-map">

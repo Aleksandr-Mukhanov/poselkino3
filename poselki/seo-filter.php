@@ -603,6 +603,12 @@ if($typeURL){ // другие URL
         }
       }
       break;
+    case 'promyshlennye':
+      $arrFilter['PROPERTY_1'] = 301; // Промышленный поселок
+      $inChainItem = 'Промышленные поселки';
+      $newTitle = 'Промышленные поселки в Московской области';
+      $h1 = 'Промышленные поселки в Московской области';
+      break;
     case 'kupit-letnij-dom':
       // $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Купить летний дом';

@@ -33,6 +33,7 @@ $SEO_text = '<p>База коттеджных и дачных поселков �
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
 $urlWithDom = '/poselki/kupit-dom/';
+$urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 if ($pagen) $pageTitleDesc = 'Поселки';
 
 if ($shosse || $rayon || $typePos || $domPos || $mkadKM || $priceURL || $areaUrl || $classCode || $commun || $typeURL || $plottage) { // странички шоссе или район
@@ -71,7 +72,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                           </g>
                       </svg>
                   </a>
-                  <a class="d-block d-sm-none btn btn-outline-warning show-map" href="<?=$ourDir?>map/">
+                  <a class="d-block d-sm-none btn btn-outline-warning show-map" href="<?=$urlMap?>">
                       <svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
                           <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)"/>
                       </svg>
@@ -137,7 +138,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                 <div class="order-0 order-sm-1 col-xl-7 col-lg-8 mt-3 mt-md-0">
                     <div class="d-flex justify-content-lg-end">
                         <a class="toggler-filter btn btn-warning d-none d-sm-block" href="#">Фильтр</a>
-                        <a class="d-none d-sm-flex btn btn-outline-warning ml-4 show-map" href="<?=$ourDir?>map/">
+                        <a class="d-none d-sm-flex btn btn-outline-warning ml-4 show-map" href="<?=$urlMap?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193"
                                  viewBox="0 0 9.24 13.193" class="inline-svg">
                                 <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z"
@@ -267,7 +268,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                     </div>
                     <div class="h1">Поиск по карте</div>
                 </div>
-                <a class="btn btn-success rounded-pill" href="<?=$ourDir?>map/">Посмотреть на карте</a>
+                <a class="btn btn-success rounded-pill" href="<?=$urlMap?>">Посмотреть на карте</a>
             </div>
         </div>
     </div>

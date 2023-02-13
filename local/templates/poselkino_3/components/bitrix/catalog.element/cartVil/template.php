@@ -1,10 +1,6 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
-use Bitrix\Main\Grid\Declension,
-		Bitrix\Main\Page\Asset;
-
-Asset::getInstance()->addJs("https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js");
-Asset::getInstance()->addCss("https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css");
+use Bitrix\Main\Grid\Declension;
 
 $this->setFrameMode(true);
 
@@ -52,7 +48,6 @@ if (mb_strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в поселк�
 elseif(mb_strtolower($arResult['PROPERTIES']['CAFE']['VALUE']) == 'в радиусе 5км') $rad5km['cafe']='Кафе';
 if (mb_strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в поселке') $inTer['gas']='АЗС';
 elseif(mb_strtolower($arResult['PROPERTIES']['AVTOZAPRAVKA']['VALUE']) == 'в радиусе 5км') $rad5km['gas']='АЗС';
-// dump($inTer); dump($rad5km);
 
 foreach ($arResult['PROPERTIES']['ON_TERRITORY']['VALUE'] as $value)
 	$inTer[$value] = $arResult['INFRASTRUKTURA'][$value];
@@ -86,11 +81,11 @@ foreach ($arResult['MORE_PHOTO'] as $photo){
 $housesValEnum = $arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
 
 switch ($arResult['PROPERTIES']['TYPE']['VALUE_ENUM_ID']) { // название по типу
-	case 1:
+	case PROP_DACHA:
 			$typePos = "дачном поселке"; break;
-	case 2:
+	case PROP_COTTAGE:
 			$typePos = "коттеджном поселке"; break;
-	case 171:
+	case PROP_FARMING:
 			$typePos = "фермерстве"; break;
 }
 
@@ -150,9 +145,9 @@ switch ($km_MKAD) {
 
 	$nameVil = $arResult['PROPERTIES']['TYPE']['VALUE'].' '.$name; // тип поселка
 
-	if($housesValEnum == 3){ // Только участки
+	if($housesValEnum == PROP_NO_DOM){ // Только участки
 		$priceSotka = 'Сотка от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).'</span><span class="rep_rubl">руб.</span>';
-	}elseif($housesValEnum == 4 || $housesValEnum == 256){ // Участки с домами
+	}elseif($housesValEnum == PROP_WITH_DOM || $housesValEnum == PROP_HOUSE_PLOT){ // Участки с домами
 		$priceSotka = 'Дом от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'</span><span class="rep_rubl">руб.</span>';
 	}
 
@@ -403,9 +398,15 @@ switch ($km_MKAD) {
 			  ?>
 				<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-zoom/1.3.0/lg-zoom.js"></script> openPlan -->
 			  <div class="w-100">
-			    <a href="<?=$planIMG?>" data-fancybox <?=$frame?>>
-			      <img class="w-100 mt-4" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$name?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
-			    </a>
+					<?if($frame):?>
+						<a data-src="<?=$planIMG?>" data-fancybox <?=$frame?> rel="nofollow">
+				      <img class="w-100 mt-4" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$name?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
+				    </a>
+					<?else:?>
+						<a href="<?=$planIMG?>" data-fancybox <?=$frame?>>
+				      <img class="w-100 mt-4" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$name?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
+				    </a>
+					<?endif;?>
 			  </div>
 			</div>
 
@@ -428,7 +429,7 @@ switch ($km_MKAD) {
                     </a>
 	                <?endif;?>
 		                <a class="metro ml-sm-auto ml-0 pl-2 z-index-1" href="/poselki/<?=$url_km_MKAD?>/">
-		                    <span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+		                    <span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span>
 		                </a>
 	            </div>
 					    <div class="d-flex w-100">
@@ -460,7 +461,7 @@ switch ($km_MKAD) {
 
 				<div class="row extra-options">
 					<div class="col-md-6">
-						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['ELECTRO']['VALUE_ENUM_ID'] == 12)echo'active';?>">
+						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['ELECTRO']['VALUE_ENUM_ID'] == PROP_ELECTRO_Y)echo'active';?>">
 							<div class="icon icon--svet">
 								<svg xmlns="http://www.w3.org/2000/svg" width="23.032" height="24" viewBox="0 0 23.032 24" class="inline-svg">
 									<g transform="translate(-9.8)">
@@ -476,7 +477,7 @@ switch ($km_MKAD) {
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['GAS']['VALUE_ENUM_ID'] == 15)echo'active';?>">
+						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['GAS']['VALUE_ENUM_ID'] == PROP_GAS_Y)echo'active';?>">
 							<div class="icon icon--gaz">
 								<svg xmlns="http://www.w3.org/2000/svg" width="17.883" height="23.844" viewBox="0 0 17.883 23.844" class="inline-svg">
 									<g transform="translate(-64 0)">
@@ -496,7 +497,7 @@ switch ($km_MKAD) {
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['PLUMBING']['VALUE_ENUM_ID'] == 18)echo'active';?>">
+						<div class="extra-options-block--circle <?if($arResult['PROPERTIES']['PLUMBING']['VALUE_ENUM_ID'] == PROP_PLUMBING_Y)echo'active';?>">
 							<div class="icon icon--voda">
 								<svg xmlns="http://www.w3.org/2000/svg" width="15.782" height="22.051" viewBox="0 0 15.782 22.051" class="inline-svg">
 									<g transform="translate(-35.275 0)">
@@ -527,7 +528,7 @@ switch ($km_MKAD) {
 				<?if($arResult['PROPERTIES']['SITE']['VALUE']):
 					$arSite = explode('//',$arResult['PROPERTIES']['SITE']['VALUE']);?>
 					<div class="w-100 text-lg-center mt-3">
-						<p>Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arSite[1]?></a></p>
+						<noindex><p>Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arSite[1]?></a></p></noindex>
 					</div>
 				<?endif;?>
 			</div>
@@ -543,7 +544,7 @@ switch ($km_MKAD) {
 						<div id="villageMap" style="width: 100%; height: 100%;"></div>
 						<div id="villageMapBalliin">
 							<div class="map-baloon">
-								<a href="/poselki/<?=$url_km_MKAD?>/"><span class="metro-other" style="margin-left: 0;"><?=$km_MKAD?> км от МКАД</span></a><br>
+								<a href="/poselki/<?=$url_km_MKAD?>/"><span class="metro-other" style="margin-left: 0;"><?=$km_MKAD?> км от <?=ROAD?></span></a><br>
 								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе ?>
 									<a href="/poselki/<?=$valEnumHW?>-shosse/" class="highway-color">
 										<span class="metro-color <?=$colorHW?>"></span>
@@ -594,7 +595,7 @@ switch ($km_MKAD) {
 								</div>
 								<div class="map-block__text">
 									<div class="map-block__title">На автомобиле:</div>
-									<div class="map-block__info"><b><?=$arResult['PROPERTIES']['AUTO_NO_JAMS']['VALUE'] // Авто (Время в пути от МКАД без пробок)?></b> от МКАДа без пробок</div>
+									<div class="map-block__info"><b><?=$arResult['PROPERTIES']['AUTO_NO_JAMS']['VALUE'] // Авто (Время в пути от МКАД без пробок)?></b> от <?=ROAD?>а без пробок</div>
 								</div>
 							</div>
 						</div>
@@ -821,7 +822,7 @@ switch ($km_MKAD) {
 									</a>
 								<?endif;?>
 								<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-									<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+									<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span>
 								</a>
 							</div>
 
@@ -857,12 +858,12 @@ switch ($km_MKAD) {
                     <div class="row">
                         <div class="col-lg-4 d-none d-lg-block">
                             <div class="form-group">
-                                <input class="form-control nameSignToView" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
+                                <input class="form-control nameSignToView ym-record-keys" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
                             </div>
                         </div>
                         <div class="col-lg-4 d-none d-lg-block">
                             <div class="form-group">
-                                <input class="form-control phone telSignToView" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
+                                <input class="form-control phone telSignToView ym-record-keys" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
                             </div>
                         </div>
                         <div class="col-lg-4 text-center">
@@ -903,12 +904,12 @@ switch ($km_MKAD) {
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control nameSignToView" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
+                                <input class="form-control nameSignToView ym-record-keys" id="form-sale-name" type="text" name="form-sale-name" placeholder="Ваше имя" required>
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control phone telSignToView" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
+                                <input class="form-control phone telSignToView ym-record-keys" id="form-sale-phone" type="text" name="form-sale-name" placeholder="Номер телефона" autocomplete="off" required inputmode="text">
                             </div>
                         </div>
                         <div class="col-12">
@@ -999,7 +1000,7 @@ switch ($km_MKAD) {
 						</div>
 					<?}?>
 					<?if(in_array('Нет', $arResult['PROPERTIES']['ARRANGE']['VALUE'])){ // Обустройство поселка: Нет?>
-						<div class="arrangement__item--no text-secondary">- По решению жителей</div>
+						<div class="arrangement__item--no text-secondary">- По решению собственников</div>
 					<?}?>
 				</div>
 			</div>
@@ -1138,8 +1139,8 @@ switch ($km_MKAD) {
 						</g>
 					</svg>
 					<div class="ecology__card-text">
-						<div class="ecology__card-title">Сторона света относительно Москвы:</div>
-						<div class="ecology__card-description"><?=$arResult['PROPERTIES']['SIDE']['VALUE'] // Сторона света относительно Москвы?></div>
+						<div class="ecology__card-title">Сторона света относительно Санкт-Петербурга:</div>
+						<div class="ecology__card-description"><?=$arResult['PROPERTIES']['SIDE']['VALUE'] // Сторона света относительно?></div>
 					</div>
 				</div>
 			</div>
@@ -1288,7 +1289,7 @@ switch ($km_MKAD) {
 									</a>
 								<?endif;?>
 								<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-									<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+									<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span>
 								</a>
 							</div>
 
@@ -1411,7 +1412,7 @@ switch ($km_MKAD) {
                     Площадь участков:&nbsp;</div>
                 <div class="price__value">от <?=$arResult['PROPERTIES']['PLOTTAGE'.$nProp]['VALUE'][0]?> до <?=$arResult['PROPERTIES']['PLOTTAGE'.$nProp]['VALUE'][1]?> соток</div>
             </div>
-            <?if($housesValEnum != 4){ // Только участки ?>
+            <?if($housesValEnum != PROP_WITH_DOM){ // Только участки ?>
                 <div class="d-flex price__row" itemscope itemtype="http://schema.org/AggregateOffer">
                     <div class="price__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="9.694" height="13.151" viewBox="0 0 9.694 13.151" class="inline-svg">
@@ -1430,7 +1431,7 @@ switch ($km_MKAD) {
                     <span itemprop="url"><?=$arResult["DETAIL_PAGE_URL"]?></span>
                 </div>
             <?}?>
-            <?if($housesValEnum != 3){ // Участки с домами ?>
+            <?if($housesValEnum != PROP_NO_DOM){ // Участки с домами ?>
                 <div class="d-flex price__row">
                     <div class="price__icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
@@ -1487,7 +1488,7 @@ switch ($km_MKAD) {
             <div id="legalInformation"><a href="<?=$egrnIMG?>"><img class="w-100" src="<?=$egrnIMG_res['src']?>" alt="Скрин ЕГРН Онлайн"></a></div>
         </div>
         <div class="offset-xl-1 col-xl-6 col-md-6">
-            <p>Категория замель: <?=$arResult['PROPERTIES']['LAND_CAT']['VALUE'] // Категория земель?></p>
+            <p>Категория земель: <?=$arResult['PROPERTIES']['LAND_CAT']['VALUE'] // Категория земель?></p>
             <p>Вид разрешенного использования: <?=$arResult['PROPERTIES']['TYPE_USE']['VALUE'] // Вид разрешенного использования?></p>
             <p>Юридическая форма: <?=$arResult['PROPERTIES']['LEGAL_FORM']['VALUE'] // Юридическая форма?></p>
             <p class="mt-2"><a class="font-weight-bold text-success text-decoration-none" href="<?=$arResult['PROPERTIES']['SRC_MAP']['VALUE'] // Ссылка на публичную карту?>" target="_blank" rel="nofollow">
@@ -1558,13 +1559,14 @@ switch ($km_MKAD) {
                 <form action="" class="formSignToView">
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="form-group"><input class="form-control nameSignToView" id="request-name" type="text" name="review-name" placeholder="Ваше имя" required></div>
+                            <div class="form-group"><input class="form-control nameSignToView ym-record-keys" id="request-name" type="text" name="review-name" placeholder="Ваше имя" required></div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="form-group"><input class="form-control phone telSignToView" id="request-phone" type="text" name="review-name" placeholder="Номер телефона" autocomplete="off" required></div>
+                            <div class="form-group"><input class="form-control phone telSignToView ym-record-keys" id="request-phone" type="text" name="review-name" placeholder="Номер телефона" autocomplete="off" required></div>
                         </div>
                         <div class="col-lg-4">
-                            <div class="form-group"><input class="form-control emailSignToView" id="request-email" type="email" name="review-name" placeholder="Адрес электронной почты" required></div>
+                            <!-- <div class="form-group"><input class="form-control emailSignToView ym-record-keys" id="request-email" type="email" name="review-name" placeholder="Адрес электронной почты" required></div> -->
+														<button class="btn btn-warning rounded-pill w-100" type="submit">Записаться на просмотр</button>
                         </div>
                         <div class="col-lg-8">
                             <div class="custom-control custom-checkbox custom-control-inline">
@@ -1574,9 +1576,9 @@ switch ($km_MKAD) {
                                 </label>
                             </div>
                         </div>
-                        <div class="col-md-4 col-sm-8 pt-lg-2 pt-4">
+                        <!-- <div class="col-md-4 col-sm-8 pt-lg-2 pt-4">
                             <button class="btn btn-warning rounded-pill w-100" type="submit">Записаться на просмотр</button>
-                        </div>
+                        </div> -->
                     </div>
                 </form>
             </div>
@@ -1812,7 +1814,7 @@ switch ($km_MKAD) {
 				'PROPERTY_GAS' => $arResult['PROPERTIES']['GAS']['VALUE_ENUM_ID'],
 				'PROPERTY_PLUMBING' => $arResult['PROPERTIES']['PLUMBING']['VALUE_ENUM_ID'],
 			];
-			if($housesValEnum == 3){ // Только участки
+			if($housesValEnum == PROP_NO_DOM){ // Только участки
 				$percent = 20;
 				$priceSotka1 = $arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0];
 				$priceSotka2 = $arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][1];
@@ -1820,7 +1822,7 @@ switch ($km_MKAD) {
 				$priceSotkaTo = $priceSotka2 + ($priceSotka2 / 100 * $percent);
 				$arrFilter['>=PROPERTY_PRICE_SOTKA'] = $priceSotkaFrom;
 				$arrFilter['<=PROPERTY_PRICE_SOTKA'] = $priceSotkaTo;
-			}elseif($housesValEnum == 4 || $housesValEnum == 256){ // Участки с домами
+			}elseif($housesValEnum == PROP_WITH_DOM || $housesValEnum == PROP_HOUSE_PLOT){ // Участки с домами
 				$percent = 20;
 				$homeValue1 = $arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0];
 				$homeValue2 = $arResult['PROPERTIES']['HOME_VALUE']['VALUE'][1];
@@ -1928,9 +1930,10 @@ switch ($km_MKAD) {
 	<?endif;?>
 
 	<? // jivosite
-	$jivositeCode = getInfoHW($idEnumHW)['JIVOSITE'];
+	/*$jivositeCode = getInfoHW($idEnumHW)['JIVOSITE'];
 	if($jivositeCode):?>
 		<script src="//code-sb1.jivosite.com/widget/<?=$jivositeCode?>" async></script>
-	<?endif;?>
+	<?endif;*/
+	?>
 
 <?endif;?>

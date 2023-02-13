@@ -34,10 +34,6 @@ $alt = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT'])
 
 if (!$arResult['PHOTO_VILLAGE'][0]) $arResult['PHOTO_VILLAGE'] = [];
 
-// добавим превьюшку в фото
-if ($arResult["PREVIEW_PICTURE"])
-	array_unshift($arResult['PHOTO_VILLAGE'],$arResult["PREVIEW_PICTURE"]); // положим в начало
-
 // водный знак
 $arWaterMark = [
 	[
@@ -56,12 +52,19 @@ $arWaterMark = [
 // 	 $arResult['PHOTO_VILLAGE'][$key]['SRC'] = $photoRes['src'];
 // 	 unset($photoRes);
 // }
-foreach ($arResult['PHOTO_VILLAGE'] as $key => $photo){
+
+$offerPhoto = ($offerType == 'plots') ? $arResult['PHOTO_VILLAGE'] : $arResult['PROPERTIES']['DOP_PHOTO']['VALUE'];
+
+// добавим превьюшку в фото
+if ($arResult["PREVIEW_PICTURE"])
+	array_unshift($offerPhoto,$arResult["PREVIEW_PICTURE"]); // положим в начало
+
+foreach ($offerPhoto as $key => $photo){
 	 $photoRes = CFile::ResizeImageGet($photo, array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT, true, $arWaterMark);
-	 $arResult['PHOTO_VILLAGE'][$key] = $photoRes;
+	 $offerPhoto[$key] = $photoRes;
 	 unset($photoRes);
 }
-shuffle($arResult['PHOTO_VILLAGE']);
+shuffle($offerPhoto);
 
 // км от МКАД
 $km_MKAD = $arResult['arVillage']['MKAD'];
@@ -116,6 +119,24 @@ if($offerType != 'plots')
 	$house_disclaimer = $arResult['PROPERTIES']['TYPE']['VALUE'];
 	$house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'ready') ? 'В стоимость входит дом и участок' : 'Цена указана за дом без участка';
 }
+
+// dump($_COOKIE); // разбираем куки
+
+$cookieComparison = ($offerType == 'plots') ? 'comparison_plots' : 'comparison_houses';
+$cookieFavorites = ($offerType == 'plots') ? 'favorites_plots' : 'favorites_houses';
+
+if(isset($_COOKIE[$cookieComparison]))
+	$arComparison = explode('-',$_COOKIE[$cookieComparison]);
+
+if(isset($_COOKIE[$cookieFavorites]))
+	$arFavorites = explode('-',$_COOKIE[$cookieFavorites]);
+
+$comparison = (in_array($arResult['ID'],$arComparison)) ? 'Y' : 'N';
+$favorites = (in_array($arResult['ID'],$arFavorites)) ? 'Y' : 'N';
+$comp_active = ($comparison == 'Y') ? 'active' : '';
+$fav_active = ($favorites == 'Y') ? 'active' : '';
+$comp_text = ($comparison != 'Y') ? 'Добавить к сравнению' : 'Удалить из сравнения';
+$fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'Удалить из избранного';
 ?>
 <div class="container mt-md-5">
 	<div class="row">
@@ -150,13 +171,45 @@ if($offerType != 'plots')
 	 <?endif;?>
 		<div class="order-1 order-md-2 col-lg-8 col-md-7">
 			<div class="village-slider">
+				<?if($USER->IsAdmin()){?>
+				<div class="slider__header">
+					<div class="photo__buttons">
+						<button title="<?=$comp_text?>" class="comparison-click <?=$comp_active?>" data-id="<?=$arResult['ID']?>" data-cookie="<?=$cookieComparison?>">
+							<svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
+								<g transform="translate(-1216.699 -36.35)">
+									<path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)" />
+									<path d="M0 0v8.468" class="s-1" transform="translate(1233.321 37)" />
+									<g transform="translate(.586 .586)">
+										<path d="M0 0v4.297" class="s-2" transform="translate(1232.735 48)" />
+										<path d="M0 0v4.297" class="s-2" transform="rotate(90 592.368 642.516)" />
+									</g>
+									<path d="M0 0v13.215" class="s-1" transform="translate(1222.807 40.041)" />
+									<path d="M0 0v7.641" class="s-1" transform="translate(1228.265 45.499)" />
+								</g>
+							</svg>
+						</button>
+						<button title="<?=$fav_text?>" class="favorites-click <?=$fav_active?>" data-id="<?=$arResult['ID']?>" data-cookie="<?=$cookieFavorites?>">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
+								<g transform="translate(.05 -26.655)">
+									<path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1" />
+									<circle cx="4.5" cy="4.5" r="4.5" class="s-2" transform="translate(14.96 26.655)" />
+									<g transform="translate(-1213.44 -18.727)">
+										<path d="M0 0v4.297" class="s-3" transform="translate(1232.735 48)" />
+										<path d="M0 0v4.297" class="s-3" transform="rotate(90 592.368 642.516)" />
+									</g>
+								</g>
+							</svg>
+						</button>
+					</div>
+				</div>
+				<?}?>
 				<div class="village-slider__list" id="village-slider">
-					<?foreach ($arResult['PHOTO_VILLAGE'] as $photo){ // Основные фото?>
+					<?foreach ($offerPhoto as $photo){ // Основные фото?>
 						<div class="village-slider__item" style="background: #eee url('<?=$photo['src']?>') no-repeat; background-size: cover;"></div>
 					<?}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
-					<?foreach ($arResult['PHOTO_VILLAGE'] as $photo){ // Доп. фото?>
+					<?foreach ($offerPhoto as $photo){ // Доп. фото?>
 						<div class="village-slider__item-thumb" style="background: url('<?=$photo['src']?>') no-repeat; background-size: cover;"></div>
 				  <?}?>
 				</div>
@@ -214,7 +267,7 @@ if($offerType != 'plots')
 							<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 					<?endif;?>
 					<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-						<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
+						<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span></a>
 					<?if($arResult['arVillage']['REGION']):?>
 						<a class="area-link" href="/kupit-uchastki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
 							<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
@@ -227,7 +280,9 @@ if($offerType != 'plots')
 						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
 					<?}else{?><p></p><?}?>
           <?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
-          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?></div>
+          	<div class="phone-cart__block">
+							<a href="tel:<?=$arResult['arVillage']['PHONE']?>"><?=$arResult['arVillage']['PHONE']?></a>
+						</div>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
@@ -241,7 +296,7 @@ if($offerType != 'plots')
 					<p class="house_disclaimer"><img src="/assets/img/svg/alert-triangle.svg" alt=""><?=$house_disclaimer_txt?></p>
 				<?endif;?>
 				<p>Поселок <a href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank" class="text-success a__bold"><?=$arResult['arVillage']['NAME']?></a></p>
-				<p>Поселок расположен в <?=$km_MKAD?> км от МКАД - <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
+				<p>Поселок расположен в <?=$km_MKAD?> км от <?=ROAD?> - <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
 				<p><?=$arResult['PREVIEW_TEXT']?></p>
 			</div>
 			<div class="home-communication">
@@ -398,7 +453,7 @@ if($offerType != 'plots')
 								</div>
 								<div class="map-block__text">
 									<div class="map-block__title">На автомобиле:</div>
-									<div class="map-block__info"><b><?=$arResult['arVillage']['AUTO_NO_JAMS']?></b> от МКАДа без пробок</div>
+									<div class="map-block__info"><b><?=$arResult['arVillage']['AUTO_NO_JAMS']?></b> от <?=ROAD?>а без пробок</div>
 								</div>
 							</div>
 						</div>
@@ -509,7 +564,7 @@ if($offerType != 'plots')
 							<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 					<?endif;?>
 					<a class="metro z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-						<span class="metro-other"><?=$km_MKAD?> км от МКАД</span></a>
+						<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span></a>
 					<?if($arResult['arVillage']['REGION']):?>
 						<a class="area-link" href="/kupit-uchastki/<?=$arResult['arVillage']['REGION_XML']?>-rayon/">
 							<svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
@@ -522,7 +577,9 @@ if($offerType != 'plots')
 						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
 					<?}else{?><p></p><?}?>
 					<?if($arResult['arVillage']['CONTACTS'] != 30 && $arResult['arVillage']['PHONE']){?>
-          	<div class="phone-cart__block"><?=$arResult['arVillage']['PHONE']?></div>
+          	<div class="phone-cart__block">
+							<a href="tel:<?=$arResult['arVillage']['PHONE']?>"><?=$arResult['arVillage']['PHONE']?></a>
+						</div>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
           <?}else{?>
 						<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Посмотреть <?=mb_strtolower($offerName)?></a>
@@ -595,7 +652,7 @@ if($offerType != 'plots')
 											<span class="metro-name"><?=$nameHW?> шоссе</span>
 										</a>
 										<a class="metro ml-0 z-index-1" href="/kupit-uchastki/<?=$url_km_MKAD?>/">
-											<span class="metro-other"><?=$km_MKAD?> км от МКАД</span>
+											<span class="metro-other"><?=$km_MKAD?> км от <?=ROAD?></span>
 										</a>
 									</div>
 								</div>

@@ -43,7 +43,7 @@ while ($arElement = $rsElements->GetNext()) { // dump($arElement);
 			$toName = 'Иван';
 			$toPhone = '+74951860665';
 			break;
-		case 'Рогачевское':
+		case 'Рогачёвское':
 			$toName = 'Иван';
 			$toPhone = '+74951860665';
 			break;
