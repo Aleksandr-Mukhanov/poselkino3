@@ -265,7 +265,7 @@
             <div class="add-filter__modal-top">
               <div class="add-filter__region">
                 <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                  href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
+                  href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a>
               </div>
               <div class="add-filter__search">
                 <div class="add-filter__search-group">
@@ -1147,7 +1147,7 @@
           <div class="add-filter__modal-top">
             <div class="add-filter__region">
               <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
+                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a>
             </div>
             <div class="add-filter__search">
               <div class="add-filter__search-group">
@@ -1427,7 +1427,7 @@
           <div class="add-filter__modal-top">
             <div class="add-filter__region">
               <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
+                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a>
             </div>
             <div class="add-filter__search">
               <div class="add-filter__search-group">

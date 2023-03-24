@@ -63,7 +63,7 @@ foreach ($arResult['MORE_PHOTO'] as $key => $photo){
 }
 // фото поселков для участка
 foreach ($arResult['MORE_PHOTO'] as $photo){
-	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
+	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true);
 	 $arResult['PHOTO_VILLAGE'][] = $photoRes;
 	 unset($photoRes);
 }
@@ -97,23 +97,23 @@ foreach($arSoil as $soil){
 // км от МКАД
 $km_MKAD = $arResult['PROPERTIES']['MKAD']['VALUE'];
 switch ($km_MKAD) {
-	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 
-	default: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	default: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 } // echo $url_km_MKAD;
 
 // объекты экологии
@@ -145,6 +145,7 @@ switch ($km_MKAD) {
 	$correctText = $ourDeclension->get($cntPos);
 
 	// dump($_COOKIE); // разбираем куки
+	$arComparison = []; $arFavorites = [];
 	if(isset($_COOKIE['comparison_vil'])){
 		$arComparison = explode('-',$_COOKIE['comparison_vil']);
 	}
@@ -162,13 +163,13 @@ switch ($km_MKAD) {
 <div class="container mt-md-5">
 	<div class="row">
 		<div class="order-0 col-12 d-md-none">
-			<div class="page-title">
-				<h1 class="h2"><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
+			<div class="page-title title_h2">
+				<h1><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
 			</div>
 		</div>
 		<div class="order-2 order-md-1 col-md-6">
-			<div class="page-title d-none d-md-block">
-				<h1 class="h2"><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
+			<div class="page-title title_h2 d-none d-md-block">
+				<h1><?=$arResult["OFFER_TYPE"].' в '.$typePos.' '.$arResult['NAME']?></h1>
 				<div class="wrap-raiting mt-4">
 					<div class="card-house__raiting d-flex">
 						<div class="line-raiting">

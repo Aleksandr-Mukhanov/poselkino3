@@ -87,6 +87,7 @@ $APPLICATION->SetTitle("Поиск");
 			"SHOW_TAGS_CLOUD" => "N",
 			"arrFILTER_iblock_content" => array(
 				0 => "1",
+				1 => "7",
 			)
 		),
 		false

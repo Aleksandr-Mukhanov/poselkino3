@@ -14,6 +14,27 @@ $email = 'r.aymanov@yandex.ru';
 
 if (!in_array($email,$arEmails)) echo 'ok';
 else echo 'no';
+
+// получим менеджеров
+$arManagers = getElHL(13,[],[],['*']);
+// dump($arManager);
+
+// распределение менеджерам по шоссе
+$arElHL = getElHL(16,[],[],['ID','UF_NAME','UF_MANAGER']);
+foreach ($arElHL as $highway)
+	$arHighway[$highway['UF_NAME']] = $highway['UF_MANAGER'];
+dump($arHighway);
+
+$highway = 'Дмитровское';
+if ($arHighway[$highway])
+{
+	$arElHL = getElHL(13,[],['ID'=>$arHighway[$highway]],['*']);
+	$arManager = array_values($arElHL)[0]; dump($arManager);
+	if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
+	if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
+	if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+}
+else echo 'no';
 ?>
 <main class="page page-contacts">
 	<div class="bg-white">

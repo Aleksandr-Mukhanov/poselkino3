@@ -33,7 +33,7 @@ use Bitrix\Main\Page\Asset;
               fill="white" />
           </svg>
           <span class="first__item-txt">Высокая ликвидность земли
-            в&nbsp;Московской области</span>
+            в&nbsp;<?=REGION_KOY?> области</span>
         </div>
         <div class="first__item">
           <svg width="25" height="30" viewBox="0 0 25 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ use Bitrix\Main\Page\Asset;
                     в&nbsp;базе</small></span>
               </div>
               <p class="offer__right-txt offer-investor__right-txt">
-                В&nbsp;нашей базе данных о&nbsp;продаже недвижимости <b>более 650 поселков</b> по&nbsp;Московской области
+                В&nbsp;нашей базе данных о&nbsp;продаже недвижимости <b>более 650 поселков</b> по&nbsp;<?=REGION_KOY?> области
               </p>
             </div>
           </div>
@@ -209,7 +209,7 @@ use Bitrix\Main\Page\Asset;
           <p class="consultation__txt consultation-investor__txt">Земельные участки обладают рядом преимуществ, высокая ликвидность, невысокий
             средний чек, отсутствие рисков</p>
           <h3 class="consultation__subtitle title_h4">Где покупать?</h3>
-          <p class="consultation__txt consultation-investor__txt">Мы&nbsp;знаем рынок загородной недвижимости по&nbsp;всему Подмосковью: более 650&nbsp;поселков.
+          <p class="consultation__txt consultation-investor__txt">Мы&nbsp;знаем рынок загородной недвижимости по&nbsp;всему <?=REGION_SHORT?>: более 650&nbsp;поселков.
             Предложим лучшие варианты</p>
           <h3 class="consultation__subtitle title_h4">Когда покупать?</h3>
           <p class="consultation__txt consultation-investor__txt">Мы&nbsp;точно знаем лучшую точку входа в&nbsp;проект, чтобы получить максимальную выгоду</p>
@@ -296,7 +296,7 @@ use Bitrix\Main\Page\Asset;
                     в&nbsp;базе</small></span>
               </div>
               <p class="offer__right-txt offer-investor__right-txt">
-                В&nbsp;нашей базе данных о&nbsp;продаже недвижимости <b>более 650 поселков</b> по&nbsp;Московской области
+                В&nbsp;нашей базе данных о&nbsp;продаже недвижимости <b>более 650 поселков</b> по&nbsp;<?=REGION_KOY?> области
               </p>
             </div>
           </div>

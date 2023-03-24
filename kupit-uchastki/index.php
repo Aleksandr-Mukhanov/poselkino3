@@ -3,7 +3,7 @@
 $pagen = $_REQUEST['PAGEN_1'];
 $ourDir = $APPLICATION->GetCurDir();
 $h2 = '<h2 class="h2">Земельные участки под дом и дачу с хорошим месторасположением</h2>';
-$SEO_text = '<p>База коттеджных и дачных поселков в Московской области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
+$SEO_text = '<p>База коттеджных и дачных поселков в '.REGION_KOY.' области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
 $urlWithDom = '/poselki/kupit-dom/';
@@ -12,7 +12,7 @@ $urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 // получим участки
 $cnt = 0; $minPrice = 999999999;
 $arOrder = Array("SORT"=>"ASC");
-$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y");
+$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","!PROPERTY_AREA"=>552); // исключим СПБ
 $arSelect = Array("ID","NAME","PROPERTY_PRICE","PROPERTY_VILLAGE");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilterPlotsAll,false,false,$arSelect);
 while ($arElement = $rsElements->Fetch()) { // dump($arElement);
@@ -25,9 +25,9 @@ while ($arElement = $rsElements->Fetch()) { // dump($arElement);
 $arVillageIDs_tags = array_unique($arVillageIDs_tags);
 // dump($arVillagePlots);
 
-$newH1 = 'Продажа участков в Московской области';
-$newTitle = 'Купить участок в Подмосковье недорого - земельные участки в Московской области цены';
-$newDesc = 'Купить участок земли в поселках Московской области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.' ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+$newH1 = 'Продажа участков в '.REGION_KOY.' области';
+$newTitle = 'Купить участок в Подмосковье недорого - земельные участки в '.REGION_KOY.' области цены';
+$newDesc = 'Купить участок земли в поселках '.REGION_KOY.' области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.' ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
 
 $shosse = $_REQUEST['SHOSSE_CODE'];
 $rayon = $_REQUEST['RAYON_CODE'];
@@ -245,6 +245,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					$sectionSortField = 'RAND';
 					$sectionSortOrder = 'asc';
 				}
+				$arrFilterPlots['!PROPERTY_AREA'] = 552; // исключим СПБ
 				?>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
@@ -402,7 +403,8 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 							<h2>Спецпредложения</h2>
 					</div>
 					<?global $arrFilterOffers;
-					$arrFilterOffers = ['!PROPERTY_ACTION' => false]; // показывать только акции?>
+					$arrFilterOffers = ['!PROPERTY_ACTION' => false]; // показывать только акции
+					$arrFilterOffers['!PROPERTY_AREA'] = 552; // исключим СПБ?>
 					<?$APPLICATION->IncludeComponent(
 						"bitrix:news.list",
 						"offers_index",

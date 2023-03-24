@@ -1,9 +1,9 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
 use Bitrix\Main\Page\Asset;
-	Asset::getInstance()->addCss("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css");
-	Asset::getInstance()->addCss("https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/theme.min.css");
-	Asset::getInstance()->addJs('https://code.jquery.com/ui/1.12.1/jquery-ui.js',true);
+	Asset::getInstance()->addCss("/assets/jquery-ui/jquery-ui.min.css");
+	Asset::getInstance()->addCss("/assets/jquery-ui/jquery-ui.theme.min.css");
+	Asset::getInstance()->addJs("/assets/jquery-ui/jquery-ui.min.js",true);
 
 if (isset($arParams["TEMPLATE_THEME"]) && !empty($arParams["TEMPLATE_THEME"]))
 {

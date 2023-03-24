@@ -257,7 +257,8 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 				"DIGNITIES" => $_POST['dignities'],
 				"DISADVANTAGES" => $_POST['disadvantages'],
 				"COMMENT" => $_POST['comment'],
-				"RESIDENT" => $resident
+				"RESIDENT" => $resident,
+				"PAGE" => $_SERVER['HTTP_REFERER']
 			);
 			CEvent::Send("SEND_OTZIV", "s1", $mailFields);
 		}else{

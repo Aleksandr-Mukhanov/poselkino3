@@ -11,7 +11,7 @@ if ($arComparisonVil)
 {
 	// получим наши поселки
 	$arOrder = Array("SORT"=>"ASC");
-	$arFilter = Array("IBLOCK_ID"=>1,"ACTIVE"=>"Y","ID"=>$arComparisonVil);
+	$arFilter = Array("IBLOCK_ID"=>IBLOCK_ID,"ACTIVE"=>"Y","ID"=>$arComparisonVil);
 	$arSelect = Array('ID','NAME','PREVIEW_PICTURE','PROPERTY_MKAD','PROPERTY_PRICE_SOTKA','PROPERTY_HOME_VALUE','PROPERTY_PRICE_ARRANGE','PROPERTY_PRICE_ARRANGE_TIP','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_WATER','PROPERTY_SOIL','PROPERTY_BUS','PROPERTY_ROADS_IN_VIL','PROPERTY_ROADS_TO_VIL','PROPERTY_AREA_VIL','DETAIL_PAGE_URL'); // ,'PROPERTY_'
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);

@@ -17,7 +17,21 @@ $propEnums = CIBlockPropertyEnum::GetList(
   ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>"REGION"]
 );
 while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
-  $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
+  $arRegion[$enumFields['XML_ID']] = [
+    'ID' => $enumFields['ID'],
+    'NAME' => $enumFields['VALUE'],
+  ];
+}
+
+// получим поселки
+$arOrder = ['SORT'=>'ASC'];
+$arFilter = ['IBLOCK_ID'=>7,'ACTIVE'=>'Y'];
+$arSelect = ['ID','PROPERTY_REGION','PROPERTY_SHOSSE'];
+$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+while ($arElement = $rsElements->Fetch()) {
+	$arRegionUse[$arElement['PROPERTY_REGION_ENUM_ID']] = $arElement['PROPERTY_REGION_VALUE'];
+  foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $key => $value)
+    $arShosseUse[$key] = $value;
 }
 
 $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
@@ -38,7 +52,8 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
     <div class="tab-pane fade <?if(!$_REQUEST['show_rayon'])echo'show active';?>" id="highwayTab" role="tabpanel" aria-labelledby="highwayTab-tab">
       <div class="row">
         <?foreach ($arShosse as $key => $value):
-          $colorHW = getColorRoad($value['ID']);?>
+          $colorHW = getColorRoad($value['ID']);
+          if (!array_key_exists($value['ID'],$arShosseUse)) continue;?>
           <div class="col-lg-3 col-md-4 col-sm-6">
             <a class="metro-title highway-color" href="/poselki/<?=$key?>-shosse/">
               <div class="metro-title__color <?=$colorHW?>"></div>
@@ -50,10 +65,11 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
     </div>
     <div class="tab-pane fade <?if($_REQUEST['show_rayon'])echo'show active';?>" id="areaTab" role="tabpanel" aria-labelledby="areaTab-tab">
       <div class="row">
-        <?foreach ($arRegion as $key => $value): $i++;?>
+        <?foreach ($arRegion as $key => $value):
+          if (!array_key_exists($value['ID'],$arRegionUse)) continue; $i++;?>
           <div class="col-lg-3 col-md-4 col-sm-6">
             <a class="metro-title" href="/poselki/<?=$key?>-rayon/">
-              <div class="metro-title__title"><?=$value?></div>
+              <div class="metro-title__title"><?=$value['NAME']?></div>
             </a>
           </div>
         <?endforeach;?>
@@ -62,14 +78,14 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
     <div class="tab-pane fade" id="mkadTab" role="tabpanel" aria-labelledby="mkadTab-tab">
       <div class="row">
         <?for($x=10; $x<=80; $x+=5){?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-<?=$x?>-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-<?=$x?>-km-ot-kad/">
               <div class="metro-title__title">до <?=$x?> км</div>
             </a></div>
         <?}?>
-        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-100-km-ot-mkad/">
+        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-100-km-ot-kad/">
             <div class="metro-title__title">до 100 км</div>
           </a></div>
-        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-120-km-ot-mkad/">
+        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-120-km-ot-kad/">
             <div class="metro-title__title">до 120 км</div>
           </a></div>
       </div>

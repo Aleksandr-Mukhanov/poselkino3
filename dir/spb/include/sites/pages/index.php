@@ -1,7 +1,7 @@
 <?
 $APPLICATION->SetTitle($arVillage['NAME']);
 $APPLICATION->SetPageProperty("title", "Коттеджный поселок ".$arVillage['NAME'].", ".$regionName." район - официальный сайт");
-$APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($priceSotka)." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от МКАД. ИЖС, охрана, свет, газ, ".$regionName." район");
+$APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($priceSotka)." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от КАД. ИЖС, охрана, свет, газ, ".$regionName." район");
 // узнаем отзывы
 	$cntCom = 0;$ratingSum = 0;
 	$arOrder = Array("ACTIVE_FROM"=>"DESC");
@@ -299,7 +299,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
 <section class="location">
   <div class="container">
     <h2 class="title--size_2 page__title">Удобное расположение</h2>
-    <p>Поселок <?=$arVillage['NAME']?> находится по <?=$shosseNameKomu?> шоссе в <?=$arVillage['PROPERTY_MKAD_VALUE']?> км от МКАД. Добраться можно на собственном и общественном транспорте - есть возможность доехать на электричке. Транспортная доступность поселка, позволяет выбрать вам любой удобный транспорт</p>
+    <p>Поселок <?=$arVillage['NAME']?> находится по <?=$shosseNameKomu?> шоссе в <?=$arVillage['PROPERTY_MKAD_VALUE']?> км от КАД. Добраться можно на собственном и общественном транспорте - есть возможность доехать на электричке. Транспортная доступность поселка, позволяет выбрать вам любой удобный транспорт</p>
     <?$arCoordinates = explode(',',$arVillage['PROPERTY_COORDINATES_VALUE']);?>
     <div class="location-map" id="map" data-lon="<?=trim($arCoordinates[1])?>" data-lat="<?=trim($arCoordinates[0])?>"></div>
     <div class="row mb-4">
@@ -311,7 +311,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
             </svg>
           </div>
           <div class="get_item__content">
-            <div class="get_item__title">На автомобиле <?=$arVillage['PROPERTY_AUTO_NO_JAMS_VALUE'] // Авто (Время в пути от МКАД без пробок)?></div>
+            <div class="get_item__title">На автомобиле <?=$arVillage['PROPERTY_AUTO_NO_JAMS_VALUE'] // Авто (Время в пути от КАД без пробок)?></div>
           </div>
         </div>
       </div>
@@ -553,7 +553,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
 						<?else:?>
 							<div class="review__source">Источник отзыва: <a href="https://poselkino.ru/poselki/<?=$arVillage['CODE']?>/" rel="dofollow" target="_blank">poselkino.ru</a></div>
 						<?endif;?>
-						
+
           </div>
         </div>
       <?}?>

@@ -64,32 +64,32 @@ foreach ($offerPhoto as $key => $photo){
 	 $offerPhoto[$key] = $photoRes;
 	 unset($photoRes);
 }
-shuffle($offerPhoto);
+if ($offerType == 'plots') shuffle($offerPhoto);
 
 // км от МКАД
 $km_MKAD = $arResult['arVillage']['MKAD'];
 switch ($km_MKAD) {
-	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 
-	default: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	default: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 } // echo $url_km_MKAD;
 
 $plottage = ($offerType == 'plots') ? 'PLOTTAGE' : 'AREA_HOUSE';
-$oneKVMetr = round($arResult['PROPERTIES']['PRICE']['VALUE'] / $arResult['PROPERTIES'][$plottage]['VALUE']);
+$oneKVMetr = ($arResult['PROPERTIES'][$plottage]['VALUE']) ? round((int)$arResult['PROPERTIES']['PRICE']['VALUE'] / (int)$arResult['PROPERTIES'][$plottage]['VALUE']) : 0;
 // выводим правильное окончание
 $plottageDeclension = new Declension('сотка', 'сотки', 'соток');
 $plottageText = ($offerType == 'plots') ? $plottageDeclension->get($arResult['PROPERTIES'][$plottage]['VALUE']) : 'кв.м.';
@@ -125,6 +125,8 @@ if($offerType != 'plots')
 $cookieComparison = ($offerType == 'plots') ? 'comparison_plots' : 'comparison_houses';
 $cookieFavorites = ($offerType == 'plots') ? 'favorites_plots' : 'favorites_houses';
 
+$arComparison = []; $arFavorites = [];
+
 if(isset($_COOKIE[$cookieComparison]))
 	$arComparison = explode('-',$_COOKIE[$cookieComparison]);
 
@@ -142,8 +144,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	<div class="row">
 	 <?if($finish || $house_disclaimer): // если есть отделка?>
 			<div class="order-0 order-md-0 col-xl-8 col-md-7">
-				<div class="page-title">
-					<h1 class="h2"><?=$h1?></h1>
+				<div class="page-title title_h2">
+					<h1><?=$h1?></h1>
 				</div>
 			</div>
 			<div class="col-xl-4 col-md-5 justify-content-end">
@@ -164,8 +166,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 			</div>
 	 <?else:?>
 		<div class="order-0 order-md-0 col-12">
-			<div class="page-title">
-				<h1 class="h2"><?=$h1?></h1>
+			<div class="page-title title_h2">
+				<h1><?=$h1?></h1>
 			</div>
 		</div>
 	 <?endif;?>

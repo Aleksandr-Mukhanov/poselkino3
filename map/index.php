@@ -45,8 +45,8 @@ use Bitrix\Main\Page\Asset;
   if (strpos($dir, 's-dorogami') !== false) $typeURL = 's-dorogami';
 
   global $arrFilter;
-	 $arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
-   $arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+	 $arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
+   $arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
 
   require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
 
@@ -81,7 +81,7 @@ use Bitrix\Main\Page\Asset;
       </h1>
       <?$APPLICATION->IncludeComponent(
         "bitrix:catalog.smart.filter",
-        "map",
+        FILTER_MAP,
         array(
           "CACHE_GROUPS" => "Y",
           "CACHE_TIME" => "36000000",
@@ -91,7 +91,7 @@ use Bitrix\Main\Page\Asset;
           "FILTER_NAME" => "arrFilter",
           "FILTER_VIEW_MODE" => "horizontal",
           "HIDE_NOT_AVAILABLE" => "N",
-          "IBLOCK_ID" => "1",
+          "IBLOCK_ID" => IBLOCK_ID,
           "IBLOCK_TYPE" => "content",
           "PAGER_PARAMS_NAME" => "arrPager",
           "POPUP_POSITION" => "left",
@@ -151,7 +151,7 @@ use Bitrix\Main\Page\Asset;
       		"FILTER_NAME" => "arrFilter",
       		"HIDE_NOT_AVAILABLE" => "N",
       		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-      		"IBLOCK_ID" => "1",
+      		"IBLOCK_ID" => IBLOCK_ID,
       		"IBLOCK_TYPE" => "content",
       		"INCLUDE_SUBSECTIONS" => "Y",
       		"LABEL_PROP" => array(

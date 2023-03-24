@@ -1,8 +1,7 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 
 use Bitrix\Main\Grid\Declension;
-
-$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
+$onlyShosse = ['moskovskoe','kievskoe','novopriozerskoe','murmanskoe'];
 $nameShosseDir = ['north','east','south','west'];
 
 global $arrFilter;
@@ -21,17 +20,17 @@ if ($shosse) { // шоссе
   $urlWithDom = '/poselki/'.$shosse.'-shosse/kupit-dom/';
   if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе'; // если пагинация
 
-  // url для км от МКАД
-  for ($i=10; $i < 60; $i+=10) { // до МКАД
+  // url для км от КАД
+  for ($i=10; $i < 60; $i+=10) { // до КАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-kad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-kad/';
         break;
       default: // Поселки
-        $urlTeg = '/poselki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/'.$shosse.'-shosse-do-'.$i.'-km-kad/';
         break;
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
@@ -135,14 +134,14 @@ if ($domPos) { // если выбор с домом или без
     case 'noDom':
       $arrFilter['=PROPERTY_DOMA'] = [PROP_NO_DOM,PROP_HOUSE_PLOT];
       $UF_Code = 'kupit-uchastok';
-      $propFilter = 'PROPERTY_120';
+      $propFilter = 'PROPERTY_COST_LAND_IN_CART';
       $nameDomPos = 'Купить участок';
       $APPLICATION->AddChainItem('Участки',"/kupit-uchastki/",true);
       break;
     case 'withDom':
       $arrFilter['=PROPERTY_DOMA'] = [PROP_WITH_DOM,PROP_HOUSE_PLOT];
       $UF_Code = 'kupit-dom';
-      $propFilter = 'PROPERTY_17';
+      $propFilter = 'PROPERTY_HOME_VALUE';
       $nameDomPos = 'Купить дом';
       $APPLICATION->AddChainItem('Дома',"/poselki/kupit-dom/",true);
       break;
@@ -173,26 +172,26 @@ if($typePos && $domPos){ // если и по типу и по дому - мет�
   }
 }
 
-if ($mkadKM) { // выбор по км от мкад
+if ($mkadKM) { // выбор по км от КАД
   if(is_numeric($mkadKM)){
     switch ($mkadKM) {
-      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
-      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-mkad"; break;
-      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-mkad"; break;
+      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-kad"; break;
+      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-kad"; break;
+      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-kad"; break;
+      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-kad"; break;
+      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-kad"; break;
+      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-kad"; break;
+      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-kad"; break;
+      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-kad"; break;
+      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-kad"; break;
+      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-kad"; break;
+      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-kad"; break;
+      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-kad"; break;
+      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-kad"; break;
+      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-kad"; break;
+      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-kad"; break;
+      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-kad"; break;
+      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-kad"; break;
 
       default: CHTTP::SetStatus("404 Not Found"); @define("ERROR_404", "Y"); break;
     }
@@ -200,20 +199,20 @@ if ($mkadKM) { // выбор по км от мкад
     $mkadKM_ot = $mkadKM - 20; // от - 20
     if($mkadKM_ot < 0)$mkadKM_ot = 0;
     $mkadKM_do = $mkadKM + 10; // до + 10
-    $arrFilter['><PROPERTY_6'] = [$mkadKM_ot,$mkadKM_do];
+    $arrFilter['><PROPERTY_MKAD'] = [$mkadKM_ot,$mkadKM_do];
     // dump($arrFilter);
-    $APPLICATION->AddChainItem('До '.$mkadKM.' км от МКАД',"/poselki/do-".$mkadKM."-km-ot-mkad/",true);
+    $APPLICATION->AddChainItem('До '.$mkadKM.' км от КАД',"/poselki/do-".$mkadKM."-km-ot-kad/",true);
     // url для Шоссе
     foreach ($onlyShosse as $key => $val) {
       switch ($domPos) {
         case 'noDom': // Участки
-          $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-kad/';
           break;
         case 'withDom': // Дома
-          $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-kad/';
           break;
         default: // Поселки
-          $urlTeg = '/poselki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/poselki/'.$val.'-shosse-do-'.$mkadKM.'-km-kad/';
           break;
       }
       $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
@@ -221,30 +220,30 @@ if ($mkadKM) { // выбор по км от мкад
     // url для С газом
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-kad/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/poselki/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/poselki/kupit-dom/gaz-do-".$mkadKM."-km-kad/";
         break;
       default: // Поселки
-        $urlTeg = "/poselki/gaz-do-".$mkadKM."-km-mkad/";;
+        $urlTeg = "/poselki/gaz-do-".$mkadKM."-km-kad/";;
         break;
     }
     $arTegs['gaz']['url'] = $urlTeg;
     // url для ИЖС
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-kad-izhs/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/poselki/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/poselki/kupit-dom/do-".$mkadKM."-km-kad-izhs/";
         break;
       default: // Поселки
-        $urlTeg = "/poselki/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/poselki/do-".$mkadKM."-km-kad-izhs/";
         break;
     }
     $arTegs['izhs']['url'] = $urlTeg;
-    // теги для км от МКАД
+    // теги для км от КАД
     $arTegsShow = ['north','east','south','west','gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
   }else{
     CHTTP::SetStatus("404 Not Found");
@@ -280,7 +279,7 @@ if($plottage){ // площадь дома
       $plottage_ot = $plottage - 50; // от
       $plottage_do = $plottage + 50; // до
     }
-    $arrFilter['><PROPERTY_15'] = [$plottage_ot,$plottage_do]; // Площадь домов
+    $arrFilter['><PROPERTY_HOUSE_AREA'] = [$plottage_ot,$plottage_do]; // Площадь домов
     // dump($arrFilter);
     $APPLICATION->AddChainItem('Купить дом '.$plottage.' кв.м.',"/poselki/kupit-dom-".$plottage."-kv-m/",true);
     $UF_Code = "kupit-dom-".$plottage."-kv-m";
@@ -381,7 +380,7 @@ if($areaUrl){ // выборка по площади
         break;
     }
     if($area_ot < 0)$area_ot = 0;
-    $arrFilter['><PROPERTY_11'] = [$area_ot,$area_do]; // dump($arrFilter);
+    $arrFilter['><PROPERTY_PLOTTAGE'] = [$area_ot,$area_do]; // dump($arrFilter);
 
     switch ($areaType) { // склонение
       case 'sotok':
@@ -409,35 +408,35 @@ if($classCode){ // выборка по классу econom / biznes / komfort / 
       $nameClass = 'эконом';$nameClass2 = 'Эконом';
       break;
     case 'komfort':
-      $arrFilter['=PROPERTY_20'] = [12]; // Электричество
-      $arrFilter['=PROPERTY_77'] = [59,60,61,156,158,193]; // Дороги в поселке
-      $arrFilter['=PROPERTY_79'] = [68]; // Обустройство поселка: Огорожен
+      $arrFilter['=PROPERTY_ELECTRO'] = [392]; // Электричество
+      $arrFilter['=PROPERTY_ROADS_IN_VIL'] = [478,479,480,483,484]; // Дороги в поселке
+      $arrFilter['=PROPERTY_ARRANGE'] = [492]; // Обустройство поселка: Огорожен
       $nameClass = 'комфорт';$nameClass2 = 'Комфорт';
       break;
     case 'biznes':
-      $arrFilter['=PROPERTY_20'] = [12]; // Электричество
-      $arrFilter['=PROPERTY_23'] = [15]; // Газ
-      $arrFilter['=PROPERTY_77'] = [59,60,61,156,158,193]; // Дороги в поселке
-      $arrFilter['=PROPERTY_79'] = [68]; // Обустройство поселка: Огорожен
+      $arrFilter['=PROPERTY_ELECTRO'] = [392]; // Электричество
+      $arrFilter['=PROPERTY_GAS'] = [397]; // Газ
+      $arrFilter['=PROPERTY_ROADS_IN_VIL'] = [478,479,480,483,484]; // Дороги в поселке
+      $arrFilter['=PROPERTY_ARRANGE'] = [492]; // Обустройство поселка: Огорожен
       $nameClass = 'бизнес';$nameClass2 = 'Бизнес';
       break;
     case 'elit':
-      $arrFilter['=PROPERTY_20'] = [12]; // Электричество
-      $arrFilter['=PROPERTY_23'] = [15]; // Газ
-      $arrFilter['=PROPERTY_26'] = [18]; // Водопровод
-      $arrFilter['=PROPERTY_77'] = [59,156,193]; // Дороги в поселке: Асфальт, Асф. кр., Асфальтовая крошка
-      $arrFilter['=PROPERTY_79'] = [67,68]; // Обустройство поселка: Охрана, Огорожен
+      $arrFilter['=PROPERTY_ELECTRO'] = [392]; // Электричество
+      $arrFilter['=PROPERTY_GAS'] = [397]; // Газ
+      $arrFilter['=PROPERTY_PLUMBING'] = [402]; // Водопровод
+      $arrFilter['=PROPERTY_ROADS_IN_VIL'] = [484,478]; // Дороги в поселке: Асфальт, Асф. кр.
+      $arrFilter['=PROPERTY_ARRANGE'] = [493,492]; // Обустройство поселка: Охрана, Огорожен
       $arrFilter['>=PROPERTY_PRICE_SOTKA'] = 150000; // Цена за сотку
       $nameClass = 'элитного';$nameClass2 = 'Элитного';
       break;
     case 'premium':
-      $arrFilter['=PROPERTY_2'] = [4,PROP_HOUSE_PLOT]; // Наличие домов
-      $arrFilter['>=PROPERTY_17'] = 10000000; // Стоимость домов
-      $arrFilter['=PROPERTY_20'] = [12]; // Электричество
-      $arrFilter['=PROPERTY_23'] = [15]; // Газ
-      $arrFilter['=PROPERTY_26'] = [18]; // Водопровод
-      $arrFilter['=PROPERTY_77'] = [59]; // Дороги в поселке: Асфальт
-      $arrFilter['=PROPERTY_79'] = [67,68]; // Обустройство поселка: Охрана, Огорожен
+      $arrFilter['=PROPERTY_DOMA'] = [PROP_WITH_DOM,PROP_HOUSE_PLOT]; // Наличие домов
+      $arrFilter['>=PROPERTY_HOME_VALUE'] = 10000000; // Стоимость домов
+      $arrFilter['=PROPERTY_ELECTRO'] = [392]; // Электричество
+      $arrFilter['=PROPERTY_GAS'] = [397]; // Газ
+      $arrFilter['=PROPERTY_PLUMBING'] = [402]; // Водопровод
+      $arrFilter['=PROPERTY_ROADS_IN_VIL'] = [484]; // Дороги в поселке: Асфальт
+      $arrFilter['=PROPERTY_ARRANGE'] = [493,492]; // Обустройство поселка: Охрана, Огорожен
       $nameClass = 'премиум';$nameClass2 = 'Премиум';
       break;
     default:
@@ -454,23 +453,23 @@ if($commun){ // коммуникации
   // echo 'ddd: '.$commun;
   switch ($commun) {
     case 'elektrichestvom':
-      $arrFilter['=PROPERTY_21'] = [14]; // Электричество (проведен)
+      $arrFilter['=PROPERTY_ELECTRO_DONE'] = [394]; // Электричество (проведен)
       $APPLICATION->AddChainItem('Со светом','',true);
       $commun2 = $commun3 = 'svet';
       break;
     case 'vodoprovodom':
-      $arrFilter['=PROPERTY_27'] = [20]; // Водопровод (проведен)
+      $arrFilter['=PROPERTY_PROVEDENA_VODA'] = [403]; // Водопровод (проведен)
       $APPLICATION->AddChainItem('С водой','',true);
       $commun2 = 'u-vody'; $commun3 = 'voda';
       break;
     case 'gazom':
-      $arrFilter['=PROPERTY_24'] = [17]; // Газ (проведен)
+      $arrFilter['=PROPERTY_PROVEDEN_GAZ'] = [398]; // Газ (проведен)
       $APPLICATION->AddChainItem('С газом','',true);
       $commun2 = $commun3 = 'gaz';
       break;
     case 'kommunikaciyami':
-      $arrFilter['=PROPERTY_21'] = [14]; // Электричество (проведен)
-      $arrFilter['=PROPERTY_24'] = [17]; // Газ (проведен)
+      $arrFilter['=PROPERTY_ELECTRO_DONE'] = [394]; // Электричество (проведен)
+      $arrFilter['=PROPERTY_PROVEDEN_GAZ'] = [398]; // Газ (проведен)
       $APPLICATION->AddChainItem('С коммуникациями','',true);
       $commun2 = $commun3 = 'kommunikatsii';
       break;
@@ -494,17 +493,17 @@ if($commun){ // коммуникации
     }
     $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
   }
-  // url для км от МКАД
-  for ($i=10; $i < 60; $i+=10) { // до МКАД
+  // url для км от КАД
+  for ($i=10; $i < 60; $i+=10) { // до КАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-kad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-kad/';
         break;
       default: // Поселки
-        $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-kad/';
         break;
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
@@ -516,7 +515,7 @@ if($commun){ // коммуникации
 if($typeURL){ // другие URL
   switch ($typeURL) {
     case 'snt': // СНТ
-      $arrFilter['=PROPERTY_33'] = [108,150,123,162]; // Вид разрешенного использования
+      $arrFilter['=PROPERTY_TYPE_USE'] = [424,430,431,432]; // Вид разрешенного использования
       $inChainItem = 'СНТ';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -527,7 +526,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'izhs': // ИЖС
-      $arrFilter['=PROPERTY_33'] = [154,228]; // Вид разрешенного использования
+      $arrFilter['=PROPERTY_TYPE_USE'] = [429,433]; // Вид разрешенного использования
       $inChainItem = 'ИЖС';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -538,7 +537,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'ryadom-s-lesom':
-      $arrFilter['=PROPERTY_45'] = [35,36,37,38]; // Лес
+      $arrFilter['=PROPERTY_LES'] = [454, 455, 457, 458]; // Лес
       $inChainItem = 'Рядом с лесом';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -549,7 +548,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'u-vody':
-      $arrFilter['=PROPERTY_47'] = [39,40,41]; // Водоем
+      $arrFilter['=PROPERTY_WATER'] = [459, 460, 461]; // Водоем
       $inChainItem = 'У воды';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -560,7 +559,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'u-ozera':
-      $arrFilter['=PROPERTY_47'] = [40]; // Водоем = Озеро
+      $arrFilter['=PROPERTY_WATER'] = [459]; // Водоем = Озеро
       $inChainItem = 'У озера';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -571,7 +570,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'u-reki':
-      $arrFilter['=PROPERTY_47'] = [39]; // Водоем = Река
+      $arrFilter['=PROPERTY_WATER'] = [460]; // Водоем = Река
       $inChainItem = 'У реки';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -582,7 +581,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'ryadom-zhd-stanciya':
-      $arrFilter['<=PROPERTY_71'] = 5; // Ближайшая ж/д станция расстояние до поселка, км
+      $arrFilter['<=PROPERTY_RAILWAY_KM'] = 5; // Ближайшая ж/д станция расстояние до поселка, км
       $inChainItem = 'Рядом Ж/Д станция';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -593,7 +592,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'ryadom-avtobusnaya-ostanovka':
-      $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Рядом автобусная остановка';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -604,31 +603,31 @@ if($typeURL){ // другие URL
       }
       break;
     case 'promyshlennye':
-      $arrFilter['PROPERTY_1'] = 301; // Промышленный поселок
+      $arrFilter['PROPERTY_TYPE'] = 314; // Промышленный поселок
       $inChainItem = 'Промышленные поселки';
       $newTitle = 'Промышленные поселки в Ленинградской области';
       $h1 = 'Промышленные поселки в Ленинградской области';
       break;
     case 'kupit-letnij-dom':
-      // $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      // $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Купить летний дом';
       break;
     case 'kupit-zimnij-dom':
-      // $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      // $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Купить зимний дом';
       break;
     case 's-infrastrukturoj':
-      $arrFilter['=PROPERTY_81'] = [72,113]; // магазин
-      $arrFilter['=PROPERTY_84'] = [78,116]; // школа
-      $arrFilter['<=PROPERTY_71'] = 2; // Ближайшая ж/д станция расстояние до поселка, км
+      $arrFilter['=PROPERTY_MAGAZIN'] = [496,497]; // магазин
+      $arrFilter['=PROPERTY_SHKOLA'] = [505,506]; // школа
+      $arrFilter['<=PROPERTY_RAILWAY_KM'] = 2; // Ближайшая ж/д станция расстояние до поселка, км
       $inChainItem = 'С инфраструктурой';
       break;
     case 's-ohranoj':
-      $arrFilter['=PROPERTY_79'] = [67]; // обустройство - охрана
+      $arrFilter['=PROPERTY_ARRANGE'] = [493]; // обустройство - охрана
       $inChainItem = 'С охраной';
       break;
     case 's-dorogami':
-      $arrFilter['=PROPERTY_78'] = [63,64,65,145,159]; // дороги до поселка
+      $arrFilter['=PROPERTY_ROADS_TO_VIL'] = [485,486,487,490,491]; // дороги до поселка
       $inChainItem = 'С дорогами';
       break;
     default:
@@ -651,17 +650,17 @@ if($typeURL){ // другие URL
   // теги для ВРИ
   if($typeURL == 'snt' || $typeURL == 'izhs'){
     if($typeURL == 'izhs'){
-      // url для км от МКАД
-      for ($i=10; $i < 60; $i+=10) { // до МКАД
+      // url для км от КАД
+      for ($i=10; $i < 60; $i+=10) { // до КАД
         switch ($domPos) {
           case 'noDom': // Участки
-            $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-uchastki/do-'.$i.'-km-kad-izhs/';
             break;
           case 'withDom': // Дома
-            $urlTeg = '/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/poselki/kupit-dom/do-'.$i.'-km-kad-izhs/';
             break;
           default: // Поселки
-            $urlTeg = '/poselki/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/poselki/do-'.$i.'-km-kad-izhs/';
             break;
         }
         $arTegs['mkad_'.$i]['url'] = $urlTeg;
@@ -672,6 +671,6 @@ if($typeURL){ // другие URL
 }
 
 if($developerCode){ // по девелоперу
-  $arrFilter['=PROPERTY_122'] = $developerCode; // Вид разрешенного использования
+  $arrFilter['=PROPERTY_DEVELOPER_ID'] = $developerCode; // Вид разрешенного использования
 }
 ?>

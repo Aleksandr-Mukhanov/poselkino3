@@ -32,6 +32,7 @@ $arVideoVil = explode('https://youtu.be/',$arResult['PROPERTIES']['VIDEO_VIL']['
 $arResult['PROPERTIES']['VIDEO_VIL']['CODE_YB'] = $arVideoVil[1];
 
 // объекты на тер. и в радиусе 5 км
+$inTer = [];
 if (mb_strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в поселке') $inTer['shop']='Магазин';
 elseif(mb_strtolower($arResult['PROPERTIES']['MAGAZIN']['VALUE']) == 'в радиусе 5км') $rad5km['shop']='Магазин';
 if (mb_strtolower($arResult['PROPERTIES']['APTEKA']['VALUE']) == 'в поселке') $inTer['pharmacy']='Аптека';
@@ -72,7 +73,7 @@ foreach ($arResult['MORE_PHOTO'] as $key => $photo){
 }
 // фото поселков для участка
 foreach ($arResult['MORE_PHOTO'] as $photo){
-	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
+	 $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true);
 	 $arResult['PHOTO_VILLAGE'][] = $photoRes;
 	 unset($photoRes);
 }
@@ -113,23 +114,23 @@ if (!$landscape) $landscape = 'Информации нет';
 // км от МКАД
 $km_MKAD = $arResult['PROPERTIES']['MKAD']['VALUE'];
 switch ($km_MKAD) {
-	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	case $km_MKAD <= 10: $url_km_MKAD = "do-10-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 15: $url_km_MKAD = "do-15-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 20: $url_km_MKAD = "do-20-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 25: $url_km_MKAD = "do-25-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 30: $url_km_MKAD = "do-30-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 35: $url_km_MKAD = "do-35-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 40: $url_km_MKAD = "do-40-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 45: $url_km_MKAD = "do-45-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 50: $url_km_MKAD = "do-50-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 55: $url_km_MKAD = "do-55-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 60: $url_km_MKAD = "do-60-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 65: $url_km_MKAD = "do-65-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 70: $url_km_MKAD = "do-70-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 75: $url_km_MKAD = "do-75-km-ot-".ROAD_URL; break;
+	case $km_MKAD <= 80: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 
-	default: $url_km_MKAD = "do-80-km-ot-mkad"; break;
+	default: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
 } // echo $url_km_MKAD;
 
 // объекты экологии
@@ -161,6 +162,7 @@ switch ($km_MKAD) {
 	$correctText = $ourDeclension->get($cntPos);
 
 	// dump($_COOKIE); // разбираем куки
+	$arComparison = []; $arFavorites = [];
 	if(isset($_COOKIE['comparison_vil'])){
 		$arComparison = explode('-',$_COOKIE['comparison_vil']);
 	}
@@ -190,8 +192,8 @@ switch ($km_MKAD) {
 <div class="container mt-md-5">
 	<div class="row">
 		<div class="order-0 order-md-0 col-xl-8 col-md-7">
-			<div class="page-title">
-				<h1 class="h2" itemprop="name"><?=$nameVil?></h1>
+			<div class="page-title title_h2">
+				<h1 itemprop="name"><?=$nameVil?></h1>
 			</div>
 			<div class="active-sale"><span class="mr-2 mr-md-5"><?=$priceSotka?></span>
 				<div class="d-none d-md-inline-block">
@@ -1018,7 +1020,7 @@ switch ($km_MKAD) {
 							</div>
 						</div>
 						<?endif;?>
-						<?if(mb_strtolower($arResult['PROPERTIES']['WATER']['VALUE']) != 'нет'): // Водоем?>
+						<?if(mb_strtolower($arResult['PROPERTIES']['WATER']['VALUE'][0]) != 'нет'): // Водоем?>
 						<div class="col-xl-6">
 							<div class="arrangement__item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="23.111" height="14.182" viewBox="0 0 23.111 14.182" class="inline-svg">
@@ -1139,7 +1141,7 @@ switch ($km_MKAD) {
 						</g>
 					</svg>
 					<div class="ecology__card-text">
-						<div class="ecology__card-title">Сторона света относительно Санкт-Петербурга:</div>
+						<div class="ecology__card-title">Сторона света относительно <?=REGION_CITY?>:</div>
 						<div class="ecology__card-description"><?=$arResult['PROPERTIES']['SIDE']['VALUE'] // Сторона света относительно?></div>
 					</div>
 				</div>

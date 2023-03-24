@@ -3733,7 +3733,7 @@
 }
 
 .banner__wrap {
-	background: 100% 100%/contain no-repeat url(/assets/img/invest//banner-1.png), 100% 100%/640px 282px url(/assets/img/invest//banner-1-swipe.png) no-repeat #e5f1f9;
+	background: 100% 100%/contain no-repeat url(/assets/img/invest/banner-1-min.webp), 100% 100%/640px 282px url(/assets/img/invest/banner-1-swipe.png) no-repeat #e5f1f9;
 	border-radius: 15px;
 	padding-bottom: 60px;
 	padding-left: 60px;
@@ -3777,7 +3777,7 @@
 }
 
 .banner__wrap-2 {
-	background: 100% -46px/45.6% no-repeat url(/assets/img/invest//banner-2.png) #e5f1f9
+	background: 100% -46px/45.6% no-repeat url(/assets/img/invest/banner-2-min.webp) #e5f1f9
 }
 
 @media (max-width:1200px) {

@@ -1,7 +1,25 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
-// dump($arTegs);
-// определим шоссе
 
+// определим шоссе
+$arHighway = [
+  [
+    'id' => 376,
+    'name' => 'Московское',
+    'code' => 'moskovskoe'
+  ],[
+    'id' => 372,
+    'name' => 'Киевское',
+    'code' => 'kievskoe'
+  ],[
+    'id' => 548,
+    'name' => 'Новоприозерское',
+    'code' => 'novopriozerskoe'
+  ],[
+    'id' => 377,
+    'name' => 'Мурманское',
+    'code' => 'murmanskoe'
+  ]
+];
 
 // получим наши поселки
 $arOrder = Array('SORT' => 'ASC');
@@ -12,24 +30,21 @@ $rsElements = CIBlockElement::GetList($arOrder, $arFilter, false, false, $arSele
 while ($arElement = $rsElements->GetNext())
 {
     if (!$shosse) {// шоссе
-        if (array_key_exists(179, $arElement['PROPERTY_SHOSSE_VALUE'])) { // Дмитровское - север
+        if (array_key_exists($arHighway[0]['id'], $arElement['PROPERTY_SHOSSE_VALUE'])) { // Дмитровское - север
             $arTegs['north']['cnt'] += 1;
         }
-        if (array_key_exists(191, $arElement['PROPERTY_SHOSSE_VALUE'])) { // Новорязанское - восток
+        if (array_key_exists($arHighway[1]['id'], $arElement['PROPERTY_SHOSSE_VALUE'])) { // Новорязанское - восток
             $arTegs['east']['cnt'] += 1;
         }
-        if (array_key_exists(129, $arElement['PROPERTY_SHOSSE_VALUE'])) { // Симферопольское - юг
+        if (array_key_exists($arHighway[2]['id'], $arElement['PROPERTY_SHOSSE_VALUE'])) { // Симферопольское - юг
             $arTegs['south']['cnt'] += 1;
         }
-        if (array_key_exists(205, $arElement['PROPERTY_SHOSSE_VALUE'])) { // Новорижское - запад
+        if (array_key_exists($arHighway[3]['id'], $arElement['PROPERTY_SHOSSE_VALUE'])) { // Новорижское - запад
             $arTegs['west']['cnt'] += 1;
-        }
-        if (array_key_exists(130, $arElement['PROPERTY_SHOSSE_VALUE'])) { // Каширское шоссе
-            $arTegs['kashirskoe']['cnt'] += 1;
         }
     }
 
-    for ($i = 10; $i < 60; $i += 10) { // до МКАД
+    for ($i = 10; $i < 60; $i += 10) { // до КАД
         if ($arElement['PROPERTY_MKAD_VALUE'] >= $i - 20 && $arElement['PROPERTY_MKAD_VALUE'] <= $i + 10) { // До xx км от Москвы
             $arTegs['mkad_' . $i]['cnt'] += 1;
         }
@@ -84,94 +99,79 @@ while ($arElement = $rsElements->GetNext())
 
 // формируем мультитеги
 // шоссе
-$arTegs['north']['name'] = 'Дмитровское ш.';
+$arTegs['north']['name'] = $arHighway[0]['name']. ' ш.';
 if (!$arTegs['north']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
-            $urlTeg = '/poselki/dmitrovskoe-shosse/kupit-uchastok/';
+            $urlTeg = '/poselki/'.$arHighway[0]['code'].'-shosse/kupit-uchastok/';
             break;
         case 'withDom': // Дома
-            $urlTeg = '/poselki/dmitrovskoe-shosse/kupit-dom/';
+            $urlTeg = '/poselki/'.$arHighway[0]['code'].'-shosse/kupit-dom/';
             break;
         default: // Поселки
-            $urlTeg = '/poselki/dmitrovskoe-shosse/';
+            $urlTeg = '/poselki/'.$arHighway[0]['code'].'-shosse/';
             break;
     }
     $arTegs['north']['url'] = $urlTeg;
 }
-$arTegs['east']['name'] = 'Новорязанское ш.';
+$arTegs['east']['name'] = $arHighway[1]['name']. ' ш.';
 if (!$arTegs['east']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
-            $urlTeg = '/poselki/novoryazanskoe-shosse/kupit-uchastok/';
+            $urlTeg = '/poselki/'.$arHighway[1]['code'].'-shosse/kupit-uchastok/';
             break;
         case 'withDom': // Дома
-            $urlTeg = '/poselki/novoryazanskoe-shosse/kupit-dom/';
+            $urlTeg = '/poselki/'.$arHighway[1]['code'].'-shosse/kupit-dom/';
             break;
         default: // Поселки
-            $urlTeg = '/poselki/novoryazanskoe-shosse/';
+            $urlTeg = '/poselki/'.$arHighway[1]['code'].'-shosse/';
             break;
     }
     $arTegs['east']['url'] = $urlTeg;
 }
-$arTegs['south']['name'] = 'Симферопольское ш.';
+$arTegs['south']['name'] = $arHighway[2]['name']. ' ш.';
 if (!$arTegs['south']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
-            $urlTeg = '/poselki/simferopolskoe-shosse/kupit-uchastok/';
+            $urlTeg = '/poselki/'.$arHighway[2]['code'].'-shosse/kupit-uchastok/';
             break;
         case 'withDom': // Дома
-            $urlTeg = '/poselki/simferopolskoe-shosse/kupit-dom/';
+            $urlTeg = '/poselki/'.$arHighway[2]['code'].'-shosse/kupit-dom/';
             break;
         default: // Поселки
-            $urlTeg = '/poselki/simferopolskoe-shosse/';
+            $urlTeg = '/poselki/'.$arHighway[2]['code'].'-shosse/';
             break;
     }
     $arTegs['south']['url'] = $urlTeg;
 }
-$arTegs['west']['name'] = 'Новорижское ш.';
+$arTegs['west']['name'] = $arHighway[3]['name']. ' ш.';
 if (!$arTegs['west']['url']) {
     switch ($domPos) {
         case 'noDom': // Участки
-            $urlTeg = '/poselki/novorijskoe-shosse/kupit-uchastok/';
+            $urlTeg = '/poselki/'.$arHighway[3]['code'].'-shosse/kupit-uchastok/';
             break;
         case 'withDom': // Дома
-            $urlTeg = '/poselki/novorijskoe-shosse/kupit-dom/';
+            $urlTeg = '/poselki/'.$arHighway[3]['code'].'-shosse/kupit-dom/';
             break;
         default: // Поселки
-            $urlTeg = '/poselki/novorijskoe-shosse/';
+            $urlTeg = '/poselki/'.$arHighway[3]['code'].'-shosse/';
             break;
     }
     $arTegs['west']['url'] = $urlTeg;
 }
-$arTegs['kashirskoe']['name'] = 'Каширское ш.';
-if (!$arTegs['kashirskoe']['url']) {
-    switch ($domPos) {
-        case 'noDom': // Участки
-            $urlTeg = '/poselki/kashirskoe-shosse/kupit-uchastok/';
-            break;
-        case 'withDom': // Дома
-            $urlTeg = '/poselki/kashirskoe-shosse/kupit-dom/';
-            break;
-        default: // Поселки
-            $urlTeg = '/poselki/kashirskoe-shosse/';
-            break;
-    }
-    $arTegs['kashirskoe']['url'] = $urlTeg;
-}
 
-for ($i = 10; $i < 60; $i += 10) { // до МКАД
-    $arTegs['mkad_' . $i]['name'] = $i . 'км от МКАД';
+for ($i = 10; $i < 60; $i += 10) { // до КАД
+    $arTegs['mkad_' . $i]['name'] = $i . 'км от КАД';
     if (!$arTegs['mkad_' . $i]['url']) {
         switch ($domPos) {
             case 'noDom': // Участки
-                $urlTeg = '/poselki/kupit-uchastok-do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/poselki/kupit-uchastok-do-' . $i . '-km-ot-kad/';
                 break;
             case 'withDom': // Дома
-                $urlTeg = '/poselki/kupit-dom-dachu-kottedzh-do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/poselki/kupit-dom-dachu-kottedzh-do-' . $i . '-km-ot-kad/';
                 break;
             default: // Поселки
-                $urlTeg = '/poselki/do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/poselki/do-' . $i . '-km-ot-kad/';
                 break;
         }
         $arTegs['mkad_' . $i]['url'] = $urlTeg;
@@ -312,7 +312,7 @@ $arTegs['do-1-milliona']['name'] = 'До 1 млн. руб.';
 $arTegs['do-2-milliona']['name'] = 'До 2 млн. руб.';
 
 // какие теги выводить
-if (!$arTegsShow) $arTegsShow = ['kashirskoe','north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
+if (!$arTegsShow) $arTegsShow = ['north', 'east', 'south', 'west', 'mkad_30', 'mkad_50', 'gaz', 'izhs', 'snt', 'econom', 'komfort'];
 // dump($arTegsShow);
 
 if ($onlyParam) { // если не нужен url тега (3 уровень)
@@ -320,19 +320,16 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
     $tegReq = $_REQUEST['teg'];
     switch ($tegReq) {
         case 'north':
-            $arrFilter['=PROPERTY_SHOSSE'] = [179]; // Дмитровское
+            $arrFilter['=PROPERTY_SHOSSE'] = [$arHighway[0]['id']]; // Дмитровское
             break;
         case 'east':
-            $arrFilter['=PROPERTY_SHOSSE'] = [191]; // Новорязанское
+            $arrFilter['=PROPERTY_SHOSSE'] = [$arHighway[1]['id']]; // Новорязанское
             break;
         case 'south':
-            $arrFilter['=PROPERTY_SHOSSE'] = [129]; // Симферопольское
+            $arrFilter['=PROPERTY_SHOSSE'] = [$arHighway[2]['id']]; // Симферопольское
             break;
         case 'west':
-            $arrFilter['=PROPERTY_SHOSSE'] = [205]; // Новорижское
-            break;
-        case 'kashirskoe':
-            $arrFilter['=PROPERTY_SHOSSE'] = [130]; // Каширское
+            $arrFilter['=PROPERTY_SHOSSE'] = [$arHighway[3]['id']]; // Новорижское
             break;
         case 'mkad_20':
             $arrFilter['><PROPERTY_MKAD'] = [0, 30];
@@ -353,10 +350,10 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
             $arrFilter['=PROPERTY_PROVEDENA_VODA'] = [403]; // Водопровод (проведен)
             break;
         case 'izhs':
-            $arrFilter['=PROPERTY_TYPE_USE'] = [433, 429]; // Вид разрешенного использования - ИЖС
+            $arrFilter['=PROPERTY_TYPE_USE'] = [429, 433]; // Вид разрешенного использования - ИЖС
             break;
         case 'snt':
-            $arrFilter['=PROPERTY_TYPE_USE'] = [424, 430, 432, 431]; // Вид разрешенного использования - СНТ
+            $arrFilter['=PROPERTY_TYPE_USE'] = [424, 430, 431, 432]; // Вид разрешенного использования - СНТ
             break;
         case 'ryadom-s-lesom':
             $arrFilter['=PROPERTY_LES'] = [454, 455, 457, 458]; // Лес

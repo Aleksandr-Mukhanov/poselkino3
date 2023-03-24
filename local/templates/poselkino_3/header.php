@@ -27,6 +27,7 @@ while($arElement = $rsElements->Fetch())
 $cntAllPlots = 0;
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y");
+if (!in_array($_SERVER['HTTP_HOST'],SITES_DIR)) $arFilter['!PROPERTY_AREA'] = 552; // исключим СПБ
 $arSelect = Array("ID");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch())
@@ -123,7 +124,7 @@ if(isset($_COOKIE['favorites_vil'])){
 						</li>
 						<li class="nav-item"><a class="nav-link" href="/sravnenie/" title="Сравнение">
 							<?// if($arComparison){?>
-								<span class="badge badge-warning text-white heart__number" id="compHeader"><?=count($arComparison)?></span>
+								<span class="badge badge-warning text-white heart__number" id="compHeader"><?=($arComparison)?count($arComparison):0?></span>
 							<?// }?>
 							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" class="inline-svg">
 							<g transform="translate(-1216.699 -36.35)">
@@ -135,7 +136,7 @@ if(isset($_COOKIE['favorites_vil'])){
 						</svg></a></li>
 						<li class="nav-item heart"><a class="nav-link heart__link" href="/izbrannoe/" title="Избранное">
 							<?// if($arFavorites){?>
-								<span class="badge badge-warning text-white heart__number" id="favHeader"><?=count($arFavorites)?></span>
+								<span class="badge badge-warning text-white heart__number" id="favHeader"><?=($arFavorites)?count($arFavorites):0?></span>
 							<?// }?>
 							<svg xmlns="http://www.w3.org/2000/svg" width="21.72" height="19.107" viewBox="0 0 21.72 19.107" class="inline-svg">
 							<g transform="translate(.05 -28.451)">
@@ -156,12 +157,12 @@ if(isset($_COOKIE['favorites_vil'])){
 				<?endif;?>
 				<!-- <li class="nav-item"><a class="nav-link" href="/doma/">Дома <?=$cntAllHouse?></a></li> -->
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/promyshlennye/">Промышленные поселки</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/stroitelyam/">Застройщикам</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/investoram/">Инвесторам</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/o-proekte/">О проекте</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/blog/">Блог</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/reklama/">Реклама и сотрудничество</a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/kontakty/">Контакты</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/stroitelyam/">Застройщикам</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/investoram/">Инвесторам</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/o-proekte/">О проекте</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/blog/">Блог</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/reklama/">Реклама и сотрудничество</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/kontakty/">Контакты</a></li>
 				<li class="nav-item mt-auto mail">
 					<div class="nav-item-label">E-mail:&nbsp;</div><a href="mailto:welcome@poselkino.ru">welcome@poselkino.ru</a>
 				</li>

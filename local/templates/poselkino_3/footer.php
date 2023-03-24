@@ -37,17 +37,17 @@
             <div class="footer__nav-item"><a href="/poselki/">Коттеджные поселки</a></div>
             <div class="footer__nav-item"><a href="/kupit-uchastki/">Земельные участки</a></div>
             <div class="footer__nav-item"><a href="/poselki/promyshlennye/">Промышленные поселки</a></div>
-            <div class="footer__nav-item"><a href="/stroitelyam/">Застройщикам</a></div>
-            <div class="footer__nav-item"><a href="/investoram/">Инвесторам</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/stroitelyam/">Застройщикам</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/investoram/">Инвесторам</a></div>
             <div class="footer__nav-item"><a href="/poselki/#shosse_rayon">По шоссе</a></div>
             <div class="footer__nav-item"><a href="/poselki/?show_rayon=y#shosse_rayon">По районам</a></div>
-            <div class="footer__nav-item"><a href="/o-proekte/">О проекте</a></div>
-            <div class="footer__nav-item"><a href="/blog/">Блог</a></div>
-            <div class="footer__nav-item"><a href="/reklama/">Реклама и сотрудничество</a></div>
-            <div class="footer__nav-item"><a href="/kontakty/">Контакты</a></div>
-            <div class="footer__nav-item"><a href="/sitemap/">Карта сайта</a></div>
-            <div class="footer__nav-item"><a href="/politika-konfidentsialnosti/">Политика конфиденциальности</a></div>
-            <div class="footer__nav-item"><a href="/polzovatelskoe-soglashenie/">Пользовательское соглашение</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/o-proekte/">О проекте</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/blog/">Блог</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/reklama/">Реклама и сотрудничество</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/kontakty/">Контакты</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/sitemap/">Карта сайта</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/politika-konfidentsialnosti/">Политика конфиденциальности</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/polzovatelskoe-soglashenie/">Пользовательское соглашение</a></div>
           </div>
         </div>
         <div class="col-xl-3 pl-xl-0 col-lg-4">

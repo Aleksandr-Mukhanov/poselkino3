@@ -110,7 +110,7 @@ if($_REQUEST['OFFER_TYPE'] == 'plots'){ // если вывод участков
 }elseif($_REQUEST['OFFER_TYPE'] == 'houses'){ // если  вывод домов
 
   // получим дома
-  $arOrder = Array("SORT"=>"ASC");
+  $arOrder = Array("SORT"=>"ASC","PROPERTY_TYPE"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>6,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$arResult["ID"]);
   $arNavParams = ['nPageSize'=>5,"bShowAll" => false];
 	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_FLOORS","PROPERTY_MATERIAL","PROPERTY_AREA_HOUSE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO");
@@ -161,13 +161,13 @@ $poselokName = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE'])
 	? $arResult['IPROPERTY_VALUES']['ELEMENT_PAGE_TITLE']
 	: $arResult['NAME'];
 switch ($arResult['PROPERTIES']['TYPE']['VALUE_ENUM_ID']) {
-	case 1:
+	case PROP_DACHA:
 			$typeShort = 'ДП'; $typeLong = 'дачный поселок'; $typeLong2 = 'дачном поселке';
 			break;
-	case 2:
+	case PROP_COTTAGE:
 			$typeShort = 'КП'; $typeLong = 'коттеджный поселок'; $typeLong2 = 'коттеджном поселке';
 			break;
-	case 171:
+	case PROP_FARMING:
 			$typeShort = 'Ф'; $typeLong = 'фермерство'; $typeLong2 = 'фермерстве';
 			break;
 	}
@@ -202,10 +202,10 @@ $cenaZaSotkyOrDom = "";
 // if ($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0] <= 1) {
 // 	$cenaZaSotkyOrDom =  '5 250 000 руб за дом';
 // }
-if($arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == 3 ){ // Только участки
+if($arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == PROP_NO_DOM ){ // Только участки
 	$cenaZaSotkyOrDom = formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).' руб. за сотку';
 	$minPrice = formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]);
-}elseif($arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == 4 || $arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == 256){ // Участки с домами
+}elseif($arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == PROP_WITH_DOM || $arResult['PROPERTIES']['DOMA']['VALUE_ENUM_ID'] == PROP_HOUSE_PLOT){ // Участки с домами
 	$cenaZaSotkyOrDom =  formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'₽ за участок с домом';
 	$minPrice = formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]);
 }
@@ -218,7 +218,7 @@ if (formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0])==0) {
 
 if($_REQUEST['OFFER_TYPE'] == 'plots'){
   $seoTitle = 'Купить участок в коттеджном поселке '.$poselokName.', цены';
-	$setDescription = '▶Участки в коттеджном поселке '.$poselokName.' Московской области. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
+	$setDescription = '▶Участки в коттеджном поселке '.$poselokName.' '.REGION_KOY.' области. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
 }else{
   $seoTitle = 'Купить дом в '.$typeShort.' '.$poselokName.' ('.$typeLong.'), цены на дома и коттеджи';
   $setDescription = '▶ Дома и коттеджи в '.$typeLong2.' '.$poselokName.' ▶ Купить готовый дом в '.$typeShort.' '.$poselokName.' ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';

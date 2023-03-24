@@ -209,6 +209,7 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 		{
 			$rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
 			// dump($_COOKIE); // разбираем куки
+			$arComparison = []; $arFavorites = [];
 			if(isset($_COOKIE['comparison_vil'])){
 				$arComparison = explode('-',$_COOKIE['comparison_vil']);
 			}
@@ -356,7 +357,7 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 			ymaps.ready(function() {
 
 				var myMap = new ymaps.Map("pageMapContainer", {
-					center: [55.76, 37.64], // Координаты центра карты
+					center: [<?=MAP_CENTER?>], // Координаты центра карты
 					zoom: 7 // Уровень масштабирования
 				});
 

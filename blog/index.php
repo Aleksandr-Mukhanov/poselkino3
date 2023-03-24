@@ -1,5 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Блог о загородной недвижимости");?>
+$APPLICATION->SetTitle("Блог о загородной недвижимости");
+if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/blog/');?>
 <main class="page page-blog">
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:news",

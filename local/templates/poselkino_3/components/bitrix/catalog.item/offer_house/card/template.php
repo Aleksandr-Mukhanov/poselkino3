@@ -46,7 +46,7 @@ $offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
 		    <?}?>
 	    </div>
 			<div class="photo__count">
-				<span class="current">1</span> / <span class="count"><?=count($item['PROPERTIES']['DOP_PHOTO']['VALUE'])?></span>
+				<span class="current">1</span> / <span class="count"><?=($item['PROPERTIES']['DOP_PHOTO']['VALUE'])?count($item['PROPERTIES']['DOP_PHOTO']['VALUE']):0?></span>
 	    </div>
 		</div>
 		<div class="card-house__content">

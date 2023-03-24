@@ -185,9 +185,22 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 				break;
 		}
 
-		if ($manager)
+		// распределение менеджерам по шоссе
+		$arElHL = getElHL(16,[],[],['ID','UF_NAME','UF_MANAGER']);
+		foreach ($arElHL as $value)
+			$arHighway[$value['UF_NAME']] = $value['UF_MANAGER'];
+
+		if ($manager) // менеджер у поселка
 		{
 			$arElHL = getElHL(13,[],['UF_XML_ID'=>$manager],['*']);
+			$arManager = array_values($arElHL)[0];
+			if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
+			if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
+			if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+		}
+		elseif ($arHighway[$highway]) // менеджер у шоссе
+		{
+			$arElHL = getElHL(13,[],['ID'=>$arHighway[$highway]],['*']);
 			$arManager = array_values($arElHL)[0];
 			if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
 			if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
@@ -345,7 +358,8 @@ elseif ($ourForm == 'SendReview') // Добавление отзыва
 			"DIGNITIES" => $_POST['dignities'],
 			"DISADVANTAGES" => $_POST['disadvantages'],
 			"COMMENT" => $_POST['comment'],
-			"RESIDENT" => $resident
+			"RESIDENT" => $resident,
+			"PAGE" => $_SERVER['HTTP_REFERER']
 		);
 		CEvent::Send("SEND_OTZIV", "s1", $mailFields);
 	}else{

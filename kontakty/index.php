@@ -1,5 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Контакты");?>
+$APPLICATION->SetTitle("Контакты");
+if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/kontakty/');?>
 <main class="page page-contacts">
 	<div class="bg-white">
 		<div class="container">

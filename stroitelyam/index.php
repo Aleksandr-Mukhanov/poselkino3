@@ -82,7 +82,7 @@ while($arElement = $rsElements->GetNext())
 										в&nbsp;базе</small></span>
 							</div>
 							<p class="offer__right-txt">
-								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по Московской области
+								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по <?=REGION_KOY?> области
 							</p>
 						</div>
 					</div>
@@ -147,7 +147,7 @@ while($arElement = $rsElements->GetNext())
 				</div>
 				<div class="col-6 benefit__left">
 					<div class="benefit__item">
-						<p class="benefit__txt">Только ликвидные локации: 10-30&nbsp;км от&nbsp;Москвы.</p>
+						<p class="benefit__txt">Только ликвидные локации: 10-30&nbsp;км от&nbsp;<?=REGION_CITY?>.</p>
 						<div style="background: center / contain no-repeat url(/assets/img/invest/benefit-2.png)" class="benefit__img-2"></div>
 					</div>
 				</div>
@@ -280,7 +280,7 @@ while($arElement = $rsElements->GetNext())
 									обращения</span>
 							</div>
 							<p class="offer__right-txt offer__plots-txt">
-								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по Московской области
+								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по <?=REGION_KOY?> области
 							</p>
 						</div>
 					</div>
@@ -497,7 +497,7 @@ while($arElement = $rsElements->GetNext())
 										в&nbsp;базе</small></span>
 							</div>
 							<p class="offer__right-txt offer__actual-right-txt">
-								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по Московской области
+								В нашей базе данных о продаже недвижимости <b>более 650 поселков</b> по <?=REGION_KOY?> области
 							</p>
 						</div>
 					</div>

@@ -34,12 +34,21 @@ function formatPricePoint($price){
 	return $newPrice;
 }
 
+// определим поддомены
+define('SITES_DIR',['spb.poselkino.ru']);
+
 // сопопоставим id
 switch ($_SERVER['HTTP_HOST']) {
 	case 'spb.poselkino.ru':
 		define('IBLOCK_ID', 7); // инфоблок Поселков
 		define('SHOW_PLOTS', 'N'); // показывать участки
 		define('ROAD', 'КАД'); // шоссе
+		define('ROAD_URL', 'kad'); // шоссе в url
+		define('REGION_CITY', 'Санкт-Петербурга'); // город области
+		define('REGION_KOY', 'Ленинградской'); // область
+		define('REGION_SHORT', 'Ленобласти'); // область коротко
+		define('FILTER_MAP', 'map_spb'); // фильтр в карте
+		define('MAP_CENTER', '59.938955, 30.315644'); // центр карты
 		define('PROP_SOLD_ID', 388); // проданные в SALES_PHASE
 		define('PROP_HIDE_ID', 310); // убрать из каталога в HIDE_POS
 		define('PROP_NO_DOM', 316); // Участки в DOMA
@@ -51,11 +60,22 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PROP_ELECTRO_Y', 392); // Электричество в ELECTRO
 		define('PROP_GAS_Y', 397); // Газ в GAS
 		define('PROP_PLUMBING_Y', 402); // Водопровод в PLUMBING
+		define('PROP_COORDINATES', 295); // Координаты поселка
+		define('PROP_PRICE_SOTKA', 234); // Цена за сотку
+		define('PLOTS_PROP_AREA', 552); // Область участков
+		define('PLOTS_PROP_REGION', 368); // Район участков
+		define('PLOTS_PROP_SHOSSE', 369); // Шоссе участков
 		break;
 	default:
 		define('IBLOCK_ID', 1); // инфоблок Поселков
 		define('SHOW_PLOTS', 'Y'); // показывать участки
 		define('ROAD', 'МКАД'); // шоссе
+		define('ROAD_URL', 'mkad'); // шоссе в url
+		define('REGION_CITY', 'Москвы'); // город области
+		define('REGION_KOY', 'Московской'); // область
+		define('REGION_SHORT', 'Подмосковью'); // область коротко
+		define('FILTER_MAP', 'map'); // фильтр в карте
+		define('MAP_CENTER', '55.76, 37.64'); // центр карты
 		define('PROP_SOLD_ID', 254); // проданные в SALES_PHASE
 		define('PROP_HIDE_ID', 273); // убрать из каталога в HIDE_POS
 		define('PROP_NO_DOM', 3); // Участки в DOMA
@@ -67,11 +87,16 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PROP_ELECTRO_Y', 12); // Электричество в ELECTRO
 		define('PROP_GAS_Y', 15); // Газ в GAS
 		define('PROP_PLUMBING_Y', 18); // Водопровод в PLUMBING
+		define('PROP_COORDINATES', 58); // Координаты поселка
+		define('PROP_PRICE_SOTKA', 8); // Цена за сотку
+		define('PLOTS_PROP_AREA', 551); // Область участков
+		define('PLOTS_PROP_REGION', 193); // Район участков
+		define('PLOTS_PROP_SHOSSE', 194); // Шоссе участков
 		break;
 }
 
 // ресайз фото
-function ResizeIMG($fileID,$width=580,$height=358)
+function ResizeIMG($fileID,$width=580,$height=358,$waterMark=true)
 {
 	// водный знак
 	$arWaterMark = [
@@ -85,6 +110,7 @@ function ResizeIMG($fileID,$width=580,$height=358)
 			"fill" => "resize",
 		]
 	];
+	if (!$waterMark) $arWaterMark = [];
 
 	// ресайз фото
 	$photoRes = \CFile::ResizeImageGet($fileID, ['width'=>$width, 'height'=>$height], BX_RESIZE_IMAGE_PROPORTIONAL_ALT, true, $arWaterMark);
@@ -220,6 +246,7 @@ function getColorRoad($id_enum){
 		case 373: $color = 'one'; break; // Красносельское
 		case 377: $color = 'six'; break; // Мурманское
 		case 378: $color = 'six'; break; // Петрозаводское
+		default: $color = 'nine'; break; // Остальные
 	}
 	return $color;
 }
@@ -450,9 +477,9 @@ class MyClass
   public function OnBeforeIBlockElementHandler(&$arFields)
   {
 		// dump($arFields);die();
-		if($arFields['PROPERTY_VALUES'][58])
+		if($arFields['PROPERTY_VALUES'][PROP_COORDINATES])
 		{
-			foreach ($arFields['PROPERTY_VALUES'][58] as $value) {
+			foreach ($arFields['PROPERTY_VALUES'][PROP_COORDINATES] as $value) {
 				$point = $value['VALUE'];
 				$point = str_replace([' ',chr(0xC2).chr(0xA0)],'',$point);
 				// проверка на правильность координат по регулярки
@@ -467,8 +494,8 @@ class MyClass
 
 		if ($arFields['IBLOCK_ID'] == 1) // История стоимость сотки
 		{
-			$firstKey = array_key_first($arFields['PROPERTY_VALUES'][8]);
-			$priceMin = $arFields['PROPERTY_VALUES'][8][$firstKey]['VALUE'];
+			$firstKey = array_key_first($arFields['PROPERTY_VALUES'][PROP_PRICE_SOTKA]);
+			$priceMin = $arFields['PROPERTY_VALUES'][PROP_PRICE_SOTKA][$firstKey]['VALUE'];
 
 			$idHL = 19;
 			$hlblock = \Bitrix\Highloadblock\HighloadBlockTable::getById($idHL)->fetch();

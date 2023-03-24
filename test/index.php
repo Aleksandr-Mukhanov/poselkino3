@@ -106,7 +106,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 						<button class="form-card__item" data-input-name="route" data-input-value="Восток" type="button"> <img src="/assets/img/test/east.svg" alt="Восток"><img class="img-active" src="/assets/img/test/east-active.svg" alt="Восток"><span>Восток</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step" data-title-step="На какой удаленности от Москвы рассматриваете земельный участок?" data-step="2" data-show-step="false" style="display: none;">
+				<div class="row test-body__step" data-title-step="На какой удаленности от <?=REGION_SHORT?> рассматриваете земельный участок?" data-step="2" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="remoteness" value name="remoteness">
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="20" type="button"> <img src="/assets/img/test/20.svg" alt="20"><img class="img-active" src="/assets/img/test/20-active.svg" alt="20"><span>До

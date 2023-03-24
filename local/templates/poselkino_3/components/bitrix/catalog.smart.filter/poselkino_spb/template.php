@@ -191,7 +191,7 @@ $this->setFrameMode(true);
 				     foreach($arResult["ITEMS"][229]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
 				      if ($ar["CHECKED"]) $activeAreas = 'active';
 				     }?>
-						<div class="col-xl-2 col-lg-2 col-md-2 mt-4 mt-lg-0"><a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a></div>
+						<div class="col-xl-2 col-lg-2 col-md-2 mt-4 mt-lg-0"><a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a></div>
 						<div class="col-xl-3 col-lg-4 mt-40 col-md-5">
 							<div class="d-flex align-items-center justify-content-md-end search-group distance-station">
 								<label class="d-flex mr-2" for="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>">Расстояние&nbsp;<br>до ближайшей станции</label>

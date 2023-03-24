@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Пользовательское соглашение");
+if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/polzovatelskoe-soglashenie/');
 ?>
 <main class="page page-contacts">
 	<div class="bg-white">

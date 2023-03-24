@@ -23,7 +23,7 @@ $this->setFrameMode(true);
 
 				 	<div class="filter__region">
 						<?$activeAreas = ''; // ставим активность если надо
-							foreach ($arResult["ITEMS"][193]["VALUES"] as $val => $ar) //dump($ar); // Район
+							foreach ($arResult["ITEMS"][PLOTS_PROP_REGION]["VALUES"] as $val => $ar) //dump($ar); // Район
 								if ($ar["CHECKED"]) $activeAreas = 'active';
 						?>
 				 		<a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
@@ -31,7 +31,7 @@ $this->setFrameMode(true);
 
 					<div class="filter__highway">
 						<?$activeHighway = '';// ставим активность если надо
-			       foreach($arResult["ITEMS"][194]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
+			       foreach($arResult["ITEMS"][PLOTS_PROP_SHOSSE]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
 			        if ($ar["CHECKED"]) $activeHighway = 'active';
 			       }?>
 						<button class="btn btn-outline-warning rounded-pill Highway <?=$activeHighway?>" type="button" data-toggle="modal" data-target="#highwayModal">Шоссе</button>
@@ -431,31 +431,120 @@ $this->setFrameMode(true);
 		          $arShosse['vostok']['NAME'] = 'Восток';
 		          $arShosse['zapad']['NAME'] = 'Запад';
 		          $arShosse['other']['NAME'] = 'Другие';
-		          foreach($arResult["ITEMS"][194]["VALUES"] as $val => $ar){
+
+		          foreach($arResult["ITEMS"][PLOTS_PROP_SHOSSE]["VALUES"] as $val => $ar){
 		            // echo $ar['VALUE'].' - '.$ar['URL_ID'].'<br>';
-		            switch ($ar['URL_ID']) {
-		              case 'dmitrovskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
-		              case 'rogachevskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
-		              case 'leningradskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
-		              case 'yaroslavskoe': $arShosse['sever-vostok']['SHOSSE'][] = $ar; break;
-		              case 'novorijskoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
-		              case 'pyatnickoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
-		              case 'volokolamskoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
-		              case 'varshavskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
-		              case 'simferopolskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
-		              case 'egorievskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
-		              case 'kashirskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
-		              case 'novoryazanskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
-		              case 'kievskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;
-		              case 'kalujskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;
-		              case 'shelkovskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
-		              case 'gorkovskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
-		              case 'nosovihinskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
-		              case 'minskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
-		              case 'rublevo-uspenskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
-		              case 'mozhayskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
-		              default: $arShosse['other']['SHOSSE'][] = $ar; break;
-		            }
+								if (PLOTS_PROP_SHOSSE == 369) // СПБ
+								{
+									switch ($ar['URL_ID']) {
+										case 'primorskoe':
+												$arShosse['sever-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'zsd':
+												$arShosse['sever-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'beloostrovskoe':
+												$arShosse['sever-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'aleksandrovskoe':
+												$arShosse['sever-zapad']['SHOSSE'][] = $ar;
+												break;
+
+										case 'vyborgskoe':
+												$arShosse['sever']['SHOSSE'][] = $ar;
+												break;
+										case 'gorskoe':
+												$arShosse['sever']['SHOSSE'][] = $ar;
+												break;
+										case 'novopriozerskoe':
+												$arShosse['sever']['SHOSSE'][] = $ar;
+												break;
+										case 'priozerskoe':
+												$arShosse['sever']['SHOSSE'][] = $ar;
+												break;
+
+										case 'ryabovskoe':
+												$arShosse['sever-vostok']['SHOSSE'][] = $ar;
+												break;
+										case 'doroga-zhizni':
+												$arShosse['sever-vostok']['SHOSSE'][] = $ar;
+												break;
+
+										case 'murmanskoe':
+												$arShosse['vostok']['SHOSSE'][] = $ar;
+												break;
+										case 'petrozavodskoe':
+												$arShosse['vostok']['SHOSSE'][] = $ar;
+												break;
+
+										case 'moskovskoe':
+												$arShosse['ug-vostok']['SHOSSE'][] = $ar;
+												break;
+
+										case 'kievskoe':
+												$arShosse['ug']['SHOSSE'][] = $ar;
+												break;
+										case 'pulkovskoe':
+												$arShosse['ug']['SHOSSE'][] = $ar;
+												break;
+										case 'volkhonskoe':
+												$arShosse['ug']['SHOSSE'][] = $ar;
+												break;
+
+										case 'e20':
+												$arShosse['ug-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'ropshinskoe':
+												$arShosse['ug-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'anninskoe':
+												$arShosse['ug-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'gatchinskoe':
+												$arShosse['ug-zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'krasnoselskoe':
+												$arShosse['ug-zapad']['SHOSSE'][] = $ar;
+												break;
+
+										case 'levashovskoe':
+												$arShosse['zapad']['SHOSSE'][] = $ar;
+												break;
+										case 'gostilitskoe':
+												$arShosse['zapad']['SHOSSE'][] = $ar;
+												break;
+
+										default:
+												$arShosse['other']['SHOSSE'][] = $ar;
+												break;
+									}
+								}
+								else
+								{
+			            switch ($ar['URL_ID']) {
+			              case 'dmitrovskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
+			              case 'rogachevskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
+			              case 'leningradskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
+			              case 'yaroslavskoe': $arShosse['sever-vostok']['SHOSSE'][] = $ar; break;
+			              case 'novorijskoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
+			              case 'pyatnickoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
+			              case 'volokolamskoe': $arShosse['sever-zapad']['SHOSSE'][] = $ar; break;
+			              case 'varshavskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
+			              case 'simferopolskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
+			              case 'egorievskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
+			              case 'kashirskoe': $arShosse['ug']['SHOSSE'][] = $ar; break;
+			              case 'novoryazanskoe': $arShosse['ug-vostok']['SHOSSE'][] = $ar; break;
+			              case 'kievskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;
+			              case 'kalujskoe': $arShosse['ug-zapad']['SHOSSE'][] = $ar; break;
+			              case 'shelkovskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
+			              case 'gorkovskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
+			              case 'nosovihinskoe': $arShosse['vostok']['SHOSSE'][] = $ar; break;
+			              case 'minskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
+			              case 'rublevo-uspenskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
+			              case 'mozhayskoe': $arShosse['zapad']['SHOSSE'][] = $ar; break;
+			              default: $arShosse['other']['SHOSSE'][] = $ar; break;
+			            }
+								}
 		          }?>
 							<?foreach ($arShosse as $key => $value) {?>
 								<div class="col-sm-6 col-lg-4 mb-4">
@@ -499,7 +588,7 @@ $this->setFrameMode(true);
 		        <div class="row">
 							<? // Группируем районы по первым буквам названий
 			        $prevLetter = '';
-			        foreach ($arResult["ITEMS"][193]["VALUES"] as $key => $value) {
+			        foreach ($arResult["ITEMS"][PLOTS_PROP_REGION]["VALUES"] as $key => $value) {
 			          $firstLetter = mb_strtoupper(mb_substr($value['VALUE'], 0, 1));
 			          if ($firstLetter != $prevLetter) $prevLetter = $firstLetter;
 			          $arRegion[$firstLetter][] = $value;

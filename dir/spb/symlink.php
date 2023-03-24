@@ -17,7 +17,21 @@ if ($_POST['create'])
    else
       $full_path = realpath($_SERVER['DOCUMENT_ROOT'].'/'.$path);
 
-  // symlink($path."/urlrewrite_my.php",$_SERVER['DOCUMENT_ROOT']."/urlrewrite_my.php");
+  // symlink($path."/stroitelyam",$_SERVER['DOCUMENT_ROOT']."/stroitelyam");
+  // symlink($path."/investoram",$_SERVER['DOCUMENT_ROOT']."/investoram");
+  // symlink($path."/o-proekte",$_SERVER['DOCUMENT_ROOT']."/o-proekte");
+  // symlink($path."/blog",$_SERVER['DOCUMENT_ROOT']."/blog");
+  // symlink($path."/reklama",$_SERVER['DOCUMENT_ROOT']."/reklama");
+  // symlink($path."/kontakty",$_SERVER['DOCUMENT_ROOT']."/kontakty");
+  // symlink($path."/sitemap",$_SERVER['DOCUMENT_ROOT']."/sitemap");
+  // symlink($path."/politika-konfidentsialnosti",$_SERVER['DOCUMENT_ROOT']."/politika-konfidentsialnosti");
+  // symlink($path."/polzovatelskoe-soglashenie",$_SERVER['DOCUMENT_ROOT']."/polzovatelskoe-soglashenie");
+  // symlink($path."/map",$_SERVER['DOCUMENT_ROOT']."/map");
+  // symlink($path."/poisk",$_SERVER['DOCUMENT_ROOT']."/poisk");
+  // symlink($path."/izbrannoe",$_SERVER['DOCUMENT_ROOT']."/izbrannoe");
+  // symlink($path."/test",$_SERVER['DOCUMENT_ROOT']."/test");
+  // symlink($path."/sravnenie",$_SERVER['DOCUMENT_ROOT']."/sravnenie");
+  // symlink($path."/ajax",$_SERVER['DOCUMENT_ROOT']."/ajax");
 
    if (file_exists($_SERVER['DOCUMENT_ROOT']."/bitrix"))
       $strError = "В текущей папке уже существует папка bitrix";

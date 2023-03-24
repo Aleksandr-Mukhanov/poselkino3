@@ -236,11 +236,13 @@ if ($arProp)
 
 $arOrder = ['SORT'=>'ASC'];
 $arFilter['IBLOCK_ID'] = $iblockID;
+// участки из СПБ
+if ($iblockID == 5 && in_array($_SERVER['HTTP_HOST'],SITES_DIR)) $arFilter['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 $arSelect = ['ID','NAME'];
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 $arResult['cntElements'] = $rsElements->result->num_rows;
 
-$arResult['filterURL'] = strtolower($filterURL_DIR.'filter/'.$urlPath.'apply/');
+$arResult['filterURL'] = ($urlPath) ? strtolower($filterURL_DIR.'filter/'.$urlPath.'apply/') : $filterURL_DIR;
 
 // dump($arFilter);
 echo json_encode($arResult);

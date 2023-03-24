@@ -65,6 +65,8 @@ $arURLFeed = [
 	5350 => 'https://zemst.ru/plan/xml/yarkoe.xml', // Яркое
 	5639 => 'https://zemst.ru/plan/xml/lapino.xml', // Лапино
 	// 5639 => 'https://zemst.ru/plan/xml/kupavna.xml', // Купавна
+	6809 => 'https://zemst.ru/plan/xml/pirogovo.xml', // ЭК Пирогово
+	6149 => 'https://zemst.ru/plan/xml/perviy.xml', // Первый
 ];
 
 foreach ($arURLFeed as $idVil => $urlFeed)
