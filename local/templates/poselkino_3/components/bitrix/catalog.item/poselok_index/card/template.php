@@ -70,9 +70,11 @@ if($domPos){
 }
 
 // добавим превьюшку в фото
-if($item["PREVIEW_PICTURE"]){
+if ($item["PREVIEW_PICTURE"])
 	array_unshift($item['PROPERTIES']['DOP_FOTO']['VALUE'],$item["PREVIEW_PICTURE"]["ID"]); // положим в начало
-} //dump($item['PROPERTIES']['DOP_FOTO']['VALUE']);
+
+$itemPhotos = $item['PROPERTIES']['DOP_FOTO']['VALUE'];
+if (count($itemPhotos) > 5) $itemPhotos = array_slice($itemPhotos,0,5);
 
 // водный знак
 $arWaterMark = [
@@ -130,8 +132,8 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
 	<a class="stretched-link z-index-0 position-absolute w-100 h-100" href="<?=$item['DETAIL_PAGE_URL']?>"></a>
 	<div class="photo offer-house__photo">
 		<div class="photo__list">
-			<?foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $key => $photo){ // Фото
-      $photoRes = CFile::ResizeImageGet($photo, array('width'=>616, 'height'=>436), BX_RESIZE_IMAGE_EXACT);?>
+			<?foreach ($itemPhotos as $photo){ // Фото
+      	$photoRes = CFile::ResizeImageGet($photo, array('width'=>616, 'height'=>436), BX_RESIZE_IMAGE_EXACT);?>
 				<div class="photo__item" style="background: url('<?=$photoRes['src']?>') no-repeat; background-size: cover; background-position: center center;" <?=$amlazySkip?>></div>
       <?}?>
 		</div>
@@ -168,7 +170,7 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
 				</button>
 			</div>
 		</div>
-		<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($item['PROPERTIES']['DOP_FOTO']['VALUE'])?></span>
+		<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($itemPhotos)?></span>
 		</div>
 	</div>
 	<div class="offer-house__info">
@@ -179,7 +181,7 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
         <div class="raiting" style="padding: 15px 20px 5px;">
           <div class="line-raiting">
             <div class="line-raiting__star">
-              <div class="line-raiting__star--wrap" style="width: <?=$ratingItogo * 100 / 5?>%;"></div>
+              <div class="line-raiting__star--wrap" style="width: <?=($ratingItogo) ? $ratingItogo * 100 / 5 : 0?>%;"></div>
             </div>
             <div class="line-raiting__title"><?=$ratingItogo?></div>
           </div>

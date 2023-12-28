@@ -496,7 +496,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
         <div class="ecology"><img src="<?=SITE_TEMPLATE_PATH?>/images/ecology-3.jpg" alt="">
           <div class="ecology__main">
             <div class="ecology__name">Водоем</div>
-            <div class="ecology__type"><?=implode($arWater,', ')?></div>
+            <div class="ecology__type"><?=implode(', ',$arWater)?></div>
             <div class="ecology__distance">расстояние <?=$arVillage['PROPERTY_WATER_KM_VALUE']*1000?> м.</div>
           </div>
         </div>
@@ -505,7 +505,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
         <div class="ecology"><img src="<?=SITE_TEMPLATE_PATH?>/images/ecology-4.jpg" alt="">
           <div class="ecology__main">
             <div class="ecology__name">Почва</div>
-            <div class="ecology__type"><?=implode($arSoil,', ')?></div>
+            <div class="ecology__type"><?=implode(', ',$arSoil)?></div>
           </div>
         </div>
       </div>
@@ -553,7 +553,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
 						<?else:?>
 							<div class="review__source">Источник отзыва: <a href="https://poselkino.ru/poselki/<?=$arVillage['CODE']?>/" rel="dofollow" target="_blank">poselkino.ru</a></div>
 						<?endif;?>
-						
+
           </div>
         </div>
       <?}?>

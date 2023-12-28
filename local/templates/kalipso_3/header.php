@@ -21,6 +21,8 @@ use Bitrix\Main\Page\Asset,
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/main.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/scripts.js');
 
+  $logoText = false;
+
   // получим наш поселок
   switch (SITE_SERVER_NAME) {
     case 'orlinye-holmy.ru': $villageID = 3058; $yandex_verification=''; break;
@@ -45,7 +47,19 @@ use Bitrix\Main\Page\Asset,
     case 'ilinskoe-kp.ru': $villageID = 3277; $yandex_verification=''; break;
     case 'favorit-kp.ru': $villageID = 3284; $yandex_verification=''; break;
     case 'kp-vihrovo.ru': $villageID = 1324; $yandex_verification=''; break;
-    // case '': $villageID = ; $yandex_verification=''; break;
+
+    case 'kostino-kp.ru': $villageID = 3515; $logoText = true; break;
+    case 'reshetnikovo-kp.ru': $villageID = 8746; $logoText = true; break;
+    case 'klinskie-sady.ru': $villageID = 8368; $logoText = true; break;
+    case 'karcevo-poselok.ru': $villageID = 8413; $logoText = true; break;
+    case 'lazurnyi-kp.ru': $villageID = 8594; $logoText = true; break;
+    case 'chereshnya-les.ru': $villageID = 8060; $logoText = true; break;
+    case 'istra-sady.ru': $villageID = 4889; $logoText = true; break;
+
+    case 'sheremetevo-usadba.ru': $villageID = 8865; $logoText = true; break;
+    case 'ushakov-kp.ru': $villageID = 3610; $logoText = true; break;
+    case 'kp-berezy.ru': $villageID = 8867; $logoText = true; break;
+    // case '': $villageID = ; $logoText = true; break;
   }
 
   $arOrder = Array('SORT'=>'ASC');
@@ -77,7 +91,8 @@ use Bitrix\Main\Page\Asset,
   if (!$landscape) $landscape = 'Информации нет';
 
   // получим девелопера
-  $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
+  if ($arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0])
+    $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
   $phone = ($arVillage["PROPERTY_PHONE_VALUE"]) ? $arVillage["PROPERTY_PHONE_VALUE"] : $arDevel[0]['UF_PHONE'];
 
   $priceSotka = ($arVillage['PROPERTY_PRICE_SOTKA_2_VALUE']) ? $arVillage['PROPERTY_PRICE_SOTKA_2_VALUE'] : $arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0];
@@ -124,7 +139,13 @@ use Bitrix\Main\Page\Asset,
 <?}?>
         <header class="header">
           <div class="container header__container">
-            <div class="header__logo"><a class="logo" href="/"><img class="logo__img" src="/logo.svg" alt="<?=$arVillage['NAME']?>" title="<?=$arVillage['NAME']?>"/></a></div>
+            <div class="header__logo">
+              <?if($logoText){?>
+                <a class="logo-text" href="/"><span>КП</span> <?=$arVillage['NAME']?></a>
+              <?}else{?>
+                <a class="logo" href="/"><img class="logo__img" src="/logo.svg" alt="<?=$arVillage['NAME']?>" title="<?=$arVillage['NAME']?>"/></a>
+              <?}?>
+            </div>
             <nav class="nav header__nav" role="navigation">
               <?$APPLICATION->IncludeComponent("bitrix:menu", "top_menu", Array(
               	"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно

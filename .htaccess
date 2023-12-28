@@ -28,7 +28,7 @@ ErrorDocument 404 /404.php
   RewriteRule ^poselki/(.*)-shosse/kupit-uchastok/$ /kupit-uchastki/$1-shosse/ [R=301,L]
   RewriteRule ^poselki/(.*)-rayon/kupit-uchastok/$ /kupit-uchastki/$1-rayon/ [R=301,L]
 
-  #RewriteRule ^poselki/kupit-uchastok-/$ /kupit-uchastki// [R=301,L]
+  #RewriteRule ^poselki/kupit-uchastok-/$ /kupit-uchastki/ [R=301,L]
 
   #del www
   RewriteCond %{HTTP_HOST} ^www\.(.*)$
@@ -95,7 +95,7 @@ ErrorDocument 404 /404.php
   Header set Cache-Control "max-age=31536000, public"
 </filesMatch>
 
-	php_value mbstring.func_overload 2
+	php_value mbstring.func_overload 0
 	php_value mbstring.internal_encoding UTF-8
 	php_flag register_globals off
 	php_value max_input_vars 10000
@@ -222,3 +222,20 @@ ErrorDocument 404 /404.php
 
 # девелоперы
   Redirect 301 /developery/ZS-Group/reviews/ /developery/zs-group/reviews/
+
+# редиректы блога
+  Redirect 301 /blog/novosti/analiz-rynka-zagorodnoy-nedvizhimosti/ /blog/analiz-rynka-zagorodnoy-nedvizhimosti/
+  Redirect 301 /blog/pro-uchastki/kak-rasschitat-stoimost-uchastka/ /blog/kak-rasschitat-stoimost-uchastka/
+  Redirect 301 /blog/pro-uchastki/derevnya-ili-dacha/ /blog/derevnya-ili-dacha/
+  Redirect 301 /blog/novosti/zapusk-sayta-poselkino-ru/ /blog/zapusk-sayta-poselkino-ru/
+  Redirect 301 /blog/pro-uchastki/nuzhen-li-magistralnyy-gaz-na-uchastke/ /blog/nuzhen-li-magistralnyy-gaz-na-uchastke/
+  Redirect 301 /blog/novosti/ipoteka-dlya-sotrudnikov-it-rompaniy-v-2022-godu-usloviya-i-varianty-pokupki-uchastka-ili-zhilogo-do/ /blog/ipoteka-dlya-sotrudnikov-it-rompaniy-v-2022-godu-usloviya-i-varianty-pokupki-uchastka-ili-zhilogo-do/
+  Redirect 301 /blog/pro-uchastki/plyusy-i-minusy-beregovykh-uchastkov/ /blog/plyusy-i-minusy-beregovykh-uchastkov/
+  Redirect 301 /blog/pro-uchastki/kak-sokratit-raskhody-pri-pokupke-zemelnogo-uchastka/ /blog/kak-sokratit-raskhody-pri-pokupke-zemelnogo-uchastka/
+  Redirect 301 /blog/novosti/v-poselke-shadrino-zavershaetsya-stroitelstvo-dorogi/ /blog/v-poselke-shadrino-zavershaetsya-stroitelstvo-dorogi/
+  Redirect 301 /blog/pro-uchastki/pervye-shagi-posle-pokupki-uchastka/ /blog/pervye-shagi-posle-pokupki-uchastka/
+  Redirect 301 /blog/pro-uchastki/kak-proverit-zemelnyy-uchastok-pered-pokupkoy/ /blog/kak-proverit-zemelnyy-uchastok-pered-pokupkoy/
+
+# новые
+  Redirect 301 /poselki//kupit-uchastok/ /kupit-uchastki/
+  #Redirect 301 /poselki//kupit-dom/ /poselki/kupit-dom/

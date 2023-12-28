@@ -18,9 +18,8 @@ $alt = !empty($arResult['IPROPERTY_VALUES']['ELEMENT_DETAIL_PICTURE_FILE_ALT'])
 	: $arResult['NAME'];
 
 // добавим превьюшку в фото
-if($arResult["PREVIEW_PICTURE"]){
+if ($arResult["PREVIEW_PICTURE"])
 	array_unshift($arResult['MORE_PHOTO'],$arResult["PREVIEW_PICTURE"]); // положим в начало
-} //dump($arResult['MORE_PHOTO']);
 
 // ссылка на ютуб Видеосъемка
 $arVideo = explode('https://youtu.be/',$arResult['PROPERTIES']['VIDEO']['VALUE']); //dump($arVideo);
@@ -136,7 +135,7 @@ switch ($km_MKAD) {
 	$reviewsDeclension = new Declension('отзыв', 'отзыва', 'отзывов');
 	$reviewsText = $reviewsDeclension->get($arResult['CNT_COMMENTS']);
 	// просмотр
-	$cntPos = $arResult['PROPERTIES']['UP_TO_VIEW']['VALUE'] + 1;
+	$cntPos = ($arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']) ? $arResult['PROPERTIES']['UP_TO_VIEW']['VALUE'] + 1 : 1;
 	$ourDeclension = new Declension('человек', 'человека', 'человек');
 	$correctText = $ourDeclension->get($cntPos);
 
@@ -549,6 +548,7 @@ switch ($km_MKAD) {
 		</div>
 	</div>
 </div>
+<input type="hidden" id="posInfo" data-namePos='<?=$arResult['NAME']?>' data-codePos='<?=$arResult['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['ID']?>' data-cntPos='<?=$arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']?>' data-manager='<?=$arResult['PROPERTIES']['MANAGER']['VALUE']?>'>
 <div class="bg-white py-4">
 	<div class="footer-feedback-village">
 		<div class="container">

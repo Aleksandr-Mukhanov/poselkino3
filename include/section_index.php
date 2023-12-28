@@ -2,7 +2,7 @@
 	// сортировка по цене
 	if ($_REQUEST['DOMA_CODE'] == 'noDom') $sortFieldCost = 'PROPERTY_COST_LAND_IN_CART'; // Стоимость участка (в карточку)
 	elseif ($_REQUEST['DOMA_CODE'] == 'withDom') $sortFieldCost = 'PROPERTY_HOME_VALUE'; // Стоимость домов
-	else $sortFieldCost = 'PROPERTY_STOIMOST_UCHASTKA'; // Стоимость (фильтр)
+	else $sortFieldCost = 'PROPERTY_PRICE_SOTKA'; // Цена за сотку
 
 	switch($_REQUEST['sort']){
 		case 'sort':

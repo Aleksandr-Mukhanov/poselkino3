@@ -61,38 +61,6 @@
       </div>
     </div>
 
-    <!-- calltouch -->
-    <script type="text/javascript">
-    (function(w,d,n,c){w.CalltouchDataObject=n;w[n]=function(){w[n]["callbacks"].push(arguments)};if(!w[n]["callbacks"]){w[n]["callbacks"]=[]}w[n]["loaded"]=false;if(typeof c!=="object"){c=[c]}w[n]["counters"]=c;for(var i=0;i<c.length;i+=1){p(c[i])}function p(cId){var a=d.getElementsByTagName("script")[0],s=d.createElement("script"),i=function(){a.parentNode.insertBefore(s,a)},m=typeof Array.prototype.find === 'function',n=m?"init-min.js":"init.js";s.type="text/javascript";s.async=true;s.src="https://mod.calltouch.ru/"+n+"?id="+cId;if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",i,false)}else{i()}}})(window,document,"ct","acjsv0co");
-    </script>
-    <!-- calltouch -->
-
-    <!-- Facebook Pixel Code -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '1573489849672695');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1573489849672695&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-
-    <? // jivosite
-    /*$shosseEnumId = array_key_first($arVillage["PROPERTY_SHOSSE_VALUE"]);
-    $jivositeCode = getInfoHW($shosseEnumId)['JIVOSITE'];
-    if($jivositeCode):?>
-      <script src="//code-sb1.jivosite.com/widget/<?=$jivositeCode?>" async></script>
-    <?endif;*/
-    ?>
-
     <?require_once $_SERVER["DOCUMENT_ROOT"] . '/inc/counters.php';?>
 
     <!-- Yandex.Metrika counter -->

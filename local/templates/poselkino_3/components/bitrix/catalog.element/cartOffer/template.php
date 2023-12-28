@@ -89,10 +89,12 @@ switch ($km_MKAD) {
 } // echo $url_km_MKAD;
 
 $plottage = ($offerType == 'plots') ? 'PLOTTAGE' : 'AREA_HOUSE';
-$oneKVMetr = ($arResult['PROPERTIES'][$plottage]['VALUE']) ? round((int)$arResult['PROPERTIES']['PRICE']['VALUE'] / (int)$arResult['PROPERTIES'][$plottage]['VALUE']) : 0;
+$plottageVal = $arResult['PROPERTIES'][$plottage]['VALUE'];
+
+$oneKVMetr = ($plottageVal) ? round((int)$arResult['PROPERTIES']['PRICE']['VALUE'] / (int)$plottageVal) : 0;
 // выводим правильное окончание
 $plottageDeclension = new Declension('сотка', 'сотки', 'соток');
-$plottageText = ($offerType == 'plots') ? $plottageDeclension->get($arResult['PROPERTIES'][$plottage]['VALUE']) : 'кв.м.';
+$plottageText = ($plottageVal && $offerType == 'plots') ? $plottageDeclension->get($plottageVal) : 'кв.м.';
 
 // План поселка
 $nProp = '';
@@ -376,58 +378,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 					<?endif;?>
 				</div>
 			</div>
-			<div class="home-legal-information">
-				<h2>Юридическая информация</h2>
-				<p>Категория замель: <?=$arResult['arVillage']['LAND_CAT']?></p>
-				<p>Вид разрешенного использования: <?=$arResult['arVillage']['TYPE_USE']?></p>
-				<p>Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?></p>
-				<?if($arResult['PROPERTIES']['CADASTRAL']['VALUE']):?>
-					<p>Кадастровый номер: <?=$arResult['PROPERTIES']['CADASTRAL']['VALUE']?></p>
-				<?endif;?>
-				<p class="mt-2"><a class="font-weight-bold text-success text-decoration-none" href="<?=$arResult['arVillage']['SRC_MAP'] // Ссылка на публичную карту?>" target="_blank" rel="nofollow">
-					Посёлок на карте Росреестра&nbsp;
-					<svg xmlns="http://www.w3.org/2000/svg" width="6.847" height="11.883" viewBox="0 0 6.847 11.883" class="inline-svg">
-						<g transform="rotate(180 59.406 5.692)">
-							<path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z" />
-						</g>
-					</svg></a>
-				</p>
-				<?if($arResult['arVillage']['SITE']):?>
-					<p class="w-100 mt-3">
-						Сайт поселка: <a href="<?=$arResult['arVillage']['SITE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['arVillage']['NAME']?></a>
-					</p>
-				<?endif;?>
-				<? // dump($arResult['arVillage']['DEVELOPER_ID']); // Девелопер ID
-				/*
-				$APPLICATION->IncludeComponent( // выводим девелопера
-					'bitrix:catalog.brandblock',
-					'cardHome',
-					array(
-						'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
-						'IBLOCK_ID' => 1,
-						'ELEMENT_ID' => $arResult['arVillage']['ID'],
-						'ELEMENT_CODE' => '',
-						'PROP_CODE' => ['DEVELOPER_ID'],
-						'CACHE_TYPE' => $arParams['CACHE_TYPE'],
-						'CACHE_TIME' => $arParams['CACHE_TIME'],
-						'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
-						'WIDTH' => '200',
-						'HEIGHT' => '200',
-						'WIDTH_SMALL' => '200',
-						'HEIGHT_SMALL' => '200',
-						'CODE_DEVEL' => $arResult['arVillage']['DEVELOPER_ID'] // передадим
-					),
-					$component,
-					array('HIDE_ICONS' => 'N')
-				);*/?>
-				<div class="d-flex flex-wrap flex-md-nowrap text-left justify-content-start mt-3 mt-md-5 align-items-center">
-				  <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-left width-md-auto">
-				    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
-				  </div>
-				  <a class="btn btn-warning rounded-pill mb-3 mr-5" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с нами</a>
-				  <a class="d-none d-md-inline developer-logo" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
-				</div>
-			</div>
+
 			<div class="village-map page-map bg-white">
 				<div class="container px-0">
 					<h2>Карта</h2>
@@ -522,6 +473,42 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 					</div>
 				</div>
 			</div>
+
+			<?if($USER->IsAdmin()){?>
+				<!-- План поселка-->
+				<div class="plan--village px-0 d-flex flex-column align-items-start text-left" style="height: auto" id="villagePlan">
+				  <h2 class="h2">Посмотреть участок на генплане</h2>
+				  <?
+				    $planIMG_res = CFile::ResizeImageGet($arResult['arVillage']['PLAN_IMG'], array('width'=>1000, 'height'=>1000), BX_RESIZE_IMAGE_EXACT);
+
+				    if($arResult['arVillage']['PLAN_IMG_IFRAME']){
+			        $planIMG = $arResult['arVillage']['PLAN_IMG_IFRAME'];
+			        // $frame = 'data-iframe="true"';
+							$frame = 'data-type="iframe"';
+				    }else{
+			        $planIMG = CFile::GetPath($arResult['arVillage']['PLAN_IMG']);
+			        $frame = '';
+				    }
+				  ?>
+					<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lg-zoom/1.3.0/lg-zoom.js"></script> openPlan -->
+				  <div class="w-100">
+						<?if($frame):?>
+							<a data-src="<?=$planIMG?>" data-fancybox <?=$frame?> rel="nofollow" class="mt-4 fill_img">
+								<span class="btn btn-warning rounded-pill">Открыть планировку</span>
+								<span class="w-100 fill-bg"></span>
+					      <img class="w-100" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$arResult['arVillage']['NAME']?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
+					    </a>
+						<?else:?>
+							<a href="<?=$planIMG?>" data-fancybox <?=$frame?> class="mt-4 fill_img">
+								<span class="btn btn-warning rounded-pill">Открыть планировку</span>
+								<span class="w-100 fill-bg"></span>
+					      <img class="w-100" src="<?=$planIMG_res["src"]?>" alt="План поселка <?=$arResult['arVillage']['NAME']?>" style="max-width: none; min-height: 468px; max-height: 45vh; object-fit: cover; object-position: top;">
+					    </a>
+						<?endif;?>
+				  </div>
+				</div>
+			<?}?>
+
 			<div class="home-about-villiage">
 				<h2>О поселке</h2>
 				<div class="row mt-4">
@@ -551,6 +538,60 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 					</div>
 				</div>
 			</div>
+
+			<div class="home-legal-information">
+				<h2>Юридическая информация</h2>
+				<p>Категория замель: <?=$arResult['arVillage']['LAND_CAT']?></p>
+				<p>Вид разрешенного использования: <?=$arResult['arVillage']['TYPE_USE']?></p>
+				<p>Юридическая форма: <?=$arResult['arVillage']['LEGAL_FORM']?></p>
+				<?if($arResult['PROPERTIES']['CADASTRAL']['VALUE']):?>
+					<p>Кадастровый номер: <?=$arResult['PROPERTIES']['CADASTRAL']['VALUE']?></p>
+				<?endif;?>
+				<p class="mt-2"><a class="font-weight-bold text-success text-decoration-none" href="<?=$arResult['arVillage']['SRC_MAP'] // Ссылка на публичную карту?>" target="_blank" rel="nofollow">
+					Посёлок на карте Росреестра&nbsp;
+					<svg xmlns="http://www.w3.org/2000/svg" width="6.847" height="11.883" viewBox="0 0 6.847 11.883" class="inline-svg">
+						<g transform="rotate(180 59.406 5.692)">
+							<path d="M113.258 5.441l4.915-4.915a.308.308 0 1 0-.436-.436L112.6 5.225a.307.307 0 0 0 0 .436l5.134 5.132a.31.31 0 0 0 .217.091.3.3 0 0 0 .217-.091.307.307 0 0 0 0-.436z" />
+						</g>
+					</svg></a>
+				</p>
+				<?if($arResult['arVillage']['SITE']):?>
+					<p class="w-100 mt-3">
+						Сайт поселка: <a href="<?=$arResult['arVillage']['SITE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['arVillage']['NAME']?></a>
+					</p>
+				<?endif;?>
+				<? // dump($arResult['arVillage']['DEVELOPER_ID']); // Девелопер ID
+				/*
+				$APPLICATION->IncludeComponent( // выводим девелопера
+					'bitrix:catalog.brandblock',
+					'cardHome',
+					array(
+						'IBLOCK_TYPE' => $arParams['IBLOCK_TYPE'],
+						'IBLOCK_ID' => 1,
+						'ELEMENT_ID' => $arResult['arVillage']['ID'],
+						'ELEMENT_CODE' => '',
+						'PROP_CODE' => ['DEVELOPER_ID'],
+						'CACHE_TYPE' => $arParams['CACHE_TYPE'],
+						'CACHE_TIME' => $arParams['CACHE_TIME'],
+						'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+						'WIDTH' => '200',
+						'HEIGHT' => '200',
+						'WIDTH_SMALL' => '200',
+						'HEIGHT_SMALL' => '200',
+						'CODE_DEVEL' => $arResult['arVillage']['DEVELOPER_ID'] // передадим
+					),
+					$component,
+					array('HIDE_ICONS' => 'N')
+				);*/?>
+				<div class="d-flex flex-wrap flex-md-nowrap text-left justify-content-start mt-3 mt-md-5 align-items-center">
+				  <div class="d-block d-md-none mb-4 mb-md-0 w-100 text-left width-md-auto">
+				    <a class="developer-logo mt-3 mt-md-0" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
+				  </div>
+				  <a class="btn btn-warning rounded-pill mb-3 mr-5" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='LEAVE_REQUEST' data-title='Перезвоните мне'>Связаться с нами</a>
+				  <a class="d-none d-md-inline developer-logo" href="/" target="_blank"><img src="/assets/img/logo_site.svg" alt="Посёлкино" width="200"></a>
+				</div>
+			</div>
+
 		</div>
 		<div class="order-2 order-md-3 col-lg-4 col-md-5">
 			<div class="d-none d-md-block h-100">

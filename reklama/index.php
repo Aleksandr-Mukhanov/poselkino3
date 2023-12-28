@@ -79,12 +79,12 @@ if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselki
 		<div class="container">
 			<p><b>Если вы&nbsp;официальный представитель поселка, владелец или девелопер</b> и&nbsp;хотите, чтобы ваш
 				поселок был на&nbsp;сайте. Просто напишите нам на&nbsp;почту <a
-					href="mailto:welcome@poselkino.ru">welcome@poselkino.ru</a>. Мы&nbsp;рассмотрим обращение и&nbsp;свяжемся
+					href="mailto:dm@poselkino.ru">dm@poselkino.ru</a>. Мы&nbsp;рассмотрим обращение и&nbsp;свяжемся
 				с&nbsp;вами по&nbsp;указанным контактным данным.</p>
-			<p><b>Если вы&nbsp;официальный представитель поселка, владелец или девелопер </b>и&nbsp;хотите разместить
+			<!-- <p><b>Если вы&nbsp;официальный представитель поселка, владелец или девелопер </b>и&nbsp;хотите разместить
 				рекламу на&nbsp;сайте poselkino.ru, напишите на&nbsp;почту <a
 					href="mailto:dm@poselkino.ru">dm@poselkino.ru</a>. Мы&nbsp;предложим вам все доступные рекламные форматы.
-			</p>
+			</p> -->
 			<p><b>Если вы&nbsp;веб-мастер</b> и&nbsp;хотите стать партнером нашего сайта по&nbsp;привлечению трафика, пишите
 				на&nbsp;почту <a href="mailto:dm@poselkino.ru">dm@poselkino.ru</a>, обсудим возможные пути для сотрудничества.
 			</p>

@@ -15,10 +15,10 @@ $this->setFrameMode(true);
 ?>
 			<div class="col-12 pl-lg-0">
 				<ul class="nav flex blog-navigation">
-					<li class="nav-item mt-3 mt-lg-0"><a class="btn <?=(CSite::InDir('/blog/index.php')) ? 'btn-warning' : 'btn-outline-secondary';?> rounded-pill px-5 ml-xl-3 ml-lg-2 ml-0 mr-2" href="/blog/" title="Все">Все</a></li>
+					<li class="nav-item mt-3 mt-lg-0"><a class="btn <?=(!$_REQUEST['tag']) ? 'btn-warning' : 'btn-outline-secondary';?> rounded-pill px-5 ml-xl-3 ml-lg-2 ml-0 mr-2" href="/blog/" title="Все">Все</a></li>
 					<?foreach($arResult["LABELS"] as $label){?>
-						<?$active = (CSite::InDir($label["SECTION_PAGE_URL"])) ? 'btn-warning' : 'btn-outline-secondary';?>
-						<li class="nav-item mt-3 mt-lg-0"><a class="btn <?=$active?> rounded-pill px-5 ml-xl-3 ml-lg-2 ml-0 mr-2" href="<?=$label["SECTION_PAGE_URL"]?>" title="<?=$label["NAME"]?>"><?=$label["NAME"]?></a></li>
+						<?$active = ($_REQUEST['tag'] == $label["CODE"]) ? 'btn-warning' : 'btn-outline-secondary';?>
+						<li class="nav-item mt-3 mt-lg-0"><a class="btn <?=$active?> rounded-pill px-5 ml-xl-3 ml-lg-2 ml-0 mr-2" href="?tag=<?=$label["CODE"]?>" title="<?=$label["NAME"]?>"><?=$label["NAME"]?></a></li>
 					<?}?>
 				</ul>
 			</div>

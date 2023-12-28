@@ -13,3 +13,32 @@
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/89384554" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
+<script>
+  <?
+    $marquizID = '6532719720cc2a0025dc3612';
+    $marquizTitle = 'Подберите участок в поселке';
+    $marquizText = 'Рублево';
+  ?>
+
+  (function(w, d, s, o){
+    var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+      if (document.readyState !== 'loading') Marquiz.init(o);
+      else document.addEventListener("DOMContentLoaded", function() {
+        Marquiz.init(o);
+      });
+    };
+    d.head.insertBefore(j, d.head.firstElementChild);
+  })(window, document, 'script', {
+      host: '//quiz.marquiz.ru',
+      region: 'eu',
+      id: '<?=$marquizID?>',
+      autoOpen: false,
+      autoOpenFreq: 'once',
+      openOnExit: false,
+      disableOnMobile: false
+    }
+  );
+
+  (function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Pop', {id: '<?=$marquizID?>', title: '<?=$marquizTitle?>', text: '<?=$marquizText?>', delay: 10, textColor: '#ffffff', bgColor: '#fbb358', svgColor: '#ffffff', closeColor: '#ffffff', bonusCount: 1, bonusText: 'Вам доступен бонус', type: 'side', position: 'position_bottom-left', rounded: true, shadow: 'rgba(251, 179, 88, 0)', blicked: true})
+</script>

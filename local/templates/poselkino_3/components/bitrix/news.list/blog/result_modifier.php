@@ -74,7 +74,7 @@ if ($mediaProperty)
 				"ID" => $ids,
 			), $propertyFilter);
 		}
-		
+
 		foreach ($elementIndex as $idx)
 		{
 			foreach ($idx["PROPERTIES"] as $property)
@@ -147,7 +147,7 @@ if ($sliderProperty)
 				"ID" => $ids,
 			), $propertyFilter);
 		}
-		
+
 		foreach ($elementIndex as $idx)
 		{
 			foreach ($idx["PROPERTIES"] as $property)
@@ -211,7 +211,7 @@ $arResult["NAV_STRING"] = $arResult["NAV_RESULT"]->GetPageNavStringEx(
 	$arResult["NAV_PARAM"]
 );
 
-// ïîëó÷èì ìåòêè
+// Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð¼ Ð¼ÐµÑ‚ÐºÐ¸
 	/*$property_enums = CIBlockPropertyEnum::GetList(
 				Array("SORT"=>"ASC"),
 				Array("IBLOCK_ID"=>3, "CODE"=>"LABEL")
@@ -220,15 +220,15 @@ $arResult["NAV_STRING"] = $arResult["NAV_RESULT"]->GetPageNavStringEx(
 	{ //dump($enum_fields);
 	  $arLabel[$enum_fields["EXTERNAL_ID"]]=$enum_fields["VALUE"];
 	} //dump($arLabel);
-	
+
 $arResult["LABELS"] = $arLabel;*/
 
-// ïîëó÷èì ðàçäåëû
+// Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð¼ Ñ€Ð°Ð·Ð´ÐµÐ»Ñ‹
 	$arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>3,"ACTIVE"=>"Y");
-	$arSelect = Array("ID","NAME","CODE","SECTION_PAGE_URL");
+	$arSelect = Array("ID","NAME","CODE");
 	$rsSections = CIBlockSection::GetList($arOrder,$arFilter,false,$arSelect,false);
-	while($arSection = $rsSections->GetNext()){ //dump($arSection);
+	while($arSection = $rsSections->Fetch()){ //dump($arSection);
 		$arLabel[] = $arSection;
 	}
 $arResult["LABELS"] = $arLabel;

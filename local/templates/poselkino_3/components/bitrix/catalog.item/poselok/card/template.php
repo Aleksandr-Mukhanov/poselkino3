@@ -82,9 +82,11 @@ if ($domPos) {
 }
 
 // добавим превьюшку в фото
-if ($item["PREVIEW_PICTURE"]) {
-    array_unshift($item['PROPERTIES']['DOP_FOTO']['VALUE'], $item["PREVIEW_PICTURE"]["ID"]); // положим в начало
-} // dump($item['PROPERTIES']['DOP_FOTO']['VALUE']);
+if ($item["PREVIEW_PICTURE"] && $item['PROPERTIES']['DOP_FOTO']['VALUE'])
+  array_unshift($item['PROPERTIES']['DOP_FOTO']['VALUE'], $item["PREVIEW_PICTURE"]["ID"]); // положим в начало
+
+$itemPhotos = $item['PROPERTIES']['DOP_FOTO']['VALUE'];
+if (count($itemPhotos) > 5) $itemPhotos = array_slice($itemPhotos,0,5);
 
 // водный знак
 $arWaterMark = [
@@ -211,23 +213,20 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
         </div>
         <a class="stretched-link" href="<?= $item['DETAIL_PAGE_URL'] ?>" style="cursor: pointer;"></a>
         <div class="card-photo__list">
-            <? foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $key => $photo) { // Фото
+            <? foreach ($itemPhotos as $photo) { // Фото
                 $photoRes = CFile::ResizeImageGet($photo, array('width' => 580, 'height' => 358), BX_RESIZE_IMAGE_EXACT); ?>
-                <div class="card-photo__item"
-                     style="background: url(<?= $photoRes['src'] ?>) center center / cover no-repeat; width: 495px;"></div>
+                <div class="card-photo__item" style="background: url(<?= $photoRes['src'] ?>) center center / cover no-repeat; width: 495px;"></div>
             <? } ?>
         </div>
         <div class="photo__count">
-            <span class="current">1</span> / <span
-                    class="count"><?= count($item['PROPERTIES']['DOP_FOTO']['VALUE']) ?></span>
+            <span class="current">1</span> / <span class="count"><?=($itemPhotos) ? count($itemPhotos) : 1?></span>
         </div>
     </div>
     <div class="card-house__content">
         <div class="content-wrap">
             <div class="wrap-title">
                 <div class="card-house__title">
-                    <a href="<?= $item['DETAIL_PAGE_URL'] ?>"
-                       style="cursor: pointer;"><?= $nameDomPos ?> <?= $productTitle ?></a>
+                    <a href="<?= $item['DETAIL_PAGE_URL'] ?>" style="cursor: pointer;"><?= $nameDomPos ?> <?= $productTitle ?></a>
                 </div>
                 <? if ($item['DISPLAY_PROPERTIES']['REGION']['VALUE']): ?>
                     <div class="card-house__area">
@@ -243,7 +242,7 @@ $housesValEnum = $item['DISPLAY_PROPERTIES']['DOMA']['VALUE_ENUM_ID'];
                 <div class="card-house__raiting">
                     <div class="line-raiting">
                         <div class="line-raiting__star">
-                            <div class="line-raiting__star--wrap" style="width: <?= $ratingItogo * 100 / 5 ?>%;"></div>
+                            <div class="line-raiting__star--wrap" style="width: <?=($ratingItogo) ? $ratingItogo * 100 / 5 : 0?>%;"></div>
                         </div>
                         <div class="line-raiting__title"><?= $ratingItogo ?></div>
                     </div>

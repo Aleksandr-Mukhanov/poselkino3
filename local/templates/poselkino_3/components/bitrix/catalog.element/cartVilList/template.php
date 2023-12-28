@@ -121,10 +121,10 @@ switch ($km_MKAD) {
 	$STORAGE_KM = $arResult['PROPERTIES']['STORAGE_KM']['VALUE'];
 	$storage = (mb_strtolower($arResult['PROPERTIES']['STORAGE']['VALUE']) == 'есть') ? true : false;
 	// Промзона
-	$INDUSTRIAL_ZONE_KM = $arResult['PROPERTIES']['INDUSTRIAL_ZONE_KM']['VALUE'];
+	$INDUSTRIAL_ZONE_KM = (float)$arResult['PROPERTIES']['INDUSTRIAL_ZONE_KM']['VALUE'];
 	$industrialZone = (mb_strtolower($arResult['PROPERTIES']['INDUSTRIAL_ZONE']['VALUE']) != 'нет' && $INDUSTRIAL_ZONE_KM <= 1) ? true : false;
 	// Полигон ТБО
-	$LANDFILL_KM = $arResult['PROPERTIES']['LANDFILL_KM']['VALUE'];
+	$LANDFILL_KM = (float)$arResult['PROPERTIES']['LANDFILL_KM']['VALUE'];
 	$landfill = (mb_strtolower($arResult['PROPERTIES']['LANDFILL']['VALUE']) == 'есть' && $LANDFILL_KM <= 3) ? true : false;
 
 	$nameVil = $arResult['PROPERTIES']['TYPE']['VALUE'].' '.$name; // тип поселка
@@ -140,7 +140,7 @@ switch ($km_MKAD) {
 	$reviewsDeclension = new Declension('отзыв', 'отзыва', 'отзывов');
 	$reviewsText = $reviewsDeclension->get($arResult['CNT_COMMENTS']);
 	// просмотр
-	$cntPos = $arResult['PROPERTIES']['UP_TO_VIEW']['VALUE'] + 1;
+	$cntPos = ($arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']) ? $arResult['PROPERTIES']['UP_TO_VIEW']['VALUE'] + 1 : 1;
 	$ourDeclension = new Declension('человек', 'человека', 'человек');
 	$correctText = $ourDeclension->get($cntPos);
 
@@ -174,7 +174,7 @@ switch ($km_MKAD) {
 					<div class="card-house__raiting d-flex">
 						<div class="line-raiting">
 							<div class="line-raiting__star">
-								<div class="line-raiting__star--wrap" style="width: <?= $arResult['ratingItogo'] * 100 / 5 ?>%;"></div>
+								<div class="line-raiting__star--wrap" style="width: <?= ($arResult['ratingItogo']) ? $arResult['ratingItogo'] * 100 / 5 : 0?>%;"></div>
 							</div>
 							<div class="line-raiting__title"><?=$arResult['ratingItogo']?></div>
 						</div>
@@ -305,6 +305,24 @@ switch ($km_MKAD) {
 	</div>
 </div>
 </div>
+
+<?if($USER->IsAdmin()){?>
+	<div class="page__content-tag-list">
+		<div class="container">
+			<?/*$APPLICATION->IncludeComponent(
+				"bitrix:main.include",
+				"",
+				Array(
+						"AREA_FILE_SHOW" => "file",
+						"AREA_FILE_SUFFIX" => "inc",
+						"EDIT_TEMPLATE" => "",
+						"PATH" => "/kupit-uchastki/inc/seo-tegi2.php"
+				)
+			);*/?>
+		</div>
+	</div>
+<?}?>
+
 <?if($arResult["arHouses"]):?>
 <div class="container">
 <div class="house-in-village area-in-village page__content-list">

@@ -26,7 +26,13 @@ global $arrFilter;
           <div class="hero-wrap">
             <div class="row align-items-center align-items-sm-start hero-wrap__title">
               <div class="col-9 col-sm-8 col-md-6">
-                <h1>Найди лучший поселок для&nbsp;жизни</h1>
+                <h1>Найди лучший поселок для жизни</h1>
+								<a href="#selectArea" class="select-area" data-toggle="modal" data-target="#selectArea">
+									Выберите область
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9.24 13.193" class="inline-svg">
+			              <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" fill="#FFF"/>
+			            </svg>
+								</a>
               </div>
               <div class="col-3 text-center d-flex d-sm-none"><svg xmlns="http://www.w3.org/2000/svg" width="26.216" height="26.216" viewBox="0 0 26.216 26.216" class="inline-svg hero-info-show">
                   <path d="M13.108,0A13.108,13.108,0,1,0,26.216,13.108,13.123,13.123,0,0,0,13.108,0Zm.853,20.885c-.623.1-1.862.363-2.491.415a1.534,1.534,0,0,1-1.342-.7,1.638,1.638,0,0,1-.2-1.5l2.478-6.813H9.831a3.08,3.08,0,0,1,2.425-2.864,9.485,9.485,0,0,1,2.491-.413,1.976,1.976,0,0,1,1.342.7,1.638,1.638,0,0,1,.2,1.5l-2.478,6.813h2.575a2.9,2.9,0,0,1-2.424,2.862Zm.786-12.693a1.639,1.639,0,1,1,1.639-1.639,1.639,1.639,0,0,1-1.639,1.639Z" />
@@ -36,6 +42,7 @@ global $arrFilter;
                   <p>Независимый обзор дачных и&nbsp;коттеджных поселков в&nbsp;Московской области</p>
                 </div>
               </div>
+							<a href="/poselki/map/" class="btn btn-outline-warning btn-map">На карте</a>
             </div>
 						<?$APPLICATION->IncludeComponent(
 							 "bitrix:main.include",

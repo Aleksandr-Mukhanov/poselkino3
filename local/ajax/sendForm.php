@@ -18,6 +18,7 @@ $captcha_code = $_POST['captcha_code'];
 $captcha_word = $_POST['captcha_word'];
 $manager = $_POST['manager'];
 $urlPage = $_POST['url'];
+$fromPage = $_SERVER['HTTP_REFERER'];
 
 if ($ourForm == 'ToUs') // Написать нам
 {
@@ -26,6 +27,7 @@ if ($ourForm == 'ToUs') // Написать нам
 		"tel" => $tel,
 		"email" => $email,
 		"mes" => $mes,
+		"page" => $fromPage,
 	);
 	if (CEvent::Send("SENT_TO_US", "s1", $mailFields)) mesOk("Сообщение успешно отправлено!");
 	else mesEr("Error: ".$el->LAST_ERROR);
@@ -36,6 +38,7 @@ elseif($ourForm == 'OrderLend') // Заявки с лендинга
 		"lend" => $formName,
 		"name" => $name,
 		"tel" => $tel,
+		"page" => $fromPage,
 	);
 	if (CEvent::Send("SEND_ORDER_LEND", "s1", $mailFields)) mesOk("Сообщение успешно отправлено!");
 	else mesEr("Error: ".$el->LAST_ERROR);
@@ -207,8 +210,6 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
 		}
 
-		$page = $_SERVER['HTTP_REFERER'];
-
 		$mailFields = array(
 			"name" => $name,
 			"tel" => $tel,
@@ -221,11 +222,11 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			"develName" => $_POST['develName'],
 			"phoneDevel" => $_POST['phoneDevel'],
 			"emailDevel" => $emailDevel,
-			"page" => $page,
+			"page" => $fromPage,
 			"toEmail" => $toEmail,
 		);
 
-		$whoContact = (strpos($page,'/blog/') !== false) ? 'Наш эксперт' : 'Представитель поселка';
+		$whoContact = (strpos($fromPage,'/blog/') !== false) ? 'Наш эксперт' : 'Представитель поселка';
 
 		if (CEvent::Send("SEND_TO_VIEW", $siteId, $mailFields)) mesOk("Ваша заявка успешно отправлена!<br /> ".$whoContact." свяжется с Вами в самое ближайшее время)");
 		else mesEr("Error: ".$el->LAST_ERROR);
@@ -242,7 +243,7 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 
 		$leadName = ($_POST['formID'] == 'sale') ? $name.' ('.$namePos.') скидка - с сайта' : $name.' ('.$namePos.') - с сайта';
 
-		if (strpos($page,'/kupit-uchastki/') !== false)
+		if (strpos($fromPage,'/kupit-uchastki/') !== false)
 			$leadName = $name.' ('.$namePos.') участки — с сайта';
 		elseif ($_POST['formID'] == 'sale_poselkino')
 			$leadName = $name.' ('.$namePos.') скидка Поселкино — с сайта';
@@ -304,6 +305,7 @@ elseif($ourForm == 'Subscribe') // Подписка
 {
 	$mailFields = array(
 		"email" => $email,
+		"page" => $fromPage,
 	);
 	if (CEvent::Send("SUBSCRIPTION", "s1", $mailFields)) mesOk("Вы успешно подписаны!");
 	else mesEr("Error: ".$el->LAST_ERROR);
@@ -313,6 +315,7 @@ elseif($ourForm == 'SendError') // Отправка ошибки
 	$mailFields = array(
 		"url" => $urlPage,
 		"mes" => $mes,
+		"page" => $fromPage,
 	);
 	if (CEvent::Send("SEND_ERROR", "s1", $mailFields)) mesOk("Ошибка успешно отправлена - спасибо!");
 	else mesEr("Error: ".$el->LAST_ERROR);
@@ -359,7 +362,7 @@ elseif ($ourForm == 'SendReview') // Добавление отзыва
 			"DISADVANTAGES" => $_POST['disadvantages'],
 			"COMMENT" => $_POST['comment'],
 			"RESIDENT" => $resident,
-			"PAGE" => $_SERVER['HTTP_REFERER']
+			"PAGE" => $fromPage
 		);
 		CEvent::Send("SEND_OTZIV", "s1", $mailFields);
 	}else{

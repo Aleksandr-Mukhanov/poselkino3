@@ -23,9 +23,11 @@ use Bitrix\Main\Grid\Declension;
  */
 
 // добавим превьюшку в фото
-if($item["PREVIEW_PICTURE"]){
+if ($item["PREVIEW_PICTURE"])
 	array_unshift($item['PROPERTIES']['DOP_PHOTO']['VALUE'],$item["PREVIEW_PICTURE"]["ID"]); // положим в начало
-} // dump($item['PROPERTIES']['DOP_PHOTO']['VALUE']);
+
+$itemPhotos = $item['PROPERTIES']['DOP_PHOTO']['VALUE'];
+if (count($itemPhotos) > 5) $itemPhotos = array_slice($itemPhotos,0,5);
 
 // dump($arResult);
 $offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
@@ -40,13 +42,13 @@ $offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
 				<?}?>
 			</div>
 			<div class="card-photo__list" id="card-house-in-village-photo">
-				<?foreach ($item['PROPERTIES']['DOP_PHOTO']['VALUE'] as $key => $photo){ // Фото
+				<?foreach ($itemPhotos as $photo){ // Фото
 		    	$photoRes = CFile::ResizeImageGet($photo, array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_EXACT);?>
 					<div class="card-photo__item" style="background: url(<?=$photoRes['src']?>) center center / cover no-repeat; width: 495px;"></div>
 		    <?}?>
 	    </div>
 			<div class="photo__count">
-				<span class="current">1</span> / <span class="count"><?=($item['PROPERTIES']['DOP_PHOTO']['VALUE'])?count($item['PROPERTIES']['DOP_PHOTO']['VALUE']):0?></span>
+				<span class="current">1</span> / <span class="count"><?=($itemPhotos)?count($itemPhotos):0?></span>
 	    </div>
 		</div>
 		<div class="card-house__content">

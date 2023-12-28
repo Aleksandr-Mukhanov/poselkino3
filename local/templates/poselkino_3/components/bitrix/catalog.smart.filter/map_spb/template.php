@@ -235,8 +235,8 @@ $this->setFrameMode(true);
 			<div class="filter__mkad map-filter__mkad mt-md-2">
 				<div class="row align-items-center">
 					<?$arItem = $arResult["ITEMS"][231]; //dump($arItem); // Удаленность от МКАД
-					$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'От';
-					$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'До';?>
+					$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
+					$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';?>
 					<label class="mt-2 mt-lg-0 col-lg-4 col-xl-5">от <?=ROAD?></label>
 					<div class="col-9 col-lg-6 col-xl-5 px-0">
 						<div class="d-flex justify-content-between">
@@ -275,8 +275,8 @@ $this->setFrameMode(true);
 						<div class="d-flex justify-content-between">
 							<?// $arItem = $arResult["ITEMS"][13]; //dump($arItem); // Стоимость в фильтр
 								$arItem = $arResult["ITEMS"][240]; // dump($arItem); // Стоимость участка (в карточку)
-								$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'От';
-								$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'До';
+								$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
+								$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';
 							?>
 							<input
 								placeholder="<?=$placeholderMin?>"
@@ -303,8 +303,8 @@ $this->setFrameMode(true);
 								/>
 							<? // Стоимость домов
 								$arItem = $arResult["ITEMS"][244]; // dump($arItem);
-								$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'От';
-								$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'До';
+								$placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
+								$placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';
 							?>
 							<input
 								placeholder="<?=$placeholderMin?>"

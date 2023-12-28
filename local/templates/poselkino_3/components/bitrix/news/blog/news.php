@@ -31,25 +31,6 @@ $this->setFrameMode(true);
 	);?>
 <?endif?>
 
-<?if($arParams["USE_FILTER"]=="Y"):?>
-	<?$APPLICATION->IncludeComponent(
-		"bitrix:catalog.filter",
-		"flat",
-		Array(
-			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
-			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
-			"FILTER_NAME" => $arParams["FILTER_NAME"],
-			"FIELD_CODE" => $arParams["FILTER_FIELD_CODE"],
-			"PROPERTY_CODE" => $arParams["FILTER_PROPERTY_CODE"],
-			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
-			"CACHE_TIME" => $arParams["CACHE_TIME"],
-			"CACHE_GROUPS" => $arParams["CACHE_GROUPS"],
-			"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-		),
-		$component
-	);
-	?>
-<?endif?>
 <div class="bg-white page-va-list__info">
 	<div class="container d-none d-sm-block">
 		<?$APPLICATION->IncludeComponent(

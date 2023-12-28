@@ -50,7 +50,7 @@ $APPLICATION->AddPanelButton(
 		"MAIN_SORT" => 300, //индекс сортировки для групп кнопок
 		"SORT" => 300, //сортировка внутри группы
 		"HREF" => "https://poselkino.ru/cron/rating.php", //или javascript:MyJSFunction())
-		"SRC" => "https://poselkino.ru/local/templates/poselkino/img/svg/star-raiting.svg"
+		"SRC" => "https://poselkino.ru/local/templates/poselkino_old/img/svg/star-raiting.svg"
 		),
 	$bReplace = false //заменить существующую кнопку?
 );
@@ -81,7 +81,6 @@ if(isset($_COOKIE['favorites_vil'])){
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 	<link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/png">
 	<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
-	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="facebook-domain-verification" content="t9usvm7ssxhfyexr5yotrpgupfwvi9" />
 	<?$APPLICATION->ShowHead();?>
@@ -160,6 +159,7 @@ if(isset($_COOKIE['favorites_vil'])){
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/stroitelyam/">Застройщикам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/investoram/">Инвесторам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/o-proekte/">О проекте</a></li>
+				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/vakansii/">Вакансии</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/blog/">Блог</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/reklama/">Реклама и сотрудничество</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/kontakty/">Контакты</a></li>

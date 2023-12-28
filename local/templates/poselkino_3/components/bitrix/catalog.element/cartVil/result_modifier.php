@@ -53,13 +53,11 @@
 	// } // dump($arPhoto);
 
 // получим девелоперов
-	// dump($arResult['PROPERTIES']['DEVELOPER_ID']);
-	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE']); // dump($arResult['DEVELOPERS']);
+	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE']);
 
 	$arElHL = getElHL(12,[],[],['ID','UF_NAME','UF_XML_ID']); // Инфраструктура
 	foreach ($arElHL as $key => $value)
 		$arResult['INFRASTRUKTURA'][$value['UF_XML_ID']] = $value['UF_NAME'];
-	// dump($arResult['INFRASTRUKTURA']);
 
 // узнаем отзывы
 	$cntCom = 0;$ratingSum = 0;
@@ -111,12 +109,14 @@
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
     // соберем фото
-		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
-		if($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
-			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $key => $val) {
+		if ($arElement["PREVIEW_PICTURE"])
+			$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
+		if ($arElement["PROPERTY_DOP_PHOTO_VALUE"]){
+			foreach ($arElement["PROPERTY_DOP_PHOTO_VALUE"] as $val)
 				$arPhoto[] = ResizeImage($val);
-			}
 		}
+		if (count($arPhoto) > 5) $arPhoto = array_slice($arPhoto,0,5);
+
 		// соберем дома
 		$arHouses[$arElement["ID"]] = [
 			"ID" => $arElement["ID"],
@@ -162,6 +162,14 @@
 //   $arHouses = $arPlots;
 //   unset($arPlots);
 // }
+
+// получим новости
+$arOrder = ['ACTIVE_FROM'=>'DESC'];
+$arFilter = ['IBLOCK_ID'=>8,'ACTIVE'=>'Y','PROPERTY_VILLAGE'=>$arResult["ID"]];
+$arSelect = ['ID','NAME','PREVIEW_PICTURE','PREVIEW_TEXT'];
+$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
+while ($arElement = $rsElements->Fetch())
+	$arResult["NEWS"][] = $arElement;
 
 $arResult["CNT_COMMENTS"] = $cntCom;
 $arResult["RATING_TOTAL"] = round($ratingTotal,1);
@@ -303,33 +311,33 @@ switch ($housesValEnum) { // Наличие домов
 		if($typeValEnum == PROP_DACHA){ // Дачный поселок
 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в ДП '.$arResult['NAME'];
 			// $setDescription = 'Продажа земельных участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа земельных участков в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа земельных участков в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}elseif($typeValEnum == PROP_COTTAGE){ // Коттеджный поселок
 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить участок земли в КП '.$arResult['NAME'];
 			// $setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа земельных участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цены от '.$priceLandMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}
 		break;
 	case PROP_WITH_DOM: // Дома
 		if($typeValEnum == PROP_DACHA){ // Дачный поселок
 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или дачу в ДП '.$arResult['NAME'];
 			// $setDescription = 'Продажа домов и дач в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов и дач в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа домов и дач в коттеджном поселке '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}elseif($typeValEnum == PROP_COTTAGE){ // Коттеджный поселок
 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом (коттедж) в КП '.$arResult['NAME'];
 			// $setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа домов и коттеджей в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.', вода '.$vodaVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}
 		break;
 	case PROP_HOUSE_PLOT: // Дома и участки
 		if($typeValEnum == PROP_DACHA){ // Дачный поселок
 			// $seoTitle = 'Дачный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в ДП '.$arResult['NAME'];
 			// $setDescription = 'Продажа домов, дач и участков в ДП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}elseif($typeValEnum == PROP_COTTAGE){ // Коттеджный поселок
 			// $seoTitle = 'Коттеджный поселок '.trim($arResult['NAME']).' в '.$descRayon.' районе - цены, фото, план, отзывы | Купить дом или участок в КП '.$arResult['NAME'];
 			// $setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области ►Цены от '.$minPrice.' руб. ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
-			$setDescription = 'Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
+			$setDescription = '★★★ Продажа домов, коттеджей и участков в КП '.trim($arResult['NAME']).' на '.$descShosse.' шоссе в Ленинградской области '.$km_MKAD.' км от '.ROAD.' ►Цена дома от '.$priceHomeMin.' руб, стоимость сотки от '.$priceSotkaMin.' руб. Коммуникации: свет '.$svetKVT.' кВт на участке, газ '.$gazVal.'. Участки от '.$plottageMin.' до '.$plottageMax.' соток. Рейтинг поселка - '.$arResult['ratingItogo'].'. Количество отзывов - '.$arResult["CNT_COMMENTS"];
 		}
 		break;
 }

@@ -19,6 +19,15 @@ use Bitrix\Main\Page\Asset,
     case 'kp-ivanovka.ru': $villageID = 3600; break;
     case 'kp-bityagovo.ru': $villageID = 3601; break;
     case 'podporinskie-dachi.ru': $villageID = 3516; break;
+
+    case 'elovyi-bor.ru': $villageID = 4461; $logoText = true; break;
+    case 'lakomka-poselok.ru': $villageID = 4463; $logoText = true; break;
+    case 'kp-marinino.ru': $villageID = 8986; $logoText = true; break;
+    case 'kp-sudakovo.ru': $villageID = 8985; $logoText = true; break;
+    case 'ilinskiy-les.ru': $villageID = 8942; $logoText = true; break;
+    case 'kp-ekaterinino.ru': $villageID = 8943; $logoText = true; break;
+    case 'ivanovskiy-les.ru': $villageID = 8987; $logoText = true; break;
+    case 'borodino-kp.ru': $villageID = 7836; $logoText = true; break;
     // case '': $villageID = ; break;
   }
 
@@ -72,6 +81,7 @@ use Bitrix\Main\Page\Asset,
 <head>
   <title><?$APPLICATION->ShowTitle()?></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="shortcut icon" href="/favicon.png" type="image/png">
 
   <meta property="og:title" content="<?=$APPLICATION->ShowProperty("title");?>"/>

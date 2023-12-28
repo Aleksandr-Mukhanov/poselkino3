@@ -42,6 +42,7 @@
             <div class="footer__nav-item"><a href="/poselki/#shosse_rayon">По шоссе</a></div>
             <div class="footer__nav-item"><a href="/poselki/?show_rayon=y#shosse_rayon">По районам</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/o-proekte/">О проекте</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/vakansii/">Вакансии</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/blog/">Блог</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/reklama/">Реклама и сотрудничество</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/kontakty/">Контакты</a></div>
@@ -171,7 +172,7 @@
         </div>
       </div>
       <div class="modal-body px-3 px-md-5">
-        <form class="row form-feedback-modal formOrderLend" action="" method="post" data-form="Строителям">
+        <form class="row form-feedback-modal formOrderLend" action="" method="post" data-form="Строителям / Инвесторам">
           <div class="col-12">
             <p class="text-center">Наш специалист перезвонит и проконсультирует вас по всем вопросам</p>
           </div>
@@ -228,162 +229,281 @@
   </div>
 </div>
 
+<!-- Выберите область -->
+<div class="modal" id="selectArea" tabindex="-1" role="dialog" aria-labelledby="selectAreaLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex w-100 justify-content-between align-items-center">
+          <h5 class="text-uppercase" id="selectAreaLabel">Выберите область</h5>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <?
+          $arArea = [
+            'poselkino.ru' => 'Московская область',
+            'spb.poselkino.ru' => 'Ленинградская область',
+          ];
+          foreach ($arArea as $key => $value) {
+            $btnType = ($_SERVER['HTTP_HOST'] == $key) ? 'btn-warning' : 'btn-outline-warning'?>
+            <a href="https://<?=$key?>" class="btn <?=$btnType?> px-5 rounded-pill"><?=$value?></a>
+          <?}
+        ?>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php if (stripos(@$_SERVER['HTTP_USER_AGENT'], 'Lighthouse') === false): ?>
 
-<!-- Global site tag (gtag.js) - Google Ads: 783230785 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-783230785"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <div id="googleScript"></div>
 
-  gtag('config', 'AW-783230785');
-  gtag('config', 'UA-140318130-1');
-</script>
-<script>
-  gtag('event', 'page_view', {
-  'send_to': 'AW-783230785',
-  'user_id': 'replace with value'
-  });
-</script>
+  <!-- Marquiz -->
+  <?
+  if ($APPLICATION->GetCurDir() == '/poselki/kashirskoe-shosse/')
+    $marquizID = '62a357f6a6e0ac004fc9af1c';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/domodedovskiy-rayon/')
+    $marquizID = '62ab57189c59e9004de9c31f';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/novoryazanskoe-shosse/')
+    $marquizID = '62ac6a702757cb00478e1bfd';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/ramenskiy-rayon/')
+    $marquizID = '62ac7ae202f177004fc566c6';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/noginskiy-rayon/')
+    $marquizID = '62ac3e3302f177004fc55e84';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/gorkovskoe-shosse/')
+    $marquizID = '62ac799302f177004fc56696';
+  elseif ($APPLICATION->GetCurDir() == '/poselki/skhodnya-layf/' || $APPLICATION->GetCurDir() == '/poselki/shadrino/' || $APPLICATION->GetCurDir() == '/poselki/blagoveshchenskoe/')
+  {
+    $marquizID = '62b33a5b8252e1004f773c3d';
+    $marquizTitle = 'Дмитровское шоссе:';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/grin-laundzh/' || $APPLICATION->GetCurDir() == '/poselki/rizhskie-zori/' || $APPLICATION->GetCurDir() == '/poselki/podporinskie-dachi/')
+  {
+    $marquizID = '630dbfc62dd09f004f262fad';
+    $marquizTitle = 'Новорижское шоссе:';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/sosnovyy-bor-1-2/')
+  {
+    $marquizID = '62ac7ae202f177004fc566c6';
+    $marquizTitle = 'Раменский район:';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/ekokvartal-razdole/')
+  {
+    $marquizID = '62a1f1a227b327004eb065b1';
+    $marquizTitle = 'Подберите участок в поселке';
+    $marquizText = 'ЭкоКвартал Раздолье';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/malinki-park/')
+  {
+    $marquizID = '62ac3e3302f177004fc55e84';
+    $marquizTitle = 'Ногинский район';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/regata/' || $APPLICATION->GetCurDir() == '/poselki/rublevo/')
+  {
+    $marquizID = '62a357f6a6e0ac004fc9af1c';
+    $marquizTitle = 'Каширское шоссе:';
+  }
+  elseif ($APPLICATION->GetCurDir() == '/poselki/pakhra-river-park/')
+  {
+    $marquizID = '630cada72dd09f004f26160f';
+    $marquizTitle = 'Подберите участок в поселке';
+    $marquizText = 'Пахра Ривер Парк';
+  }
+  else
+    $marquizID = false;
 
-<!-- Facebook Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '2471989892881253');
-fbq('track', 'PageView');
-</script>
-<!-- End Facebook Pixel Code -->
+  $curDir = $APPLICATION->GetCurDir();
+  switch ($curDir) {
+    case '/poselki/lapino/':
+      $marquizID = '65326c6346345800253ff225';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Лапино';
+      break;
+    case '/poselki/sokolinaya-gora/':
+      $marquizID = '65326f1477cec900253340a9';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Соколиная гора';
+      break;
+    case '/poselki/chereshnevyy-les/':
+      $marquizID = '65326fbff02a0d00257553e4';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Черешневый лес';
+      break;
+    case '/poselki/orlinye-kholmy/':
+      $marquizID = '653270bafce5d800257e5095';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Орлиные холмы';
+      break;
+    case '/poselki/red/':
+      $marquizID = '653270fb77cec900253340f1';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'РЭД';
+      break;
+    case '/poselki/favorit-/':
+      $marquizID = '6532716a617e8d0025f12250';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Фаворит';
+      break;
+    case '/poselki/rublevo/':
+      $marquizID = '6532719720cc2a0025dc3612';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Рублево';
+      break;
+    case '/poselki/esenino/':
+      $marquizID = '653271c9f02a0d0025755428';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Есенино';
+      break;
+    case '/poselki/repino/':
+      $marquizID = '653271f077cec90025334111';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Репино';
+      break;
+    case '/poselki/kuzminskiy/':
+      $marquizID = '653280eb917f010025fa9e8e';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Кузьминский';
+      break;
+    case '/poselki/velikie_ozera/':
+      $marquizID = '65328134fce5d800257e5294';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Великие озера';
+      break;
+    case '/poselki/traditsii/':
+      $marquizID = '653281b1dcc63500250bbbfb';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Традиции';
+      break;
+    case '/poselki/yarkoe/':
+      $marquizID = '653281fe77cec90025334278';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Яркое';
+      break;
+    case '/poselki/kartsevo/':
+      $marquizID = '6532823a917f010025fa9eb3';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Карцево';
+      break;
+    case '/poselki/istrinskie-sady/':
+      $marquizID = '6532826e617e8d0025f1240c';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Истринские сады';
+      break;
+    case '/poselki/olshany/':
+      $marquizID = '653282c0fce5d800257e52c2';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Ольшаны';
+      break;
+    case '/poselki/skhodnya-forest-park/':
+      $marquizID = '65328315a79fdb00255d012f';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Сходня Форест Парк';
+      break;
+    case '/poselki/bolshoe-brekhovo/':
+      $marquizID = '6532835dfce5d800257e52d2';
+      $marquizTitle = 'Подберите участок в поселке';
+      $marquizText = 'Большое Брехово';
+      break;
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    default:
+      $marquizID = false;
+      break;
+  }
+  ?>
 
-   ym(50830593, "init", {
-        clickmap:true,
-        trackLinks:true,
-        accurateTrackBounce:true,
-        webvisor:true
-   });
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/50830593" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-<!-- calltouch -->
-<script type="text/javascript">
-(function(w,d,n,c){w.CalltouchDataObject=n;w[n]=function(){w[n]["callbacks"].push(arguments)};if(!w[n]["callbacks"]){w[n]["callbacks"]=[]}w[n]["loaded"]=false;if(typeof c!=="object"){c=[c]}w[n]["counters"]=c;for(var i=0;i<c.length;i+=1){p(c[i])}function p(cId){var a=d.getElementsByTagName("script")[0],s=d.createElement("script"),i=function(){a.parentNode.insertBefore(s,a)},m=typeof Array.prototype.find === 'function',n=m?"init-min.js":"init.js";s.type="text/javascript";s.async=true;s.src="https://mod.calltouch.ru/"+n+"?id="+cId;if(w.opera=="[object Opera]"){d.addEventListener("DOMContentLoaded",i,false)}else{i()}}})(window,document,"ct","acjsv0co");
-</script>
-<!-- calltouch -->
-
-<!-- пиксели ВК -->
-<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1431182-R9A1"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1431182-R9A1" style="position:fixed; left:-999px;" alt=""/></noscript>
-
-<!-- MyTarget -->
-<!-- Rating Mail.ru counter -->
-<script type="text/javascript">
-var _tmr = window._tmr || (window._tmr = []);
-_tmr.push({id: "3252735", type: "pageView", start: (new Date()).getTime(), pid: "USER_ID"});
-(function (d, w, id) {
-  if (d.getElementById(id)) return;
-  var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true; ts.id = id;
-  ts.src = "https://top-fwz1.mail.ru/js/code.js";
-  var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
-  if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
-})(document, window, "topmailru-code");
-</script><noscript><div>
-<img src="https://top-fwz1.mail.ru/counter?id=3252735;js=na" style="border:0;position:absolute;left:-9999px;" alt="Top.Mail.Ru" />
-</div></noscript>
-<!-- //Rating Mail.ru counter -->
-
-<!-- Marquiz -->
-<?
-if ($APPLICATION->GetCurDir() == '/poselki/kashirskoe-shosse/')
-  $marquizID = '62a357f6a6e0ac004fc9af1c';
-elseif ($APPLICATION->GetCurDir() == '/poselki/domodedovskiy-rayon/')
-  $marquizID = '62ab57189c59e9004de9c31f';
-elseif ($APPLICATION->GetCurDir() == '/poselki/novoryazanskoe-shosse/')
-  $marquizID = '62ac6a702757cb00478e1bfd';
-elseif ($APPLICATION->GetCurDir() == '/poselki/ramenskiy-rayon/')
-  $marquizID = '62ac7ae202f177004fc566c6';
-elseif ($APPLICATION->GetCurDir() == '/poselki/noginskiy-rayon/')
-  $marquizID = '62ac3e3302f177004fc55e84';
-elseif ($APPLICATION->GetCurDir() == '/poselki/gorkovskoe-shosse/')
-  $marquizID = '62ac799302f177004fc56696';
-elseif ($APPLICATION->GetCurDir() == '/poselki/skhodnya-layf/' || $APPLICATION->GetCurDir() == '/poselki/shadrino/' || $APPLICATION->GetCurDir() == '/poselki/blagoveshchenskoe/')
-{
-  $marquizID = '62b33a5b8252e1004f773c3d';
-  $marquizTitle = 'Дмитровское шоссе:';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/grin-laundzh/' || $APPLICATION->GetCurDir() == '/poselki/rizhskie-zori/' || $APPLICATION->GetCurDir() == '/poselki/podporinskie-dachi/')
-{
-  $marquizID = '630dbfc62dd09f004f262fad';
-  $marquizTitle = 'Новорижское шоссе:';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/sosnovyy-bor-1-2/')
-{
-  $marquizID = '62ac7ae202f177004fc566c6';
-  $marquizTitle = 'Раменский район:';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/ekokvartal-razdole/')
-{
-  $marquizID = '62a1f1a227b327004eb065b1';
-  $marquizTitle = 'Подберите участок в поселке';
-  $marquizText = 'ЭкоКвартал Раздолье';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/malinki-park/')
-{
-  $marquizID = '62ac3e3302f177004fc55e84';
-  $marquizTitle = 'Ногинский район';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/regata/' || $APPLICATION->GetCurDir() == '/poselki/rublevo/')
-{
-  $marquizID = '62a357f6a6e0ac004fc9af1c';
-  $marquizTitle = 'Каширское шоссе:';
-}
-elseif ($APPLICATION->GetCurDir() == '/poselki/pakhra-river-park/')
-{
-  $marquizID = '630cada72dd09f004f26160f';
-  $marquizTitle = 'Подберите участок в поселке';
-  $marquizText = 'Пахра Ривер Парк';
-}
-else
-  $marquizID = false;
-
-if ($marquizID):
-  if (!$marquizTitle) $marquizTitle = 'Пройдите тест';
-  if (!$marquizText) $marquizText = '5 лучших участков по Вашим требованиям';
-?>
   <script>
-  (function(w, d, s, o){
-    var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
-      if (document.readyState !== 'loading') Marquiz.init(o);
-      else document.addEventListener("DOMContentLoaded", function() {
-        Marquiz.init(o);
-      });
-    };
-    d.head.insertBefore(j, d.head.firstElementChild);
-  })(window, document, 'script', {
-      host: '//quiz.marquiz.ru',
-      region: 'eu',
-      id: '<?=$marquizID?>',
-      autoOpen: false,
-      autoOpenFreq: 'once',
-      openOnExit: false,
-      disableOnMobile: false
+    // Создаем функцию, в которой каждый скрипт подключаем внутри своего таймаута, чтобы предыдущий успевал загрузиться и выполниться.
+    // Некоторые скрипты стоит отклыдвать только по одному событию, а не по всем, например загрузку карты проезда с яндекса или гугла можно откладывать только по скроллу, даже без таймаута.
+    // Чаты и другие маркетинговые инструменты, которые отображаются на странице спустя какое-то время можно отклыдвать только по таймеру и смело откалыдвать чат на 15-20 секунд.
+
+    // Polyfill
+    if (!window.requestIdleCallback) {
+      window.requestIdleCallback = (func, options) => {
+          options = options || {};
+          setTimeout(func, options.timeout || 1);
+      }
     }
-  );
+
+    let psLoadedJs = false
+    const getExtJs = () => {
+      // проверяем, была ли выполнена функция ранее
+      if (!psLoadedJs) {
+          psLoadedJs = true
+          // при выполенении функций удаляем события, которые были навешаны ранее.
+          window.removeEventListener("scroll", getExtJs, false)
+          window.removeEventListener("touchstart", getExtJs, false)
+          window.removeEventListener("mousemove", getExtJs, false)
+          window.removeEventListener("click", getExtJs, false)
+          window.removeEventListener("keydown", getExtJs, false)
+          clearTimeout(getExtJsTimeout)
+          requestIdleCallback(()=>{
+            // Здесь все внешние скрипты, вроде живосайта, метрики,
+            // аналитикса, обратные звонки, коллтрекинги и так далее
+
+            // Google tag (gtag.js)
+            var scriptGT = document.createElement("script");
+            scriptGT.async = "true";
+            scriptGT.src = "https://www.googletagmanager.com/gtag/js?id=G-QVMMQH5RV7";
+            document.getElementById("googleScript").appendChild(scriptGT);
+            // код Google tag
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QVMMQH5RV7');
+
+            // Marquiz
+            <?if($marquizID):
+                if (!$marquizTitle) $marquizTitle = 'Пройдите тест';
+                if (!$marquizText) $marquizText = '5 лучших участков по Вашим требованиям';?>
+
+                (function(w, d, s, o){
+                  var j = d.createElement(s); j.async = true; j.src = '//script.marquiz.ru/v2.js';j.onload = function() {
+                    if (document.readyState !== 'loading') Marquiz.init(o);
+                    else document.addEventListener("DOMContentLoaded", function() {
+                      Marquiz.init(o);
+                    });
+                  };
+                  d.head.insertBefore(j, d.head.firstElementChild);
+                })(window, document, 'script', {
+                    host: '//quiz.marquiz.ru',
+                    region: 'eu',
+                    id: '<?=$marquizID?>',
+                    autoOpen: false,
+                    autoOpenFreq: 'once',
+                    openOnExit: false,
+                    disableOnMobile: false
+                  }
+                );
+
+                (function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Pop', {id: '<?=$marquizID?>', title: '<?=$marquizTitle?>', text: '<?=$marquizText?>', delay: 10, textColor: '#ffffff', bgColor: '#fbb358', svgColor: '#ffffff', closeColor: '#ffffff', bonusCount: 1, bonusText: 'Вам доступен бонус', type: 'side', position: 'position_bottom-left', rounded: true, shadow: 'rgba(251, 179, 88, 0)', blicked: true})
+            <?endif;?>
+          })
+          // Для каждого скрипта нужно подбирать время, чтобы предыдущий успевал загрузиться и инициализироваться.
+      }
+    }
+    // Вешаем выполнение функцию на каждое необходимое событие. Здесь перечислены самые распространенные.
+    window.addEventListener("scroll", getExtJs, { passive: true })
+    window.addEventListener("touchstart", getExtJs, { passive: true })
+    window.addEventListener("mousemove", getExtJs, { passive: true })
+    window.addEventListener("click", getExtJs, { passive: true })
+    window.addEventListener("keydown", getExtJs, { passive: true })
+    // Если никакое событие не произошло, то выполняем функцию через 5 секунд
+    let getExtJsTimeout = setTimeout(getExtJs, 7000)
   </script>
-  <script>(function(t, p) {window.Marquiz ? Marquiz.add([t, p]) : document.addEventListener('marquizLoaded', function() {Marquiz.add([t, p])})})('Pop', {id: '<?=$marquizID?>', title: '<?=$marquizTitle?>', text: '<?=$marquizText?>', delay: 10, textColor: '#ffffff', bgColor: '#fbb358', svgColor: '#ffffff', closeColor: '#ffffff', bonusCount: 1, bonusText: 'Вам доступен бонус', type: 'side', position: 'position_bottom-left', rounded: true, shadow: 'rgba(251, 179, 88, 0)', blicked: true})</script>
-<?endif;?>
+  <script>
+    // Yandex.Metrika counter
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+    ym(50830593, "init", {
+      clickmap:true,
+      trackLinks:true,
+      accurateTrackBounce:true,
+      webvisor:true
+    });
+  </script>
 
 <?php endif; ?>
 </body>

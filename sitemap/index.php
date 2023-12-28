@@ -1,6 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Карта сайта");
-if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/sitemap/');
+// if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/sitemap/');
 
 use Bitrix\Main\Loader;
 	Loader::includeModule('iblock');
@@ -13,18 +13,16 @@ $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"ACTIVE"=>"Y");
 $arSelect = Array("ID","NAME","DETAIL_PAGE_URL","PROPERTY_TYPE");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->GetNext())
 	$arPoselki[] = $arElement;
-} // dump($arPoselki);
 
 // получим страницы блога
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>3,"ACTIVE"=>"Y");
 $arSelect = Array("ID","NAME","DETAIL_PAGE_URL");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while ($arElement = $rsElements->GetNext())
 	$arBlog[] = $arElement;
-} // dump($arBlog);
 ?>
 <main class="page page-contacts">
 	<div class="bg-white">
@@ -386,10 +384,10 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 				    <div class="item">
 				      <ul>
 				        <li><a href="/blog/">Блог</a></li>
-				        <li><a href="/blog/novosti/">Новости</a></li>
-				        <li><a href="/blog/pro-uchastki/">Про участки</a></li>
-								<li><a href="/blog/pro-doma/">Про дома</a></li>
-								<li><a href="/blog/obzor-rynka/">Обзор рынка</a></li>
+				        <li><a href="/blog?tag=novosti">Новости</a></li>
+				        <li><a href="/blog?tag=pro-uchastki">Про участки</a></li>
+								<li><a href="/blog?tag=pro-doma">Про дома</a></li>
+								<li><a href="/blog?tag=obzor-rynka">Обзор рынка</a></li>
 				      </ul>
 				    </div>
 				  </div>

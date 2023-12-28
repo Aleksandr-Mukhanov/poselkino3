@@ -29,7 +29,7 @@ use Bitrix\Main\Page\Asset,
     case 'soninskiy-les.ru': $villageID = 3145; $yandex_verification=''; break;
     case 'abbakumovo-kp.ru': $villageID = 1855; $yandex_verification=''; break;
     case 'kp-skazka.ru': $villageID = 3032; $yandex_verification=''; break;
-    case 'rastunovo-kp.ru': $villageID = 1891; $yandex_verification=''; break;
+    case 'rastunovo-kp.ru': $villageID = 8873; $yandex_verification=''; break;
     case 'matchino-life.ru': $villageID = 3163; $yandex_verification=''; break;
     case 'skazka-kp.ru': $villageID = 3175; $yandex_verification=''; break;
     case 'novaya-evropa.ru': $villageID = 1063; $yandex_verification=''; break;
@@ -85,6 +85,15 @@ use Bitrix\Main\Page\Asset,
     case 'dinastiya-kp.ru': $villageID = 4451; $yandex_verification=''; break;
     case 'mishutinckaya-sloboda.ru': $villageID = 4485; $yandex_verification=''; break;
     case 'lapino-kp.ru': $villageID = 5639; $yandex_verification=''; break;
+    case 'lesnoi-ostrov.ru': $villageID = 5255; $yandex_verification=''; break;
+    case 'kp-pervyi.ru': $villageID = 6149; $yandex_verification=''; break;
+    case 'eco-pirogovo.ru': $villageID = 6809; $yandex_verification=''; break;
+    case 'kp-svetliy.ru': $villageID = 7068; $yandex_verification=''; break;
+    case 'kp-bunino.ru': $villageID = 5855; $yandex_verification=''; break;
+    case 'esenino-kp.ru': $villageID = 5857; $yandex_verification=''; break;
+    case 'kp-kalina.ru': $villageID = 7213; $yandex_verification=''; break;
+    case 'kp-lider.ru': $villageID = 7154; $yandex_verification=''; break;
+    case 'kp-brusnikino.ru': $villageID = 7150; $yandex_verification=''; break;
     // case '': $villageID = ; $yandex_verification=''; break;
   }
 
@@ -128,7 +137,8 @@ use Bitrix\Main\Page\Asset,
   if (!$landscape) $landscape = 'Информации нет';
 
   // получим девелопера
-  $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
+  if ($arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0])
+    $arDevel = array_values(getElHL(5,[],['UF_XML_ID'=>$arVillage['PROPERTY_DEVELOPER_ID_VALUE'][0]],['ID','UF_NAME','UF_XML_ID','UF_ADDRESS','UF_PHONE','UF_SCHEDULE'])); // dump($arDevel);
   $phone = ($arVillage["PROPERTY_PHONE_VALUE"]) ? $arVillage["PROPERTY_PHONE_VALUE"] : $arDevel[0]['UF_PHONE'];
 
   $priceSotka = ($arVillage['PROPERTY_PRICE_SOTKA_2_VALUE']) ? $arVillage['PROPERTY_PRICE_SOTKA_2_VALUE'] : $arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0];

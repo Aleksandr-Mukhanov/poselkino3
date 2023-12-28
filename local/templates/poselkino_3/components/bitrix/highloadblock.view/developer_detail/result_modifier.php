@@ -62,7 +62,7 @@
   $APPLICATION->AddChainItem($arResult['row']['UF_NAME'],'',true);
 
   $arResult["CNT_COMMENTS"] = $cntCom;
-  $arResult["RATING_TOTAL"] = round($ratingTotal,1);
+  $arResult["RATING_TOTAL"] = round((int)$ratingTotal,1);
   $arResult["COMMENTS"] = $arComments;
   $arResult["COMMENTS_RES"] = $arCommentsRes;
 ?>

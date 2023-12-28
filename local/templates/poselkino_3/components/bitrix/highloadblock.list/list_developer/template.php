@@ -29,9 +29,9 @@ if (!empty($arResult['ERROR']))
 <div class="bg-gray-mobile">
 	<div class="container">
 		<div class="developer__list">
-			<?foreach ($arResult['rows'] as $key => $val) { // dump($val);
+			<?foreach ($arResult['rows'] as $val) {
 				$arDeveloper = $arResult['DEVEL'][$val['UF_XML_ID']];
-				$arFile = explode('"',$val['UF_FILE']); // dump($arFile);
+				$arFile = explode('"',$val['UF_FILE']);
 				$cntPos = $arDeveloper['CNT_POS'];
 				$cntCom = ($arDeveloper['CNT_COMMENTS']) ? $arDeveloper['CNT_COMMENTS'].' отзыва' : 'нет отзывов';
 				$ratingTotal = ($arDeveloper['CNT_COMMENTS']>0) ? round($arDeveloper['RATING_SUM'] / $arDeveloper['CNT_COMMENTS'],1) : 'нет данных';

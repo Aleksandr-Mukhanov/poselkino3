@@ -1,13 +1,18 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Блог о загородной недвижимости");
-if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/blog/');?>
+if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/blog/');
+if ($_REQUEST['tag']) {
+	global $arrFilter;
+	$arrFilter['SECTION_CODE'] = $_REQUEST['tag'];
+}
+?>
 <main class="page page-blog">
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:news",
 		"blog",
 		array(
 			"ADD_ELEMENT_CHAIN" => "Y",
-			"ADD_SECTIONS_CHAIN" => "Y",
+			"ADD_SECTIONS_CHAIN" => "N",
 			"AJAX_MODE" => "N",
 			"AJAX_OPTION_ADDITIONAL" => "",
 			"AJAX_OPTION_HISTORY" => "N",
@@ -80,7 +85,7 @@ if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselki
 			"STRICT_SECTION_CHECK" => "N",
 			"TEMPLATE_THEME" => "blue",
 			"USE_CATEGORIES" => "N",
-			"USE_FILTER" => "N",
+			"USE_FILTER" => "Y",
 			"USE_PERMISSIONS" => "N",
 			"USE_RATING" => "N",
 			"USE_REVIEW" => "N",
@@ -98,7 +103,7 @@ if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselki
 			"TAGS_CLOUD_WIDTH" => "100%",
 			"FILTER_NAME" => "arrFilter",
 			"FILTER_FIELD_CODE" => array(
-				0 => "",
+				0 => "SECTION_CODE",
 				1 => "",
 			),
 			"FILTER_PROPERTY_CODE" => array(
@@ -110,8 +115,8 @@ if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselki
 			"COMPOSITE_FRAME_TYPE" => "AUTO",
 			"SEF_URL_TEMPLATES" => array(
 				"news" => "",
-				"section" => "#SECTION_CODE#/",
-				"detail" => "#SECTION_CODE#/#ELEMENT_CODE#/",
+				"section" => "",
+				"detail" => "#ELEMENT_CODE#/",
 			)
 		),
 		false

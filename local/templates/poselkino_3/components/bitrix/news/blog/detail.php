@@ -116,7 +116,7 @@ use Bitrix\Main\Page\Asset;
         	$GROUPS[] = $arGroups;
 
         foreach($GROUPS as $label){?>
-					<a href="/blog/<?=$label["CODE"]?>/"><?=$label["NAME"]?></a>
+					<a href="/blog/?tag=<?=$label["CODE"]?>"><?=$label["NAME"]?></a>
 				<?}?>
 			</div>
 		</div>

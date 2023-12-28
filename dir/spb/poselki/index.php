@@ -5,8 +5,8 @@ $arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем прода
 $arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
 
 $APPLICATION->SetTitle("Поселки в Ленинградской области");
-$APPLICATION->SetPageProperty("title", "Поселки в Ленинградской области – лучшие поселки на карте Ленобласти");
-$APPLICATION->SetPageProperty("description", "Поселки в Ленинградской области ➤Цены от " . getMetaInfo($arrFilter)['minPrice'] . " руб.➤Кол-во объявлений - " . getMetaInfo($arrFilter)['cntPos'] . " ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота");
+$APPLICATION->SetPageProperty("title", "Коттеджные поселки в Ленинградской области - ".getMetaInfo($arrFilter)['cntPos']." объявлений");
+$APPLICATION->SetPageProperty("description", "★★★ Коттеджные поселки в Ленинградской области ➤Цены от ".getMetaInfo($arrFilter)['minPrice']." руб. ➤Кол-во объявлений - ".getMetaInfo($arrFilter)['cntPos']." ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор");
 
 // dump($_REQUEST);
 $shosse = $_REQUEST['SHOSSE_CODE'];

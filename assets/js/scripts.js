@@ -274,7 +274,7 @@ $(document).ready(function(){
 		mes = $('#textToUs').val();
 		idButton = $('#idButton').val();
 		yaCounter50830593.reachGoal(idButton);
-    gtag('event',idButton,{'event_category':'button','event_action':idButton});
+    // gtag('event',idButton,{'event_category':'button','event_action':idButton});
 		$.post("/local/ajax/sendForm.php",{
 				name: name,
 				tel: tel,
@@ -314,7 +314,7 @@ $(document).ready(function(){
 		idButton = $('#idButton').val();
     if (idButton == '') idButton = 'SIGN_UP_TO_VIEW';
 		yaCounter50830593.reachGoal(idButton);
-    gtag('event',idButton,{'event_category':'button','event_action':idButton});
+    // gtag('event',idButton,{'event_category':'button','event_action':idButton});
 		idPos = $('#posInfo').attr('data-idPos');
 		namePos = $('#posInfo').attr('data-namePos');
 		codePos = $('#posInfo').attr('data-codePos');
@@ -355,7 +355,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		email = $('#emailSubscribeForm').val();
 		yaCounter50830593.reachGoal('SUBSCRIBE');
-    gtag('event','SUBSCRIBE',{'event_category':'button','event_action':'SUBSCRIBE'});
+    // gtag('event','SUBSCRIBE',{'event_category':'button','event_action':'SUBSCRIBE'});
 		$.post("/local/ajax/sendForm.php",{
 				email: email,
 				ourForm: 'Subscribe'
@@ -370,7 +370,7 @@ $(document).ready(function(){
 		event.preventDefault();
 		textPosEr = $('#textPosEr').val();
 		yaCounter50830593.reachGoal('SEND_ERROR');
-    gtag('event','SEND_ERROR',{'event_category':'button','event_action':'SEND_ERROR'});
+    // gtag('event','SEND_ERROR',{'event_category':'button','event_action':'SEND_ERROR'});
 		$.post("/local/ajax/sendForm.php",{
 				url: window.location.href,
 				mes: textPosEr,
@@ -418,13 +418,3 @@ $(document).ready(function(){
 	});
 
 });
-
-// (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-// m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-// (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-//
-// ym(55033927, "init", {
-// 		 clickmap:true,
-// 		 trackLinks:true,
-// 		 accurateTrackBounce:true
-// });

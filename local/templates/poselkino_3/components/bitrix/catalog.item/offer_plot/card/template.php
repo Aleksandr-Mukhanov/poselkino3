@@ -30,6 +30,8 @@ if ($item["PREVIEW_PICTURE"])
 	array_unshift($arPhoto,$item["PREVIEW_PICTURE"]["ID"]); // положим в начало
 shuffle($arPhoto);
 
+if (count($arPhoto) > 5) $arPhoto = array_slice($arPhoto,0,5);
+
 $offerURL = '/kupit-uchastki/uchastok-'.$item['ID'].'/';
 ?>
 <div class="d-flex flex-wrap bg-white card-grid">
@@ -40,13 +42,13 @@ $offerURL = '/kupit-uchastki/uchastok-'.$item['ID'].'/';
 			<?}?>
 		</div>
 		<div class="card-photo__list">
-			<?foreach ($arPhoto as $key => $photo){ // Фото
+			<?foreach ($arPhoto as $photo){ // Фото
 	    	$photoRes = CFile::ResizeImageGet($photo, array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_EXACT);?>
 				<div class="card-photo__item" style="background: url(<?=$photoRes['src']?>) center center / cover no-repeat; width: 495px;"></div>
 	    <?}?>
     </div>
     <div class="photo__count">
-			<span class="current">1</span> / <span class="count"><?=count($arPhoto)?></span>
+			<span class="current">1</span> / <span class="count"><?=($arPhoto)?count($arPhoto):0?></span>
     </div>
 	</div>
 	<div class="card-house__content">

@@ -1,11 +1,12 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Поселки");
-use Bitrix\Main\Page\Asset;
+// use Bitrix\Main\Page\Asset;
  // Яндекс.Поделиться
- Asset::getInstance()->addJs("//yastatic.net/es5-shims/0.0.2/es5-shims.min.js");
- Asset::getInstance()->addJs("//yastatic.net/share2/share.js");
+ // Asset::getInstance()->addJs("//yastatic.net/es5-shims/0.0.2/es5-shims.min.js");
+ // Asset::getInstance()->addJs("//yastatic.net/share2/share.js");
  // Яндекс.Карты
- Asset::getInstance()->addJs("https://api-maps.yandex.ru/2.1/?lang=ru_RU");?>
+ // Asset::getInstance()->addJs("https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=0c55e225-bb2b-4b98-94a5-3390b6dbf643");
+?>
 <main class="page page-village" itemscope itemtype="http://schema.org/Product">
 	<div class="bg-white">
 		<div class="container d-none d-sm-block">

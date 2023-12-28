@@ -190,7 +190,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 			<h2 class="section-title mb-4">Все для комфортного отдыха и проживания</h2>
 			<div class="row">
 				<?$i = 0;
-					dump($arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE']);
+					// dump($arVillage['PROPERTY_BLOCK_COMFORT_RENAME_VALUE']);
 					// dump($arVillage['PROPERTY_BLOCK_COMFORT_DESCRIPTION']);
 					foreach ($arVillage['PROPERTY_BLOCK_COMFORT_DESCRIPTION'] as $key => $value) {
 						if ($value == 'Лес') $textLes = $arVillage['PROPERTY_BLOCK_COMFORT_VALUE'][$key];

@@ -61,17 +61,21 @@ foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $photo){
 		$arVillage = $arResult['arVillage'][$arOffer['PROPERTIES']['VILLAGE']['VALUE']];
 		if ($arOffer["IMG"])
 			array_unshift($item['PHOTO_VILLAGE'],$arOffer["IMG"]); // положим в начало
-		shuffle($item['PHOTO_VILLAGE']);?>
+		shuffle($item['PHOTO_VILLAGE']);
+
+		$itemPhotos = $item['PHOTO_VILLAGE'];
+		if (count($itemPhotos) > 5) $itemPhotos = array_slice($itemPhotos,0,5);
+	?>
 		<div class="item">
 			<!-- Ссылка карточки-->
 			<div class="offer-house__item card-house house-in-village">
 				<div class="photo offer-house__photo">
 					<div class="photo__list">
-						<?foreach ($item['PHOTO_VILLAGE'] as $value) {?>
+						<?foreach ($itemPhotos as $value) {?>
 							<div class="photo__item" style="background: url('<?=$value['src']?>') no-repeat; background-size: cover; background-position: center center;"></div>
 						<?}?>
 					</div>
-					<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($item['PHOTO_VILLAGE'])?></span>
+					<div class="photo__count"><span class="current">1</span> / <span class="count"><?=($itemPhotos)?count($itemPhotos):0?></span>
 					</div>
 				</div>
 				<div class="offer-house__info card-house__content px-3">

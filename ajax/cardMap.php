@@ -5,14 +5,14 @@ use Bitrix\Main\Loader;
 
 $item = $_REQUEST['item']; // dump($_REQUEST['item']);
 
-if(isset($_COOKIE['comparison_vil'])){
+if(isset($_COOKIE['comparison_vil']))
   $arComparison = explode('-',$_COOKIE['comparison_vil']);
-}
-if(isset($_COOKIE['favorites_vil'])){
+
+if(isset($_COOKIE['favorites_vil']))
   $arFavorites = explode('-',$_COOKIE['favorites_vil']);
-}
-$generalParams['COMPARISON'] = (in_array($item['ID'],$arComparison)) ? 'Y' : 'N';
-$generalParams['FAVORITES'] = (in_array($item['ID'],$arFavorites)) ? 'Y' : 'N';
+
+$generalParams['COMPARISON'] = ($arComparison && in_array($item['ID'],$arComparison)) ? 'Y' : 'N';
+$generalParams['FAVORITES'] = ($arFavorites && in_array($item['ID'],$arFavorites)) ? 'Y' : 'N';
 $generalParams['TEMPLATE_CARD'] = 'map';
 ?>
 <div class="close-map"></div>

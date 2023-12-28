@@ -5,9 +5,9 @@ if(file_exists($_SERVER["DOCUMENT_ROOT"]."/local/php_interface/amo.php"))
 // тест вывод
 function dump($el){
 	global $USER;
-	// if($USER->IsAdmin()){
+	if($USER->IsAdmin()){
 		echo "<pre>";print_r($el);echo "</pre>";
-	// }
+	}
 }
 
 // вывод ошибки
@@ -21,16 +21,16 @@ function mesOk($txt){
 
 // формат цены
 function formatPrice($price){
-	$newPrice = number_format($price, 0, ',', '');
+	$newPrice = number_format((int)$price, 0, ',', '');
 	return $newPrice;
 }
 function formatPriceSite($price){
-	$newPrice = number_format($price, 0, ',', ' ');
+	$newPrice = number_format((int)$price, 0, ',', ' ');
 	return $newPrice;
 }
 // формат цены с точками
 function formatPricePoint($price){
-	$newPrice = number_format($price, 0, ',', '.');
+	$newPrice = number_format((int)$price, 0, ',', '.');
 	return $newPrice;
 }
 
@@ -474,7 +474,7 @@ AddEventHandler('iblock', 'OnBeforeIBlockElementUpdate', array('MyClass', 'OnBef
 
 class MyClass
 {
-  public function OnBeforeIBlockElementHandler(&$arFields)
+  static public function OnBeforeIBlockElementHandler(&$arFields)
   {
 		// dump($arFields);die();
 		if($arFields['PROPERTY_VALUES'][PROP_COORDINATES])
