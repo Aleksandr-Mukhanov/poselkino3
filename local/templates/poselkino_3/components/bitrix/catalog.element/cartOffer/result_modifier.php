@@ -143,7 +143,7 @@ if ($offerType == 'plots') // если участки
   $arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$villageID,"!ID"=>$arResult['ID']);
 	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
-	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
+	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while ($arElement = $rsElements->GetNext()) { // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
@@ -172,7 +172,7 @@ if ($offerType == 'plots') // если участки
 	if ($_SERVER['HTTP_HOST'] != 'poselkino.ru') $arFilter['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 	else $arFilter['PROPERTY_AREA'] = false;
 	$arSelect = Array("ID","NAME","CODE","PREVIEW_PICTURE","PROPERTY_PLOTTAGE","PROPERTY_PRICE","PROPERTY_DOP_PHOTO","PROPERTY_NUMBER");
-	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>2],$arSelect);
+	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>3],$arSelect);
 	while ($arElement = $rsElements->GetNext()) { // dump($arElement);
     // соберем фото
 		if($arElement["PREVIEW_PICTURE"])$arPhoto[] = ResizeImage($arElement["PREVIEW_PICTURE"]);
@@ -220,7 +220,7 @@ if ($offerType == 'plots') // если участки
     // соберем дома
     $arOffers[$arElement["ID"]] = [
       "NAME" => $arElement["NAME"],
-      "CODE" => 'doma/'.$arElement["CODE"],
+      "CODE" => 'kupit-dom/'.$arElement["CODE"],
       "IMG" => $arPhoto,
       "FLOORS" => $arElement["PROPERTY_FLOORS_VALUE"],
       "MATERIAL" => $arElement["PROPERTY_MATERIAL_VALUE"],
@@ -247,7 +247,7 @@ if ($offerType == 'plots') // если участки
     // соберем дома
     $arSimilarOffers[$arElement["ID"]] = [
       "NAME" => $arElement["NAME"],
-      "CODE" => 'doma/'.$arElement["CODE"],
+      "CODE" => 'kupit-dom/'.$arElement["CODE"],
       "IMG" => $arPhoto,
       "FLOORS" => $arElement["PROPERTY_FLOORS_VALUE"],
       "MATERIAL" => $arElement["PROPERTY_MATERIAL_VALUE"],

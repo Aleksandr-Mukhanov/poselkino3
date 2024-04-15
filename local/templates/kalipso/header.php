@@ -18,6 +18,7 @@ use Bitrix\Main\Page\Asset,
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/bootstrap-select.min.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/jquery.mask.min.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/jquery.fancybox.min.js');
+  Asset::getInstance()->addJs('https://dmp.one/sync?stock_key=5c4c8430279387999602b988321b468a');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/main.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/scripts.js');
 

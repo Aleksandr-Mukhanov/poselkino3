@@ -138,7 +138,7 @@ foreach ($item['PROPERTIES']['DOP_FOTO']['VALUE'] as $photo){
 						</div>
 					<?}?>
 					<div class="footer-card d-flex align-items-center mt-3">
-						<div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$arOffer['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+						<div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$arOffer['PRICE']?></span> <span class="rub_currency">&#8381;</span></div>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="<?=$arOffer['URL']?>">Подробнее</a>
 					</div>
 				</div>

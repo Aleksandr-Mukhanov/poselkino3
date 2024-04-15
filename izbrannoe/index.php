@@ -1,15 +1,32 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Избранное");
 
-if(isset($_COOKIE['favorites_vil']))
-	$arFavoritesVil = explode('-',$_COOKIE['favorites_vil']);
+$activeBtnVil = 'btn-success';
+$activeBtnPlots = 'btn-outline-secondary';
 
-if(isset($_COOKIE['favorites_plots']))
+if (isset($_COOKIE['favorites_vil'])) {
+	$arFavoritesVil = explode('-',$_COOKIE['favorites_vil']);
+}
+
+if (isset($_COOKIE['favorites_plots'])) {
 	$arFavoritesPlots = explode('-',$_COOKIE['favorites_plots']);
+	if (!$arFavoritesVil) {
+		$activeBtnPlots = 'btn-success';
+		$activeBtnVil = 'btn-outline-secondary';
+	}
+}
 
 $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет поселков в избранном!';
+$h1Plots = ($arFavoritesPlots) ? 'Участки в избранном' : 'Нет участков в избранном!';
 // $h1 = 'Избранное';
 ?>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.chooseFav .nav-link').on('click', function() {
+			$('.card-photo__list').slick('resize');
+		});
+	})
+</script>
 <main class="page page-search">
 	<div class="page__breadcrumbs">
 		<div class="container">
@@ -46,22 +63,22 @@ $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет по�
 			</div>
 		</div>
 	</div>
-	<div class="page__content-title">
+	<div class="page__content-title mb-4">
     <div class="container">
-      <div class="row align-items-center">
+      <!-- <div class="row align-items-center">
         <div class="col-xl-7 col-lg-6">
           <h1 class="h2"><?=$h1?> <span class="text-secondary"><?$APPLICATION->ShowViewContent('COUNT_POS');?></span></h1>
         </div>
-			</div>
+			</div> -->
 			<div class="row">
 				<div class="col-md-12 filter__tab">
-					<?if($USER->IsAdmin()):?>
+					<?//if($USER->IsAdmin()):?>
 						<ul class="nav mt-lg-0 mt-2 chooseFav">
 							<li class="nav-item">
-								<a class="nav-link btn btn-success rounded-pill" href="#favorites_villages">Поселки</a>
+								<a class="nav-link btn rounded-pill <?=$activeBtnVil?>" href="#favorites_villages">Поселки</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link btn btn-outline-secondary rounded-pill" href="#favorites_plots">
+								<a class="nav-link btn rounded-pill <?=$activeBtnPlots?>" href="#favorites_plots">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
 										<path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
 									</svg>
@@ -69,13 +86,20 @@ $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет по�
 								</a>
 							</li>
 						</ul>
-					<?endif;?>
+					<?//endif;?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="block_favorites">
-		<div id="favorites_villages"><br>
+		<div id="favorites_villages" class="<?=(!$arFavoritesVil && $arFavoritesPlots)?'hide':''?>">
+			<div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-xl-7 col-lg-6">
+	          <h1 class="h2"><?=$h1?> <span class="text-secondary"><?$APPLICATION->ShowViewContent('COUNT_POS');?></span></h1>
+	        </div>
+				</div>
+			</div>
 			<?if ($arFavoritesVil) {
 				$arrFilter = array('ID'=>$arFavoritesVil); // показывать только избранные
 			?>
@@ -90,11 +114,20 @@ $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет по�
 					)
 				);?>
 			<?}else{?>
-				<p>Поселков нет в избранном!</p>
+				<div class="container">
+					<p>Поселков нет в избранном!</p>
+				</div>
 			<?}?>
 		</div>
-		<div id="favorites_plots" class="hide">
-			<?if ($arFavoritesPlots && $USER->IsAdmin()) {
+		<div id="favorites_plots" class="<?=(!$arFavoritesPlots || $arFavoritesVil)?'hide':''?>">
+			<div class="container">
+	      <div class="row align-items-center">
+	        <div class="col-xl-7 col-lg-6">
+	          <h1 class="h2"><?=$h1Plots?> <span class="text-secondary"><?$APPLICATION->ShowViewContent('COUNT_PLOTS');?></span></h1>
+	        </div>
+				</div>
+			</div>
+			<?if ($arFavoritesPlots) {
 				global $arrFilterPlots;
 				$arrFilterPlots = ['ID'=>$arFavoritesPlots]; // показывать только избранные
 			?>
@@ -164,7 +197,9 @@ $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет по�
 					false
 				);?>
 			<?}else{?>
-				<p>Участков нет в избранном!</p>
+				<div class="container">
+					<p>Участков нет в избранном!</p>
+				</div>
 			<?}?>
 		</div>
 	</div>

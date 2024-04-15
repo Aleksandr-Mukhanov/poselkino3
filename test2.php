@@ -1,4 +1,106 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+
+use Bitrix\Main\Loader;
+use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
+	Loader::includeModule('highloadblock');
+  Loader::includeModule('iblock');
+
+	// Вытаскиваем элементы инфоблока
+	// $arOrder = ['SORT'=>'ASC'];
+	// $arFilter = ['IBLOCK_ID'=>6];
+	// $arSelect = ['ID','NAME','PROPERTY_MATERIAL','PROPERTY_MATERIAL2'];
+	// $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+	// while ($arElement = $rsElements->Fetch()) { // dump($arElement);
+	//   switch ($arElement['PROPERTY_MATERIAL2_VALUE']) {
+	// 		case 'каркас':
+	//   		$newProp = 582;
+	//   		break;
+	// 		case 'брус':
+	//   		$newProp = 583;
+	//   		break;
+	// 		case 'кирпич':
+	//   		$newProp = 584;
+	//   		break;
+	// 		case 'газоблок':
+	//   		$newProp = 585;
+	//   		break;
+	// 		case 'теплая керамика':
+	//   		$newProp = 586;
+	//   		break;
+	// 		case 'газосиликат':
+	//   		$newProp = 587;
+	//   		break;
+	// 		case 'монолит':
+	//   		$newProp = 588;
+	//   		break;
+	// 		case 'пеноблок':
+	//   		$newProp = 589;
+	//   		break;
+	// 		case 'теплый бетон':
+	//   		$newProp = 590;
+	//   		break;
+	// 		case 'фахтверк':
+	//   		$newProp = 591;
+	//   		break;
+	// 		case 'Сруб':
+	//   		$newProp = 592;
+	//   		break;
+	//
+	//   	default:
+	//   		$newProp = '';
+	//   		break;
+	//   }
+	//
+	// 	// if ($newProp) CIBlockElement::SetPropertyValues($arElement['ID'], 6, $newProp, "MATERIAL");
+	// }
+
+// получим шоссе и районы
+// $arElHL = getElHL(16,[],[],['*']);
+// foreach ($arElHL as $value)
+// 	$arShosse[$value['UF_NAME']] = $value['UF_XML_ID'];
+//
+// $arElHL = getElHL(17,[],[],['*']);
+// foreach ($arElHL as $value)
+// 	$arRegion[$value['UF_NAME']] = $value['UF_XML_ID'];
+//
+// // Вытаскиваем элементы инфоблока
+// $arOrder = ['SORT'=>'ASC'];
+// $arFilter = ['IBLOCK_ID'=>6];
+// $arSelect = ['ID','NAME','PROPERTY_VILLAGE'];
+// $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+// while ($arElement = $rsElements->Fetch()) {
+//   if ($arElement['PROPERTY_VILLAGE_VALUE'][0]) {
+//     $arHouseIds[$arElement['ID']] = $arElement['PROPERTY_VILLAGE_VALUE'][0];
+//   	$arVillageIds[] = $arElement['PROPERTY_VILLAGE_VALUE'][0];
+//   }
+//   // if ($arElement['PROPERTY_VILLAGE_VALUE'][1]) dump($arElement);
+// }
+//
+// $arOrder = ['SORT'=>'ASC'];
+// $arFilter = ['IBLOCK_ID'=>1,'ID'=>$arVillageIds];
+// $arSelect = ['ID','NAME',"PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE'];
+// $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+// while ($arElement = $rsElements->Fetch()) {
+// 	// dump($arElement);
+//   $arVillage[$arElement['ID']] = [
+//     // 'MKAD' => $arElement['PROPERTY_MKAD_VALUE'],
+//     // 'REGION' => $arRegion[$arElement['PROPERTY_REGION_VALUE']],
+//     'SHOSSE' => $arElement['PROPERTY_SHOSSE_VALUE'],
+//   ];
+// }
+// // dump($arVillage);
+//
+// foreach ($arHouseIds as $idHouse => $idVil) {
+//   // dump($arVillage[$idVil]['SHOSSE']);
+//   // CIBlockElement::SetPropertyValues($idHouse, 6, $arVillage[$idVil]['MKAD'], "MKAD");
+//   // CIBlockElement::SetPropertyValues($idHouse, 6, $arVillage[$idVil]['REGION'], "REGION");
+//   foreach ($arVillage[$idVil]['SHOSSE'] as $value)
+//     $arShosse2[] = $arShosse[$value];
+//   // CIBlockElement::SetPropertyValues($idHouse, 6, $arShosse2, "SHOSSE");
+//   unset($arShosse2);
+// }
+
+
 // require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 // сортировка urlrewrite.php
 // $i = 0;
@@ -76,4 +178,5 @@
 //   // else echo 'Ошибка!'.$arElement['ID'];
 //   // echo '<br>';
 // }
+echo 'ok_OLD';
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

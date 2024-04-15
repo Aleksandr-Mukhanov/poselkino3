@@ -8,6 +8,7 @@ use Bitrix\Main\Page\Asset,
   Asset::getInstance()->addCss(SITE_TEMPLATE_PATH.'/style/main.css');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/libs.min.js');
   Asset::getInstance()->addJs('https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=1c914fae-c0ca-40d5-9641-9cbd355e4f55');
+  Asset::getInstance()->addJs('https://dmp.one/sync?stock_key=5c4c8430279387999602b988321b468a');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/script.js');
 
   // получим наш поселок
@@ -28,6 +29,8 @@ use Bitrix\Main\Page\Asset,
     case 'kp-ekaterinino.ru': $villageID = 8943; $logoText = true; break;
     case 'ivanovskiy-les.ru': $villageID = 8987; $logoText = true; break;
     case 'borodino-kp.ru': $villageID = 7836; $logoText = true; break;
+
+    case 'kp-lisichkino.ru': $villageID = 8284; break;
     // case '': $villageID = ; break;
   }
 

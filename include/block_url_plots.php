@@ -23,17 +23,17 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
 $urlPlotsHide = (CSite::InDir('/kupit-uchastki/')) ? '' : 'hide';
 ?>
 <div class="container block_url <?=$urlPlotsHide?>" id="block_url_plots">
-  <ul class="nav nav-tabs" id="addressTabPlots" role="tablist">
-    <li class="nav-item"><a class="nav-link <?if(!$_REQUEST['show_rayon'])echo'active';?>" id="highwayTab-tab" data-toggle="tab" href="#highwayTabPlots" role="tab" aria-controls="highwayTab" aria-selected="true">Шоссе</a></li>
-    <li class="nav-item"><a class="nav-link <?if($_REQUEST['show_rayon'])echo'active';?>" id="areaTab-tab" data-toggle="tab" href="#areaTabPlots" role="tab" aria-controls="areaTab" aria-selected="false">Районы</a></li>
-    <li class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabPlots" role="tab" aria-controls="mkadTab" aria-selected="false">от МКАД</a></li>
-    <li class="nav-item"><a class="nav-link" id="priceTab-tab" data-toggle="tab" href="#priceTabPlots" role="tab" aria-controls="priceTab" aria-selected="false">Цена</a></li>
-    <li class="nav-item"><a class="nav-link" id="sizeTab-tab" data-toggle="tab" href="#sizeTabPlots" role="tab" aria-controls="sizeTab" aria-selected="false">Площадь</a></li>
-    <li class="nav-item"><a class="nav-link" id="classTab-tab" data-toggle="tab" href="#classTabPlots" role="tab" aria-controls="classTab" aria-selected="false">Класс</a></li>
-    <li class="nav-item"><a class="nav-link" id="communicationsTab-tab" data-toggle="tab" href="#communicationsTabPlots" role="tab" aria-controls="communicationsTab" aria-selected="false">Коммуникации</a></li>
-    <li class="nav-item"><a class="nav-link" id="infrastructureTab-tab" data-toggle="tab" href="#infrastructureTabPlots" role="tab" aria-controls="infrastructureTab" aria-selected="false">Инфраструктура</a></li>
+  <div class="nav nav-tabs" id="addressTabPlots" role="tablist">
+    <div class="nav-item"><a class="nav-link <?if(!$_REQUEST['show_rayon'])echo'active';?>" id="highwayTab-tab" data-toggle="tab" href="#highwayTabPlots" role="tab" aria-controls="highwayTab" aria-selected="true">Шоссе</a></div>
+    <div class="nav-item"><a class="nav-link <?if($_REQUEST['show_rayon'])echo'active';?>" id="areaTab-tab" data-toggle="tab" href="#areaTabPlots" role="tab" aria-controls="areaTab" aria-selected="false">Районы</a></div>
+    <div class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabPlots" role="tab" aria-controls="mkadTab" aria-selected="false">от МКАД</a></div>
+    <div class="nav-item"><a class="nav-link" id="priceTab-tab" data-toggle="tab" href="#priceTabPlots" role="tab" aria-controls="priceTab" aria-selected="false">Цена</a></div>
+    <div class="nav-item"><a class="nav-link" id="sizeTab-tab" data-toggle="tab" href="#sizeTabPlots" role="tab" aria-controls="sizeTab" aria-selected="false">Площадь</a></div>
+    <div class="nav-item"><a class="nav-link" id="classTab-tab" data-toggle="tab" href="#classTabPlots" role="tab" aria-controls="classTab" aria-selected="false">Класс</a></div>
+    <div class="nav-item"><a class="nav-link" id="communicationsTab-tab" data-toggle="tab" href="#communicationsTabPlots" role="tab" aria-controls="communicationsTab" aria-selected="false">Коммуникации</a></div>
+    <div class="nav-item"><a class="nav-link" id="infrastructureTab-tab" data-toggle="tab" href="#infrastructureTabPlots" role="tab" aria-controls="infrastructureTab" aria-selected="false">Инфраструктура</a></div>
     <!-- <li class="nav-item"><a class="nav-link" id="natureTab-tab" data-toggle="tab" href="#natureTabPlots" role="tab" aria-controls="natureTab" aria-selected="false">Природа</a></li> -->
-  </ul>
+  </div>
   <div class="tab-content">
     <div class="tab-pane fade <?if(!$_REQUEST['show_rayon'])echo'show active';?>" id="highwayTabPlots" role="tabpanel" aria-labelledby="highwayTab-tab">
       <div class="row">

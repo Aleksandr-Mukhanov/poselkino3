@@ -44,7 +44,7 @@ $strCSV = " --- ".date('d.m.Y H:i:s')." --- \n";
 $strCSV .= "XML Developer: zemform\n\n";
 
 $arURLFeed = [
-	3497 => 'https://zemst.ru/plan/xml/shadrino.xml', // Шадрино
+	// 3497 => 'https://zemst.ru/plan/xml/shadrino.xml', // Шадрино
 	// 3154 => 'https://zemst.ru/plan/xml/ignatovo.xml', // Игнатово
 	3256 => 'https://zemst.ru/plan/xml/flora-park-2.xml', // Флора-Парк-2
 	// 3339 => 'https://zemst.ru/plan/xml/vesna-park.xml', // Весна Парк
@@ -62,7 +62,7 @@ $arURLFeed = [
 	3396 => 'https://zemst.ru/plan/xml/sokolniki.xml', // Сокольники
 	3333 => 'https://zemst.ru/plan/xml/nazaryevo.xml', // Назарьево
 	// 4077 => 'https://zemst.ru/plan/xml/malinki-park.xml', // Малинки Парк
-	4485 => 'https://zemst.ru/plan/xml/mishutinskaya-sloboda.xml', // Мишутинская слобода
+	// 4485 => 'https://zemst.ru/plan/xml/mishutinskaya-sloboda.xml', // Мишутинская слобода
 	3613 => 'https://zemst.ru/plan/xml/rizhskie-zori.xml', // Рижские зори
 	5350 => 'https://zemst.ru/plan/xml/yarkoe.xml', // Яркое
 	5639 => 'https://zemst.ru/plan/xml/lapino.xml', // Лапино
@@ -70,6 +70,9 @@ $arURLFeed = [
 	// 6809 => 'https://zemst.ru/plan/xml/pirogovo.xml', // ЭК Пирогово
 	6149 => 'https://zemst.ru/plan/xml/perviy.xml', // Первый
 	8413 => 'https://zemst.ru/plan/xml/karcevo.xml', // Карцево
+	8746 => 'https://zemst.ru/plan/xml/reshetnikovo.xml', // Решетниково
+	9428 => 'https://zemst.ru/plan/xml/koskovo.xml', // Коськово
+	9652 => 'https://zemst.ru/plan/xml/ottepel.xml' // Оттепель
 ];
 
 foreach ($arURLFeed as $idVil => $urlFeed)
@@ -177,7 +180,8 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 	    $NUMBER = $plotId;
 	    $PLOTTAGE = str_replace(',','.',$plotArea);
 
-			if (in_array($idVil,[6809,3613,4077,6149,5639,8413]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Карцево
+			if (in_array($idVil,[6809,3613,4077,6149,5639,9428]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Коськово
+			if (in_array($idVil,[8413,8746,5350]) && $PLOTTAGE <= 7) continue; // Карцево, Решетниково, Яркое
 
 			// формула добавления участков
 			switch ($PLOTTAGE) {

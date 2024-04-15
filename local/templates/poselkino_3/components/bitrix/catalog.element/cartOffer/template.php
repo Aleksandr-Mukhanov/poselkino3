@@ -106,7 +106,7 @@ if($arResult['arVillage']['PLAN_IMG_IFRAME'.$nProp]){
 	$frame = '';
 }
 
-if ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) $priceArrange = formatPriceSite($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']).' <span class="rep_rubl">руб.</span>';
+if ($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']) $priceArrange = formatPriceSite($arResult['PROPERTIES']['ARRANGEMENT']['VALUE']).' <span class="rub_currency">&#8381;</span>';
 $priceArrange = ($priceArrange) ? $priceArrange : $arResult['arVillage']['PRICE_ARRANGE'];
 if (!$priceArrange) $priceArrange = 'Включено';
 
@@ -120,6 +120,7 @@ if($offerType != 'plots')
 	$finish = $arResult['PROPERTIES']['FINISH']['VALUE'];
 	$house_disclaimer = $arResult['PROPERTIES']['TYPE']['VALUE'];
 	$house_disclaimer_txt = ($arResult['PROPERTIES']['TYPE']['VALUE_XML_ID'] == 'ready') ? 'В стоимость входит дом и участок' : 'Цена указана за дом без участка';
+	if ($arResult['PROPERTIES']['DISCLAIMER']['VALUE']) $house_disclaimer_txt = $arResult['PROPERTIES']['DISCLAIMER']['VALUE'];
 }
 
 // dump($_COOKIE); // разбираем куки
@@ -175,8 +176,14 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	 <?endif;?>
 		<div class="order-1 order-md-2 col-lg-8 col-md-7">
 			<div class="village-slider">
-				<?if($USER->IsAdmin()){?>
+				<?if($offerType == 'plots'){?>
 				<div class="slider__header">
+					<div class="photo__top">
+						<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0 0H50V35C50 43.2843 43.2843 50 35 50H15C6.71573 50 0 43.2843 0 35V0Z" fill="#4B833E"></path>
+							<path d="M14.464 22V15.304H11.908V13.6H18.868V15.304H16.312V22H14.464ZM27.5613 20.884C26.7133 21.724 25.6493 22.144 24.3693 22.144C23.0893 22.144 22.0253 21.724 21.1773 20.884C20.3373 20.044 19.9173 19.016 19.9173 17.8C19.9173 16.592 20.3413 15.568 21.1893 14.728C22.0453 13.88 23.1133 13.456 24.3933 13.456C25.6733 13.456 26.7333 13.876 27.5733 14.716C28.4213 15.556 28.8453 16.584 28.8453 17.8C28.8453 19.008 28.4173 20.036 27.5613 20.884ZM22.5693 19.672C23.0493 20.184 23.6573 20.44 24.3933 20.44C25.1293 20.44 25.7333 20.188 26.2053 19.684C26.6773 19.172 26.9133 18.544 26.9133 17.8C26.9133 17.064 26.6733 16.44 26.1933 15.928C25.7133 15.416 25.1053 15.16 24.3693 15.16C23.6333 15.16 23.0293 15.416 22.5573 15.928C22.0853 16.432 21.8493 17.056 21.8493 17.8C21.8493 18.536 22.0893 19.16 22.5693 19.672ZM30.4846 22V13.6H37.4926V22H35.6446V15.268H32.3326V22H30.4846ZM15.8391 36V29.412L14.3751 29.772L13.9911 28.26L16.4031 27.54H17.6631V36H15.8391ZM25.8336 34.908C25.1376 35.732 24.2376 36.144 23.1336 36.144C22.0296 36.144 21.1336 35.732 20.4456 34.908C19.7576 34.084 19.4136 33.048 19.4136 31.8C19.4136 30.56 19.7616 29.528 20.4576 28.704C21.1536 27.872 22.0536 27.456 23.1576 27.456C24.2536 27.456 25.1456 27.868 25.8336 28.692C26.5296 29.516 26.8776 30.552 26.8776 31.8C26.8776 33.04 26.5296 34.076 25.8336 34.908ZM21.8136 33.72C22.1576 34.224 22.6056 34.476 23.1576 34.476C23.7096 34.476 24.1496 34.228 24.4776 33.732C24.8136 33.228 24.9816 32.584 24.9816 31.8C24.9816 31.032 24.8096 30.396 24.4656 29.892C24.1216 29.38 23.6776 29.124 23.1336 29.124C22.5896 29.124 22.1496 29.376 21.8136 29.88C21.4776 30.376 21.3096 31.016 21.3096 31.8C21.3096 32.576 21.4776 33.216 21.8136 33.72ZM34.5993 34.908C33.9033 35.732 33.0033 36.144 31.8993 36.144C30.7953 36.144 29.8993 35.732 29.2113 34.908C28.5233 34.084 28.1793 33.048 28.1793 31.8C28.1793 30.56 28.5273 29.528 29.2233 28.704C29.9193 27.872 30.8193 27.456 31.9233 27.456C33.0193 27.456 33.9113 27.868 34.5993 28.692C35.2953 29.516 35.6433 30.552 35.6433 31.8C35.6433 33.04 35.2953 34.076 34.5993 34.908ZM30.5793 33.72C30.9233 34.224 31.3713 34.476 31.9233 34.476C32.4753 34.476 32.9153 34.228 33.2433 33.732C33.5793 33.228 33.7473 32.584 33.7473 31.8C33.7473 31.032 33.5753 30.396 33.2313 29.892C32.8873 29.38 32.4433 29.124 31.8993 29.124C31.3553 29.124 30.9153 29.376 30.5793 29.88C30.2433 30.376 30.0753 31.016 30.0753 31.8C30.0753 32.576 30.2433 33.216 30.5793 33.72Z" fill="white"></path>
+						</svg>
+					</div>
 					<div class="photo__buttons">
 						<button title="<?=$comp_text?>" class="comparison-click <?=$comp_active?>" data-id="<?=$arResult['ID']?>" data-cookie="<?=$cookieComparison?>">
 							<svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
@@ -209,7 +216,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 				<?}?>
 				<div class="village-slider__list" id="village-slider">
 					<?foreach ($offerPhoto as $photo){ // Основные фото?>
-						<div class="village-slider__item" style="background: #eee url('<?=$photo['src']?>') no-repeat; background-size: cover;"></div>
+						<img class="village-slider__item" src="<?=$photo['src']?>" style="background: #eee;object-fit: cover;" alt="" itemprop="image" lazyload>
 					<?}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
@@ -278,8 +285,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 								<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
 					<?endif;?>
-					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rep_rubl">руб.</span></div>
-					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 <?=$offerPriceFor?></div>
+					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rub_currency">&#8381;</span></div>
+					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rub_currency">&#8381;</span> за 1 <?=$offerPriceFor?></div>
 					<?if($arResult['PROPERTIES']['INS']['VALUE']){ // рассрочка?>
 						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
 					<?}else{?><p></p><?}?>
@@ -302,6 +309,9 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 				<p>Поселок <a href="/poselki/<?=$arResult['arVillage']['CODE']?>/" target="_blank" class="text-success a__bold"><?=$arResult['arVillage']['NAME']?></a></p>
 				<p>Поселок расположен в <?=$km_MKAD?> км от <?=ROAD?> - <?=$arResult['arVillage']['SHOSSE']?> шоссе. Есть возможность добраться на личном авто и электричке.</p>
 				<p><?=$arResult['PREVIEW_TEXT']?></p>
+				<?if($arResult['PROPERTIES']['STROIMAN_URL']['VALUE']):?>
+					<p><a href="<?=$arResult['PROPERTIES']['STROIMAN_URL']['VALUE']?>" target="_blank" class="text-success a__bold"><?=$arResult['NAME']?></a></p>
+				<?endif;?>
 			</div>
 			<div class="home-communication">
 				<h2>Коммуникации</h2>
@@ -382,8 +392,16 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 			<div class="village-map page-map bg-white">
 				<div class="container px-0">
 					<h2>Карта</h2>
-					<div class="map-container-page position-relative">
-						<div id="villageMap" style="width: 100%; height: 100%;"></div>
+					<div class="map-container-page position-relative fill_img">
+						<div id="YaMaps"></div>
+						<span class="btn btn-default rounded-pill" id="btnLoadMapOffer">
+							Загрузить карту
+							<svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M21.2001 14C21.2001 14.04 21.2001 14.08 21.2001 14.12C21.2401 14.48 21.7201 22.84 20.0801 26.92C19.9601 27.24 19.6401 27.44 19.3201 27.44C19.2001 27.44 19.1201 27.4 19.0001 27.36C18.5601 27.2 18.3601 26.68 18.5201 26.28C19.9601 22.76 19.5601 15.12 19.5201 14.32C19.4401 13.96 19.2001 13.32 18.6001 13.32C18.1201 13.32 17.7201 13.72 17.7201 14.2V15.88C17.7201 16.36 17.3601 16.72 16.8801 16.72C16.4001 16.72 16.0401 16.36 16.0401 15.88V14.2C16.0401 14.12 16.0401 14 16.0401 13.92C16.0401 13.88 16.0401 13.8 16.0401 13.76V12.64C16.0401 12.16 15.6401 11.76 15.1601 11.76C14.6801 11.76 14.2801 12.16 14.2801 12.64V13.52V15.88C14.2801 16.36 13.9201 16.72 13.4401 16.72C12.9601 16.72 12.6001 16.36 12.6001 15.88V13.52V12.64V11.52C12.6001 11.04 12.2001 10.64 11.7201 10.64C11.2801 10.64 10.8801 11 10.8401 11.44C10.8401 11.44 10.8401 11.44 10.8401 11.48V15.64C10.8401 16.12 10.4801 16.48 10.0001 16.48C9.52007 16.48 9.16007 16.12 9.16007 15.64V6.00004C9.16007 5.52004 8.76007 5.12003 8.28007 5.12003C7.80007 5.12003 7.40007 5.52004 7.40007 6.00004V19.88C7.40007 20.28 7.16007 20.6 6.76007 20.68C6.40007 20.76 6.00007 20.6 5.80007 20.28L3.28007 15.92C3.16007 15.68 3.00007 15.56 2.76007 15.48C2.56007 15.44 2.36007 15.48 2.20007 15.56C1.92007 15.72 1.92007 16.36 2.12007 17.04C2.24007 17.32 4.56007 23.84 7.12007 26.4C7.44007 26.72 7.44007 27.24 7.12007 27.6C6.96007 27.76 6.76007 27.84 6.52007 27.84C6.32007 27.84 6.08007 27.76 5.92007 27.6C3.04007 24.72 0.640069 17.88 0.520069 17.6C0.0400691 16.12 0.360067 14.8 1.28007 14.16C1.84007 13.8 2.52007 13.68 3.16007 13.84C3.80007 14 4.36007 14.44 4.72007 15.08L5.64007 16.68V5.92003C5.64007 4.52003 6.80007 3.36003 8.20007 3.36003C9.60007 3.36003 10.7601 4.52003 10.7601 5.92003V9.04004C11.0401 8.92004 11.3601 8.88004 11.6401 8.88004C12.6401 8.88004 13.5201 9.44004 13.9201 10.28C14.2801 10.08 14.6801 10 15.0801 10C16.2001 10 17.2001 10.76 17.5201 11.76C17.8401 11.64 18.2001 11.56 18.5601 11.56C19.8801 11.6 20.8801 12.52 21.2001 14ZM12.7601 8.16003C13.2001 8.28003 13.6801 8.04004 13.8001 7.60004C13.9601 7.08004 14.0401 6.52003 14.0401 5.96003C14.0401 2.76003 11.4401 0.160034 8.24007 0.160034C5.04007 0.160034 2.44007 2.76003 2.44007 5.96003C2.44007 6.68003 2.56007 7.36004 2.80007 8.00004C2.92007 8.32004 3.24007 8.56003 3.60007 8.56003C3.68007 8.56003 3.80007 8.56003 3.88007 8.52003C4.32007 8.36003 4.52007 7.88004 4.36007 7.44004C4.20007 6.96004 4.08007 6.48004 4.08007 6.00004C4.08007 3.72004 5.92007 1.88004 8.20007 1.88004C10.4801 1.88004 12.3201 3.72004 12.3201 6.00004C12.3201 6.40004 12.2801 6.80003 12.1601 7.16003C12.0401 7.56003 12.3201 8.04003 12.7601 8.16003Z" fill="white"/>
+							</svg>
+						</span>
+						<span class="w-100 fill-bg"></span>
+						<div id="villageMap" class="map" style="display: none; width: 100%; height: 100%; border-radius: 15px;"></div>
 					</div>
 				</div>
 				<div class="container mobile--margin-top px-0">
@@ -614,8 +632,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 								<path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
 							</svg><?=$arResult['arVillage']['REGION']?> р-н, <?=$arResult['arVillage']['SETTLEM']?></a>
 					<?endif;?>
-					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rep_rubl">руб.</span></div>
-					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rep_rubl">руб.</span> за 1 <?=$offerPriceFor?></div>
+					<div class="price-main"><b><span class="split-number"><?=$arResult['PROPERTIES']['PRICE']['VALUE']?></span></b> <span class="rub_currency">&#8381;</span></div>
+					<div class="card-info__price"><span class="split-number"><?=$oneKVMetr?></span> <span class="rub_currency">&#8381;</span> за 1 <?=$offerPriceFor?></div>
 					<?if($arResult['PROPERTIES']['INS']['VALUE']){ // рассрочка?>
 						<p><a class="text-success a__bold" data-toggle="modal" data-target="#bank-widget" href="#">Доступна рассрочка</a></p>
 					<?}else{?><p></p><?}?>
@@ -664,10 +682,11 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
-									<div class="photo__item" style="background: url('<?=$value['src']?>') no-repeat; background-size: cover; background-position: center center;"></div>
+									<img class="photo__item" src="<?=$value['src']?>" style="background: #eee; object-fit: cover;" alt="" itemprop="image" lazyload>
 								<?}?>
               </div>
-              <div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
+              <div class="photo__count">
+								<span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
               </div>
             </div>
             <div class="offer-house__info card-house__content px-3">
@@ -706,7 +725,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	                <div class="card-house__inline">
 										<img class="mr-3" src="/assets/img/site/house.svg" alt>
 	                  <div class="card-house__inline-title">
-	                    Площадь участка:&nbsp;</div>
+	                    Площадь участка:&nbsp;
+										</div>
 	                  <div class="card-house__inline-value"><?=$house['PLOTTAGE']?> соток</div>
 	                </div>
 	              </div>
@@ -715,8 +735,11 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	                <div class="card-house__inline px-0">
 										<img src="/assets/img/svg/house-plan.svg" alt="Площадь дома" class="svg_image">
 	                  <div class="card-house__inline-title">
-	                    Площадь дома:&nbsp;</div>
-	                  <div class="card-house__inline-value"><?=$house['AREA_HOUSE']?> м<sup>2</sup></div>
+	                    Площадь дома:&nbsp;
+										</div>
+	                  <div class="card-house__inline-value">
+											<?=$house['AREA_HOUSE']?> м<sup>2</sup>
+										</div>
 	                </div>
 	                <div class="card-house__inline px-0">
                     <img src="/assets/img/svg/stairs.svg" alt="Этажей" class="svg_image">
@@ -727,13 +750,17 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	                <div class="card-house__inline px-0">
 										<img src="/assets/img/svg/brickwall.svg" alt="Материал" class="svg_image">
 	                  <div class="card-house__inline-title">
-											Материал:&nbsp;</div>
+											Материал:&nbsp;
+										</div>
 										<div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	                </div>
 	              </div>
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">
-                <div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+                <div class="footer-card__price mt-2 mb-4 w-100 mx-2">
+									<span class="split-number"><?=$house['PRICE']?></span>
+									<span class="rub_currency">&#8381;</span>
+								</div>
 								<a class="btn btn-outline-warning rounded-pill w-100" href="<?=$house['URL']?>">Подробнее</a>
               </div>
             </div>
@@ -754,10 +781,11 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
             <div class="photo offer-house__photo">
               <div class="photo__list">
 								<?foreach ($house['IMG'] as $key => $value) {?>
-									<div class="photo__item" style="background: url('<?=$value['src']?>') no-repeat; background-size: cover; background-position: center center;"></div>
+									<img class="photo__item" src="<?=$value['src']?>" style="background: #eee; object-fit: cover;" alt="" itemprop="image" lazyload>
 								<?}?>
               </div>
-              <div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
+              <div class="photo__count">
+								<span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
               </div>
             </div>
             <div class="offer-house__info card-house__content px-3">
@@ -773,7 +801,8 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	                <div class="card-house__inline px-0">
 										<img class="mr-3" src="/assets/img/site/house.svg" alt>
 	                  <div class="card-house__inline-title">
-	                    Площадь участка:&nbsp;</div>
+	                    Площадь участка:&nbsp;
+										</div>
 	                  <div class="card-house__inline-value"><?=$house['PLOTTAGE']?> соток</div>
 	                </div>
 	              </div>
@@ -782,24 +811,32 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	                <div class="card-house__inline px-0">
 										<img src="/assets/img/svg/house-plan.svg" alt="Площадь дома" class="mr-3">
 	                  <div class="card-house__inline-title">
-	                    Площадь дома:&nbsp;</div>
-	                  <div class="card-house__inline-value"><?=$house['AREA_HOUSE']?> м<sup>2</sup></div>
+	                    Площадь дома:&nbsp;
+										</div>
+	                  <div class="card-house__inline-value">
+											<?=$house['AREA_HOUSE']?> м<sup>2</sup>
+										</div>
 	                </div>
 	                <div class="card-house__inline px-0">
 										<img src="/assets/img/svg/stairs.svg" alt="Этажей" class="mr-3">
 	                  <div class="card-house__inline-title">
-	                    Этажей:&nbsp;</div>
+	                    Этажей:&nbsp;
+										</div>
 	                  <div class="card-house__inline-value"><?=$house['FLOORS']?></div>
 	                </div>
 	                <div class="card-house__inline px-0">
 										<img src="/assets/img/svg/brickwall.svg" alt="Материал" class="mr-3">
 	                  <div class="card-house__inline-title">
-											Материал:&nbsp;</div>
+											Материал:&nbsp;
+										</div>
 										<div class="card-house__inline-value mt-2"><?=$house['MATERIAL']?></div>
 	                </div>
+								</div>
 							<?}?>
               <div class="footer-card d-flex align-items-center mt-3">
-                <div class="footer-card__price mt-2 mb-4 w-100"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+                <div class="footer-card__price mt-2 mb-4 w-100">
+									<span class="split-number"><?=$house['PRICE']?></span> <span class="rub_currency">&#8381;</span>
+								</div>
 								<a class="btn btn-outline-warning rounded-pill w-100" href="/<?=$house['URL']?>/">Подробнее</a>
               </div>
             </div>
@@ -809,7 +846,14 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 		</div>
 	</div>
 <?endif;?>
-<script type="text/javascript">
+<script>
+
+	function showYaMaps(){
+	 var script   = document.createElement("script");
+	 script.src   = "https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=0c55e225-bb2b-4b98-94a5-3390b6dbf643";
+	 document.getElementById("YaMaps").appendChild(script);
+	}
+
   // Яндекс.Карты
 	function loadMaps() {
     ymaps.ready(function () {
@@ -830,5 +874,9 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
     });
 	};
 
-	setTimeout(loadMaps, 3000);
+	$(document).ready(function(){
+		setTimeout(showYaMaps, 100);
+		setTimeout(loadMaps, 1000);
+	});
+
 </script>

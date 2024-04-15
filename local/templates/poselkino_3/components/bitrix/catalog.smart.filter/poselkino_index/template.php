@@ -92,7 +92,7 @@ $this->setFrameMode(true);
         <div class="col-12 col-sm-4 col-md-3 col-xl-4 col-inline">
             <div class="form-group form-group-inline">
                 <label>
-                    Стоимость, <span class="rub">a</span>
+                    Стоимость, <span class="rub_currency">&#8381;</span>
                 </label>
             </div>
             <div class="cost_land">

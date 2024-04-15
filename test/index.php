@@ -109,8 +109,8 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 				<div class="row test-body__step" data-title-step="На какой удаленности от <?=REGION_SHORT?> рассматриваете земельный участок?" data-step="2" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="remoteness" value name="remoteness">
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="20" type="button"> <img src="/assets/img/test/20.svg" alt="20"><img class="img-active" src="/assets/img/test/20-active.svg" alt="20"><span>До
-								20 км.</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="30" type="button"> <img src="/assets/img/test/20.svg" alt="30"><img class="img-active" src="/assets/img/test/20-active.svg" alt="0"><span>До
+								30 км.</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="50" type="button"> <img src="/assets/img/test/50.svg" alt="50"><img class="img-active" src="/assets/img/test/50-active.svg" alt="50"><span>До
@@ -120,10 +120,10 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="70" type="button"> <img src="/assets/img/test/70.svg" alt="70"><img class="img-active" src="/assets/img/test/70-active.svg" alt="70"><span>До
 								70 км.</span></button>
 					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
+					<!-- <div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="100" type="button"> <img src="/assets/img/test/100.svg" alt="100"><img class="img-active" src="/assets/img/test/100-active.svg" alt="100"><span>До
 								100 км.</span></button>
-					</div>
+					</div> -->
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="remoteness" data-input-value="irrelevant" type="button"> <span>Не имеет значения</span></button>
 					</div>
@@ -131,16 +131,16 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 				<div class="row test-body__step" data-title-step="В какую стоимость планируете уложиться при выборе участка?" data-step="3" data-show-step="false" style="display: none;">
 					<input class="hidden sr-only" id="cost" value name="cost">
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 500 000" type="button"><span>До 500 000</span></button>
-					</div>
-					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 1,5 млн." type="button"><span>До 1,5 млн.</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 1 млн." type="button"><span>До 1 млн.</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 2 млн." type="button"><span>До 2 млн.</span></button>
 					</div>
 					<div class="col-lg-3 col-md-4 col-sm-6">
-						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="Выше 2 млн." type="button"><span>Выше 2 млн.</span></button>
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="До 3 млн." type="button"><span>До 3 млн.</span></button>
+					</div>
+					<div class="col-lg-3 col-md-4 col-sm-6">
+						<button class="form-card__item form-card__item--small" data-input-name="cost" data-input-value="Выше 3 млн." type="button"><span>Выше 3 млн.</span></button>
 					</div>
 				</div>
 				<div class="row test-body__step" data-title-step="Какой размер участка для Вас наиболее подходящий?" data-step="4" data-show-step="false" style="display: none;">
@@ -175,7 +175,7 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 								alt="Беру на дальнюю перспективу"><span>Оба варианта</span></button>
 					</div>
 				</div>
-				<div class="row test-body__step step-last" data-title-step="Отправьте нам результаты теста" data-subtitle-step="И мы пришлем перечень поселков, которые вам подходят:" data-step="6" data-show-step="false" style="display: none;">
+				<div class="row test-body__step step-last" data-title-step="Отправьте нам результаты теста" data-subtitle-step="И наш менеджер пришлет наиболее подходящие варианты вам на wa:" data-step="6" data-show-step="false" style="display: none;">
 					<div class="col-md-4 mb-3 mb-md-0">
 						<input id="nameTest" type="text" value placeholder="Ваше имя" name="nameTest" required>
 					</div>

@@ -18,6 +18,7 @@ use Bitrix\Main\Page\Asset,
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/bootstrap-select.min.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/jquery.mask.min.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/jquery.fancybox.min.js');
+  Asset::getInstance()->addJs('https://dmp.one/sync?stock_key=5c4c8430279387999602b988321b468a');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/main.js');
   Asset::getInstance()->addJs(SITE_TEMPLATE_PATH.'/js/scripts.js');
 
@@ -59,6 +60,22 @@ use Bitrix\Main\Page\Asset,
     case 'sheremetevo-usadba.ru': $villageID = 8865; $logoText = true; break;
     case 'ushakov-kp.ru': $villageID = 3610; $logoText = true; break;
     case 'kp-berezy.ru': $villageID = 8867; $logoText = true; break;
+
+    case 'solnce-bereg.ru': $villageID = 17; $logoText = true; break;
+    case 'reka-kp.ru': $villageID = 9025; $logoText = true; break;
+    case 'triumfalniy.ru': $villageID = 9111; $logoText = true; break;
+    case 'prilesnoy.ru': $villageID = 9113; $logoText = true; break;
+    case 'kp-koskovo.ru': $villageID = 9428; $logoText = true; break;
+    case 'kp-tashirovo.ru': $villageID = 9366; $logoText = true; break;
+    case 'novie-velemi.ru': $villageID = 9531; $logoText = true; break;
+    case 'sohinki-igs.ru': $villageID = 9508; $logoText = true; break;
+    case 'shodnya-forest.ru': $villageID = 5401; $logoText = true; break;
+    case 'doma-nasledie.ru': $villageID = 8151; $logoText = true; break;
+
+    case 'kp-vysokovo.ru': $villageID = 9457; $logoText = true; break;
+    case 'kp-artemovo.ru': $villageID = 9620; $logoText = true; break;
+    case 'ot-tepel.ru': $villageID = 9652; $logoText = true; break;
+    case 'kp-ecovillage.ru': $villageID = 9608; $logoText = true; break;
     // case '': $villageID = ; $logoText = true; break;
   }
 

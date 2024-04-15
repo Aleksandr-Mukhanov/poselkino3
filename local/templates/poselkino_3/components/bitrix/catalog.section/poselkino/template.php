@@ -20,6 +20,11 @@ echo $arResult['NAV_RESULT']->NavRecordCount;
 $this->EndViewTarget();
 $GLOBALS['COUNT_POS'] = $arResult['NAV_RESULT']->NavRecordCount;
 
+// автоматически ставить шильдик ТОП 100
+$arElHL = getElHL(5,[],['UF_TOP100'=>true],['ID','UF_XML_ID']);
+foreach ($arElHL as $value)
+	$arDevelopersTOP100[] = $value['UF_XML_ID'];
+
 if (!empty($arResult['NAV_RESULT']))
 {
 	$navParams =  array(
@@ -208,13 +213,31 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 		foreach ($arResult['ITEM_ROWS'] as $rowData)
 		{
 			$rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
+
+			// разбираем сравнение и избранное
+			switch ($arParams['TEMPLATE_CARD']) {
+				case 'offer_plot':
+					$comparisonCookie = 'comparison_plots';
+					$favoritesCookie = 'favorites_plots';
+					break;
+				case 'offer_house':
+					$comparisonCookie = 'comparison_house';
+					$favoritesCookie = 'favorites_house';
+					break;
+
+				default:
+					$comparisonCookie = 'comparison_vil';
+					$favoritesCookie = 'favorites_vil';
+					break;
+			}
+
 			// dump($_COOKIE); // разбираем куки
 			$arComparison = []; $arFavorites = [];
-			if(isset($_COOKIE['comparison_vil'])){
-				$arComparison = explode('-',$_COOKIE['comparison_vil']);
+			if(isset($_COOKIE[$comparisonCookie])){
+				$arComparison = explode('-',$_COOKIE[$comparisonCookie]);
 			}
-			if(isset($_COOKIE['favorites_vil'])){
-				$arFavorites = explode('-',$_COOKIE['favorites_vil']);
+			if(isset($_COOKIE[$favoritesCookie])){
+				$arFavorites = explode('-',$_COOKIE[$favoritesCookie]);
 			}
 
 			foreach ($rowItems as $item){ $i++; // вывод карточек
@@ -232,7 +255,8 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 							'BIG_LABEL' => 'N',
 							'BIG_DISCOUNT_PERCENT' => 'N',
 							'BIG_BUTTONS' => 'N',
-							'SCALABLE' => 'N'
+							'SCALABLE' => 'N',
+							'DEVELOPERS_TOP100' => $arDevelopersTOP100
 						),
 						'PARAMS' => $generalParams
 							+ array('SKU_PROPS' => $arResult['SKU_PROPS'][$item['IBLOCK_ID']])
@@ -241,7 +265,7 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 					array('HIDE_ICONS' => 'Y')
 				);?>
 				<?if ($i == 5):
-					if($_REQUEST['PAGEN_1'] && ($_REQUEST['PAGEN_1'] % 2) == 0):?>
+					/*if($_REQUEST['PAGEN_1'] && ($_REQUEST['PAGEN_1'] % 2) == 0):?>
 						<section class="banner">
 							<div class="container">
 								<div class="banner__wrap banner__wrap-2">
@@ -260,7 +284,23 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 								</div>
 							</div>
 						</section>
-					<?endif;?>
+					<?endif;*/?>
+					<div class="telegram telegram--big">
+						<div class="telegram__container">
+							<div class="telegram__wrap">
+								<img src="/assets/img/tg-bg.svg" alt="tg">
+								<div class="telegram__text">
+									Подпишитесь на&nbsp;Телеграм канал Поселкино.ру и&nbsp;следите за&nbsp;скидками и&nbsp;горячими предложениями
+								</div>
+								<a href="https://t.me/poselkino_news" class="telegram_button" target="_blank">
+									<svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M0.884691 6.6054L17.7346 0.0798657C18.5167 -0.203917 19.1997 0.271492 18.9463 1.45928L18.9477 1.45782L16.0787 15.034C15.8661 15.9965 15.2967 16.2306 14.5001 15.7771L10.131 12.5429L8.02369 14.582C7.79068 14.8161 7.59407 15.0135 7.1426 15.0135L7.45281 10.5476L15.5501 3.20001C15.9025 2.88843 15.4714 2.7129 15.0069 3.02301L5.00032 9.35106L0.686628 7.99944C-0.249802 7.70103 -0.270191 7.05886 0.884691 6.6054Z" fill="white"/>
+									</svg>
+									Подпишись&nbsp;на&nbsp;канал
+								</a>
+							</div>
+						</div>
+					</div>
 				<?endif;?>
 				<? // вставка формы
 				//$nPos = ($cntPos > 5) ? $cntPos / 2 : $cntPos;
@@ -347,7 +387,7 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 						$(this).text(text_number);
 					});
 					// замена рубля
-					$('.rep_rubl').html('<span class="rubl">a</span>');
+					$('.rep_rubl').html('<span class="rub_currency">&#8381;</span>');
 				}
 			);
 

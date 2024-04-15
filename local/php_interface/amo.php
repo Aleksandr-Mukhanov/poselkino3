@@ -64,7 +64,7 @@ function authInAmo(){
 function inAmo($arPostFields,$url){
 
 	$authAmoResult = authInAmo(); // результат авторизации в АМО
-	if($authAmoResult != 1)die($authAmoResult);
+	if ($authAmoResult != 1) echo ($authAmoResult);
 
 	#Формируем ссылку для запроса
 	$link='https://d7825718.amocrm.ru'.$url;

@@ -1,30 +1,38 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Сравнение");
 
+\Bitrix\Main\Loader::includeModule('highloadblock');
+
 if (isset($_COOKIE['comparison_vil']))
 	$arComparisonVil = explode('-',$_COOKIE['comparison_vil']);
 
 if (isset($_COOKIE['comparison_plots']))
 	$arComparisonPlots = explode('-',$_COOKIE['comparison_plots']);
 
+// получим шоссе и районы
+$arElHL = getElHL(16,[],[],['*']);
+foreach ($arElHL as $value)
+	$arShosse[$value['UF_XML_ID']] = $value['UF_NAME'];
+
 if ($arComparisonVil)
 {
 	// получим наши поселки
 	$arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>IBLOCK_ID,"ACTIVE"=>"Y","ID"=>$arComparisonVil);
-	$arSelect = Array('ID','NAME','PREVIEW_PICTURE','PROPERTY_MKAD','PROPERTY_PRICE_SOTKA','PROPERTY_HOME_VALUE','PROPERTY_PRICE_ARRANGE','PROPERTY_PRICE_ARRANGE_TIP','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_WATER','PROPERTY_SOIL','PROPERTY_BUS','PROPERTY_ROADS_IN_VIL','PROPERTY_ROADS_TO_VIL','PROPERTY_AREA_VIL','DETAIL_PAGE_URL'); // ,'PROPERTY_'
+	$arSelect = Array('ID','NAME','PREVIEW_PICTURE','DETAIL_PAGE_URL','PROPERTY_SHOSSE','PROPERTY_MKAD','PROPERTY_PRICE_SOTKA','PROPERTY_HOME_VALUE','PROPERTY_PRICE_ARRANGE','PROPERTY_PRICE_ARRANGE_TIP','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_WATER','PROPERTY_SOIL','PROPERTY_BUS','PROPERTY_ROADS_IN_VIL','PROPERTY_ROADS_TO_VIL','PROPERTY_AREA_VIL'); // ,'PROPERTY_'
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
 		// выводим водоемы
 		$arWater = $arElement['PROPERTY_WATER_VALUE']; // Водоем
-		foreach($arWater as $water){
+		foreach($arWater as $water)
 			$arElement['WATER'] .= ($arElement['WATER']) ? ', '.$water : $water;
-		}
+
 		// выводим почву
 		$arSoil = $arElement['PROPERTY_SOIL_VALUE']; // Почва
-		foreach($arSoil as $soil){
+		foreach($arSoil as $soil)
 			$arElement['SOIL'] .= ($arElement['SOIL']) ? ', '.$soil : $soil;
-		}
+
+		if ($arElement['PROPERTY_SHOSSE_VALUE']) $arElement['SHOSSE'] = implode(', ',$arElement['PROPERTY_SHOSSE_VALUE']);
 
 		$arVillageComp[$arElement['ID']] = $arElement;
 	} // dump($arVillageComp);
@@ -32,23 +40,28 @@ if ($arComparisonVil)
 
 if ($arComparisonPlots)
 {
+	// $arElHL = getElHL(16,[],[],['*']); dump($arElHL);
 	// получим наши участки
 	$arOrder = Array("SORT"=>"ASC");
 	$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","ID"=>$arComparisonPlots);
-	$arSelect = Array('ID','NAME','PREVIEW_PICTURE','DETAIL_PAGE_URL','PROPERTY_PLOTTAGE','PROPERTY_PRICE','PROPERTY_ARRANGEMENT','PROPERTY_MKAD','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_WATER','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_LES','PROPERTY_PLYAZH'); // ,'PROPERTY_'
+	$arSelect = Array('ID','NAME','PREVIEW_PICTURE','DETAIL_PAGE_URL','PROPERTY_SHOSSE','PROPERTY_PLOTTAGE','PROPERTY_PRICE','PROPERTY_ARRANGEMENT','PROPERTY_MKAD','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_WATER','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_LES','PROPERTY_PLYAZH','PROPERTY_VILLAGE'); // ,'PROPERTY_'
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 	while($arElement = $rsElements->GetNext()){ // dump($arElement);
 		// выводим водоемы
 		$arWater = $arElement['PROPERTY_WATER_VALUE']; // Водоем
-		foreach($arWater as $water){
+		foreach($arWater as $water)
 			$arElement['WATER'] .= ($arElement['WATER']) ? ', '.$water : $water;
-		}
+
+		foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $value)
+			$arPlotShosse[] = $arShosse[$value];
+		if ($arElement['PROPERTY_SHOSSE_VALUE']) $arElement['SHOSSE'] = implode(', ',$arPlotShosse);
+		unset($arPlotShosse);
 
 		$arPlotsComp[$arElement['ID']] = $arElement;
 	} // dump($arPlotsComp);
 }
 
-$h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' : 'Нет поселков в сравнении!';
+$h1 = ($arComparisonVil && $arComparisonPlots) ? 'Сравните выбранное' : 'В сравнении пусто!';
 ?>
 <main class="page page-comparison slider">
 	<div class="page__breadcrumbs mt-0 py-4">
@@ -95,13 +108,13 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 					</div>
 				</div>
 				<div class="col-md-12 filter__tab">
-					<?if($USER->IsAdmin()):?>
-						<ul class="nav mt-lg-0 mt-2">
+					<?//if($USER->IsAdmin()):?>
+						<ul class="nav mt-lg-0 mt-2 chooseFav">
 							<li class="nav-item">
-								<a class="nav-link btn btn-success rounded-pill" href="<?=htmlspecialcharsbx($urlAll)?>">Поселки</a>
+								<a class="nav-link btn btn-success rounded-pill" href="#comparison_vil">Поселки</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link btn btn-outline-secondary rounded-pill" href="<?=htmlspecialcharsbx($urlNoDom)?>">
+								<a class="nav-link btn btn-outline-secondary rounded-pill" href="#comparison_plots">
 									<svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
 										<path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"/>
 									</svg>
@@ -109,22 +122,24 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 								</a>
 							</li>
 						</ul>
-					<?endif;?>
+					<?//endif;?>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="block_comparison">
 	<?if($arComparisonVil){?>
-		<div class="container comparison-content">
+		<div class="container comparison-content" id="comparison_vil">
 			<div class="row">
 				<div class="col-xl-2 col-md-3 col-sm-4 d-sm-flex d-none">
 					<div class="comparison-tabs__char">
+						<div class="char__title tr_1">Шоссе:</div>
 						<div class="char__title tr_1">Удаленность от МКАД:</div>
 						<div class="char__title tr_2">Цена за сотку:</div>
 						<div class="char__title tr_3">Цена за дом:</div>
 						<div class="char__title tr_4">Цена за обустройство (описание):</div>
 						<div class="char__title tr_5">Цена за обустройство (кто):</div>
-						<div class="char__title tr_6">Свет:</div>
+						<div class="char__title tr_6">Электричество:</div>
 						<div class="char__title tr_7">Газ:</div>
 						<div class="char__title tr_8">Вода:</div>
 						<div class="char__title tr_9">Водоем:</div>
@@ -157,6 +172,10 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 	                      </a>
 	                    </div>
 											<div class="card-description tr_1">
+												<div class="card-description__title">Шоссе:</div>
+												<div class="card-description__value"><?=$villageComp['SHOSSE']?></div>
+											</div>
+											<div class="card-description tr_1">
 												<div class="card-description__title">Удаленность от МКАД:</div>
 												<div class="card-description__value"><?=$villageComp['PROPERTY_MKAD_VALUE']?></div>
 											</div>
@@ -177,7 +196,7 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 												<div class="card-description__value"><?=$villageComp['PROPERTY_PRICE_ARRANGE_TIP_VALUE']?></div>
 											</div>
 											<div class="card-description tr_6">
-												<div class="card-description__title">Свет:</div>
+												<div class="card-description__title">Электричество:</div>
 												<div class="card-description__value"><?=$villageComp['PROPERTY_ELECTRO_VALUE']?></div>
 											</div>
 											<div class="card-description tr_7">
@@ -222,16 +241,17 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 			</div>
 		</div>
 	<?}?>
-	<?if($arComparisonPlots && $USER->IsAdmin()){?>
-		<div class="container comparison-content">
-			<div class="row hide">
+	<?if($arComparisonPlots){?>
+		<div class="container comparison-content hide" id="comparison_plots">
+			<div class="row">
 				<div class="col-xl-2 col-md-3 col-sm-4 d-sm-flex d-none">
 					<div class="comparison-tabs__char">
+						<div class="char__title tr_1">Шоссе:</div>
 						<div class="char__title tr_1">Удаленность от МКАД:</div>
 						<div class="char__title tr_2">Площадь:</div>
 						<div class="char__title tr_3">Цена:</div>
 						<div class="char__title tr_4">Обустройство:</div>
-						<div class="char__title tr_5">Свет:</div>
+						<div class="char__title tr_5">Электричество:</div>
 						<div class="char__title tr_6">Газ:</div>
 						<div class="char__title tr_7">Вода:</div>
 						<div class="char__title tr_8">Водоем:</div>
@@ -263,6 +283,10 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 	                      </a>
 	                    </div>
 											<div class="card-description tr_1">
+												<div class="card-description__title">Шоссе:</div>
+												<div class="card-description__value"><?=$villageComp['SHOSSE']?></div>
+											</div>
+											<div class="card-description tr_1">
 												<div class="card-description__title">Удаленность от МКАД:</div>
 												<div class="card-description__value"><?=$villageComp['PROPERTY_MKAD_VALUE']?></div>
 											</div>
@@ -279,7 +303,7 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 												<div class="card-description__value"><?=$villageComp['PROPERTY_ARRANGEMENT_VALUE']?></div>
 											</div>
 											<div class="card-description tr_5">
-												<div class="card-description__title">Свет:</div>
+												<div class="card-description__title">Электричество:</div>
 												<div class="card-description__value"><?=$villageComp['PROPERTY_ELECTRO_VALUE']?></div>
 											</div>
 											<div class="card-description tr_6">
@@ -304,7 +328,7 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 											</div>
 											<div class="card-description tr_11">
 												<div class="card-description__title">Лес:</div>
-												<div class="card-description__value"><?=implode(', ',$villageComp['PROPERTY_LES_VALUE'])?></div>
+												<div class="card-description__value"><?//=implode(', ',$villageComp['PROPERTY_LES_VALUE'])?></div>
 											</div>
 											<div class="card-description tr_12">
 												<div class="card-description__title">Пляж:</div>
@@ -320,9 +344,11 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
 			</div>
 		</div>
 	<?}?>
+	</div>
 </main>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function()
+	{
 		for (var i = 1; i < 15; i++) {
       var show_dif = true;
       var j = 0;
@@ -335,6 +361,11 @@ $h1 = ($arComparisonVil) ? 'Сравните выбранные поселки' 
       });
       if (show_dif) $('.tr_'+i).hide();
     }
+
+		$('.chooseFav .nav-link').on('click', function() {
+			$('.card-photo__list').slick('resize');
+		});
+
 	});
 </script>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -50,7 +50,7 @@ if ($shosse) { // шоссе
         $urlTeg = '/poselki/'.$shosse.'-shosse-'.$nameTeg.'/';
         break;
     }
-    if (!$domPos) $urlTeg = str_replace('/poselki/','/kupit-uchastki/',$urlTeg); // у поселков нет
+    // if (!$domPos) $urlTeg = str_replace('/poselki/','/kupit-uchastki/',$urlTeg); // у поселков нет
     $arTegs[$nameTeg]['url'] = $urlTeg;
   }
 

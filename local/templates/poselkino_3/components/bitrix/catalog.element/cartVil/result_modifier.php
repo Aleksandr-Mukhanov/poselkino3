@@ -53,7 +53,12 @@
 	// } // dump($arPhoto);
 
 // получим девелоперов
-	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE']);
+	$arResult['DEVELOPERS'] = getElHL(5,[],['UF_XML_ID'=>$arResult['PROPERTIES']['DEVELOPER_ID']['VALUE']],['ID','UF_NAME','UF_PHONE','UF_FILE','UF_TOP100']);
+
+	// автоматически ставить шильдик ТОП 100
+	$arResult['TOP_100'] = false;
+	foreach ($arResult['DEVELOPERS'] as $key => $value)
+		if ($value['UF_TOP100']) $arResult['TOP_100'] = true;
 
 	$arElHL = getElHL(12,[],[],['ID','UF_NAME','UF_XML_ID']); // Инфраструктура
 	foreach ($arElHL as $key => $value)

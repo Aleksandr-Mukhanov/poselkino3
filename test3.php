@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-echo 'ok<br>';
+echo 'ok2<br>';
 
 // передадим в АМО
 $name = 'тест';

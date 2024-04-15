@@ -11,4 +11,3 @@
 	} //dump($arComment);
 
 $arResult["COMMENTS"] = $arComment;
-?>

@@ -24,6 +24,7 @@ global $arrFilter;
       <div class="row">
         <div class="col-12">
           <div class="hero-wrap">
+						<img src="/assets/img/site/hero@2x.jpg" alt="Hero image" class="hero-wrap__image" loading="lazy">
             <div class="row align-items-center align-items-sm-start hero-wrap__title">
               <div class="col-9 col-sm-8 col-md-6">
                 <h1>Найди лучший поселок для жизни</h1>

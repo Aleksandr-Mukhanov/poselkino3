@@ -125,9 +125,9 @@ switch ($km_MKAD) {
 	$nameVil = $arResult['PROPERTIES']['TYPE']['VALUE'].' '.$name; // тип поселка
 
 	if($housesValEnum == 3){ // Только участки
-		$priceSotka = 'Сотка от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).'</span> <span class="rep_rubl">руб.</span>';
+		$priceSotka = 'Сотка от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).'</span> <span class="rub_currency">&#8381;</span>';
 	}elseif($housesValEnum == 4 || $housesValEnum == 256){ // Участки с домами
-		$priceSotka = 'Дом от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'</span> <span class="rep_rubl">руб.</span>';
+		$priceSotka = 'Дом от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'</span> <span class="rub_currency">&#8381;</span>';
 	}
 
 	// выводим правильные окончания
@@ -280,7 +280,7 @@ switch ($km_MKAD) {
 					<div class="village-slider__list" id="village-slider">
 						<?foreach ($arResult['MORE_PHOTO'] as $key => $photo){ // Основные фото
 						  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-							<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') no-repeat; background-size: cover;"></div>
+							<img class="village-slider__item" src="<?=$photoRes['src']?>" style="background: #eee;object-fit: cover;" alt="" itemprop="image" lazyload>
 						<?unset($photoRes);}?>
 					</div>
 					<div class="village-slider__list-thumb" id="village-slider-thumb">
@@ -534,6 +534,12 @@ switch ($km_MKAD) {
 				$arrFilter['>=PROPERTY_HOME_VALUE'] = $homeValueFrom;
 				$arrFilter['<=PROPERTY_HOME_VALUE'] = $homeValueTo;
 			} // dump($arrFilter);
+			$arrFilter = [
+				['LOGIC' => 'OR',
+					['ID' => $arResult['PROPERTIES']['RECOM']['VALUE']],
+					$arrFilter
+				]
+			];
 			// $arrFilter=array('PROPERTY_DOMA'=>3,'!PROPERTY_ACTION'=>false); // показывать только акции?>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:main.include",

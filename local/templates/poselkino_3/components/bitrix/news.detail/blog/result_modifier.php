@@ -44,6 +44,14 @@ if($arResult['PROPERTIES']['INSERT_ARTICLE']['VALUE']){
 	}
 }
 
+// Галереи поселков
+if($arResult['PROPERTIES']['BLOCK_VIL_1']['VALUE']){
+	// %block_gallery_1%
+}
+if($arResult['PROPERTIES']['BLOCK_VIL_2']['VALUE']){
+	// %block_gallery_2%
+}
+
 /*TAGS*/
 if ($arParams["SEARCH_PAGE"])
 {

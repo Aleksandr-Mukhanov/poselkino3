@@ -88,7 +88,7 @@ $this->setFrameMode(true);
 			        $placeholderMin = ($arItem["VALUES"]["MIN"]["HTML_VALUE"]) ? $arItem["VALUES"]["MIN"]["HTML_VALUE"]: 'от';
 			        $placeholderMax = ($arItem["VALUES"]["MAX"]["HTML_VALUE"]) ? $arItem["VALUES"]["MAX"]["HTML_VALUE"]: 'до';
 			      ?>
-						<label>Стоимость, <span class="rub">a</span></label>
+						<label>Стоимость, <span class="rub_currency">&#8381;</span></label>
 						<input
 		          placeholder="<?=$placeholderMin?>"
 		          data-min-val='<?echo $arItem["VALUES"]["MIN"]["VALUE"]?>'

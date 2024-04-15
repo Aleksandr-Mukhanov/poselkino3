@@ -30,7 +30,13 @@ $itemPhotos = $item['PROPERTIES']['DOP_PHOTO']['VALUE'];
 if (count($itemPhotos) > 5) $itemPhotos = array_slice($itemPhotos,0,5);
 
 // dump($arResult);
-$offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
+$offerURL = '/kupit-dom/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
+
+// dump($arParams);
+$comp_active = ($arParams['COMPARISON'] == 'Y') ? 'active' : '';
+$fav_active = ($arParams['FAVORITES'] == 'Y') ? 'active' : '';
+$comp_text = ($arParams['COMPARISON'] == 'Y') ? 'Удалить из сравнения' : 'Добавить к сравнению';
+$fav_text = ($arParams['FAVORITES'] == 'Y') ? 'Удалить из избранного' : 'Добавить в избранное';
 ?>
 <div class="card-house">
 	<div class="d-flex flex-wrap bg-white card-grid">
@@ -40,11 +46,41 @@ $offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
 				<?if($item['PROPERTIES']['ACTION']['VALUE']){?>
 					<div class="slider__label">Акция</div>
 				<?}?>
+				<?if($USER->IsAdmin()){?>
+					<div class="photo__buttons">
+	            <button title="<?= $comp_text ?>" class="comparison-click <?= $comp_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="comparison_house">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
+	                    <g transform="translate(-1216.699 -36.35)">
+	                        <path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)"/>
+	                        <path d="M0 0v8.468" class="s-1" transform="translate(1233.321 37)"/>
+	                        <g transform="translate(.586 .586)">
+	                            <path d="M0 0v4.297" class="s-2" transform="translate(1232.735 48)"/>
+	                            <path d="M0 0v4.297" class="s-2" transform="rotate(90 592.368 642.516)"/>
+	                        </g>
+	                        <path d="M0 0v13.215" class="s-1" transform="translate(1222.807 40.041)"/>
+	                        <path d="M0 0v7.641" class="s-1" transform="translate(1228.265 45.499)"/>
+	                    </g>
+	                </svg>
+	            </button>
+	            <button title="<?= $fav_text ?>" class="favorites-click <?= $fav_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="favorites_house">
+	                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
+	                    <g transform="translate(.05 -26.655)">
+	                        <path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1"/>
+	                        <circle cx="4.5" cy="4.5" r="4.5" class="s-2" transform="translate(14.96 26.655)"/>
+	                        <g transform="translate(-1213.44 -18.727)">
+	                            <path d="M0 0v4.297" class="s-3" transform="translate(1232.735 48)"/>
+	                            <path d="M0 0v4.297" class="s-3" transform="rotate(90 592.368 642.516)"/>
+	                        </g>
+	                    </g>
+	                </svg>
+	            </button>
+	        </div>
+				<?}?>
 			</div>
 			<div class="card-photo__list" id="card-house-in-village-photo">
 				<?foreach ($itemPhotos as $photo){ // Фото
 		    	$photoRes = CFile::ResizeImageGet($photo, array('width'=>580, 'height'=>358), BX_RESIZE_IMAGE_EXACT);?>
-					<div class="card-photo__item" style="background: url(<?=$photoRes['src']?>) center center / cover no-repeat; width: 495px;"></div>
+					<img class="card-photo__item" src="<?=$photoRes['src']?>" alt="" />
 		    <?}?>
 	    </div>
 			<div class="photo__count">
@@ -85,7 +121,7 @@ $offerURL = '/doma/'.$arResult['VILLAGE']['CODE'].'-dom-'.$item['ID'].'/';
 				<div class="card-house__inline-value"><span><?=$item['PROPERTIES']['MATERIAL']['VALUE']?></span></div>
 			</div>
 			<div class="footer-card d-flex align-items-center">
-				<div class="footer-card__price"><span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span></div><a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
+				<div class="footer-card__price"><span class="split-number"><?=$item['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rub_currency">&#8381;</span></div><a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
 			</div>
 		</div>
 	</div>

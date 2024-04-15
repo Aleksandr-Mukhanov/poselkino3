@@ -37,7 +37,10 @@
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6">
         <div class="useful-links__card useful-links__card-link">
-          <a href="/poselki/map/" class="useful-links__map">Все поселки на карте</a>
+          <a href="/poselki/map/" class="useful-links__map">
+            <span>Все поселки на карте</span>
+            <img src="/assets/img/content/useful-map.png" alt="all">
+          </a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6">
@@ -58,7 +61,11 @@
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6">
         <div class="useful-links__card useful-links__card-link">
-          <a href="/test/" class="useful-links__questions">Ответьте на 6 вопросов <br>и получите подборку из 5 лучших участков</a>
+          <a href="/test/" class="useful-links__questions">
+
+            <span>Ответьте на 6 вопросов <br>и получите подборку из 5 лучших участков</span>
+            <img src="/assets/img/content/useful-questions.png" alt="all">
+          </a>
         </div>
       </div>
       <div class="col-lg-4 col-md-6 col-sm-6">

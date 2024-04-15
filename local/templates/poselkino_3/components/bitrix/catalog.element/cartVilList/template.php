@@ -130,9 +130,9 @@ switch ($km_MKAD) {
 	$nameVil = $arResult['PROPERTIES']['TYPE']['VALUE'].' '.$name; // тип поселка
 
 	if($housesValEnum == 3){ // Только участки
-		$priceSotka = 'Сотка от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).'</span> <span class="rep_rubl">руб.</span>';
+		$priceSotka = 'Сотка от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0]).'</span> <span class="rub_currency">&#8381;</span>';
 	}elseif($housesValEnum == 4 || $housesValEnum == 256){ // Участки с домами
-		$priceSotka = 'Дом от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'</span> <span class="rep_rubl">руб.</span>';
+		$priceSotka = 'Дом от <span class="split-number">'.formatPrice($arResult['PROPERTIES']['HOME_VALUE']['VALUE'][0]).'</span> <span class="rub_currency">&#8381;</span>';
 	}
 
 	// выводим правильные окончания
@@ -291,7 +291,7 @@ switch ($km_MKAD) {
 				<div class="village-slider__list" id="village-slider">
 					<?foreach ($arResult['MORE_PHOTO'] as $photo){ // Основные фото
 					  $photoRes = CFile::ResizeImageGet($photo['ID'], array('width'=>1232, 'height'=>872), BX_RESIZE_IMAGE_EXACT);?>
-						<div class="village-slider__item" style="background: #eee url('<?=$photoRes['src']?>') 0 100% no-repeat; background-size: cover;" itemprop="image"></div>
+						<img class="village-slider__item" src="<?=$photoRes['src']?>" style="background: #eee;object-fit: cover;" alt="" itemprop="image" lazyload>
 					<?unset($photoRes);}?>
 				</div>
 				<div class="village-slider__list-thumb" id="village-slider-thumb">
@@ -328,13 +328,13 @@ switch ($km_MKAD) {
 <div class="house-in-village area-in-village page__content-list">
 	<div class="list--grid">
 		<?foreach ($arResult["arHouses"] as $id => $house) {
-			$offerURL = '/doma/'.$arResult['CODE'].'-dom-'.$house['ID'].'/';?>
+			$offerURL = '/kupit-dom/'.$arResult['CODE'].'-dom-'.$house['ID'].'/';?>
 		<div class="card-house">
 			<div class="d-flex flex-wrap bg-white card-grid">
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
 						<?foreach ($house['IMG'] as $key => $value) {?>
-							<div class="card-photo__item" style="background: url(<?=$value['src']?>) center center / cover no-repeat; width: 495px;"></div>
+							<img class="card-photo__item" src="<?=$value['src']?>" alt="" />
 						<?}?>
 					</div>
 					<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
@@ -363,7 +363,7 @@ switch ($km_MKAD) {
 						<div class="card-house__inline-value"><span><?=$house['MATERIAL']?></span></div>
 					</div>
 					<div class="footer-card d-flex align-items-center">
-						<div class="footer-card__price"><span class="split-number"><?=$house['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+						<div class="footer-card__price"><span class="split-number"><?=$house['PRICE']?></span> <span class="rub_currency">&#8381;</span></div>
 						<a class="btn btn-outline-warning rounded-pill" href="<?=$offerURL?>">Подробнее</a>
 					</div>
 				</div>
@@ -387,7 +387,7 @@ switch ($km_MKAD) {
 				<div class="card-house__photo photo">
 					<div class="card-photo__list">
 						<?foreach ($arResult['PHOTO_VILLAGE'] as $value) {?>
-							<div class="card-photo__item" style="background: url(<?=$value['src']?>) center center / cover no-repeat; width: 495px;"></div>
+							<img class="card-photo__item" src="<?=$value['src']?>" alt="" />
 						<?}?>
 					</div>
 					<div class="photo__count">
@@ -421,7 +421,7 @@ switch ($km_MKAD) {
 						<div class="card-house__inline-value"><?=$plot['PLOTTAGE']?> соток</div>
 					</div>
 					<div class="footer-card d-flex align-items-center">
-						<div class="footer-card__price"><span class="split-number"><?=$plot['PRICE']?></span> <span class="rep_rubl">руб.</span></div>
+						<div class="footer-card__price"><span class="split-number"><?=$plot['PRICE']?></span> <span class="rub_currency">&#8381;</span></div>
 						<a class="btn btn-outline-warning rounded-pill" href="/kupit-uchastki/uchastok-<?=$plot['ID']?>/">Подробнее</a>
 					</div>
 				</div>

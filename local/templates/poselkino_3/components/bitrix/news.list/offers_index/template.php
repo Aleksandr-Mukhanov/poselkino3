@@ -11,14 +11,15 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-$offerType = 'plots';
+$offerType = ($arParams['OFFER_TYPE']) ? $arParams['OFFER_TYPE'] : 'plots';
 $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 // $offerNameM = ($offerType == 'plots') ? 'Участки' : 'Дома';
 // $offerPriceFor = ($offerType == 'plots') ? 'сотку' : 'кв.м.';
 ?>
 <div class="card-house-carousel house-in-village area-in-village">
 	<?foreach($arResult["ITEMS"] as $arOffer):
-		$arVillage = $arResult['arVillage'][$arOffer['PROPERTIES']['VILLAGE']['VALUE']];
+		$villageID = ($offerType == 'plots') ? $arOffer['PROPERTIES']['VILLAGE']['VALUE'] : $arOffer['PROPERTIES']['VILLAGE']['VALUE'][0];
+		$arVillage = $arResult['arVillage'][$villageID];
 		foreach ($arVillage['PROPERTY_DOP_FOTO_VALUE'] as $value)
 			$arOffer['IMG'][] = ['src' => CFile::GetPath($value)];
 		shuffle($arOffer['IMG']);?>
@@ -28,10 +29,10 @@ $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 				<div class="photo offer-house__photo">
 					<div class="photo__list">
 						<?foreach ($arOffer['IMG'] as $value) {?>
-							<div class="photo__item" style="background: url('<?=$value['src']?>') no-repeat; background-size: cover; background-position: center center;"></div>
+							<img class="photo__item" src="<?=$value['src']?>" style="background: #eee; object-fit: cover;" alt="" itemprop="image" lazyload>
 						<?}?>
 					</div>
-					<div class="photo__count"><span class="current">1</span> / <span class="count"><?=count($arOffer['IMG'])?></span>
+					<div class="photo__count" style="border-radius: 0 0 15px 0;"><span class="current">1</span> / <span class="count"><?=count($arOffer['IMG'])?></span>
 					</div>
 				</div>
 				<div class="offer-house__info card-house__content px-3">
@@ -85,12 +86,12 @@ $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 												<path d="M16.523 1.614v13.3a1.615 1.615 0 0 1-1.614 1.614h-1.57a.645.645 0 1 1 0-1.291h1.571a.323.323 0 0 0 .323-.323V8.939h-5.7a.645.645 0 0 1 0-1.291h5.7V1.614a.323.323 0 0 0-.323-.323H7.618v1.893a.645.645 0 0 1-1.291 0V1.291H1.614a.323.323 0 0 0-.323.323v6h5.036V5.723a.645.645 0 0 1 1.291 0V10.8a.645.645 0 1 1-1.291 0V8.907H1.291v6a.323.323 0 0 0 .323.323h4.713v-1.891a.645.645 0 0 1 1.291 0v1.893H10.8a.645.645 0 1 1 0 1.291H1.614A1.615 1.615 0 0 1 0 14.909V1.614A1.615 1.615 0 0 1 1.614 0h13.3a1.615 1.615 0 0 1 1.609 1.614zm0 0"></path>
 										</svg>
 								<div class="card-house__inline-title">Материал:</div>
+								<div class="card-house__inline-value"><?=$arOffer['PROPERTIES']['MATERIAL']['VALUE']?></div>
 							</div>
-							<div class="card-house__inline-value mt-2"><?=$arOffer['PROPERTIES']['MATERIAL']['VALUE']?></div>
 						</div>
 					<?}?>
 					<div class="footer-card d-flex align-items-center mt-3">
-						<div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$arOffer['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rep_rubl">руб.</span></div>
+						<div class="footer-card__price mt-2 mb-4 w-100 mx-2"><span class="split-number"><?=$arOffer['PROPERTIES']['PRICE']['VALUE']?></span> <span class="rub_currency">&#8381;</span></div>
 						<a class="btn btn-outline-warning rounded-pill w-100" href="<?=$arOffer['URL']?>">Подробнее</a>
 					</div>
 				</div>

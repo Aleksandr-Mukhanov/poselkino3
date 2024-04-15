@@ -24,6 +24,7 @@ global $arrFilter;
       <div class="row">
         <div class="col-12">
           <div class="hero-wrap">
+						<img src="/assets/img/site/hero@2x.jpg" alt="Hero image" class="hero-wrap__image" loading="lazy">
             <div class="row align-items-center align-items-sm-start hero-wrap__title">
               <div class="col-9 col-sm-8 col-md-6">
                 <h1>Найди лучший поселок для жизни</h1>
@@ -135,7 +136,7 @@ global $arrFilter;
     <div class="container">
       <div class="tab-content">
         <div class="tab-pane active" id="raiting-area" role="tabpanel">
-          <div class="block-page__offer" id="raiting-area-slick">
+          <div class="owl-carousel d-flex w-100 block-page__offer" id="raiting-area-slick">
 						<?$arrFilter=array('PROPERTY_DOMA'=>[3,256]); // показывать только участки?>
 		 				<?$APPLICATION->IncludeComponent(
 		 					"bitrix:main.include",
@@ -151,7 +152,7 @@ global $arrFilter;
           </div>
         </div>
         <div class="tab-pane" id="raiting-area-home" role="tabpanel">
-          <div class="block-page__offer" id="raiting-area-home-slick">
+          <div class="owl-carousel d-flex w-100 block-page__offer" id="raiting-area-home-slick">
 						<?$arrFilter=array('PROPERTY_DOMA'=>[4,256]); // показывать участки с домами?>
 		 				<?$APPLICATION->IncludeComponent(
 		 					"bitrix:main.include",
@@ -499,6 +500,7 @@ global $arrFilter;
       </div>
     </div>
   </div>
+
 	<?$APPLICATION->IncludeComponent(
 		 "bitrix:main.include",
 		 "",
@@ -509,6 +511,7 @@ global $arrFilter;
 			 "PATH" => "/include/block_url.php"
 		)
 	);?>
+
   <div class="bg-white">
     <div class="footer-feedback">
       <div class="container">

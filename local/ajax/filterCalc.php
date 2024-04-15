@@ -27,7 +27,7 @@ foreach ($formData as $data)
 			}
 			elseif ($data['value'] == 'filterHouse'){
 				// $iblockID = 6;
-				// $filterURL_DIR = '/doma/';
+				// $filterURL_DIR = '/kupit-dom/';
 				$arDoma = ['withDom','housePlot'];
 				$arFilter['PROPERTY_DOMA'] = [PROP_WITH_DOM,PROP_HOUSE_PLOT];
 				$urlPath .= 'doma-is-'.implode('-or-',$arDoma).'/';

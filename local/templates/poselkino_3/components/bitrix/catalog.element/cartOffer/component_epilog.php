@@ -17,7 +17,7 @@ $APPLICATION->SetPageProperty('description', $arResult['SEO_DESCRIPTION']);
 $offerType = $_REQUEST['OFFER_TYPE'];
 $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 $offerNameM = ($offerType == 'plots') ? 'Участки' : 'Дома';
-$offerCodeM = ($offerType == 'plots') ? 'kupit-uchastki' : 'doma';
+$offerCodeM = ($offerType == 'plots') ? 'kupit-uchastki' : 'kupit-dom';
 
 $APPLICATION->AddChainItem($offerNameM.' в поселке '.$arResult['VILLAGE_NAME'],'/'.$offerCodeM.'/v-poselke-'.$arResult['VILLAGE_CODE'].'/');
 $APPLICATION->AddChainItem($offerName.' '.$arResult['NUMBER'],'');

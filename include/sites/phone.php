@@ -101,9 +101,9 @@ switch (SITE_SERVER_NAME) {
   case 'novoe-tashirovo.ru': $phone = '+7(499)450-55-12'; break;
   case 'lapino-kp.ru': $phone = '+7(499)450-55-12'; break;
   case 'elizarovo-kp.ru': $phone = '+7(499)450-55-12'; break;
-  case 'admiral-kp.ru': $phone = '+7(499)430-08-41'; break;
-  case 'velikie-ozera.ru': $phone = '+7(499)430-08-41'; break;
-  case 'kp-saltykovo.ru': $phone = '+7(499)430-08-41'; break;
+  case 'admiral-kp.ru': $phone = '+7(499)288-74-81'; break;
+  case 'velikie-ozera.ru': $phone = '+7(499)288-74-81'; break;
+  case 'kp-saltykovo.ru': $phone = '+7(499)288-74-81'; break;
   case 'pahra-river-kp.ru': $phone = '+7(499)430-08-41'; break;
   case 'sosnovyi-bor.ru': $phone = '+7(499)430-08-41'; break;
   case 'faustovo-kp.ru': $phone = '+7(499)430-08-41'; break;
@@ -167,4 +167,6 @@ switch (SITE_SERVER_NAME) {
   case 'uzhnye-ozera.ru': $phone = '+7(499)504-98-09'; break;
   case 'svyataja-gora.ru': $phone = '+7(499)504-98-09'; break;
   case 'uzhny-park.ru': $phone = '+7(499)455-08-70'; break;
+  case 'borodino-kp.ru': $phone = '+7(499)455-08-70'; break;
+  case 'dolyna-ozer.ru': $phone = '+7(499)288-74-81'; break;
 }

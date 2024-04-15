@@ -20,14 +20,14 @@ $this->setFrameMode(true);
 				<h3 class="h2 text-center">Читайте также:</h3>
 			</div>
 			<div class="col-12 px-3">
-				<div class="slider-article" id="slider_article">
+				<div class="owl-carousel slider-article" id="slider_article">
 					<?foreach($arResult["ITEMS"] as $arItem):?>
 						<?
 						$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 						$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 						?>
 					<a class="article-card" href="<?=$arItem["DETAIL_PAGE_URL"]?>" id="<?=$this->GetEditAreaId($arItem['ID'])?>">
-						<div class="article-card__img" style="background: #eee url(<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>); background-size: cover; background-position: center center;"></div>
+						<img class="article-card__img border-none" src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" alt=""/>
 						<div class="article-card__content">
 							<div class="article-card__title"><?=$arItem["NAME"]?></div>
 							<div class="article-card__text"><?=$arItem["PREVIEW_TEXT"]?></div>

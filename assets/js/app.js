@@ -207,6 +207,7 @@ $(document).ready(function() {
     }
   }
 
+  // Article
   $('#slider_article').not('.slick-initialized').slick(getArticle());
 
   // Hero
@@ -289,7 +290,7 @@ $(document).ready(function() {
   $('#village-slider').not('.slick-initialized').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: true,
+    arrows: false,
     fade: true,
     prevArrow: "<button type='button' class='slick-prev main-arr' aria-label='Скролл влево'><<svg xmlns='http://www.w3.org/2000/svg' width='12.552' height='22.81'><g id='next' transform='translate(-111.989 .567)'><path d='M123.864 10.438L113.607.181a.615.615 0 00-.87.87l9.82 9.82-9.82 9.82a.617.617 0 00.433 1.053.6.6 0 00.433-.182L123.86 11.3a.612.612 0 00.004-.862z' fill='#fff' stroke='#fff' stroke-width='1'/></g></svg></button>",
     nextArrow: "<button type='button' class='slick-next main-arr' aria-label='Скролл вправо'><svg xmlns='http://www.w3.org/2000/svg' width='12.552' height='22.81'><g id='next' transform='translate(-111.989 .567)'><path d='M123.864 10.438L113.607.181a.615.615 0 00-.87.87l9.82 9.82-9.82 9.82a.617.617 0 00.433 1.053.6.6 0 00.433-.182L123.86 11.3a.612.612 0 00.004-.862z' fill='#fff' stroke='#fff' stroke-width='1'/></g></svg></button>",
@@ -503,6 +504,18 @@ $(document).ready(function() {
 
   $('.phone-cart__block span').on('click', function() {
     $(this).css('display', 'none')
+  })
+
+  // Toggle map
+  $('#btnLoadMap').on('click', function() {
+    $(this).hide();
+    $('.map-container .fill-bg').hide();
+    $('.map-container .map').show();
+  })
+  $('#btnLoadMapOffer').on('click', function() {
+    $(this).hide();
+    $('.map-container-page .fill-bg').hide();
+    $('.map-container-page .map').show();
   })
 
 });

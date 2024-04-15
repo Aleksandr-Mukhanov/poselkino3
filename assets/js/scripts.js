@@ -50,6 +50,7 @@ $(document).ready(function(){
 
   // фильтр в избранном
   $('.chooseFav').on('click', 'li a', function () {
+    event.preventDefault();
     blockFav = $(this).attr('href');
     $(blockFav).slideDown().siblings().slideUp();
     $('.nav-link').removeClass('btn-success').addClass('btn-outline-secondary');

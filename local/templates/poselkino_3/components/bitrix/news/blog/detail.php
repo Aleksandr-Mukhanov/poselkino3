@@ -123,6 +123,23 @@ use Bitrix\Main\Page\Asset;
 	</div>
 </div>
 
+<div class="telegram telegram--big">
+  <div class="telegram__container">
+    <div class="telegram__wrap">
+      <img src="/assets/img/tg-bg.svg" alt="tg">
+      <div class="telegram__text">
+        Подпишитесь на&nbsp;Телеграм канал Поселкино.ру и&nbsp;следите за&nbsp;скидками и&nbsp;горячими предложениями
+      </div>
+      <a href="https://t.me/poselkino" class="telegram_button" target="_blank">
+        <svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.884691 6.6054L17.7346 0.0798657C18.5167 -0.203917 19.1997 0.271492 18.9463 1.45928L18.9477 1.45782L16.0787 15.034C15.8661 15.9965 15.2967 16.2306 14.5001 15.7771L10.131 12.5429L8.02369 14.582C7.79068 14.8161 7.59407 15.0135 7.1426 15.0135L7.45281 10.5476L15.5501 3.20001C15.9025 2.88843 15.4714 2.7129 15.0069 3.02301L5.00032 9.35106L0.686628 7.99944C-0.249802 7.70103 -0.270191 7.05886 0.884691 6.6054Z" fill="white"/>
+        </svg>
+        Подпишись&nbsp;на&nbsp;канал
+      </a>
+    </div>
+  </div>
+</div>
+
 <div class="feedback-sale-form blog__feedback">
     <div class="container">
         <div class="feedback-form">
@@ -294,6 +311,25 @@ $otherFilter = [
 	),
 	$component
 );?>
+
+<div class="high-raiting">
+  <div class="container">
+    <h2>Скорее всего вам будут интересны данные поселки:</h2>
+    <div class="owl-carousel block-page__offer" id="raiting-area-home-slick">
+      <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+          "AREA_FILE_SHOW" => "file",
+          "AREA_FILE_SUFFIX" => "inc",
+          "EDIT_TEMPLATE" => "",
+          "PATH" => "/include/section_index.php"
+        )
+      );?>
+    </div>
+  </div>
+</div>
+
 <?if($arParams["USE_CATEGORIES"]=="Y" && $ElementID):
 	global $arCategoryFilter;
 	$obCache = new CPHPCache;

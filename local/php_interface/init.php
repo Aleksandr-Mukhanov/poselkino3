@@ -47,6 +47,8 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('REGION_CITY', 'Санкт-Петербурга'); // город области
 		define('REGION_KOY', 'Ленинградской'); // область
 		define('REGION_SHORT', 'Ленобласти'); // область коротко
+		define('REGION_SHORT_WHERE', 'Ленобласти'); // область коротко Род.п.
+		define('REGION_SHORT_WHAT', 'Ленобласти'); // область коротко Род.п.
 		define('FILTER_MAP', 'map_spb'); // фильтр в карте
 		define('MAP_CENTER', '59.938955, 30.315644'); // центр карты
 		define('PROP_SOLD_ID', 388); // проданные в SALES_PHASE
@@ -65,6 +67,8 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PLOTS_PROP_AREA', 552); // Область участков
 		define('PLOTS_PROP_REGION', 368); // Район участков
 		define('PLOTS_PROP_SHOSSE', 369); // Шоссе участков
+		define('HOUSE_PROP_REGION', 384); // Район домов
+		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
 		break;
 	default:
 		define('IBLOCK_ID', 1); // инфоблок Поселков
@@ -74,6 +78,8 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('REGION_CITY', 'Москвы'); // город области
 		define('REGION_KOY', 'Московской'); // область
 		define('REGION_SHORT', 'Подмосковью'); // область коротко
+		define('REGION_SHORT_WHERE', 'Подмосковье'); // область коротко Род.п.
+		define('REGION_SHORT_WHAT', 'Подмосковья'); // область коротко Род.п.
 		define('FILTER_MAP', 'map'); // фильтр в карте
 		define('MAP_CENTER', '55.76, 37.64'); // центр карты
 		define('PROP_SOLD_ID', 254); // проданные в SALES_PHASE
@@ -92,6 +98,8 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PLOTS_PROP_AREA', 551); // Область участков
 		define('PLOTS_PROP_REGION', 193); // Район участков
 		define('PLOTS_PROP_SHOSSE', 194); // Шоссе участков
+		define('HOUSE_PROP_REGION', 384); // Район домов
+		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
 		break;
 }
 

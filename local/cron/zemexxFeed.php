@@ -149,7 +149,7 @@ foreach ($offers as $offer)
 			}
 			else $plotId = $offer -> {'plot_id'};
 
-			$dateUpdate = $offer -> {'last-update-date'};
+			$dateUpdate = $offer -> {'creation-date'};
 			$dateUpdateOnSite = date('d.m.Y H:i',strtotime($dateUpdate));
 			$plotPrice = $offer -> {'price'} -> {'value'};
 	    $plotArea = $offer -> {'lot-area'} -> {'value'};

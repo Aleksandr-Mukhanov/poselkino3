@@ -6,6 +6,7 @@ Loader::includeModule("iblock");
 Asset::getInstance()->addCss("/assets/css/fancybox.css");
 Asset::getInstance()->addCss("/assets/css/vendor.min.css");
 Asset::getInstance()->addCss("/assets/css/style.min.css");
+
 Asset::getInstance()->addJs("/assets/js/fancybox.umd.js");
 Asset::getInstance()->addJs("/assets/js/vendor.min.js");
 Asset::getInstance()->addJs("/assets/js/app.js");
@@ -66,12 +67,36 @@ $APPLICATION->SetPageProperty('canonical', $canonical);
 
 if ($_REQUEST['teg']) $APPLICATION->SetPageProperty('robots', 'noindex, follow');
 
+$sumComparison = 0; $sumFavorites=0;
 // dump($_COOKIE); // разбираем куки
 if(isset($_COOKIE['comparison_vil'])){
 	$arComparison = explode('-',$_COOKIE['comparison_vil']);
+	$sumComparison += count($arComparison);
 }
+
 if(isset($_COOKIE['favorites_vil'])){
 	$arFavorites = explode('-',$_COOKIE['favorites_vil']);
+	$sumFavorites += count($arFavorites);
+}
+
+if(isset($_COOKIE['comparison_plots'])){
+	$arComparisonPlots = explode('-',$_COOKIE['comparison_plots']);
+	$sumComparison += count($arComparisonPlots);
+}
+
+if(isset($_COOKIE['favorites_plots'])){
+	$arFavoritesPlots = explode('-',$_COOKIE['favorites_plots']);
+	$sumFavorites += count($arFavoritesPlots);
+}
+
+if(isset($_COOKIE['comparison_houses'])){
+	$arComparisonHouses = explode('-',$_COOKIE['comparison_houses']);
+	$sumComparison += count($arComparisonHouses);
+}
+
+if(isset($_COOKIE['favorites_houses'])){
+	$arFavoritesHouses = explode('-',$_COOKIE['favorites_houses']);
+	$sumFavorites += count($arFavoritesHouses);
 }
 ?>
 <!DOCTYPE html>
@@ -79,8 +104,9 @@ if(isset($_COOKIE['favorites_vil'])){
 <head>
 	<title><?$APPLICATION->ShowTitle();?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
-	<link rel="shortcut icon" href="/assets/img/favicon/favicon.png" type="image/png">
 	<link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml">
+	<link rel="shortcut icon" href="/favicon.png" type="image/png">
+	<link rel="apple-touch-icon" href="/favicon.png"/>
 	<meta name="yandex-verification" content="7dc43856ec298fed" />
 	<meta name="facebook-domain-verification" content="t9usvm7ssxhfyexr5yotrpgupfwvi9" />
 	<?$APPLICATION->ShowHead();?>
@@ -122,9 +148,7 @@ if(isset($_COOKIE['favorites_vil'])){
 							);?>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="/sravnenie/" title="Сравнение">
-							<?// if($arComparison){?>
-								<span class="badge badge-warning text-white heart__number" id="compHeader"><?=($arComparison)?count($arComparison):0?></span>
-							<?// }?>
+							<span class="badge badge-warning text-white heart__number" id="compHeader"><?=$sumComparison?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" class="inline-svg">
 							<g transform="translate(-1216.699 -36.35)">
 								<path d="M0 0v16.139" class="comparison" transform="translate(1217.349 37)" />
@@ -134,9 +158,7 @@ if(isset($_COOKIE['favorites_vil'])){
 							</g>
 						</svg></a></li>
 						<li class="nav-item heart"><a class="nav-link heart__link" href="/izbrannoe/" title="Избранное">
-							<?// if($arFavorites){?>
-								<span class="badge badge-warning text-white heart__number" id="favHeader"><?=($arFavorites)?count($arFavorites):0?></span>
-							<?// }?>
+							<span class="badge badge-warning text-white heart__number" id="favHeader"><?=$sumFavorites?></span>
 							<svg xmlns="http://www.w3.org/2000/svg" width="21.72" height="19.107" viewBox="0 0 21.72 19.107" class="inline-svg">
 							<g transform="translate(.05 -28.451)">
 								<path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="heart" />
@@ -154,7 +176,7 @@ if(isset($_COOKIE['favorites_vil'])){
 				<?if(SHOW_PLOTS == 'Y'):?>
 					<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <?=$cntAllPlots?></a></li>
 				<?endif;?>
-				<!-- <li class="nav-item"><a class="nav-link" href="/doma/">Дома <?=$cntAllHouse?></a></li> -->
+				<li class="nav-item"><a class="nav-link" href="/kupit-dom/">Дома <?=$cntAllHouse?></a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/promyshlennye/">Промышленные поселки</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/stroitelyam/">Застройщикам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/investoram/">Инвесторам</a></li>
@@ -169,4 +191,22 @@ if(isset($_COOKIE['favorites_vil'])){
 			</ul>
 		</div>
 	</header>
+	<div class="bg-white pb-2">
+		<div class="telegram">
+			<div class="telegram__container">
+				<div class="telegram__wrap">
+					<a href="https://t.me/poselkino_news" class="telegram_button" target="_blank">
+						<svg width="19" height="16" viewBox="0 0 19 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M0.884691 6.6054L17.7346 0.0798657C18.5167 -0.203917 19.1997 0.271492 18.9463 1.45928L18.9477 1.45782L16.0787 15.034C15.8661 15.9965 15.2967 16.2306 14.5001 15.7771L10.131 12.5429L8.02369 14.582C7.79068 14.8161 7.59407 15.0135 7.1426 15.0135L7.45281 10.5476L15.5501 3.20001C15.9025 2.88843 15.4714 2.7129 15.0069 3.02301L5.00032 9.35106L0.686628 7.99944C-0.249802 7.70103 -0.270191 7.05886 0.884691 6.6054Z" fill="white"/>
+						</svg>
+						Подпишись&nbsp;на&nbsp;канал
+					</a>
+					<div class="telegram__text">
+						Подпишитесь на Телеграм канал Поселкино.ру и следите за скидками и горячими предложениями
+					</div>
+					<img src="/assets/img/tg-bg.svg" alt="tg">
+				</div>
+			</div>
+		</div>
+	</div>
 	<?endif;?>

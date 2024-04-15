@@ -36,6 +36,7 @@
           <div class="footer__nav">
             <div class="footer__nav-item"><a href="/poselki/">Коттеджные поселки</a></div>
             <div class="footer__nav-item"><a href="/kupit-uchastki/">Земельные участки</a></div>
+            <div class="footer__nav-item"><a href="/kupit-dom/">Дома</a></div>
             <div class="footer__nav-item"><a href="/poselki/promyshlennye/">Промышленные поселки</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/stroitelyam/">Застройщикам</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/investoram/">Инвесторам</a></div>
@@ -46,9 +47,9 @@
             <div class="footer__nav-item"><a href="https://poselkino.ru/blog/">Блог</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/reklama/">Реклама и сотрудничество</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/kontakty/">Контакты</a></div>
-            <div class="footer__nav-item"><a href="https://poselkino.ru/sitemap/">Карта сайта</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/politika-konfidentsialnosti/">Политика конфиденциальности</a></div>
             <div class="footer__nav-item"><a href="https://poselkino.ru/polzovatelskoe-soglashenie/">Пользовательское соглашение</a></div>
+            <div class="footer__nav-item"><a href="https://poselkino.ru/sitemap/">Карта сайта</a></div>
           </div>
         </div>
         <div class="col-xl-3 pl-xl-0 col-lg-4">
@@ -83,7 +84,11 @@
       <div class="modal-header">
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="text-uppercase" id="feedbackModalLabel">Записаться на просмотр</h5>
-          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+            </svg>
+          </button>
         </div>
       </div>
       <div class="modal-body px-3 px-md-5">
@@ -124,7 +129,11 @@
       <div class="modal-header">
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="text-uppercase" id="writeToUsLabel">Написать нам</h5>
-          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+            </svg>
+          </button>
         </div>
       </div>
       <div class="modal-body px-3 px-md-5">
@@ -168,7 +177,11 @@
       <div class="modal-header">
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="text-uppercase" id="writeToUsLabel">Консультация специалиста</h5>
-          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+            </svg>
+          </button>
         </div>
       </div>
       <div class="modal-body px-3 px-md-5">
@@ -206,7 +219,11 @@
       <div class="modal-header">
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="text-uppercase" id="sendErrorLabel">Сообщить об ошибке</h5>
-          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+            </svg>
+          </button>
         </div>
       </div>
       <div class="modal-body">
@@ -236,7 +253,11 @@
       <div class="modal-header">
         <div class="d-flex w-100 justify-content-between align-items-center">
           <h5 class="text-uppercase" id="selectAreaLabel">Выберите область</h5>
-          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button class="close btn-sm" type="button" data-dismiss="modal" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.0044 14.8471C15.3949 14.4566 15.3949 13.8235 15.0044 13.4329L9.34785 7.77641L15.0045 2.11975C15.395 1.72923 15.395 1.09606 15.0045 0.705538C14.614 0.315014 13.9808 0.315014 13.5903 0.705538L7.93364 6.3622L2.27644 0.705003C1.88592 0.314478 1.25275 0.314478 0.862229 0.705003C0.471705 1.09553 0.471705 1.72869 0.862229 2.11922L6.51942 7.77641L0.862379 13.4335C0.471855 13.824 0.471855 14.4571 0.862379 14.8477C1.2529 15.2382 1.88607 15.2382 2.27659 14.8477L7.93364 9.19063L13.5901 14.8471C13.9807 15.2377 14.6138 15.2377 15.0044 14.8471Z" fill="#808080"/>
+            </svg>
+          </button>
         </div>
       </div>
       <div class="modal-body">

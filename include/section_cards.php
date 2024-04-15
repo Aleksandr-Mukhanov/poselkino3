@@ -15,11 +15,11 @@
 				break;
 			case 'cost_ask':
 				$sectionSortField = $sortFieldCost;
-				$sectionSortOrder = 'asc';
+				$sectionSortOrder = 'asc,nulls';
 				break;
 			case 'cost_desc':
 				$sectionSortField = $sortFieldCost;
-				$sectionSortOrder = 'desc';
+				$sectionSortOrder = 'desc,nulls';
 				break;
 			case 'mkad':
 				$sectionSortField = 'PROPERTY_MKAD';

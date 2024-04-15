@@ -12,7 +12,7 @@ $urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 // получим участки
 $cnt = 0; $minPrice = 999999999;
 $arOrder = Array("SORT"=>"ASC");
-$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","!PROPERTY_AREA"=>552); // исключим СПБ
+$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","!PROPERTY_AREA"=>PLOTS_PROP_AREA); // исключим СПБ
 $arSelect = Array("ID","NAME","PROPERTY_PRICE","PROPERTY_VILLAGE");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilterPlotsAll,false,false,$arSelect);
 while ($arElement = $rsElements->Fetch()) { // dump($arElement);
@@ -245,7 +245,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					$sectionSortField = 'RAND';
 					$sectionSortOrder = 'asc';
 				}
-				$arrFilterPlots['!PROPERTY_AREA'] = 552; // исключим СПБ
+				$arrFilterPlots['!PROPERTY_AREA'] = PLOTS_PROP_AREA; // исключим СПБ
 				?>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
@@ -404,7 +404,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					</div>
 					<?global $arrFilterOffers;
 					$arrFilterOffers = ['!PROPERTY_ACTION' => false]; // показывать только акции
-					$arrFilterOffers['!PROPERTY_AREA'] = 552; // исключим СПБ?>
+					$arrFilterOffers['!PROPERTY_AREA'] = PLOTS_PROP_AREA; // исключим СПБ?>
 					<?$APPLICATION->IncludeComponent(
 						"bitrix:news.list",
 						"offers_index",

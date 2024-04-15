@@ -6,6 +6,8 @@
 /** @global CDatabase $DB */
 /** @var CBitrixComponentTemplate $this */
 
+$offerType = ($arParams['OFFER_TYPE']) ? $arParams['OFFER_TYPE'] : 'plots';
+
 foreach($arResult["ITEMS"] as $key => $arOffer)
 { // dump($arOffer);
 	// сформируем фото
@@ -18,9 +20,20 @@ foreach($arResult["ITEMS"] as $key => $arOffer)
 	// }
 	$arResult["ITEMS"][$key]['IMG'] = $arPhoto;
 
-	$arResult["ITEMS"][$key]['URL'] = '/kupit-uchastki/uchastok-'.$arOffer['ID'].'/';
+	if ($offerType == 'plots')
+	{
+		$arResult["ITEMS"][$key]['URL'] = '/kupit-uchastki/uchastok-'.$arOffer['ID'].'/';
 
-	$arVillageIDs[] = $arOffer['PROPERTIES']['VILLAGE']['VALUE'];
+		$arVillageIDs[] = $arOffer['PROPERTIES']['VILLAGE']['VALUE'];
+	}
+	else
+	{
+		$villageCode = $arOffer['DISPLAY_PROPERTIES']['VILLAGE']['LINK_ELEMENT_VALUE'][$arOffer['PROPERTIES']['VILLAGE']['VALUE'][0]]['CODE'];
+		$arResult["ITEMS"][$key]['URL'] = '/kupit-dom/'.$villageCode.'-dom-'.$arOffer['ID'].'/';
+
+		foreach ($arOffer['PROPERTIES']['VILLAGE']['VALUE'] as $value)
+			$arVillageIDs[] = $value;
+	}
 }
 
 $rsPropertyEnum = CIBlockPropertyEnum::GetList([],["CODE"=>"REGION"]);
