@@ -41,7 +41,7 @@ use Bitrix\Main\Page\Asset;
 				"BASKET_URL" => "/personal/basket.php",
 				"BRAND_USE" => "N",
 				"BROWSER_TITLE" => "-",
-				"CACHE_GROUPS" => "Y",
+				"CACHE_GROUPS" => "N",
 				"CACHE_TIME" => "36000000",
 				"CACHE_TYPE" => "A",
 				"CHECK_SECTION_ID_VARIABLE" => "N",

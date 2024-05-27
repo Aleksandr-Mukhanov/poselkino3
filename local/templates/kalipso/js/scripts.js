@@ -84,8 +84,9 @@ $(document).ready(function(){
                 formID: formID,
                 manager: manager
               },function(data){
+                // console.log(data);
                 $('.formSignToView').html(data);
-                fbq('track', 'Lead');
+                // fbq('track', 'Lead');
               }
             );
       //     }

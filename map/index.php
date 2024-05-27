@@ -83,7 +83,7 @@ use Bitrix\Main\Page\Asset;
         "bitrix:catalog.smart.filter",
         FILTER_MAP,
         array(
-          "CACHE_GROUPS" => "Y",
+          "CACHE_GROUPS" => "N",
           "CACHE_TIME" => "36000000",
           "CACHE_TYPE" => "A",
           "CONVERT_CURRENCY" => "N",
@@ -130,8 +130,8 @@ use Bitrix\Main\Page\Asset;
       		"BACKGROUND_IMAGE" => "-",
       		"BASKET_URL" => "/personal/basket.php",
       		"BROWSER_TITLE" => "-",
-      		"CACHE_FILTER" => "N",
-      		"CACHE_GROUPS" => "Y",
+      		"CACHE_FILTER" => "Y",
+      		"CACHE_GROUPS" => "N",
       		"CACHE_TIME" => "36000000",
       		"CACHE_TYPE" => "A", // $cache
       		"COMPATIBLE_MODE" => "N",

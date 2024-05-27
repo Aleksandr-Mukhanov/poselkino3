@@ -191,7 +191,7 @@ foreach ($arDevelopers as $value)
   			</div>
   		<?}?>
       <div class="slider__header">
-        <?if($item['PROPERTIES']['TOP_100']['VALUE'] || $item['TOP_100']){?>
+        <?if(($item['PROPERTIES']['TOP_100']['VALUE'] || $item['TOP_100']) && $item['PROPERTIES']['SALES_PHASE']['VALUE_XML_ID'] != 'sold'){?>
   				<div class="photo__top">
   					<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
   					<path d="M0 0H50V35C50 43.2843 43.2843 50 35 50H15C6.71573 50 0 43.2843 0 35V0Z" fill="#4B833E"/>

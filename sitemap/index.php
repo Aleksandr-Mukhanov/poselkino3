@@ -1,6 +1,6 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Карта сайта");
-// if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: https://poselkino.ru/sitemap/');
+// if (in_array($_SERVER['HTTP_HOST'],SITES_DIR)) header('Location: /sitemap/');
 
 use Bitrix\Main\Loader;
 	Loader::includeModule('iblock');
@@ -144,20 +144,20 @@ while ($arElement = $rsElements->GetNext())
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-dom-do-1-mln-rub/">Дома 1 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-1,5-mln-rub/">Дома 1,5 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-2-mln-rub/">Дома 2 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-3-mln-rub/">Дома 3 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-4-mln-rub/">Дома 4 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-5-mln-rub/">Дома 5 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-6-mln-rub/">Дома 6 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-7-mln-rub/">Дома 7 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-8-mln-rub/">Дома 8 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-9-mln-rub/">Дома 9 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-10-mln-rub/">Дома 10 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-15-mln-rub/">Дома 15 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-20-mln-rub/">Дома 20 млн руб</a></li>
-				        <li><a href="/poselki/kupit-dom-do-30-mln-rub/">Дома 30 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-1-mln-rub/">Дома 1 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-1,5-mln-rub/">Дома 1,5 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-2-mln-rub/">Дома 2 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-3-mln-rub/">Дома 3 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-4-mln-rub/">Дома 4 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-5-mln-rub/">Дома 5 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-6-mln-rub/">Дома 6 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-7-mln-rub/">Дома 7 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-8-mln-rub/">Дома 8 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-9-mln-rub/">Дома 9 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-10-mln-rub/">Дома 10 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-15-mln-rub/">Дома 15 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-20-mln-rub/">Дома 20 млн руб</a></li>
+				        <li><a href="/kupit-dom/do-30-mln-rub/">Дома 30 млн руб</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -185,21 +185,21 @@ while ($arElement = $rsElements->GetNext())
 				          }else{
 				            $nameSot = 'соток'; $urlSot = 'sotok';
 				          }?>
-				          <li><a href="/poselki/kupit-dom-na-<?=$i?>-sotkah/">Дом на <?=$i?> сотках</a></li>
+				          <li><a href="/kupit-dom/na-<?=$i?>-sotkah/">Дом на <?=$i?> сотках</a></li>
 				          <?if($i == 15)echo '</ul></div><div class="item"><ul>';?>
 				        <?}?>
-				          <li><a href="/poselki/kupit-dom-na-25-sotkah/">Дом на 25 сотках</a></li>
+				          <li><a href="/kupit-dom/na-25-sotkah/">Дом на 25 сотках</a></li>
 				        <?for ($i=30; $i <= 100; $i+=10) {?>
-				          <li><a href="/poselki/kupit-dom-na-<?=$i?>-sotkah/">Дом на <?=$i?> сотках</a></li>
+				          <li><a href="/kupit-dom/na-<?=$i?>-sotkah/">Дом на <?=$i?> сотках</a></li>
 				        <?}?>
-				        <li><a href="/poselki/kupit-dom-100-kv-m/">Купить дом 100 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-120-kv-m/">Купить дом 120 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-150-kv-m/">Купить дом 150 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-200-kv-m/">Купить дом 200 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-250-kv-m/">Купить дом 250 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-300-kv-m/">Купить дом 300 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-400-kv-m/">Купить дом 400 кв.м.</a></li>
-				        <li><a href="/poselki/kupit-dom-500-kv-m/">Купить дом 500 кв.м.</a></li>
+				        <li><a href="/kupit-dom/100-kv-m/">Купить дом 100 кв.м.</a></li>
+				        <li><a href="/kupit-dom/120-kv-m/">Купить дом 120 кв.м.</a></li>
+				        <li><a href="/kupit-dom/150-kv-m/">Купить дом 150 кв.м.</a></li>
+				        <li><a href="/kupit-dom/200-kv-m/">Купить дом 200 кв.м.</a></li>
+				        <li><a href="/kupit-dom/250-kv-m/">Купить дом 250 кв.м.</a></li>
+				        <li><a href="/kupit-dom/300-kv-m/">Купить дом 300 кв.м.</a></li>
+				        <li><a href="/kupit-dom/400-kv-m/">Купить дом 400 кв.м.</a></li>
+				        <li><a href="/kupit-dom/500-kv-m/">Купить дом 500 кв.м.</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -226,11 +226,11 @@ while ($arElement = $rsElements->GetNext())
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-dom-econom-class/">Дома эконом класса</a></li>
-				        <li><a href="/poselki/kupit-dom-biznes-class/">Дома бизнес класса</a></li>
-				        <li><a href="/poselki/kupit-dom-komfort-class/">Дома комфорт класса</a></li>
-				        <li><a href="/poselki/kupit-dom-elit-class/">Дома элитного класса</a></li>
-				        <li><a href="/poselki/kupit-dom-premium-class/">Дома премиум класса</a></li>
+				        <li><a href="/kupit-dom/econom-class/">Дома эконом класса</a></li>
+				        <li><a href="/kupit-dom/biznes-class/">Дома бизнес класса</a></li>
+				        <li><a href="/kupit-dom/komfort-class/">Дома комфорт класса</a></li>
+				        <li><a href="/kupit-dom/elit-class/">Дома элитного класса</a></li>
+				        <li><a href="/kupit-dom/premium-class/">Дома премиум класса</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -255,10 +255,10 @@ while ($arElement = $rsElements->GetNext())
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-dom-s-elektrichestvom/">Дома с электричеством</a></li>
-				        <li><a href="/poselki/kupit-dom-s-vodoprovodom/">Дома с водопроводом</a></li>
-				        <li><a href="/poselki/kupit-dom-s-gazom/">Дома с газом</a></li>
-				        <li><a href="/poselki/kupit-dom-s-kommunikaciyami/">Дома с коммуникациями</a></li>
+				        <li><a href="/kupit-dom/s-elektrichestvom/">Дома с электричеством</a></li>
+				        <li><a href="/kupit-dom/s-vodoprovodom/">Дома с водопроводом</a></li>
+				        <li><a href="/kupit-dom/s-gazom/">Дома с газом</a></li>
+				        <li><a href="/kupit-dom/s-kommunikaciyami/">Дома с коммуникациями</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -282,9 +282,9 @@ while ($arElement = $rsElements->GetNext())
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-dom-snt/">Дома СНТ</a></li>
-				        <li><a href="/poselki/kupit-dom-izhs/">Дома ИЖС</a></li>
-				        <li><a href="/poselki/kupit-dom-ryadom-zhd-stanciya/">Дома рядом с Ж/Д станцией</a></li>
+				        <li><a href="/kupit-dom/snt/">Дома СНТ</a></li>
+				        <li><a href="/kupit-dom/izhs/">Дома ИЖС</a></li>
+				        <li><a href="/kupit-dom/ryadom-zhd-stanciya/">Дома рядом с Ж/Д станцией</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -309,10 +309,10 @@ while ($arElement = $rsElements->GetNext())
 				    </div>
 				    <div class="item">
 				      <ul>
-				        <li><a href="/poselki/kupit-dom-ryadom-s-lesom/">Дома рядом с лесом</a></li>
-				        <li><a href="/poselki/kupit-dom-u-vody/">Дома у воды</a></li>
-				        <li><a href="/poselki/kupit-dom-u-ozera/">Дома у озера</a></li>
-				        <li><a href="/poselki/kupit-dom-u-reki/">Дома у реки</a></li>
+				        <li><a href="/kupit-dom/ryadom-s-lesom/">Дома рядом с лесом</a></li>
+				        <li><a href="/kupit-dom/u-vody/">Дома у воды</a></li>
+				        <li><a href="/kupit-dom/u-ozera/">Дома у озера</a></li>
+				        <li><a href="/kupit-dom/u-reki/">Дома у реки</a></li>
 				      </ul>
 				    </div>
 				  </div>
@@ -321,7 +321,7 @@ while ($arElement = $rsElements->GetNext())
 					<div class="links-item houses-item">
 				    <div class="item">
 				      <ul>
-								<li><a href="https://poselkino.ru/developery/">Все девелоперы</a></li>
+								<li><a href="/developery/">Все девелоперы</a></li>
 							<? // получим девелоперов
 								$hlblock_id = 5; // id HL
 								$hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
@@ -337,7 +337,7 @@ while ($arElement = $rsElements->GetNext())
 								$rsData = new CDBResult($rsData, $sTableID);
 
 								while ($arRes = $rsData->Fetch()) { // dump($arRes);?>
-									<li><a href="https://poselkino.ru/developery/<?=$arRes['UF_XML_ID']?>/"><?=$arRes['UF_NAME']?></a></li>
+									<li><a href="/developery/<?=$arRes['UF_XML_ID']?>/"><?=$arRes['UF_NAME']?></a></li>
 								<?}?>
 							</ul>
 						</div>
@@ -350,7 +350,7 @@ while ($arElement = $rsElements->GetNext())
 				        <li><a href="/poselki/kottedzhnye/">Коттеджные поселки</a></li>
 				        <li><a href="/poselki/kupit-kottedzhnyj-uchastok/">Купить коттеджный участок</a></li>
 				        <li><a href="/poselki/kupit-kottedzh/">Купить коттедж</a></li>
-				        <li><a href="/poselki/kupit-dom/">Купить дом</a></li>
+				        <li><a href="/kupit-dom/">Купить дом</a></li>
 				      </ul>
 				    </div>
 				    <div class="item">
@@ -416,13 +416,13 @@ while ($arElement = $rsElements->GetNext())
 						foreach ($arShosse as $shosse => $value) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД
 								?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить дом <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Поселки <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-dom/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить дом <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="/poselki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Поселки <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
 							<?}?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-gaz/">Купить дом <?=$value?> шоссе с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-gaz/">Поселки <?=$value?> шоссе с газом</a></li>
+							<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
+							<li><a href="/kupit-dom/<?=$shosse?>-shosse-gaz/">Купить дом <?=$value?> шоссе с газом</a></li>
+							<li><a href="/poselki/<?=$shosse?>-shosse-gaz/">Поселки <?=$value?> шоссе с газом</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -432,9 +432,9 @@ while ($arElement = $rsElements->GetNext())
 				      <ul>
 					<?// район до МКАД и газ
 						foreach ($arRegion as $rayon => $value) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/'.$rayon.'-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/kupit-dom/'.$rayon.'-rayon-gaz/">Купить дом <?=$value?> район с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/'.$rayon.'-rayon-gaz/">Поселки <?=$value?> с газом</a></li>
+							<li><a href="/kupit-uchastki/<?=$rayon?>-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
+							<li><a href="/kupit-dom/<?=$rayon?>-rayon-gaz/">Купить дом <?=$value?> район с газом</a></li>
+							<li><a href="/poselki/<?=$rayon?>-rayon-gaz/">Поселки <?=$value?> с газом</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -444,9 +444,9 @@ while ($arElement = $rsElements->GetNext())
 							<ul>
 					<?// до МКАД газ
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
-							<li><a href="https://poselkino.ru/poselki/kupit-dom/gaz-do-<?=$i?>-km-mkad/">Купить дом с газом до <?=$i?> км от МКАД</a></li>
-							<li><a href="https://poselkino.ru/poselki/gaz-do-<?=$i?>-km-mkad/">Поселки с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="/kupit-uchastki/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="/kupit-dom/gaz-do-<?=$i?>-km-mkad/">Купить дом с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="/poselki/gaz-do-<?=$i?>-km-mkad/">Поселки с газом до <?=$i?> км от МКАД</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -456,9 +456,9 @@ while ($arElement = $rsElements->GetNext())
 							<ul>
 					<?// до МКАД ИЖС
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
-							<li><a href="https://poselkino.ru/poselki/kupit-dom/do-<?=$i?>-km-mkad-izhs/">Купить дом до <?=$i?> км от МКАД ИЖС</a></li>
-							<li><a href="https://poselkino.ru/poselki/do-<?=$i?>-km-mkad-izhs/">Поселки до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="/kupit-uchastki/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="/kupit-dom/do-<?=$i?>-km-mkad-izhs/">Купить дом до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="/poselki/do-<?=$i?>-km-mkad-izhs/">Поселки до <?=$i?> км от МКАД ИЖС</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -511,9 +511,9 @@ while ($arElement = $rsElements->GetNext())
 
 						foreach ($urlPriceShosse as $price) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
 								<?if(!in_array($price,$noUrlPriceShosse)){?>
-									<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-<?=$price?>/">Купить дом <?=$value?> шоссе <?=$price?></a></li>
+									<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$price?>/">Купить дом <?=$value?> шоссе <?=$price?></a></li>
 								<?}
 							}
 						}?>
@@ -526,13 +526,14 @@ while ($arElement = $rsElements->GetNext())
 					<?
 					// коммуникации и шоссе
 						$commun2 = ['svet','voda','gaz','kommunikatsii','ryadom-s-lesom','u-vody','izhs','snt'];
+						$commun3 = ['svet','voda','gaz','kommunikatsii'];
 						$communName = ['со светом','с водой','с газом','с коммуникациями','рядом с лесом','у воды','ИЖС','СНТ'];
 
 						foreach ($commun2 as $key => $commun) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
-								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$shosse?>-shosse-<?=$commun?>/">Купить дом <?=$value?> шоссе <?=$communName[$key]?></a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$commun?>/">Купить дом <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$value?> шоссе <?=$communName[$key]?></a></li>
 							<?}
 						}?>
 							</ul>
@@ -543,11 +544,11 @@ while ($arElement = $rsElements->GetNext())
 							<ul>
 					<?
 					// коммуникации и МКАД
-						foreach ($commun2 as $commun) {
+						foreach ($commun3 as $key => $commun) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/kupit-dom/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить дом <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$commun?>-do-<?=$i?>-km-mkad/">Поселки <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-uchastki/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-dom/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить дом <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="/poselki/<?=$commun?>-do-<?=$i?>-km-mkad/">Поселки <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
 							<?}
 						}
 					?>

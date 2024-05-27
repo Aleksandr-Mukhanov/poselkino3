@@ -100,7 +100,7 @@ if ($mkadKM)
     if($mkadKM_ot < 0)$mkadKM_ot = 0;
     $mkadKM_do = $mkadKM + 10; // до + 10
 
-    $arrFilterVillage['><PROPERTY_6'] = [$mkadKM_ot,$mkadKM_do];
+    $arrFilterPlots['><PROPERTY_MKAD'] = [$mkadKM_ot,$mkadKM_do];
 
     $APPLICATION->AddChainItem('Дома до '.$mkadKM.' км от МКАД','',true);
 
@@ -117,6 +117,47 @@ if ($mkadKM)
     $arTegsShow = ['north','east','south','west','gaz','izhs','snt','les','voda','econom','komfort'];
   }
   else{
+    CHTTP::SetStatus("404 Not Found");
+    @define("ERROR_404", "Y");
+  }
+}
+
+if($plottage){ // площадь дома
+  if(is_numeric($plottage)){
+    switch ($plottage) {
+      case $plottage == 100: $url_km_MKAD = "kupit-dom-100-kv-m"; break;
+      case $plottage == 120: $url_km_MKAD = "kupit-dom-120-kv-m"; break;
+      case $plottage == 150: $url_km_MKAD = "kupit-dom-150-kv-m"; break;
+      case $plottage == 200: $url_km_MKAD = "kupit-dom-200-kv-m"; break;
+      case $plottage == 250: $url_km_MKAD = "kupit-dom-250-kv-m"; break;
+      case $plottage == 300: $url_km_MKAD = "kupit-dom-300-kv-m"; break;
+      case $plottage == 400: $url_km_MKAD = "kupit-dom-400-kv-m"; break;
+      case $plottage == 500: $url_km_MKAD = "kupit-dom-500-kv-m"; break;
+
+      default: CHTTP::SetStatus("404 Not Found"); @define("ERROR_404", "Y"); break;
+    }
+
+    if($plottage == 100){
+      $plottage_ot = $plottage - 20; // от
+      $plottage_do = $plottage + 20; // до
+    }elseif($plottage == 120){
+      $plottage_ot = $plottage - 20; // от
+      $plottage_do = $plottage + 30; // до
+    }elseif($plottage == 150){
+      $plottage_ot = $plottage - 30; // от
+      $plottage_do = $plottage + 30; // до
+    }else{
+      $plottage_ot = $plottage - 50; // от
+      $plottage_do = $plottage + 50; // до
+    }
+
+    $arrFilterPlots['><PROPERTY_AREA_HOUSE'] = [$plottage_ot,$plottage_do]; // Площадь домов
+    // dump($arrFilter);
+    $APPLICATION->AddChainItem('Купить дом '.$plottage.' кв.м.',"/kupit-dom/".$plottage."-kv-m/",true);
+    $UF_Code = "kupit-dom-".$plottage."-kv-m";
+    // теги для площади
+    $arTegsShow = ['north','east','south','west','gaz','izhs','snt','ryadom-s-lesom','u-vody','econom','komfort'];
+  }else{
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
   }
@@ -160,7 +201,7 @@ if ($priceURL) // выборка по цене
     $priceType2 = 'milliona';
   }
 
-  $arrFilterVillage['><PROPERTY_120'] = [$price_ot,$price_do];
+  // $arrFilterVillage['><PROPERTY_120'] = [$price_ot,$price_do];
   $arrFilterPlots['><PROPERTY_PRICE'] = [$price_ot,$price_do]; // для фильтрации участков
 
   $APPLICATION->AddChainItem('Дома за '.$priceURL.' '.$nameBC.' руб','',true);
@@ -213,7 +254,8 @@ if ($areaUrl) // выборка по площади
     }
     if ($area_ot < 0) $area_ot = 0;
 
-    $arrFilterVillage['><PROPERTY_11'] = [$area_ot,$area_do];
+    // $arrFilterVillage['><PROPERTY_11'] = [$area_ot,$area_do];
+    $arrFilterPlots['><PROPERTY_PLOTTAGE'] = [$area_ot,$area_do]; // для фильтрации оферов
 
     switch ($areaType) { // склонение
       case 'sotok':
@@ -226,9 +268,9 @@ if ($areaUrl) // выборка по площади
 
     $APPLICATION->AddChainItem('Дома площадью '.$areaUrl.' '.$nameArea,'',true);
 
-    $newTitle = 'Купить частный дом '.$areaUrl.' '.$nameArea.' - Поселкино';
-    $newDesc = '▶Продажа частных домов площадью '.$areaUrl.' '.$nameArea.' в Московской области с коммуникациями. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
-    $newH1 = 'Частные дома площадью '.$areaUrl.' '.$nameArea;
+    $newTitle = 'Купить частный дом на '.$areaUrl.' '.$nameArea.' - Поселкино';
+    $newDesc = '▶Продажа частных домов на '.$areaUrl.' '.$nameArea.' в Московской области с коммуникациями. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
+    $newH1 = 'Частные дома на '.$areaUrl.' '.$nameArea;
 
     // теги для площади
     $arTegsShow = ['north','east','south','west','gaz','izhs','snt','les','voda','econom','komfort'];

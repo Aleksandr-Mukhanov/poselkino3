@@ -75,7 +75,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					</div>
 					<div class="show-mobile-filter" style="display: none;">
 							<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "land_plots", Array(
-									"CACHE_GROUPS" => "Y",	// Учитывать права доступа
+									"CACHE_GROUPS" => "N",	// Учитывать права доступа
 									"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
 									"CACHE_TYPE" => "A",	// Тип кеширования
 									"CONVERT_CURRENCY" => "N",
@@ -263,8 +263,8 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 						"BACKGROUND_IMAGE" => "-",
 						"BASKET_URL" => "/personal/basket.php",
 						"BROWSER_TITLE" => "-",
-						"CACHE_FILTER" => "N",
-						"CACHE_GROUPS" => "Y",
+						"CACHE_FILTER" => "Y",
+						"CACHE_GROUPS" => "N",
 						"CACHE_TIME" => "36000000",
 						"CACHE_TYPE" => "A",
 						"COMPARE_NAME" => "CATALOG_COMPARE_PLOT",

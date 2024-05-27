@@ -84,7 +84,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                     "bitrix:catalog.smart.filter",
                     "poselkino",
                     array(
-                        "CACHE_GROUPS" => "Y",
+                        "CACHE_GROUPS" => "N",
                         "CACHE_TIME" => "36000000",
                         "CACHE_TYPE" => "A",
                         "CONVERT_CURRENCY" => "N",

@@ -1,6 +1,6 @@
 <?
 $APPLICATION->SetTitle($arVillage['NAME']);
-$APPLICATION->SetPageProperty("title", "Коттеджный поселок ".$arVillage['NAME'].", ".$regionName." район - официальный сайт");
+$APPLICATION->SetPageProperty("title", "Коттеджный поселок ".$arVillage['NAME'].", ".$regionName." район - ".renameTitle());
 $APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($priceSotka)." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от МКАД. ИЖС, охрана, свет, газ, ".$regionName." район");
 // узнаем отзывы
 	$cntCom = 0;$ratingSum = 0;
@@ -8,7 +8,7 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 	$arFilter = Array("IBLOCK_ID"=>2,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$villageID);
 	$arSelect = Array("ID","ACTIVE_FROM","PREVIEW_TEXT","PROPERTY_RATING","PROPERTY_DIGNITIES","PROPERTY_DISADVANTAGES","PROPERTY_FIO","PROPERTY_RESIDENT");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>4],$arSelect);
-	while($arElement = $rsElements->GetNext()){ // dump($arElement);
+	while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		$cntCom++; // кол-во отзывов
 		$arDateTime = explode(' ',$arElement["ACTIVE_FROM"]);
 		$arDate = explode('.',$arDateTime[0]);
@@ -34,7 +34,7 @@ if($arVillage['PROPERTY_LINK_ELEMENTS_VALUE'])
   $arFilter = Array('IBLOCK_ID'=>1,'ID'=>$arVillage['PROPERTY_LINK_ELEMENTS_VALUE']);
   $arSelect = Array('ID','NAME','PROPERTY_AREA_VIL','PROPERTY_COUNT_PLOTS','PROPERTY_COUNT_PLOTS_SOLD','PROPERTY_COUNT_PLOTS_SALE','PROPERTY_PLOTTAGE','PROPERTY_COST_LAND_IN_CART','PROPERTY_PRICE_ARRANGE','PROPERTY_INS_TERMS','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_PLAN_IMG');
   $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-  while ($arElements = $rsElements->GetNext())
+  while ($arElements = $rsElements->Fetch())
     $arVillageLink[] = $arElements;
 }
 
@@ -496,7 +496,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
         <div class="ecology"><img src="<?=SITE_TEMPLATE_PATH?>/images/ecology-3.jpg" alt="">
           <div class="ecology__main">
             <div class="ecology__name">Водоем</div>
-            <div class="ecology__type"><?=implode(', ',$arWater)?></div>
+            <div class="ecology__type"><?=(is_array($arWater))?implode(', ',$arWater):$arWater?></div>
             <div class="ecology__distance">расстояние <?=$arVillage['PROPERTY_WATER_KM_VALUE']*1000?> м.</div>
           </div>
         </div>
@@ -505,7 +505,7 @@ $planIMG_res2 = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], a
         <div class="ecology"><img src="<?=SITE_TEMPLATE_PATH?>/images/ecology-4.jpg" alt="">
           <div class="ecology__main">
             <div class="ecology__name">Почва</div>
-            <div class="ecology__type"><?=implode(', ',$arSoil)?></div>
+            <div class="ecology__type"><?=(is_array($arSoil))?implode(', ',$arSoil):$arSoil?></div>
           </div>
         </div>
       </div>

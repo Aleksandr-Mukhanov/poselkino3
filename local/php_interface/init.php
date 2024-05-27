@@ -34,6 +34,11 @@ function formatPricePoint($price){
 	return $newPrice;
 }
 
+// заявки по умолчанию
+define('defaultEmail', 'start@poselkino.ru');
+define('defaultPhone', '+7 (926) 108-73-32');
+define('defaultAmoID', '3584062'); // Юлия С. / Дмитрий
+
 // определим поддомены
 define('SITES_DIR',['spb.poselkino.ru']);
 
@@ -101,6 +106,15 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('HOUSE_PROP_REGION', 384); // Район домов
 		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
 		break;
+}
+
+// название в title
+function renameTitle()
+{
+	$arSites = ['istra-sady.ru','kp-berezy.ru','klinskie-sady.ru','reka-kp.ru','kp-ogudnevo.ru','sohinki-igs.ru','novie-velemi.ru','novoe-tashirovo.ru','kp-saltykovo.ru','shodnya-forest.ru'];
+
+	$siteName = (in_array($_SERVER['HTTP_HOST'],$arSites)) ? 'сайт поселка' : 'официальный сайт';
+	return $siteName;
 }
 
 // ресайз фото
@@ -655,4 +669,3 @@ function DeleteElement($ID){
 
   return true;
 }
-?>

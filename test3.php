@@ -1,5 +1,5 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-echo 'ok2<br>';
+echo 'ok3<br>';
 
 // передадим в АМО
 $name = 'тест';
@@ -24,31 +24,45 @@ $arLead['add'] = [
 	]
 ];
 
-// $url = "/api/v2/leads";
-// $resultAmo = inAmo($arLead,$url);
+$url = "/api/v4/leads/complex";
+// $arInfo = [
+// 	'url' => $url,
+// 	'date' => date('d.m.Y H:i:s'),
+// ];
+// $resultAmo = inAmoV4($arLead,$url);
 // dump($resultAmo);
+// dump($_SERVER["DOCUMENT_ROOT"]);
 
-use Bitrix\Main\Loader;
-use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
-	Loader::includeModule('highloadblock');
-  Loader::includeModule('iblock');
+// $fp = fopen('amo-log.txt', 'a+');
+// // $txt = var_export($arLead, true)
+// // $txt .= json_encode($arInfo);
+// // $txt .= json_encode($arLead);
+// // $txt .= "\r\n";
+// fwrite($fp,var_export($arInfo, true)."\r\n");
+// fwrite($fp,var_export($arLead, true)."\r\n");
+// fclose($fp);
 
-$hlblock_id = 17; // id HL
-$hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
-$entity = HL\HighloadBlockTable::compileEntity($hlblock);
-$entity_data_class = $entity->getDataClass();
-
-$property_enums = CIBlockPropertyEnum::GetList(Array("ID"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>"REGION"));
-while($enum_fields = $property_enums->GetNext())
-{
-  dump($enum_fields);
-  $data =[
-		"UF_NAME" => $enum_fields['VALUE'],
-    "UF_XML_ID" => $enum_fields['XML_ID'],
-	];
-  // dump($data);
-	// $result = $entity_data_class::add($data);
-}
+// use Bitrix\Main\Loader;
+// use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
+// 	Loader::includeModule('highloadblock');
+//   Loader::includeModule('iblock');
+//
+// $hlblock_id = 17; // id HL
+// $hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+// $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+// $entity_data_class = $entity->getDataClass();
+//
+// $property_enums = CIBlockPropertyEnum::GetList(Array("ID"=>"ASC"), Array("IBLOCK_ID"=>1, "CODE"=>"REGION"));
+// while($enum_fields = $property_enums->GetNext())
+// {
+//   dump($enum_fields);
+//   $data =[
+// 		"UF_NAME" => $enum_fields['VALUE'],
+//     "UF_XML_ID" => $enum_fields['XML_ID'],
+// 	];
+//   // dump($data);
+// 	// $result = $entity_data_class::add($data);
+// }
 
 // сортировка urlrewrite.php
 // $i = 0;

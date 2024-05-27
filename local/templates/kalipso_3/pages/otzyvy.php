@@ -8,7 +8,7 @@ $APPLICATION->SetPageProperty("title", "Отзывы о коттеджном п�
 	$arFilter = Array("IBLOCK_ID"=>2,"ACTIVE"=>"Y","PROPERTY_VILLAGE"=>$villageID);
 	$arSelect = Array("ID","ACTIVE_FROM","PREVIEW_TEXT","PROPERTY_RATING","PROPERTY_DIGNITIES","PROPERTY_DISADVANTAGES","PROPERTY_FIO","PROPERTY_RESIDENT");
 	$rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,['nTopCount'=>4],$arSelect);
-	while($arElement = $rsElements->GetNext()){ // dump($arElement);
+	while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		$cntCom++; // кол-во отзывов
 		$arDateTime = explode(' ',$arElement["ACTIVE_FROM"]);
 		$arDate = explode('.',$arDateTime[0]);

@@ -297,7 +297,7 @@ switch ($km_MKAD) {
 <div class="bg-white py-md-4 py-2" id="block_reviews">
 	<div class="about about-home-portal bg-white block-articles">
 		<div class="container">
-			<h2>Что нового в посёлке <?=$arResult["NAME"]?></h2>
+			<h2>Что нового в посёлке КП <?=$arResult["NAME"]?></h2>
 			<?foreach ($arResult["NEWS"] as $value) {
 				// обрежем текст
 				$countText = strlen($value["PREVIEW_TEXT"]);

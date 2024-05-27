@@ -2800,6 +2800,20 @@ $arUrlRewrite = array(
       'PATH' => '/map/index.php',
       'SORT' => 3860,
   ],
+  3865 => [
+      'CONDITION' => '#^/kupit-dom/na-([0-9]+?)-sotkah/map/(\?(.*))?#',
+      'RULE' => 'OFFER_TYPE=plots&AREA_TYPE=sotkah&AREA_URL=$1',
+      'ID' => '',
+      'PATH' => '/map/index.php',
+      'SORT' => 3865,
+  ],
+  3867 => [
+    'CONDITION' => '#^/kupit-dom/([0-9]+?)-kv-m/map/(\?(.*))?#',
+    'RULE' => 'DOMA_CODE=withDom&PLOTTAGE=$1',
+    'ID' => '',
+    'PATH' => '/map/index.php',
+    'SORT' => 3867,
+  ],
   3870 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-class/map/(\?(.*))?#',
       'RULE' => 'OFFER_TYPE=plots&CLASS_CODE=$1',
@@ -2891,6 +2905,13 @@ $arUrlRewrite = array(
       'PATH' => '/map/index.php',
       'SORT' => 3990,
   ],
+  3995 => [
+      'CONDITION' => '#^/kupit-dom/([^/]+?)-shosse-na-([0-9]+?)-sotkah/map/(\?(.*))?#',
+      'RULE' => 'OFFER_TYPE=plots&AREA_TYPE=sotkah&SHOSSE_CODE=$1&AREA_URL=$2',
+      'ID' => '',
+      'PATH' => '/map/index.php',
+      'SORT' => 3995,
+  ],
   4000 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-shosse-kommunikatsii/map/(\?(.*))?#',
       'RULE' => 'OFFER_TYPE=plots&COMMUN=kommunikaciyami&SHOSSE_CODE=$1',
@@ -2974,6 +2995,13 @@ $arUrlRewrite = array(
       'ID' => '',
       'PATH' => '/map/index.php',
       'SORT' => 4110,
+  ],
+  4115 => [
+      'CONDITION' => '#^/kupit-dom/([^/]+?)-rayon-na-([0-9]+?)-sotkah/map/(\?(.*))?#',
+      'RULE' => 'OFFER_TYPE=plots&AREA_TYPE=sotkah&RAYON_CODE=$1&AREA_URL=$2',
+      'ID' => '',
+      'PATH' => '/map/index.php',
+      'SORT' => 4115,
   ],
   4120 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-rayon-kommunikatsii/map/(\?(.*))?#',
@@ -3164,6 +3192,20 @@ $arUrlRewrite = array(
       'PATH' => '/kupit-dom/index.php',
       'SORT' => 4380,
   ],
+  4385 => [
+      'CONDITION' => '#^/kupit-dom/na-([0-9]+?)-sotkah/(\?(.*))?#',
+      'RULE' => 'AREA_TYPE=sotkah&AREA_URL=$1',
+      'ID' => '',
+      'PATH' => '/kupit-dom/index.php',
+      'SORT' => 4385,
+  ],
+  4387 => [
+      'CONDITION' => '#^/kupit-dom/([0-9]+?)-kv-m/(\?(.*))?#',
+      'RULE' => 'DOMA_CODE=withDom&PLOTTAGE=$1',
+      'ID' => '',
+      'PATH' => '/kupit-dom/index.php',
+      'SORT' => 4387,
+  ],
   4390 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-class/(\?(.*))?#',
       'RULE' => 'CLASS_CODE=$1',
@@ -3255,6 +3297,13 @@ $arUrlRewrite = array(
       'PATH' => '/kupit-dom/index.php',
       'SORT' => 4510,
   ],
+  4515 => [
+      'CONDITION' => '#^/kupit-dom/([^/]+?)-shosse-na-([0-9]+?)-sotkah/(\?(.*))?#',
+      'RULE' => 'AREA_TYPE=sotkah&SHOSSE_CODE=$1&AREA_URL=$2',
+      'ID' => '',
+      'PATH' => '/kupit-dom/index.php',
+      'SORT' => 4515,
+  ],
   4520 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-shosse-kommunikatsii/(\?(.*))?#',
       'RULE' => 'COMMUN=kommunikaciyami&SHOSSE_CODE=$1',
@@ -3338,6 +3387,13 @@ $arUrlRewrite = array(
       'ID' => '',
       'PATH' => '/kupit-dom/index.php',
       'SORT' => 4630,
+  ],
+  4635 => [
+      'CONDITION' => '#^/kupit-dom/([^/]+?)-rayon-na-([0-9]+?)-sotkah/(\?(.*))?#',
+      'RULE' => 'AREA_TYPE=sotkah&RAYON_CODE=$1&AREA_URL=$2',
+      'ID' => '',
+      'PATH' => '/kupit-dom/index.php',
+      'SORT' => 4635,
   ],
   4640 => [
       'CONDITION' => '#^/kupit-dom/([^/]+?)-rayon-kommunikatsii/(\?(.*))?#',

@@ -1,9 +1,223 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-
+echo 'test2<br>';
 use Bitrix\Main\Loader;
 use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	Loader::includeModule('highloadblock');
   Loader::includeModule('iblock');
+
+	$token = '7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0';
+	$chat_id = 461529239;
+
+	// $getQuery = array(
+  //   "chat_id" 	=> $chat_id,
+  //   "text"  	=> "Новое сообщение из формы",
+	// );
+	// $ch = curl_init("https://api.telegram.org/bot". $token ."/sendMessage?" . http_build_query($getQuery));
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// curl_setopt($ch, CURLOPT_HEADER, false);
+	// $resultQuery = curl_exec($ch);
+	// curl_close($ch);
+	//
+	// dump($resultQuery);
+	//
+	// dump($getQuery);
+
+	// $params = array(
+  //   'chat_id' => $chat_id, // id получателя сообщения
+  //   'text' => 'privet', // текст сообщения
+  //   // 'parse_mode' => 'HTML', // режим отображения сообщения, не обязательный параметр
+	// );
+	//
+	// $curl = curl_init();
+	// curl_setopt($curl, CURLOPT_URL, 'https://api.telegram.org/bot' . $token . '/sendMessage'); // адрес api телеграмм
+	// curl_setopt($curl, CURLOPT_POST, true); // отправка данных методом POST
+	// curl_setopt($curl, CURLOPT_TIMEOUT, 10); // максимальное время выполнения запроса
+	// curl_setopt($curl, CURLOPT_POSTFIELDS, $params); // параметры запроса
+	// $result = curl_exec($curl); // запрос к api
+	// curl_close($curl);
+	//
+	// dump($result);
+
+	// https://api.telegram.org/bot7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0/sendMessage?chat_id=461529239&text=привет
+
+
+	// $mailFields = array(
+	// 	"name" => $name,
+	// 	"tel" => $tel,
+	// 	"email" => $email,
+	// 	"namePos" => $namePos,
+	// 	"codePos" => $codePos,
+	// 	"highway" => $highway,
+	// 	"subject" => $subject,
+	// 	"develId" => $_POST['develId'],
+	// 	"develName" => $_POST['develName'],
+	// 	"phoneDevel" => $_POST['phoneDevel'],
+	// 	"emailDevel" => $emailDevel,
+	// 	"page" => $fromPage,
+	// 	"toEmail" => $toEmail,
+	// );
+
+	// $mailFields = [
+	// 	'111' => 222,
+	// 	'333' => 444
+	// ];
+	//
+	// $hlblock_id = 24; // id HL
+	// $hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+	// $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+	// $entity_data_class = $entity->getDataClass();
+	//
+	// $arData =[
+	// 	// "UF_ORDER" => $mailFields,
+	// 	"UF_NAME" => $name,
+	// 	"UF_PHONE" => $tel,
+	// 	"UF_VILLAGE" => $namePos,
+	// 	"UF_HIGHWAY" => $highway,
+	// 	"UF_FORM" => $leadName,
+	// 	"UF_DEVELOPER" => $name,
+	// 	"UF_PAGE" => $fromPage,
+	// 	"UF_M_EMAIL" => $toEmail,
+	// 	"UF_M_PHONE" => $toPhone,
+	// 	"UF_M_AMO" => $responsibleUserId,
+	// 	"UF_DATE" => date('d.m.Y H:i:s')
+	// ];
+	// dump($arData);
+	// // $result = $entity_data_class::add($arData);
+
+	// // тестовая отправка
+	// $mailFields = array(
+	// 	"NAME" => 'Тестинг1',
+	// );
+	// if ($result = CEvent::Send("TEST_SEND", "s1", $mailFields)) echo "Сообщение успешно отправлено!";
+	// else echo "Error: ".$result->LAST_ERROR;
+
+	// if (mail('mukhanov.au@gmail.com','test1','test1'))
+	// 	echo 'ok gmail';
+	// else
+	// 	echo 'no gmail';
+	//
+	// echo '<br>';
+	//
+	// if (mail('mukhanov.au@ya.ru','test2','test2'))
+	// 	echo 'ok ya';
+	// else
+	// 	echo 'no ya';
+	//
+	// echo '<br>';
+	//
+	// if (mail('muxa___@mail.ru','test3','test3'))
+	// 	echo 'ok mail';
+	// else
+	// 	echo 'no mail';
+
+	// $success = mail('muxa___@mail.ru', 'My Subject1', 'test');
+	// if (!$success) {
+	// 		echo 'not';
+	//    $errorMessage = error_get_last()['message'];
+	// 	 dump($errorMessage);
+	// } else echo 'da';
+
+	// $site = 1;
+	// $arElHL = getElHL(13,['ID'=>'desc'],['UF_ROUTE'=>$site],['ID','UF_EMAIL','UF_PHONE','UF_ROUTE']);
+	// foreach ($arElHL as $value) {
+	// 	$arEmail[] = trim($value['UF_EMAIL']);
+	// 	$arPhone[] = trim($value['UF_PHONE']);
+	// }
+	// $toEmail = implode(',',$arEmail);
+	// $toPhone = implode(',',$arPhone);
+	// dump($toPhone);
+
+	// $arPhones = [
+	// 	'novoe-tashirovo.ru' => '+7(499)450-55-12',
+	// 	'lapino-kp.ru' => '+7(499)450-55-12',
+	// 	'elizarovo-kp.ru' => '+7(499)450-55-12',
+	// 	'admiral-kp.ru' => '+7(499)288-74-81',
+	// 	'velikie-ozera.ru' => '+7(499)288-74-81',
+	// 	'kp-saltykovo.ru' => '+7(499)288-74-81',
+	// 	'pahra-river-kp.ru' => '+7(499)430-08-41',
+	// 	'sosnovyi-bor.ru' => '+7(499)430-08-41',
+	// 	'faustovo-kp.ru' => '+7(499)430-08-41',
+	// 	'eco-razdolie.ru' => '+7(499)430-08-41',
+	// 	'mishutinckaya-sloboda.ru' => '+7(499)288-23-86',
+	// 	'malinky-park.ru' => '+7(499)288-23-86',
+	// 	'kalitino-kp.ru' => '+7(499)288-23-86',
+	// 	'berezky-park.ru' => '+7(499)288-23-86',
+	// 	'kp-ogudnevo.ru' => '+7(499)288-23-86',
+	// 	'edem-kp.ru' => '+7(499)288-23-86',
+	// 	'kp-tradicii.ru' => '+7(499)288-23-86',
+	// 	'dariino-park.ru' => '+7(499)226-28-24',
+	// 	'rizskie-zori.ru' => '+7(499)226-28-24',
+	// 	'maximovo-park.ru' => '+7(499)226-28-24',
+	// 	'repino-kp.ru' => '+7(499)757-57-25',
+	// 	'lesnoi-ostrov.ru' => '+7(499)757-57-25',
+	// 	'regata-kp.ru' => '+7(499)757-57-25',
+	// 	'favorit-kp.ru' => '+7(499)757-57-25',
+	// 	'ilinskoe-kp.ru' => '+7(499)757-57-25',
+	// 	'red-poselok.ru' => '+7(499)757-57-25',
+	// 	'karamel-kp.ru' => '+7(499)757-57-25',
+	// 	'kp-divniy.ru' => '+7(499)757-57-25',
+	// 	'zem-polyana.ru' => '+7(499)757-57-25',
+	// 	'rublevo-kp.ru' => '+7(499)757-57-25',
+	// 	'kp-kalina.ru' => '+7(499)757-57-25',
+	// 	'kp-svetliy.ru' => '+7(499)757-57-25',
+	// 	'kp-bunino.ru' => '+7(499)757-57-25',
+	// 	'esenino-kp.ru' => '+7(499)757-57-25',
+	// 	'dinastiya-kp.ru' => '+7(499)757-57-25',
+	// 	'kp-brusnikino.ru' => '+7(499)757-57-25',
+	// 	'fisher-poselok.ru' => '+7(499)757-57-25',
+	// 	'kp-lider.ru' => '+7(499)757-57-25',
+	// 	'minaevo-igs.ru' => '+7(499)757-57-25',
+	// 	'kuzminskiy-kp.ru' => '+7(901)505-41-01',
+	// 	'kp-beregovoy.ru' => '+7(499)757-57-25',
+	// 	'stepigino.ru' => '+7(499)757-57-25',
+	// 	'vasnetsovo-kp.ru' => '+7(499)757-57-25',
+	// 	'skazka-kp.ru' => '+7(499)757-57-25',
+	// 	'kp-mirnyi.ru' => '+7(499)757-57-25',
+	// 	'novoe-sonino.ru' => '+7(499)757-57-25',
+	// 	'matchino-park.ru' => '+7(499)757-57-25',
+	// 	'rastunovo-kp.ru' => '+7(499)757-57-25',
+	// 	'soninskiy-les.ru' => '+7(499)757-57-25',
+	// 	'shelest-kp.ru' => '+7(499)757-57-25',
+	// 	'dachnaya-practika.ru' => '+7(499)757-57-25',
+	// 	'kalipso-village.ru' => '+7(499)495-40-56',
+	// 	'kp-brehovo.ru' => '+7(499)495-40-56',
+	// 	'sokolniki-kp.ru' => '+7(499)495-40-56',
+	// 	'shadrino.su' => '+7(499)495-40-56',
+	// 	'kp-lyzhnik.ru' => '+7(499)495-40-56',
+	// 	'vasilkovo-kp.ru' => '+7(499)504-98-09',
+	// 	'socolinaya-gora.ru' => '+7(499)504-98-09',
+	// 	'orlinye-holmy.ru' => '+7(499)504-98-09',
+	// 	'swiss-dolina.ru' => '+7(499)504-98-09',
+	// 	'kp-ivanovka.ru' => '+7(499)455-08-70',
+	// 	'hodaevskie-dachi.ru' => '+7(499)455-08-70',
+	// 	'kp-koledino.ru' => '+7(499)455-08-70',
+	// 	'kp-skurygino.ru' => '+7(499)455-08-70',
+	// 	'kp-bityagovo.ru' => '+7(499)455-08-70',
+	// 	'uzhnye-ozera.ru' => '+7(499)504-98-09',
+	// 	'svyataja-gora.ru' => '+7(499)504-98-09',
+	// 	'uzhny-park.ru' => '+7(499)455-08-70',
+	// 	'borodino-kp.ru' => '+7(499)455-08-70',
+	// 	'dolyna-ozer.ru' => '+7(499)288-74-81',
+	// 	'sohinki-igs.ru' => '+7(499)504-98-09',
+	// ];
+	//
+	// $hlblock_id = 23; // id HL
+	// $hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+	// $entity = HL\HighloadBlockTable::compileEntity($hlblock);
+	// $entity_data_class = $entity->getDataClass();
+	//
+	// foreach ($arPhones as $key => $value) {
+	// 	$arData = [
+	// 		'UF_NAME' => $key,
+	// 		'UF_PHONE' => $value,
+	// 	];
+	// 	// $result = $entity_data_class::add($arData);
+	// }
+	//
+	// $site = 'borodino-kp.ru';
+	// $arElHL = getElHL(23,['ID'=>'desc'],['UF_NAME'=>$site],['ID','UF_PHONE']);
+	// $phoneSite = array_values($arElHL)[0]['UF_PHONE'];
+	// dump($phoneSite);
 
 	// Вытаскиваем элементы инфоблока
 	// $arOrder = ['SORT'=>'ASC'];
@@ -178,5 +392,5 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 //   // else echo 'Ошибка!'.$arElement['ID'];
 //   // echo '<br>';
 // }
-echo 'ok_OLD';
+echo 'ok_VPS';
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");

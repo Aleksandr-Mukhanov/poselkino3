@@ -9,6 +9,9 @@ if (isset($_COOKIE['comparison_vil']))
 if (isset($_COOKIE['comparison_plots']))
 	$arComparisonPlots = explode('-',$_COOKIE['comparison_plots']);
 
+if (isset($_COOKIE['comparison_houses']))
+	$arComparisonHouses = explode('-',$_COOKIE['comparison_houses']);
+
 // получим шоссе и районы
 $arElHL = getElHL(16,[],[],['*']);
 foreach ($arElHL as $value)
@@ -61,7 +64,7 @@ if ($arComparisonPlots)
 	} // dump($arPlotsComp);
 }
 
-$h1 = ($arComparisonVil && $arComparisonPlots) ? 'Сравните выбранное' : 'В сравнении пусто!';
+$h1 = ($arComparisonVil || $arComparisonPlots || $arComparisonHouses) ? 'Сравните выбранное' : 'В сравнении пусто!';
 ?>
 <main class="page page-comparison slider">
 	<div class="page__breadcrumbs mt-0 py-4">

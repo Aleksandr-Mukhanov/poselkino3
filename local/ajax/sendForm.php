@@ -75,118 +75,118 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 		$siteId = ($_POST['siteId']) ? $_POST['siteId'] : 's1';
 
 		// разбивка по шоссе
-		switch ($highway) {
-			case 'Дмитровское':
-				$toEmail = 's-lozovaya@yandex.ru';
-				$toPhone = '+7 (901) 505-41-01';
-				$responsibleUserId = '8542930'; // Светлана Лозовая
-				break;
-			case 'Рогачёвское':
-				$toEmail = 's-lozovaya@yandex.ru';
-				$toPhone = '+7 (901) 505-41-01';
-				$responsibleUserId = '8542930'; // Светлана Лозовая
-				break;
-			case 'Осташковское':
-				$toEmail = 'gomuleckaya@mail.ru';
-				$toPhone = '+7 (968) 396-13-34';
-				$responsibleUserId = '8076100'; // Александра
-				break;
-			case 'Ленинградское':
-				$toEmail = 's-lozovaya@yandex.ru';
-				$toPhone = '+7 (901) 505-41-01';
-				$responsibleUserId = '8542930'; // Светлана Лозовая
-				break;
-			case 'Пятницкое':
-				$toEmail = 's-lozovaya@yandex.ru';
-				$toPhone = '+7 (901) 505-41-01';
-				$responsibleUserId = '8542930'; // Светлана Лозовая
-				break;
-			case 'Волоколамское':
-				$toEmail = 'alexa_morozova30@mail.ru';
-				$toPhone = '+7 (985) 224-03-04';
-				$responsibleUserId = '7244824'; // Александра М.
-				break;
-			case 'Новорижское':
-				$toEmail = 'alexa_morozova30@mail.ru';
-				$toPhone = '+7 (985) 224-03-04';
-				$responsibleUserId = '7244824'; // Александра М.
-				break;
-			case 'Минское':
-				$toEmail = '7825718@mail.ru';
-				$toPhone = '+7 (926) 108-73-32';
-				$responsibleUserId = '3584062'; // Дима Маслов
-				break;
-			// case 'Ильинское':
-			// 	$toEmail = 'sobolevau75@gmail.com';
-			// 	$toPhone = '+7 (916) 742-03-01';
-			// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
-			// 	break;
-			// case 'Рублевское':
-			// 	$toEmail = 'sobolevau75@gmail.com';
-			// 	$toPhone = '+7 (916) 742-03-01';
-			// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
-			// 	break;
-			case 'Горьковское':
-				$toEmail = 'a.pishchikova1@mail.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7913857'; // Айнура
-				break;
-			case 'Щелковское':
-				$toEmail = 'a.pishchikova1@mail.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7913857'; // Айнура
-				break;
-			case 'Носовихинское':
-				$toEmail = 'a.pishchikova1@mail.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7913857'; // Айнура
-				break;
-			case 'Егорьевское':
-				$toEmail = 'a.pishchikova1@mail.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7913857'; // Айнура
-				break;
-			case 'Новорязанское':
-				$toEmail = 'syusin.al@yandex.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7818886'; // Александр
-				break;
-			case 'Каширское':
-				$toEmail = 'a.pishchikova1@mail.ru';
-				$toPhone = '+7 (963) 674-84-61';
-				$responsibleUserId = '7913857'; // Айнура
-				break;
-			case 'Симферопольское':
-				$toEmail = 'alexa_morozova30@mail.ru';
-				$toPhone = '+7 (985) 224-03-04';
-				$responsibleUserId = '7244824'; // Александра М.
-				break;
-			case 'Варшавское':
-				$toEmail = 'alexa_morozova30@mail.ru';
-				$toPhone = '+7 (985) 224-03-04';
-				$responsibleUserId = '7244824'; // Александра М.
-				break;
-			case 'Калужское':
-				$toEmail = 'alexa_morozova30@mail.ru';
-				$toPhone = '+7 (985) 224-03-04';
-				$responsibleUserId = '7244824'; // Александра М.
-				break;
-			// case 'Киевское':
-			// 	$toEmail = 'sobolevau75@gmail.com';
-			// 	$toPhone = '+7 (916) 742-03-01';
-			// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
-			// 	break;
-			case 'Ярославское':
-				$toEmail = 's-lozovaya@yandex.ru';
-				$toPhone = '+7 (901) 505-41-01';
-				$responsibleUserId = '8542930'; // Светлана Лозовая
-				break;
-
-			default:
-				$toEmail = 'start@poselkino.ru';
-				$toPhone = '+7 (926) 108-73-32';
-				break;
-		}
+		// switch ($highway) {
+		// 	case 'Дмитровское':
+		// 		$toEmail = 's-lozovaya@yandex.ru';
+		// 		$toPhone = '+7 (901) 505-41-01';
+		// 		$responsibleUserId = '8542930'; // Светлана Лозовая
+		// 		break;
+		// 	case 'Рогачёвское':
+		// 		$toEmail = 's-lozovaya@yandex.ru';
+		// 		$toPhone = '+7 (901) 505-41-01';
+		// 		$responsibleUserId = '8542930'; // Светлана Лозовая
+		// 		break;
+		// 	case 'Осташковское':
+		// 		$toEmail = 'gomuleckaya@mail.ru';
+		// 		$toPhone = '+7 (968) 396-13-34';
+		// 		$responsibleUserId = '8076100'; // Александра
+		// 		break;
+		// 	case 'Ленинградское':
+		// 		$toEmail = 's-lozovaya@yandex.ru';
+		// 		$toPhone = '+7 (901) 505-41-01';
+		// 		$responsibleUserId = '8542930'; // Светлана Лозовая
+		// 		break;
+		// 	case 'Пятницкое':
+		// 		$toEmail = 's-lozovaya@yandex.ru';
+		// 		$toPhone = '+7 (901) 505-41-01';
+		// 		$responsibleUserId = '8542930'; // Светлана Лозовая
+		// 		break;
+		// 	case 'Волоколамское':
+		// 		$toEmail = 'alexa_morozova30@mail.ru';
+		// 		$toPhone = '+7 (985) 224-03-04';
+		// 		$responsibleUserId = '7244824'; // Александра М.
+		// 		break;
+		// 	case 'Новорижское':
+		// 		$toEmail = 'alexa_morozova30@mail.ru';
+		// 		$toPhone = '+7 (985) 224-03-04';
+		// 		$responsibleUserId = '7244824'; // Александра М.
+		// 		break;
+		// 	case 'Минское':
+		// 		$toEmail = '7825718@mail.ru';
+		// 		$toPhone = '+7 (926) 108-73-32';
+		// 		$responsibleUserId = '3584062'; // Дима Маслов
+		// 		break;
+		// 	// case 'Ильинское':
+		// 	// 	$toEmail = 'sobolevau75@gmail.com';
+		// 	// 	$toPhone = '+7 (916) 742-03-01';
+		// 	// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
+		// 	// 	break;
+		// 	// case 'Рублевское':
+		// 	// 	$toEmail = 'sobolevau75@gmail.com';
+		// 	// 	$toPhone = '+7 (916) 742-03-01';
+		// 	// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
+		// 	// 	break;
+		// 	case 'Горьковское':
+		// 		$toEmail = 'a.pishchikova1@mail.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7913857'; // Айнура
+		// 		break;
+		// 	case 'Щелковское':
+		// 		$toEmail = 'a.pishchikova1@mail.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7913857'; // Айнура
+		// 		break;
+		// 	case 'Носовихинское':
+		// 		$toEmail = 'a.pishchikova1@mail.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7913857'; // Айнура
+		// 		break;
+		// 	case 'Егорьевское':
+		// 		$toEmail = 'a.pishchikova1@mail.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7913857'; // Айнура
+		// 		break;
+		// 	case 'Новорязанское':
+		// 		$toEmail = 'syusin.al@yandex.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7818886'; // Александр
+		// 		break;
+		// 	case 'Каширское':
+		// 		$toEmail = 'a.pishchikova1@mail.ru';
+		// 		$toPhone = '+7 (963) 674-84-61';
+		// 		$responsibleUserId = '7913857'; // Айнура
+		// 		break;
+		// 	case 'Симферопольское':
+		// 		$toEmail = 'alexa_morozova30@mail.ru';
+		// 		$toPhone = '+7 (985) 224-03-04';
+		// 		$responsibleUserId = '7244824'; // Александра М.
+		// 		break;
+		// 	case 'Варшавское':
+		// 		$toEmail = 'alexa_morozova30@mail.ru';
+		// 		$toPhone = '+7 (985) 224-03-04';
+		// 		$responsibleUserId = '7244824'; // Александра М.
+		// 		break;
+		// 	case 'Калужское':
+		// 		$toEmail = 'alexa_morozova30@mail.ru';
+		// 		$toPhone = '+7 (985) 224-03-04';
+		// 		$responsibleUserId = '7244824'; // Александра М.
+		// 		break;
+		// 	// case 'Киевское':
+		// 	// 	$toEmail = 'sobolevau75@gmail.com';
+		// 	// 	$toPhone = '+7 (916) 742-03-01';
+		// 	// 	$responsibleUserId = '3584062'; // Юлия С. / Дмитрий
+		// 	// 	break;
+		// 	case 'Ярославское':
+		// 		$toEmail = 's-lozovaya@yandex.ru';
+		// 		$toPhone = '+7 (901) 505-41-01';
+		// 		$responsibleUserId = '8542930'; // Светлана Лозовая
+		// 		break;
+		//
+		// 	default:
+		// 		$toEmail = 'start@poselkino.ru';
+		// 		$toPhone = '+7 (926) 108-73-32';
+		// 		break;
+		// }
 
 		// распределение менеджерам по шоссе
 		$arElHL = getElHL(16,[],[],['ID','UF_NAME','UF_MANAGER']);
@@ -210,6 +210,10 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
 		}
 
+		if (!$toEmail) $toEmail = defaultEmail;
+		if (!$toPhone) $toPhone = defaultPhone;
+		if (!$responsibleUserId) $responsibleUserId = defaultAmoID;
+
 		$mailFields = array(
 			"name" => $name,
 			"tel" => $tel,
@@ -231,6 +235,10 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 		if (CEvent::Send("SEND_TO_VIEW", $siteId, $mailFields)) mesOk("Ваша заявка успешно отправлена!<br /> ".$whoContact." свяжется с Вами в самое ближайшее время)");
 		else mesEr("Error: ".$el->LAST_ERROR);
 
+		// отправим смс менеджеру
+		$textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента! Телефон: '.$tel;
+		sendSMS($toPhone,$textSMS);
+
 		// обновим счетчик UP_TO_VIEW
 		$cntPos = ($_POST['cntPos']) ? $_POST['cntPos'] : 0;
 		$idEl = $_POST['idPos'];
@@ -238,8 +246,6 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 		$PROPERTY_VAL = $cntPos + 1;
 		$PROPERTY_CODE = "UP_TO_VIEW";
 		CIBlockElement::SetPropertyValues($idEl, $IBLOCK_ID, $PROPERTY_VAL, $PROPERTY_CODE);
-
-		if (!$responsibleUserId) $responsibleUserId = '3584062'; // Юлия С. / Дмитрий
 
 		$leadName = ($_POST['formID'] == 'sale') ? $name.' ('.$namePos.') скидка - с сайта' : $name.' ('.$namePos.') - с сайта';
 
@@ -251,54 +257,112 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			$leadName = $name.' ('.$namePos.') блог Поселкино — с сайта';
 
 		// передадим в АМО
-		$arLead['add'] = [
+		$arLead = [
 			[
 				'name' => $leadName, // имя сделки
-				'status_id' => '28709515', // статус 'Новый лид'
-				'responsible_user_id' => $responsibleUserId,
-				'created_at' => time(),
-				'custom_fields' => [
+				// 'status_id' => '28709515', // статус 'Новый лид'
+				'responsible_user_id' => (int)$responsibleUserId,
+				// 'created_at' => time(),
+				'custom_fields_values' => [
 					[
-						'id' => 650157, // Девелопер
+						'field_id' => 650157, // Девелопер
 						'values' => [
 							[
 								'value' => $_POST['develName']
 							]
 						]
 					],
-				]
-			]
-		];
-
-		$url = "/api/v2/leads";
-		$resultAmo = inAmo($arLead,$url);
-		$requestId = $resultAmo['_embedded']['items'][0]['id'];
-
-		// создадим контакт в АМО
-		$arCont['add'] = [
-			[
-				'name' => $name, // имя контакта
-				'leads_id' => [$requestId],
-				'created_at' => time(),
-				'custom_fields' => [
-					[
-						'id' => 426347, // Телефон
-						'values' => [
-							[
-								'value' => $tel,
-								'enum' => 600995 // Раб. тел.
+				],
+				'_embedded' => [
+					'contacts' => [
+						[
+							'name' => $name, // имя контакта
+							'responsible_user_id' => (int)$responsibleUserId,
+							'custom_fields_values' => [
+								[
+									"field_code" => "PHONE",
+									"values" => [
+										[
+											"enum_code" => "WORK",
+											"value" => $tel
+										]
+									]
+								],
 							]
 						]
-					],
+					]
 				]
 			]
 		];
-		$url = "/api/v2/contacts";
-		$resultAmo = inAmo($arCont,$url); //dump($resultAmo);
 
-		// отправим смс менеджеру
-		$textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента!';
-		sendSMS($toPhone,$textSMS);
+		$url = "/api/v4/leads/complex";
+		$resultAmo = inAmoV4($arLead,$url);
+
+		// добавим в админку
+		$hlblock_id = 24; // id HL
+		$hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+		$entity = HL\HighloadBlockTable::compileEntity($hlblock);
+		$entity_data_class = $entity->getDataClass();
+
+		$arData =[
+			"UF_NAME" => $name,
+			"UF_PHONE" => $tel,
+			"UF_VILLAGE" => $namePos,
+			"UF_HIGHWAY" => $highway,
+			"UF_FORM" => $leadName,
+			"UF_DEVELOPER" => $_POST['develName'],
+			"UF_PAGE" => $fromPage,
+			"UF_M_EMAIL" => $toEmail,
+			"UF_M_PHONE" => $toPhone,
+			"UF_M_AMO" => $responsibleUserId,
+			"UF_DATE" => date('d.m.Y H:i:s')
+		];
+		$entity_data_class::add($arData);
+
+		// $arLead['add'] = [
+		// 	[
+		// 		'name' => $leadName, // имя сделки
+		// 		'status_id' => '28709515', // статус 'Новый лид'
+		// 		'responsible_user_id' => $responsibleUserId,
+		// 		'created_at' => time(),
+		// 		'custom_fields' => [
+		// 			[
+		// 				'id' => 650157, // Девелопер
+		// 				'values' => [
+		// 					[
+		// 						'value' => $_POST['develName']
+		// 					]
+		// 				]
+		// 			],
+		// 		]
+		// 	]
+		// ];
+		//
+		// $url = "/api/v2/leads";
+		// $resultAmo = inAmo($arLead,$url);
+		// $requestId = $resultAmo['_embedded']['items'][0]['id'];
+		//
+		// // создадим контакт в АМО
+		// $arCont['add'] = [
+		// 	[
+		// 		'name' => $name, // имя контакта
+		// 		'leads_id' => [$requestId],
+		// 		'created_at' => time(),
+		// 		'custom_fields' => [
+		// 			[
+		// 				'id' => 426347, // Телефон
+		// 				'values' => [
+		// 					[
+		// 						'value' => $tel,
+		// 						'enum' => 600995 // Раб. тел.
+		// 					]
+		// 				]
+		// 			],
+		// 		]
+		// 	]
+		// ];
+		// $url = "/api/v2/contacts";
+		// $resultAmo = inAmo($arCont,$url); //dump($resultAmo);
 	}
 }
 elseif($ourForm == 'Subscribe') // Подписка

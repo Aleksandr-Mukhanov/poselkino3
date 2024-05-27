@@ -1,0 +1,108 @@
+array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '03.05.2024 12:09:10',
+)
+array (
+  0 => 
+  array (
+    'name' => 'тест123 (Решетниково) - с сайта',
+    'responsible_user_id' => 10672978,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест123',
+          'responsible_user_id' => 10672978,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+3 (333) 333-33-33',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+false
+
+
+array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '03.05.2024 12:10:16',
+)
+array (
+  0 => 
+  array (
+    'name' => 'тест1111 (Решетниково) - с сайта',
+    'responsible_user_id' => 10672978,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест1111',
+          'responsible_user_id' => 10672978,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+1 (111) 111-11-11',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+false
+
+

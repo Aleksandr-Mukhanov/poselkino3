@@ -1,5 +1,8 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
+$APPLICATION->SetTitle("Тест");
+use Bitrix\Main\Loader;
+	Loader::includeModule('highloadblock');
+use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;?>
 <main class="page page-test">
 	<div class="bg-white">
 		<div class="container">
@@ -22,20 +25,24 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 		// выбор почты
 		switch ($_POST["route"]) {
 			case 'Север':
-				$toEmail = '89645358935@bk.ru,andrey1761300@ya.ru';
-				$toPhone = '+7 (964) 535-89-35,+7 (926) 176-13-00';
+				// $toEmail = '89645358935@bk.ru,andrey1761300@ya.ru';
+				// $toPhone = '+7 (964) 535-89-35,+7 (926) 176-13-00';
+				$routeID = 1;
 				break;
 			case 'Запад':
-				$toEmail = 'andrey1761300@ya.ru,Liya.Shvec@inbox.ru';
-				$toPhone = '+7 (926) 176-13-00,+7 (977) 308-97-81';
+				// $toEmail = 'andrey1761300@ya.ru';
+				// $toPhone = '+7 (926) 176-13-00,+7 (977) 308-97-81';
+				$routeID = 2;
 				break;
 			case 'Восток':
-				$toEmail = '7611911@gmail.com,rosstroi2013@yandex.ru';
-				$toPhone = '+7 (931) 888-85-08,+7 (905) 587-70-94';
+				// $toEmail = '7611911@gmail.com,rosstroi2013@yandex.ru';
+				// $toPhone = '+7 (931) 888-85-08,+7 (905) 587-70-94';
+				$routeID = 3;
 				break;
 			case 'Юг':
-				$toEmail = 'Dmitriy_alex86@mail.ru,Liya.Shvec@inbox.ru';
-				$toPhone = '+7 (925) 566-59-78,+7 (977) 308-97-81';
+				// $toEmail = 'Dmitriy_alex86@mail.ru';
+				// $toPhone = '+7 (925) 566-59-78,+7 (977) 308-97-81';
+				$routeID = 4;
 				break;
 
 			default:
@@ -43,6 +50,18 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 				$toPhone = '+7 (926) 108-73-32';
 				break;
 		}
+
+		$arElHL = getElHL(13,['ID'=>'desc'],['UF_ROUTE'=>$routeID],['ID','UF_EMAIL','UF_PHONE']);
+		foreach ($arElHL as $value) {
+			$arEmail[] = trim($value['UF_EMAIL']);
+			$arPhone[] = trim($value['UF_PHONE']);
+		}
+		$toEmail = implode(',',$arEmail);
+		$toPhone = implode(',',$arPhone);
+
+		if (!$toEmail) $toEmail = defaultEmail;
+		if (!$toPhone) $toPhone = defaultPhone;
+		if (!$responsibleUserId) $responsibleUserId = defaultAmoID;
 
 		$mailFields = array(
 			"CHEK1" => $_POST["route"], // направление
@@ -62,9 +81,73 @@ $APPLICATION->SetTitle("Тест"); // на почту start@poselkino.ru ?>
 
 		// отправим смс менеджеру
 		// $textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента к девелоперу!';
-		// $arPhone = explode(',',$toPhone);
-		// foreach ($arPhone as $phone)
-			// sendSMS($phone,$textSMS);
+		$arPhone = explode(',',$toPhone);
+		foreach ($arPhone as $phone) {
+			$textSMS = 'Вам пришли заявка на почту, зарегистрируйте клиента! Телефон: '.$phone;
+			sendSMS($phone,$textSMS);
+		}
+
+		// отправка в АМО
+		$leadName = 'Заявка с теста Поселкино';
+
+		// передадим в АМО
+		$arLead = [
+			[
+				'name' => $leadName, // имя сделки
+				// 'status_id' => '28709515', // статус 'Новый лид'
+				'responsible_user_id' => (int)$responsibleUserId,
+				// 'created_at' => time(),
+				// 'custom_fields_values' => [
+				// 	[
+				// 		'field_id' => 650157, // Девелопер
+				// 		'values' => [
+				// 			[
+				// 				'value' => $_POST['develName']
+				// 			]
+				// 		]
+				// 	],
+				// ],
+				'_embedded' => [
+					'contacts' => [
+						[
+							'name' => $_POST["nameTest"], // имя контакта
+							'responsible_user_id' => (int)$responsibleUserId,
+							'custom_fields_values' => [
+								[
+									"field_code" => "PHONE",
+									"values" => [
+										[
+											"enum_code" => "WORK",
+											"value" => $_POST["phoneTest"]
+										]
+									]
+								],
+							]
+						]
+					]
+				]
+			]
+		];
+
+		$url = "/api/v4/leads/complex";
+		$resultAmo = inAmoV4($arLead,$url);
+
+		// добавим в админку
+		$hlblock_id = 24; // id HL
+		$hlblock = HL\HighloadBlockTable::getById($hlblock_id)->fetch();
+		$entity = HL\HighloadBlockTable::compileEntity($hlblock);
+		$entity_data_class = $entity->getDataClass();
+
+		$arData =[
+			"UF_NAME" => $_POST["nameTest"],
+			"UF_PHONE" => $_POST["phoneTest"],
+			"UF_FORM" => $leadName,
+			"UF_PAGE" => $_SERVER['HTTP_REFERER'],
+			"UF_M_EMAIL" => $toEmail,
+			"UF_M_PHONE" => $toPhone,
+			"UF_M_AMO" => $responsibleUserId,
+		];
+		$entity_data_class::add($arData);
 
 	} else { ?>
 

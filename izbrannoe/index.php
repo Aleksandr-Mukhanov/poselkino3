@@ -18,6 +18,7 @@ if (isset($_COOKIE['favorites_plots'])) {
 
 $h1 = ($arFavoritesVil) ? 'Посёлки в избранном' : 'Нет поселков в избранном!';
 $h1Plots = ($arFavoritesPlots) ? 'Участки в избранном' : 'Нет участков в избранном!';
+$h1House = ($arFavoritesPlots) ? 'Дома в избранном' : 'Нет домов в избранном!';
 // $h1 = 'Избранное';
 ?>
 <script type="text/javascript">

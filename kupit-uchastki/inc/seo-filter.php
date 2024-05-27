@@ -100,7 +100,7 @@ if ($mkadKM)
     if($mkadKM_ot < 0)$mkadKM_ot = 0;
     $mkadKM_do = $mkadKM + 10; // до + 10
 
-    $arrFilterVillage['><PROPERTY_6'] = [$mkadKM_ot,$mkadKM_do];
+    $arrFilterPlots['><PROPERTY_MKAD'] = [$mkadKM_ot,$mkadKM_do];
 
     $APPLICATION->AddChainItem('Участки до '.$mkadKM.' км от МКАД','',true);
 
@@ -160,7 +160,7 @@ if ($priceURL) // выборка по цене
     $priceType2 = 'milliona';
   }
 
-  $arrFilterVillage['><PROPERTY_120'] = [$price_ot,$price_do];
+  // $arrFilterVillage['><PROPERTY_120'] = [$price_ot,$price_do];
   $arrFilterPlots['><PROPERTY_PRICE'] = [$price_ot,$price_do]; // для фильтрации участков
 
   $APPLICATION->AddChainItem('Участки за '.$priceURL.' '.$nameBC.' руб','',true);
@@ -213,7 +213,8 @@ if ($areaUrl) // выборка по площади
     }
     if ($area_ot < 0) $area_ot = 0;
 
-    $arrFilterVillage['><PROPERTY_11'] = [$area_ot,$area_do];
+    // $arrFilterVillage['><PROPERTY_11'] = [$area_ot,$area_do];
+    $arrFilterPlots['><PROPERTY_PLOTTAGE'] = [$area_ot,$area_do]; // для фильтрации оферов
 
     switch ($areaType) { // склонение
       case 'sotok':

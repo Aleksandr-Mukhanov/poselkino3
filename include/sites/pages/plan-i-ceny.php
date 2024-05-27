@@ -9,7 +9,7 @@ if($arVillage['PROPERTY_LINK_ELEMENTS_VALUE'])
   $arFilter = Array('IBLOCK_ID'=>1,'ID'=>$arVillage['PROPERTY_LINK_ELEMENTS_VALUE']);
   $arSelect = Array('ID','NAME','PROPERTY_AREA_VIL','PROPERTY_COUNT_PLOTS','PROPERTY_COUNT_PLOTS_SOLD','PROPERTY_COUNT_PLOTS_SALE','PROPERTY_PLOTTAGE','PROPERTY_COST_LAND_IN_CART','PROPERTY_PRICE_ARRANGE','PROPERTY_INS_TERMS','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_PLAN_IMG');
   $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-  while ($arElements = $rsElements->GetNext())
+  while ($arElements = $rsElements->Fetch())
     $arVillageLink[] = $arElements;
 }
 
@@ -26,6 +26,12 @@ $planIMG_2 = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_2_VALUE']);
 if ($planIFrame_2 && strpos($planIFrame_2,'zemexx.ru') === false) $planIMG_2 = $planIFrame_2;
 $frame_2 = ($planIFrame_2 && strpos($planIFrame_2,'zemexx.ru') === false) ? 'data-iframe="true"' : '';
 $planIMG_2_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+
+// отправим смс менеджеру
+// $textSMS = 'тест';
+// $toPhone = '+7(985)291-31-17';
+// $resultSMS = sendSMS($toPhone,$textSMS);
+// dump($resultSMS);
 ?>
 <section class="page">
   <div class="container page__container">

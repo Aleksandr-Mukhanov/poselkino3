@@ -1,0 +1,2299 @@
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 12:44:22',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Рамазон (Рижские зори) скидка - с сайта',
+    'responsible_user_id' => 8147410,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Рамазон',
+          'responsible_user_id' => 8147410,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (925) 627-87-43',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 12:46:23',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Татьяна (Новое Таширово) скидка - с сайта',
+    'responsible_user_id' => 7913857,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земля за городом',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Татьяна',
+          'responsible_user_id' => 7913857,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 858-82-26',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 13:03:46',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест1 (Сходня Форест Парк) - с сайта',
+    'responsible_user_id' => 7487314,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Дмитровка Загородная недвижимость',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест1',
+          'responsible_user_id' => 7487314,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+1 (111) 111-1111',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:18:50',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест1 (Триумфальный) - с сайта',
+    'responsible_user_id' => 7487314,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земельный Экспресс',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест1',
+          'responsible_user_id' => 7487314,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+1 (111) 111-1111',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:45:46',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299146,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:46:15',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299175,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:46:57',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299217,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:47:35',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299255,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:47:46',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299266,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:48:00',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299280,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:47',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299627,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:48',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299628,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:52',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299632,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:53',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299633,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:53',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299633,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:54',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299634,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:54',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299634,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:53:57',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299637,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:54:59',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299699,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:55:03',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299703,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 16:55:05',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716299705,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 17:07:17',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Татьяна (Ходаевские дачи) - с сайта',
+    'responsible_user_id' => 10173730,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Зембери',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Татьяна',
+          'responsible_user_id' => 10173730,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 916 433 72 92',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 17:24:43',
+)
+Запрос: array (
+  'add' => 
+  array (
+    0 => 
+    array (
+      'name' => 'тест (Фишер) - с сайта',
+      'status_id' => '28709515',
+      'created_at' => 1716301483,
+      'custom_fields' => 
+      array (
+        0 => 
+        array (
+          'id' => 650157,
+          'values' => 
+          array (
+            0 => 
+            array (
+              'value' => 'тестовый',
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 17:28:50',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест111 (Триумфальный) - с сайта',
+    'responsible_user_id' => 7487314,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земельный Экспресс',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест111',
+          'responsible_user_id' => 7487314,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+3 (333) 333-3333',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 18:01:46',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Игорь (Наследие) - с сайта',
+    'responsible_user_id' => 10672866,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Игорь',
+          'responsible_user_id' => 10672866,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (916) 684-7703',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.05.2024 18:03:32',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Игорь (Наследие) - с сайта',
+    'responsible_user_id' => 10672866,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Игорь',
+          'responsible_user_id' => 10672866,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (916) 684-7703',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 00:56:10',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ксения (Акиньшино) - с сайта',
+    'responsible_user_id' => 7913857,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Мета Группа',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ксения',
+          'responsible_user_id' => 7913857,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 388-3807',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 06:40:47',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Валентина (Орлиные холмы) - с сайта',
+    'responsible_user_id' => 6946444,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Красивая Земля',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Валентина',
+          'responsible_user_id' => 6946444,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (906) 082-60-49',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 06:41:31',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест (Есенино) - с сайта',
+    'responsible_user_id' => 8542930,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земельный Экспресс',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест',
+          'responsible_user_id' => 8542930,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 999-9999',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 11:08:58',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Евгения (Подпоринские дачи) - с сайта',
+    'responsible_user_id' => 8147410,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Зембери',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Евгения',
+          'responsible_user_id' => 8147410,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 919 037 98 70',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 11:15:36',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Лариса (Лазурный) скидка - с сайта',
+    'responsible_user_id' => 6929662,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земельный Экспресс',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Лариса',
+          'responsible_user_id' => 6929662,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (911) 103-76-78',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 12:59:45',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ольга (Орлиные холмы) участки — с сайта',
+    'responsible_user_id' => 6946444,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ольга',
+          'responsible_user_id' => 6946444,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (916) 381-5925',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 14:19:30',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Елена (Орлиные холмы) - с сайта',
+    'responsible_user_id' => 6946444,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Красивая Земля',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Елена',
+          'responsible_user_id' => 6946444,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (985) 534-99-88',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 16:08:43',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Сергей (Новое Таширово) - с сайта',
+    'responsible_user_id' => 7913857,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земля за городом',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Сергей',
+          'responsible_user_id' => 7913857,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (909) 644-44-12',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 17:14:03',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Анна () - с сайта',
+    'responsible_user_id' => 3584062,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Анна',
+          'responsible_user_id' => 3584062,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (985) 734-7779',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.05.2024 19:05:28',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Алиса (Новое Таширово) - с сайта',
+    'responsible_user_id' => 7913857,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земля за городом',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Алиса',
+          'responsible_user_id' => 7913857,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (916) 959-8881',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 10:12:56',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест () - с сайта',
+    'responsible_user_id' => 3584062,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест',
+          'responsible_user_id' => 3584062,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 999-99-99',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 10:29:07',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => '2222 (Шадрино) - с сайта',
+    'responsible_user_id' => 7487314,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => '2222',
+          'responsible_user_id' => 7487314,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+2 (222) 222-22-22',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 11:05:15',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Оксана (Великие Озера) - с сайта',
+    'responsible_user_id' => 7818886,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Красивая Земля',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Оксана',
+          'responsible_user_id' => 7818886,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (904) 372-6081',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 11:22:59',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Оксана (Салтыково Парк) - с сайта',
+    'responsible_user_id' => 3584062,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Оксана',
+          'responsible_user_id' => 3584062,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (904) 372-6081',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 11:23:56',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Оксана (Дергаево-2 (3 очередь)) - с сайта',
+    'responsible_user_id' => 7818886,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Своя Земля',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Оксана',
+          'responsible_user_id' => 7818886,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (904) 372-6081',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 11:32:01',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Оксана (Березовый парк) - с сайта',
+    'responsible_user_id' => 7818886,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Инком-Недвижимость',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Оксана',
+          'responsible_user_id' => 7818886,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (904) 372-6081',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 12:48:09',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ольга (Рэд) - с сайта',
+    'responsible_user_id' => 6929662,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земельный Экспресс',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ольга',
+          'responsible_user_id' => 6929662,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 264-55-65',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 12:48:23',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Оксана () участки — с сайта',
+    'responsible_user_id' => 3584062,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Оксана',
+          'responsible_user_id' => 3584062,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (904) 372-6081',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 15:57:40',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Андрей (Александровы пруды) - с сайта',
+    'responsible_user_id' => 6946444,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Александровы пруды',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Андрей',
+          'responsible_user_id' => 6946444,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (915) 042-5206',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.05.2024 22:24:58',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Алексей (Дивный) участки — с сайта',
+    'responsible_user_id' => 8542930,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Алексей',
+          'responsible_user_id' => 8542930,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (925) 333-1147',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '24.05.2024 09:30:54',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Мила (Лапино) участки — с сайта',
+    'responsible_user_id' => 7913857,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Мила',
+          'responsible_user_id' => 7913857,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 629-6088',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '24.05.2024 11:52:17',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест (Максимово Парк) - с сайта',
+    'responsible_user_id' => 10218722,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Мета Группа',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест',
+          'responsible_user_id' => 10218722,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 999-9999',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '24.05.2024 14:25:59',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ксения (Васильевское) - с сайта',
+    'responsible_user_id' => 7487314,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Васильевское',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ксения',
+          'responsible_user_id' => 7487314,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (916) 108-1993',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: false
+Код: 0
+
+

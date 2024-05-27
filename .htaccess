@@ -12,45 +12,22 @@ ErrorDocument 404 /404.php
   RewriteEngine On
 
   # редирект на раздел участков
-  #RewriteRule ^poselki/kupit-uchastok-(.*)-sotki/$ /kupit-uchastki/$1-sotki/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-(.*)-sotok/$ /kupit-uchastki/$1-sotok/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-km-ot-mkad/$ /kupit-uchastki/do-$1-km-ot-mkad/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-tys-rub/$ /kupit-uchastki/do-$1-tys-rub/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-do-(.*)-mln-rub/$ /kupit-uchastki/do-$1-mln-rub/ [R=301,L]
-
-  #RewriteRule ^poselki/kupit-uchastok-econom-class/$ /kupit-uchastki/econom-class/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-izhs/$ /kupit-uchastki/izhs/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-ryadom-s-lesom/$ /kupit-uchastki/ryadom-s-lesom/ [R=301,L]
-  #RewriteRule ^poselki/kupit-uchastok-ryadom-zhd-stanciya/$ /kupit-uchastki/ryadom-zhd-stanciya/ [R=301,L]
-
   RewriteRule ^poselki/kupit-uchastok-(.*)/$ /kupit-uchastki/$1/ [R=301,L]
   RewriteRule ^poselki/kupit-uchastok/(.*)/$ /kupit-uchastki/$1/ [R=301,L]
+
   RewriteRule ^poselki/(.*)-shosse/kupit-uchastok/$ /kupit-uchastki/$1-shosse/ [R=301,L]
   RewriteRule ^poselki/(.*)-rayon/kupit-uchastok/$ /kupit-uchastki/$1-rayon/ [R=301,L]
 
-  #RewriteRule ^poselki/kupit-uchastok-/$ /kupit-uchastki/ [R=301,L]
-
   # редирект на раздел домов
   Redirect 301 /poselki/kupit-dom/ /kupit-dom/
-  #RewriteRule ^poselki/kupit-dom-(.*)/$ /kupit-dom/$1/ [R=301,L]
-  #RewriteRule ^poselki/kupit-dom/(.*)/$ /kupit-dom/$1/ [R=301,L]
+
   RewriteRule ^poselki/kupit-dom-dachu-kottedzh-(.*)/$ /kupit-dom/$1/ [R=301,L]
-  #RewriteRule ^poselki/kupit-dom-(.*)/$ /kupit-dom/$1/ [R=301,L]
+
+  RewriteRule ^poselki/kupit-dom-(.*)/$ /kupit-dom/$1/ [R=301,L]
+  RewriteRule ^poselki/kupit-dom/(.*)/$ /kupit-dom/$1/ [R=301,L]
+
   RewriteRule ^poselki/(.*)-shosse/kupit-dom/$ /kupit-dom/$1-shosse/ [R=301,L]
   RewriteRule ^poselki/(.*)-rayon/kupit-dom/$ /kupit-dom/$1-rayon/ [R=301,L]
-
-  Redirect 301 /poselki/kupit-dom-s-elektrichestvom/ /kupit-dom/s-elektrichestvom/
-  Redirect 301 /poselki/kupit-dom-s-vodoprovodom/ /kupit-dom/s-vodoprovodom/
-  Redirect 301 /poselki/kupit-dom-s-gazom/ /kupit-dom/s-gazom/
-  Redirect 301 /poselki/kupit-dom-s-kommunikaciyami/ /kupit-dom/s-kommunikaciyami/
-  Redirect 301 /poselki/kupit-dom-izhs/ /kupit-dom/izhs/
-  Redirect 301 /poselki/kupit-dom-snt/ /kupit-dom/snt/
-  Redirect 301 /poselki/kupit-dom-ryadom-zhd-stanciya/ /kupit-dom/ryadom-zhd-stanciya/
-
-  Redirect 301 /poselki/kupit-dom-econom-class/ /kupit-dom/econom-class/
-  Redirect 301 /poselki/kupit-dom-komfort-class/ /kupit-dom/komfort-class/
-  Redirect 301 /poselki/kupit-dom-premium-class/ /kupit-dom/premium-class/
-  Redirect 301 /poselki/kupit-dom-biznes-class/ /kupit-dom/biznes-class/
 
   #del www
   RewriteCond %{HTTP_HOST} ^www\.(.*)$
