@@ -2297,3 +2297,1378 @@
 Код: 0
 
 
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '07.06.2024 06:35:19',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ольга (Экопарк Бабеево) скидка Поселкино — с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ольга',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (977) 387-2355',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '10.06.2024 05:52:03',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест (Юбилейный квартал) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 999-9999',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '21.06.2024 10:15:25',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Елена (Мишутинская слобода) скидка - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Елена',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (985) 142-15-01',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.06.2024 23:01:19',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Любовь  (Традиции) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Удача',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Любовь ',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (909) 150-58-06',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '25.06.2024 17:44:25',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Никита (Левобережный) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Дачи Подмосковья',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Никита',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (910) 101-8724',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '29.06.2024 15:04:07',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Мила (Традиции) участки — с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => NULL,
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Мила',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 629-6088',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '09.07.2024 11:47:59',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'ТАТЬЯНА  (Мишнево Лайф) скидка Поселкино — с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'ТАТЬЯНА ',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (903) 700-1818',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '16.07.2024 23:56:33',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Елена  (Река) скидка - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земля за городом',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Елена ',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (926) 408-76-19',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '18.07.2024 15:38:23',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Елена (Река) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земля за городом',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Елена',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (926) 408-76-19',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '19.07.2024 11:35:45',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Владимир (Калитино) скидка - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Владимир',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (930) 915-17-75',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '19.07.2024 21:03:09',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'дарья (Петровский Луг) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Родные Земли',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'дарья',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (985) 816-4645',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '22.07.2024 14:03:55',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Алеся  (Романово Лайф) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Астерра',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Алеся ',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (916) 649-0363',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '23.07.2024 18:23:39',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Юрий (Мишутинская слобода) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Юрий',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (967) 618-8484',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '29.07.2024 11:38:03',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ирина (Первый) скидка - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ирина',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+9 (792) 666-70-04',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '29.07.2024 14:01:02',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ксения (Орлово Лайф) скидка Поселкино — с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ксения',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 671-8108',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '29.07.2024 16:36:08',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'тест (Первый) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земстройторг',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'тест',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 999-9999',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '07.08.2024 08:04:16',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Татьяна (Восточная деревня) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Татьяна',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (916) 998-3150',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '09.08.2024 20:42:01',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Элина (Аква Викториас Вилладж) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Элина',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (980) 700-7799',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '09.08.2024 20:53:12',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Элина (Лесные озера) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Дальние Дачи',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Элина',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (980) 700-7799',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '11.08.2024 13:51:44',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Даниил (Светлый ручей) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Родные Земли',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Даниил',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (903) 543-5252',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '16.08.2024 11:31:22',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Алексей (Экопарк Бабеево) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Алексей',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+8 (926) 433-1589',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '19.08.2024 15:08:41',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Игорь (Светлый ручей) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Родные Земли',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Игорь',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (901) 085-2298',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '29.08.2024 21:07:49',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Ольга (Воскресенское-2) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Сottage Poselki',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Ольга',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (968) 858-5512',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '05.09.2024 15:39:38',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Константин  (Воскресенское-2) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Сottage Poselki',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Константин ',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (950) 533-7111',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '16.09.2024 14:29:39',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Карен (Радужный (Щекутово)) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Эко Зем',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Карен',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (999) 819-2259',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+

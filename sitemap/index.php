@@ -510,10 +510,11 @@ while ($arElement = $rsElements->GetNext())
 						];
 
 						foreach ($urlPriceShosse as $price) {
+							$priceName = str_replace(['do-','-tysyach','-milliona'],['до ',' тысяч',' миллионов'],$price);
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$arShosse[$shosse]?> шоссе <?=$priceName?></a></li>
 								<?if(!in_array($price,$noUrlPriceShosse)){?>
-									<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$price?>/">Купить дом <?=$value?> шоссе <?=$price?></a></li>
+									<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$price?>/">Купить дом <?=$arShosse[$shosse]?> шоссе <?=$priceName?></a></li>
 								<?}
 							}
 						}?>
@@ -531,9 +532,9 @@ while ($arElement = $rsElements->GetNext())
 
 						foreach ($commun2 as $key => $commun) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
-								<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$commun?>/">Купить дом <?=$value?> шоссе <?=$communName[$key]?></a></li>
-								<li><a href="/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$arShosse[$shosse]?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/kupit-dom/<?=$shosse?>-shosse-<?=$commun?>/">Купить дом <?=$arShosse[$shosse]?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$arShosse[$shosse]?> шоссе <?=$communName[$key]?></a></li>
 							<?}
 						}?>
 							</ul>

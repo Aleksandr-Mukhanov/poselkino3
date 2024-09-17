@@ -192,12 +192,12 @@ if ($arResult['PROPERTIES']['PROVEDEN_GAZ']['VALUE_ENUM_ID'] == 17) { $arrComuni
 if ($arResult['PROPERTIES']['PROVEDENA_VODA']['VALUE_ENUM_ID'] == 20) { $arrComunications[] = 'Вода'; }
 
 // формируем несколько шоссе
-foreach($arResult['PROPERTIES']['SHOSSE']['VALUE'] as $HIGTWAY){
+foreach($arResult['PROPERTIES'][ROAD_CODE]['VALUE'] as $HIGTWAY){
 	$arResult['PROPERTIES']['SHOSSE']['SHOW'] .= ($arResult['PROPERTIES']['SHOSSE']['SHOW']) ? ', '.$HIGTWAY : $HIGTWAY;
 }
 // dump($arResult['PROPERTIES']['REGION']);
 $descShosse = str_replace('кое' ,'ком',$arResult['PROPERTIES']['SHOSSE']['SHOW']);
-$descRayon = str_replace('кий' ,'ком',$arResult['PROPERTIES']['REGION']['VALUE_ENUM']);
+$descRayon = str_replace('кий' ,'ком',$arResult['PROPERTIES'][REGION_CODE]['VALUE_ENUM']);
 $cenaZaSotkyOrDom = "";
 // if ($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0] <= 1) {
 // 	$cenaZaSotkyOrDom =  '5 250 000 руб за дом';
@@ -217,8 +217,11 @@ if (formatPrice($arResult['PROPERTIES']['PRICE_SOTKA']['VALUE'][0])==0) {
 }
 
 if($_REQUEST['OFFER_TYPE'] == 'plots'){
-  $seoTitle = 'Купить участок в коттеджном поселке '.$poselokName.', цены';
+  $seoTitle = 'Участки в '.$poselokName.' - купить участок в КП '.$poselokName.', цены';
 	$setDescription = '▶Участки в коттеджном поселке '.$poselokName.' '.REGION_KOY.' области. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
+
+	if ($_REQUEST['PAGEN_1'])
+		$seoTitle = $setDescription = 'Участки в поселке '.$poselokName.' - Страница '.$_REQUEST['PAGEN_1'];
 }else{
   $seoTitle = 'Купить дом в '.$typeShort.' '.$poselokName.' ('.$typeLong.'), цены на дома и коттеджи';
   $setDescription = '▶ Дома и коттеджи в '.$typeLong2.' '.$poselokName.' ▶ Купить готовый дом в '.$typeShort.' '.$poselokName.' ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';

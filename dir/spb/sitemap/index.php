@@ -350,11 +350,11 @@ while ($arElement = $rsElements->GetNext())
 						foreach ($arShosse as $shosse => $value) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД
 								?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Поселки <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Купить участок <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
+								<li><a href="/poselki/<?=$shosse?>-shosse-do-<?=$i?>-km-mkad/">Поселки <?=$value?> шоссе до <?=$i?> км от МКАД</a></li>
 							<?}?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-gaz/">Поселки <?=$value?> шоссе с газом</a></li>
+							<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-gaz/">Купить участок <?=$value?> шоссе с газом</a></li>
+							<li><a href="/poselki/<?=$shosse?>-shosse-gaz/">Поселки <?=$value?> шоссе с газом</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -364,8 +364,8 @@ while ($arElement = $rsElements->GetNext())
 				      <ul>
 					<?// район до МКАД и газ
 						foreach ($arRegion as $rayon => $value) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/'.$rayon.'-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
-							<li><a href="https://poselkino.ru/poselki/'.$rayon.'-rayon-gaz/">Поселки <?=$value?> с газом</a></li>
+							<li><a href="/kupit-uchastki/<?=$rayon?>-rayon-gaz/">Купить участок <?=$value?> район с газом</a></li>
+							<li><a href="/poselki/<?=$rayon?>-rayon-gaz/">Поселки <?=$value?> с газом</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -375,8 +375,8 @@ while ($arElement = $rsElements->GetNext())
 							<ul>
 					<?// до МКАД газ
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
-							<li><a href="https://poselkino.ru/poselki/gaz-do-<?=$i?>-km-mkad/">Поселки с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="/kupit-uchastki/gaz-do-<?=$i?>-km-mkad/">Купить участок с газом до <?=$i?> км от МКАД</a></li>
+							<li><a href="/poselki/gaz-do-<?=$i?>-km-mkad/">Поселки с газом до <?=$i?> км от МКАД</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -386,8 +386,8 @@ while ($arElement = $rsElements->GetNext())
 							<ul>
 					<?// до МКАД ИЖС
 						for ($i=10; $i < 60; $i+=10) {?>
-							<li><a href="https://poselkino.ru/kupit-uchastki/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
-							<li><a href="https://poselkino.ru/poselki/do-<?=$i?>-km-mkad-izhs/">Поселки до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="/kupit-uchastki/do-<?=$i?>-km-mkad-izhs/">Купить участок до <?=$i?> км от МКАД ИЖС</a></li>
+							<li><a href="/poselki/do-<?=$i?>-km-mkad-izhs/">Поселки до <?=$i?> км от МКАД ИЖС</a></li>
 						<?}?>
 							</ul>
 						</div>
@@ -439,8 +439,9 @@ while ($arElement = $rsElements->GetNext())
 						];
 
 						foreach ($urlPriceShosse as $price) {
+							$priceName = str_replace(['do-','-tysyach','-milliona'],['до ',' тысяч',' миллионов'],$price);
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$value?> шоссе <?=$price?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$price?>/">Купить участок <?=$arShosse[$shosse]?> шоссе <?=$priceName?></a></li>
 								<?
 							}
 						}?>
@@ -457,8 +458,8 @@ while ($arElement = $rsElements->GetNext())
 
 						foreach ($commun2 as $key => $commun) {
 							foreach ($onlyShosse as $shosse) {?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$value?> шоссе <?=$communName[$key]?></a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$value?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/kupit-uchastki/<?=$shosse?>-shosse-<?=$commun?>/">Купить участок <?=$arShosse[$shosse]?> шоссе <?=$communName[$key]?></a></li>
+								<li><a href="/poselki/<?=$shosse?>-shosse-<?=$commun?>/">Поселки <?=$arShosse[$shosse]?> шоссе <?=$communName[$key]?></a></li>
 							<?}
 						}?>
 							</ul>
@@ -471,8 +472,8 @@ while ($arElement = $rsElements->GetNext())
 					// коммуникации и МКАД
 						foreach ($commun2 as $commun) {
 							for ($i=10; $i < 60; $i+=10) { // до МКАД?>
-								<li><a href="https://poselkino.ru/kupit-uchastki/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
-								<li><a href="https://poselkino.ru/poselki/<?=$commun?>-do-<?=$i?>-km-mkad/">Поселки <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="/kupit-uchastki/<?=$commun?>-do-<?=$i?>-km-mkad/">Купить участок <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
+								<li><a href="/poselki/<?=$commun?>-do-<?=$i?>-km-mkad/">Поселки <?=$communName[$key]?> до <?=$i?> км от МКАД</a></li>
 							<?}
 						}
 					?>

@@ -36,7 +36,7 @@ $APPLICATION->SetTitle("Список участков / домов в посел
 				"BRAND_USE" => "N",
 				"BROWSER_TITLE" => "-",
 				"CACHE_GROUPS" => "N",
-				"CACHE_TIME" => "36000000",
+				"CACHE_TIME" => "86400",
 				"CACHE_TYPE" => "A",
 				"CHECK_SECTION_ID_VARIABLE" => "N",
 				"COMPATIBLE_MODE" => "Y",
@@ -65,7 +65,7 @@ $APPLICATION->SetTitle("Список участков / домов в посел
 				"GIFTS_SHOW_NAME" => "Y",
 				"GIFTS_SHOW_OLD_PRICE" => "Y",
 				"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-				"IBLOCK_ID" => "1",
+				"IBLOCK_ID" => IBLOCK_ID,
 				"IBLOCK_TYPE" => "content",
 				"IMAGE_RESOLUTION" => "16by9",
 				"LABEL_PROP" => array(

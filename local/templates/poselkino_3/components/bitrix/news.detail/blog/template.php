@@ -24,11 +24,8 @@ CUtil::InitJSCore(array('fx'));
       <img src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>" alt="<?=$arResult["NAME"]?>">
     </div>
 		<?=$arResult["DETAIL_TEXT"]?>
-    <?if($USER->IsAuthorized()){?>
 
-    <?}?>
-
-    <?if($USER->IsAuthorized()){?>
+  <?if($USER->IsAuthorized()){?>
     <?if($arResult['PROPERTIES']['QUOTE']['VALUE']):?>
       <blockquote>
         <svg width="29" height="20" viewBox="0 0 29 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +80,7 @@ CUtil::InitJSCore(array('fx'));
         <?endif;?>
       </div>
     <?endif;?>
-    <?}?>
+  <?}?>
 
     <?if($arResult['PROPERTIES']['DROP_DOWN_TEXT']['VALUE']):?>
       <div class="d-flex w-100 mt-5 justify-content-between">

@@ -51,13 +51,15 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;?>
 				break;
 		}
 
-		$arElHL = getElHL(13,['ID'=>'desc'],['UF_ROUTE'=>$routeID],['ID','UF_EMAIL','UF_PHONE']);
-		foreach ($arElHL as $value) {
-			$arEmail[] = trim($value['UF_EMAIL']);
-			$arPhone[] = trim($value['UF_PHONE']);
+		if ($routeID) {
+			$arElHL = getElHL(13,['ID'=>'desc'],['UF_ROUTE'=>$routeID],['ID','UF_EMAIL','UF_PHONE']);
+			foreach ($arElHL as $value) {
+				$arEmail[] = trim($value['UF_EMAIL']);
+				$arPhone[] = trim($value['UF_PHONE']);
+			}
+			$toEmail = implode(',',$arEmail);
+			$toPhone = implode(',',$arPhone);
 		}
-		$toEmail = implode(',',$arEmail);
-		$toPhone = implode(',',$arPhone);
 
 		if (!$toEmail) $toEmail = defaultEmail;
 		if (!$toPhone) $toPhone = defaultPhone;

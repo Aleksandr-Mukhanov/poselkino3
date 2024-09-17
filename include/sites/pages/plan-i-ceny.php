@@ -16,15 +16,15 @@ if($arVillage['PROPERTY_LINK_ELEMENTS_VALUE'])
 // первый план
 $planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
 $planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
-if ($planIFrame && strpos($planIFrame,'zemexx.ru') === false) $planIMG = $planIFrame;
-$frame = ($planIFrame && strpos($planIFrame,'zemexx.ru') === false) ? 'data-iframe="true"' : '';
+if ($planIFrame) $planIMG = $planIFrame;
+$frame = ($planIFrame) ? 'data-iframe="true"' : '';
 $planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
 
 // второй план
 $planIFrame_2 = $arVillage['PROPERTY_PLAN_IMG_IFRAME_2_VALUE'];
 $planIMG_2 = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_2_VALUE']);
-if ($planIFrame_2 && strpos($planIFrame_2,'zemexx.ru') === false) $planIMG_2 = $planIFrame_2;
-$frame_2 = ($planIFrame_2 && strpos($planIFrame_2,'zemexx.ru') === false) ? 'data-iframe="true"' : '';
+if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+$frame_2 = ($planIFrame_2) ? 'data-iframe="true"' : '';
 $planIMG_2_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
 
 // отправим смс менеджеру
@@ -124,8 +124,8 @@ $planIMG_2_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], 
           // второй план и далее
           $planIFrame_2 = $villageLink['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
           $planIMG_2 = CFile::GetPath($villageLink['PROPERTY_PLAN_IMG_VALUE']);
-          if ($planIFrame_2 && strpos($planIFrame,'zemexx.ru') === false) $planIMG_2 = $planIFrame_2;
-          $frame_2 = ($planIFrame_2 && strpos($planIFrame,'zemexx.ru') === false) ? 'data-iframe="true"' : '';
+          if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+          $frame_2 = ($planIFrame_2) ? 'data-iframe="true"' : '';
           $planIMG_2_res = CFile::ResizeImageGet($villageLink['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
       ?>
           <div class="row card__row card__plan_2">

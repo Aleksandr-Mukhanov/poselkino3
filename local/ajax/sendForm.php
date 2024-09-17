@@ -200,6 +200,7 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
 			if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
 			if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+			if ($arManager['UF_TG_ID']) $toTelegram = $arManager['UF_TG_ID'];
 		}
 		elseif ($arHighway[$highway]) // менеджер у шоссе
 		{
@@ -208,6 +209,7 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 			if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
 			if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
 			if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+			if ($arManager['UF_TG_ID']) $toTelegram = $arManager['UF_TG_ID'];
 		}
 
 		if (!$toEmail) $toEmail = defaultEmail;
@@ -297,6 +299,10 @@ elseif($ourForm == 'SignToView') // Записаться на просмотр
 
 		$url = "/api/v4/leads/complex";
 		$resultAmo = inAmoV4($arLead,$url);
+
+		// отправим в Telegram
+		if ($toTelegram)
+			sendTelegram($toTelegram,$textSMS);
 
 		// добавим в админку
 		$hlblock_id = 24; // id HL

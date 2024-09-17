@@ -3,6 +3,21 @@ $APPLICATION->SetTitle($arVillage['NAME']);
 $APPLICATION->SetPageProperty("title", "Коттеджный поселок ".$arVillage['NAME'].", ".$regionName." район - официальный сайт");
 $priceSotka = ($arVillage['PROPERTY_PRICE_SOTKA_2_VALUE']) ? $arVillage['PROPERTY_PRICE_SOTKA_2_VALUE'] : $arVillage['PROPERTY_PRICE_SOTKA_VALUE'][0];
 $APPLICATION->SetPageProperty("description", "Купить земельный участок в КП ".$arVillage['NAME']." от ".formatPriceSite($priceSotka)." руб. за сотку. ".$shosseName." шоссе, ".$arVillage['PROPERTY_MKAD_VALUE']." км от МКАД. ИЖС, охрана, свет, газ, ".$regionName." район");
+
+$planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
+$planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
+$planIMG_2 = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_2_VALUE']);
+$planIFrame_2 = $arVillage['PROPERTY_PLAN_IMG_IFRAME_2_VALUE'];
+
+if($arVillage['PROPERTY_LINK_ELEMENTS_VALUE'])
+{
+  $arOrder = Array('SORT'=>'ASC');
+  $arFilter = Array('IBLOCK_ID'=>1,'ID'=>$arVillage['PROPERTY_LINK_ELEMENTS_VALUE']);
+  $arSelect = Array('ID','NAME','PROPERTY_COUNT_PLOTS_SALE','PROPERTY_PLOTTAGE','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_PRICE_SOTKA','PROPERTY_PRICE_SOTKA_2');
+  $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  while ($arElements = $rsElements->Fetch())
+    $arVillageLink[] = $arElements;
+}
 ?>
 <section class="section-1" style="background-image: url(<?=$prevSrc['src']?>);">
 	<div class="section-1-main">
@@ -125,24 +140,97 @@ $APPLICATION->SetPageProperty("description", "Купить земельный у
 				</div>
 			</div>
 		</div>
-		<div class="village-plan">
-			<?
-				$planIFrame = $arVillage['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
-				$planIMG = CFile::GetPath($arVillage['PROPERTY_PLAN_IMG_VALUE']);
-				if ($planIFrame) $planIMG = $planIFrame;
-				$frame = ($planIFrame) ? 'data-iframe="true"' : '';
-				$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>1200, 'height'=>700), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
-			?>
-			<img src="<?=$planIMG_res['src']?>" alt="" />
-			<a class="section-btn" href="<?=$planIMG?>" data-fancybox="data-fancybox" <?=$frame?>>
-				<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M11.75 21.75C17.2728 21.75 21.75 17.2728 21.75 11.75C21.75 6.22715 17.2728 1.75 11.75 1.75C6.22715 1.75 1.75 6.22715 1.75 11.75C1.75 17.2728 6.22715 21.75 11.75 21.75Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-					<path d="M24.25 24.25L18.8125 18.8125" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-				</svg>
-			</a>
-		</div>
+		<?if($planIMG || $planIFrame):?>
+			<div class="village-plan">
+				<?
+					if ($planIFrame) $planIMG = $planIFrame;
+					$frame = ($planIFrame) ? 'data-iframe="true"' : '';
+					$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_VALUE'], array('width'=>1200, 'height'=>700), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+				?>
+				<img src="<?=$planIMG_res['src']?>" alt="" />
+				<a class="section-btn" href="<?=$planIMG?>" data-fancybox="data-fancybox" <?=$frame?>>
+					<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.75 21.75C17.2728 21.75 21.75 17.2728 21.75 11.75C21.75 6.22715 17.2728 1.75 11.75 1.75C6.22715 1.75 1.75 6.22715 1.75 11.75C1.75 17.2728 6.22715 21.75 11.75 21.75Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M24.25 24.25L18.8125 18.8125" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+			</div>
+		<?endif;?>
+		<?if($planIMG_2 || $planIFrame_2):?>
+			<br><h2 class="section-title mb-4">План поселка (2 очередь)</h2>
+			<div class="village-plan">
+				<?
+					if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+					$frame = ($planIFrame_2) ? 'data-iframe="true"' : '';
+					$planIMG_res = CFile::ResizeImageGet($arVillage['PROPERTY_PLAN_IMG_2_VALUE'], array('width'=>1200, 'height'=>700), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+				?>
+				<img src="<?=$planIMG_res['src']?>" alt="" />
+				<a class="section-btn" href="<?=$planIMG_2?>" data-fancybox="data-fancybox" <?=$frame?>>
+					<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.75 21.75C17.2728 21.75 21.75 17.2728 21.75 11.75C21.75 6.22715 17.2728 1.75 11.75 1.75C6.22715 1.75 1.75 6.22715 1.75 11.75C1.75 17.2728 6.22715 21.75 11.75 21.75Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M24.25 24.25L18.8125 18.8125" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+			</div>
+		<?endif;?>
 	</div>
 </section>
+
+<?if($arVillage['PROPERTY_LINK_ELEMENTS_VALUE']):
+	foreach ($arVillageLink as $villageLink)
+	{
+		$priceSotka = ($villageLink['PROPERTY_PRICE_SOTKA_2_VALUE']) ? $villageLink['PROPERTY_PRICE_SOTKA_2_VALUE'] : $villageLink['PROPERTY_PRICE_SOTKA_VALUE'][0];
+		// второй план и далее
+		$planIFrame_2 = $villageLink['PROPERTY_PLAN_IMG_IFRAME_VALUE'];
+		$planIMG_2 = CFile::GetPath($villageLink['PROPERTY_PLAN_IMG_VALUE']);
+		if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+		$frame_2 = ($planIFrame_2) ? 'data-iframe="true"' : '';
+		$planIMG_2_res = CFile::ResizeImageGet($villageLink['PROPERTY_PLAN_IMG_VALUE'], array('width'=>766, 'height'=>526), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+?>
+<section class="section-4 section">
+	<div class="container-fluid">
+		<h2 class="section-title mb-4">План поселка (<?=$villageLink['NAME']?>)</h2>
+		<div class="row mb-md-1 mb-lg-3 mb-0">
+			<div class="col-lg mb-3">
+				<div class="advg">
+					<div class="advg__mark"> </div>
+					<p>В поселке осталось <?=$villageLink['PROPERTY_COUNT_PLOTS_SALE_VALUE']?> участков<br>в продаже</p>
+				</div>
+			</div>
+			<div class="col-md mb-3">
+				<div class="advg">
+					<div class="advg__mark"> </div>
+					<p>Земельные участки от <?=formatPriceSite($priceSotka)?> ₽ за сотку</p>
+				</div>
+			</div>
+			<div class="col-lg mb-3">
+				<div class="advg">
+					<div class="advg__mark"> </div>
+					<p>Площадь земельных участков<br>от <?=$villageLink['PROPERTY_PLOTTAGE_VALUE'][0]?> до <?=$villageLink['PROPERTY_PLOTTAGE_VALUE'][1]?> соток</p>
+				</div>
+			</div>
+		</div>
+		<?if($planIMG_2 || $planIFrame_2):?>
+			<div class="village-plan">
+				<?
+					if ($planIFrame_2) $planIMG_2 = $planIFrame_2;
+					$frame = ($planIFrame_2) ? 'data-iframe="true"' : '';
+					$planIMG_res = CFile::ResizeImageGet($villageLink['PROPERTY_PLAN_IMG_VALUE'], array('width'=>1200, 'height'=>700), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+				?>
+				<img src="<?=$planIMG_res['src']?>" alt="" />
+				<a class="section-btn" href="<?=$planIMG_2?>" data-fancybox="data-fancybox" <?=$frame?>>
+					<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M11.75 21.75C17.2728 21.75 21.75 17.2728 21.75 11.75C21.75 6.22715 17.2728 1.75 11.75 1.75C6.22715 1.75 1.75 6.22715 1.75 11.75C1.75 17.2728 6.22715 21.75 11.75 21.75Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+						<path d="M24.25 24.25L18.8125 18.8125" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+			</div>
+		<?endif;?>
+	</div>
+</section>
+<?}
+endif;?>
+
 <section class="section-2 section" id="section-2">
 	<div class="container-fluid">
 		<div class="row">

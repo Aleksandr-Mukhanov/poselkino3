@@ -6,7 +6,7 @@ $h2 = '<h2 class="h2">Земельные участки под дом и дач�
 $SEO_text = '<p>База коттеджных и дачных поселков в '.REGION_KOY.' области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от КАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
-$urlWithDom = '/poselki/kupit-dom/';
+$urlWithDom = '';
 $urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 
 // получим участки
@@ -26,7 +26,7 @@ $arVillageIDs_tags = array_unique($arVillageIDs_tags);
 // dump($arVillagePlots);
 
 $newH1 = 'Продажа участков в '.REGION_KOY.' области';
-$newTitle = 'Купить участок в Ленобласти недорого - земельные участки в '.REGION_KOY.' области цены';
+$newTitle = 'Купить участок в '.REGION_SHORT.' недорого - земельные участки в '.REGION_KOY.' области цены';
 $newDesc = 'Купить участок земли в поселках '.REGION_KOY.' области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.' ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
 
 $shosse = $_REQUEST['SHOSSE_CODE'];
@@ -79,7 +79,7 @@ $arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 					<div class="show-mobile-filter" style="display: none;">
 							<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "land_plots", Array(
 									"CACHE_GROUPS" => "N",	// Учитывать права доступа
-									"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+									"CACHE_TIME" => "86400",	// Время кеширования (сек.)
 									"CACHE_TYPE" => "A",	// Тип кеширования
 									"CONVERT_CURRENCY" => "N",
 									"DISPLAY_ELEMENT_COUNT" => "Y",	// Показывать количество
@@ -151,6 +151,7 @@ $arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 						<li class="nav-item">
 							<a class="nav-link btn btn-outline-secondary rounded-pill" href="<?=htmlspecialcharsbx($urlAll)?>">Поселки</a>
 						</li>
+						<? if ($urlWithDom): // убираем у цены, если участки?>
 						<li class="nav-item">
 							<a class="nav-link btn btn-outline-secondary rounded-pill" href="<?=htmlspecialcharsbx($urlWithDom)?>">
 								<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
@@ -158,6 +159,7 @@ $arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 								</svg>
 							Дома</a>
 						</li>
+						<? endif; ?>
 						<li class="nav-item">
 							<a class="nav-link btn btn-success rounded-pill" href="<?=htmlspecialcharsbx($urlNoDom)?>">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
@@ -266,7 +268,7 @@ $arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 						"BROWSER_TITLE" => "-",
 						"CACHE_FILTER" => "Y",
 						"CACHE_GROUPS" => "N",
-						"CACHE_TIME" => "36000000",
+						"CACHE_TIME" => "86400",
 						"CACHE_TYPE" => "A",
 						"COMPARE_NAME" => "CATALOG_COMPARE_PLOT",
 						"COMPARE_PATH" => "",
@@ -419,7 +421,7 @@ $arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 							"AJAX_OPTION_STYLE" => "Y",
 							"CACHE_FILTER" => "Y",
 							"CACHE_GROUPS" => "N",
-							"CACHE_TIME" => "36000000",
+							"CACHE_TIME" => "86400",
 							"CACHE_TYPE" => "A",
 							"CHECK_DATES" => "Y",
 							"DETAIL_URL" => "",

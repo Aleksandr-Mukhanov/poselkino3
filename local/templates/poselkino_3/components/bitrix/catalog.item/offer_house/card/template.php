@@ -46,9 +46,9 @@ $fav_text = ($arParams['FAVORITES'] == 'Y') ? 'Удалить из избран�
 				<?if($item['PROPERTIES']['ACTION']['VALUE']){?>
 					<div class="slider__label">Акция</div>
 				<?}?>
-				<?if($USER->IsAdmin()){?>
+				<?//if($USER->IsAdmin()){?>
 					<div class="photo__buttons">
-	            <button title="<?= $comp_text ?>" class="comparison-click <?= $comp_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="comparison_house">
+	            <button title="<?= $comp_text ?>" class="comparison-click <?= $comp_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="comparison_houses">
 	                <svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
 	                    <g transform="translate(-1216.699 -36.35)">
 	                        <path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)"/>
@@ -62,7 +62,7 @@ $fav_text = ($arParams['FAVORITES'] == 'Y') ? 'Удалить из избран�
 	                    </g>
 	                </svg>
 	            </button>
-	            <button title="<?= $fav_text ?>" class="favorites-click <?= $fav_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="favorites_house">
+	            <button title="<?= $fav_text ?>" class="favorites-click <?= $fav_active ?>" data-id="<?= $item['ID'] ?>" data-cookie="favorites_houses">
 	                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
 	                    <g transform="translate(.05 -26.655)">
 	                        <path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1"/>
@@ -75,7 +75,7 @@ $fav_text = ($arParams['FAVORITES'] == 'Y') ? 'Удалить из избран�
 	                </svg>
 	            </button>
 	        </div>
-				<?}?>
+				<?//}?>
 			</div>
 			<div class="card-photo__list" id="card-house-in-village-photo">
 				<?foreach ($itemPhotos as $photo){ // Фото

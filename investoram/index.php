@@ -246,7 +246,10 @@ use Bitrix\Main\Page\Asset;
       <div class="tab-content">
         <div class="tab-pane active" id="raiting-area" role="tabpanel">
           <div class="block-page__offer" id="raiting-area-slick">
-						<?$arrFilter=array('PROPERTY_DOMA'=>[3,256]); // показывать только участки?>
+						<?
+						// $arrFilter=array('PROPERTY_DOMA'=>[3,256]); // показывать только участки
+						$arrFilter['PROPERTY_INVESTORAM'] = 622;
+						?>
 		 				<?$APPLICATION->IncludeComponent(
 		 					"bitrix:main.include",
 		 					"",
@@ -257,7 +260,7 @@ use Bitrix\Main\Page\Asset;
 		 						"PATH" => "/include/section_index.php"
 		 					)
 		 				);?>
-		 				<?unset($arrFilter['PROPERTY_DOMA']);?>
+		 				<?//unset($arrFilter['PROPERTY_DOMA']);?>
           </div>
         </div>
       </div>

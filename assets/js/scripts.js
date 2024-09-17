@@ -249,7 +249,7 @@ $(document).ready(function(){
 
   // сравнение
   $('#comparison-differences-tab').click(function(){
-    for (var i = 1; i < 15; i++) {
+    for (var i = 1; i < 9999; i++) {
       var show_dif = true;
       var j = 0;
       $('.tr_'+i).each(function(){ // переберем строки

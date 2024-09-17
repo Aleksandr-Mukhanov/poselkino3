@@ -75,6 +75,15 @@
   color: #000;
 }
 
+.nav__list{
+  padding-left: 80px;
+}
+
+.infrastructure-item__icon.on_territory svg{
+  width: 60px;
+  height: 60px;
+}
+
 @media (max-width: 768px) {
   .header__logo .logo-text {
     font-size: 16px;

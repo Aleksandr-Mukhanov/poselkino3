@@ -12,7 +12,7 @@
     </div>
     <div class="col-12 col-sm-4 col-md-3 col-xl-3 col-inline">
       <div class="form-group form-group-inline">
-        <label>от КАД, км</label>
+        <label>от <?=ROAD?>, км</label>
       </div>
       <div class="row">
         <div class="col-6 pr-2">
@@ -86,7 +86,7 @@
               $arShosse['zapad']['NAME'] = 'Запад';
               $arShosse['other']['NAME'] = 'Другие';
 
-              $arHighway = getElHL(21,[],[],['ID','UF_XML_ID','UF_NAME']);
+              $arHighway = getElHL(ROAD_HL,[],[],['ID','UF_XML_ID','UF_NAME']);
               foreach ($arHighway as $highway) {
                 switch ($highway['UF_XML_ID']) {
 
@@ -215,7 +215,7 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <?$arRegionHL = getElHL(20,['UF_NAME'=>'ASC'],[],['ID','UF_XML_ID','UF_NAME']);
+            <?$arRegionHL = getElHL(REGION_HL,['UF_NAME'=>'ASC'],[],['ID','UF_XML_ID','UF_NAME']);
             foreach ($arRegionHL as $region) {
               $firstLetter = mb_strtoupper(mb_substr($region['UF_NAME'], 0, 1));
               if ($firstLetter != $prevLetter) $prevLetter = $firstLetter;
@@ -265,7 +265,7 @@
             <div class="add-filter__modal-top">
               <div class="add-filter__region">
                 <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                  href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a>
+                  href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы <?=REGION_LETTER?></a>
               </div>
               <div class="add-filter__search">
                 <div class="add-filter__search-group">
@@ -1147,7 +1147,7 @@
           <div class="add-filter__modal-top">
             <div class="add-filter__region">
               <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы ЛО</a>
+                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы <?=REGION_LETTER?></a>
             </div>
             <div class="add-filter__search">
               <div class="add-filter__search-group">

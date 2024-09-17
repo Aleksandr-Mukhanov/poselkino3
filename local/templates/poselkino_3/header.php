@@ -19,6 +19,8 @@ $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>IBLOCK_ID,"ACTIVE"=>"Y");
 $arFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
 $arFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+$arFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
+
 $arSelect = Array("ID");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch())
@@ -61,7 +63,7 @@ $canonical = 'https://'.$_SERVER['HTTP_HOST'].$APPLICATION->GetCurDir();
 $ourPage = $APPLICATION->GetCurPage(false);
 if (strpos($ourPage, '/filter/') !== false) $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/poselki/';
 if ($ourPage == '/poselki/kupit-uchastok/') $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/kupit-uchastki/';
-if ($ourPage == '/doma/') $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/poselki/kupit-dom/';
+if ($ourPage == '/doma/' || $ourPage == '/poselki/kupit-dom/') $canonical = 'https://'.$_SERVER['HTTP_HOST'].'/kupit-dom/';
 if ($_REQUEST['PAGEN_1'] && !$_REQUEST['teg']) $canonical .= '?PAGEN_1='.$_REQUEST['PAGEN_1'];
 $APPLICATION->SetPageProperty('canonical', $canonical);
 
@@ -176,8 +178,12 @@ if(isset($_COOKIE['favorites_houses'])){
 				<?if(SHOW_PLOTS == 'Y'):?>
 					<li class="nav-item"><a class="nav-link" href="/kupit-uchastki/">Участки <?=$cntAllPlots?></a></li>
 				<?endif;?>
-				<li class="nav-item"><a class="nav-link" href="/kupit-dom/">Дома <?=$cntAllHouse?></a></li>
-				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/promyshlennye/">Промышленные поселки</a></li>
+				<?if(SHOW_HOUSES == 'Y'):?>
+					<li class="nav-item"><a class="nav-link" href="/kupit-dom/">Дома <?=$cntAllHouse?></a></li>
+				<?endif;?>
+				<?if($_SERVER['HTTP_HOST']=='poselkino.ru'):?>
+					<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="/poselki/promyshlennye/">Промышленные поселки</a></li>
+				<?endif;?>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/stroitelyam/">Застройщикам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/investoram/">Инвесторам</a></li>
 				<li class="nav-item" itemprop="name"><a class="nav-link" itemprop="url" href="https://poselkino.ru/o-proekte/">О проекте</a></li>
@@ -201,7 +207,7 @@ if(isset($_COOKIE['favorites_houses'])){
 						</svg>
 						Подпишись&nbsp;на&nbsp;канал
 					</a>
-					<div class="telegram__text">
+					<div class="telegram__text hide__mob">
 						Подпишитесь на Телеграм канал Поселкино.ру и следите за скидками и горячими предложениями
 					</div>
 					<img src="/assets/img/tg-bg.svg" alt="tg">

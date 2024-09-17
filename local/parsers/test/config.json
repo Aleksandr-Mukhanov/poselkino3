@@ -1,0 +1,21 @@
+{
+        "max_logs_size" : 10485760,
+        "zemlimo":
+        {
+            "use_logs" : false,
+
+            "output_errores" : true,
+            "output_plots" : true,
+            "output_villages" : true,  
+
+            "create_new_files": false,
+            "max_copies" : 1,
+            "use_buffer" : true,
+
+            "keep_zero_villages" : false,
+
+            "base_site_link" : "https://zemlimo.ru",
+            "village_filename" : "villages_zemlimo",
+            "plots_filename" : "plots_zemlimo"    
+        }
+    }

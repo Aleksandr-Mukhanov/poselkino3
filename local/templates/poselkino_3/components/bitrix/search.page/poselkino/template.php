@@ -150,8 +150,11 @@
 		<?if($arParams["DISPLAY_TOP_PAGER"] != "N") echo $arResult["NAV_STRING"];?>
 		<br />
 		<?//foreach($arResult["SEARCH"] as $arItem): //dump($arItem);?>
-			<?global $arrFilter;
-			$arrFilter['ID']=$arResult["arrFilter"];  //dump($arResult["arrFilter"]);?>
+			<?
+        global $arrFilter;
+  			$arrFilter['ID']=$arResult["arrFilter"];
+        $arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
+      ?>
 			<?$APPLICATION->IncludeComponent(
 				"bitrix:main.include",
 				"",

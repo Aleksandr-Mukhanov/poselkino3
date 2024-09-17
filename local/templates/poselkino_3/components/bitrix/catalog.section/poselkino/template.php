@@ -188,6 +188,18 @@ $containerName = 'container-'.$navParams['NavNum'];
 			if($arParams['TEMPLATE_CARD'] == 'map'){ // на карте
 				// создадим массив меток для карты
 				$adresItem = $item['PROPERTIES']['OBLAST']['VALUE'].", ".$item['PROPERTIES']['REGION']['VALUE']." р-он, ".$item['PROPERTIES']['HIGTWAY']['VALUE'][0]." шоссе, ".$item['PROPERTIES']['MKAD']['VALUE']." км. от МКАД ";
+
+				$statusSold = ($item['PROPERTIES']['SALES_PHASE']['VALUE_XML_ID'] == 'sold') ? true : false;
+
+				// автоматически ставить шильдик ТОП 100
+				$item['TOP_100'] = false;
+				$arDevelopers = $item['PROPERTIES']['DEVELOPER_ID']['VALUE'];
+				foreach ($arDevelopers as $value)
+				  if (in_array($value,$arDevelopersTOP100)) $item['TOP_100'] = true;
+
+				$mapIcon = (($item['PROPERTIES']['TOP_100']['VALUE'] || $item['TOP_100']) && !$statusSold) ? '/assets/img/site/placeholder-map-blue.svg' : '/assets/img/site/placeholder-map.svg';
+				// dump($item);
+
 				$point = $item['PROPERTIES']['COORDINATES']['VALUE'];
 				// проверка на правильность координат по регулярки
 				$point = str_replace([' ',chr(0xC2).chr(0xA0)],'',$point);
@@ -197,6 +209,7 @@ $containerName = 'container-'.$navParams['NavNum'];
 						"NAME" => $item["NAME"],
 						"adresItem" => $adresItem,
 						"point" => $point,
+						"mapIcon" => $mapIcon,
 						//"point2" => $point2,
 					];
 				}else {
@@ -221,8 +234,8 @@ if($arParams['TEMPLATE_CARD'] != 'map'){ // в разделе
 					$favoritesCookie = 'favorites_plots';
 					break;
 				case 'offer_house':
-					$comparisonCookie = 'comparison_house';
-					$favoritesCookie = 'favorites_house';
+					$comparisonCookie = 'comparison_houses';
+					$favoritesCookie = 'favorites_houses';
 					break;
 
 				default:
@@ -403,11 +416,12 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 				});
 
 				var myClusterer = new ymaps.Clusterer({
-					preset: 'islands#redClusterIcons',
+					preset: 'islands#blueClusterIcons',
 				});
-				var imageIcon = '/assets/img/site/placeholder-map.svg';
 
 				<?foreach($arMapItem as $id => $item){ // выводим метки ?>
+
+					var imageIcon = '<?=$item["mapIcon"]?>';
 
 					var myPlacemark_<?=$id?> = new ymaps.Placemark([<?=$item["point"]?>], {
 						hintContent: '<?=$item["NAME"]?>',
@@ -426,6 +440,10 @@ if($arParams['TEMPLATE_CARD'] == 'poselok'){ // в разделе ?>
 						showCard(item);
 
 					});
+
+					<?/*if($item["mapIcon"] == '/assets/img/site/placeholder-map-blue.svg'):?>
+						myClusterer.options.set('preset', 'islands#blueClusterIcons');
+					<?endif;*/?>
 
 					myMap.geoObjects.add(myPlacemark_<?=$id?>);
 					myClusterer.add(myPlacemark_<?=$id?>);

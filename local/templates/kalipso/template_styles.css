@@ -54,3 +54,8 @@
 .card__plan_2{
   margin-top: 60px;
 }
+
+.infrastructure-item__icon.on_territory svg{
+  width: 60px;
+  height: 60px;
+}

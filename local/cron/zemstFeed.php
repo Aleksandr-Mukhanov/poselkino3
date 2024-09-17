@@ -72,7 +72,12 @@ $arURLFeed = [
 	8413 => 'https://zemst.ru/plan/xml/karcevo.xml', // Карцево
 	8746 => 'https://zemst.ru/plan/xml/reshetnikovo.xml', // Решетниково
 	9428 => 'https://zemst.ru/plan/xml/koskovo.xml', // Коськово
-	9652 => 'https://zemst.ru/plan/xml/ottepel.xml' // Оттепель
+	9652 => 'https://zemst.ru/plan/xml/ottepel.xml', // Оттепель
+	9933 => 'https://zemst.ru/plan/xml/medvedki.xml', // Медведки
+	10397 => 'https://zemst.ru/plan/xml/bratovshina.xml', // Братовщина
+	10399 => 'https://zemst.ru/plan/xml/kalistovo.xml', // Калистово
+	9799 => 'https://zemst.ru/plan/xml/serebryanyj-ruchej.xml', // Серебряный ручей
+	11079 => 'https://zemst.ru/plan/xml/sboevo.xml', // Сбоево
 ];
 
 foreach ($arURLFeed as $idVil => $urlFeed)
@@ -83,7 +88,7 @@ $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"ID" => $arVillageIds);
 $arSelect = Array("ID","NAME","PREVIEW_PICTURE","PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->Fetch()){ // dump($arElement);
 
 	foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $value)
 		$shosse[] = $arShosse[$value];
@@ -128,9 +133,9 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 // получим участки
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>5,"PROPERTY_VILLAGE" => $arVillageIds);
-$arSelect = Array("ID","ACTIVE","NAME","PROPERTY_DEVELOPER_ID","PROPERTY_NUMBER","PROPERTY_VILLAGE","PROPERTY_DATE_FEED");
+$arSelect = Array("ID","NAME","ACTIVE","PROPERTY_DEVELOPER_ID","PROPERTY_NUMBER","PROPERTY_VILLAGE","PROPERTY_DATE_FEED");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->Fetch()){ // dump($arElement);
 	$keyElement = $arElement['PROPERTY_DEVELOPER_ID_VALUE'].'_'.$arElement['PROPERTY_VILLAGE_VALUE'].'_'.$arElement['PROPERTY_NUMBER_VALUE'];
 	$arPlot[$keyElement] = $arElement;
 } // dump($arPlot);
@@ -164,6 +169,7 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 	  $plotId = $region['id'];
 		$keyPlot = $idDeveloper.'_'.$idVil.'_'.$plotId;
 		$plotPrice = $region -> {'prices'} -> {'land'};
+		$arPlotUpdate[] = $keyPlot;
 
 	  // echo '<p>'.$plotId.') '.$plotStatus.'</p>';
 
@@ -180,7 +186,7 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 	    $NUMBER = $plotId;
 	    $PLOTTAGE = str_replace(',','.',$plotArea);
 
-			if (in_array($idVil,[6809,3613,4077,6149,5639,9428]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Коськово
+			if (in_array($idVil,[6809,3613,4077,6149,5639,9428,11079]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Коськово
 			if (in_array($idVil,[8413,8746,5350]) && $PLOTTAGE <= 7) continue; // Карцево, Решетниково, Яркое
 
 			// формула добавления участков
@@ -337,13 +343,13 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 		if($dateUpdate)
 			CIBlockElement::SetPropertyValues($idVil, 1, $dateUpdate, "DATE_FEED");
 
-		if($COUNT_PLOTS_SOLD && $COUNT_PLOTS_SOLD != $ourVillage['COUNT_PLOTS_SOLD']);
+		if($COUNT_PLOTS_SOLD && ($COUNT_PLOTS_SOLD != $ourVillage['COUNT_PLOTS_SOLD']));
 		{
 			CIBlockElement::SetPropertyValues($idVil, 1, $COUNT_PLOTS_SOLD, "COUNT_PLOTS_SOLD");
 			$strCSV .= " - Участков продано: ".$COUNT_PLOTS_SOLD."\n";
 		}
 
-		if($COUNT_PLOTS_SALE && $COUNT_PLOTS_SALE != $ourVillage['COUNT_PLOTS_SALE']);
+		if($COUNT_PLOTS_SALE && ($COUNT_PLOTS_SALE != $ourVillage['COUNT_PLOTS_SALE']));
 		{
 			CIBlockElement::SetPropertyValues($idVil, 1, $COUNT_PLOTS_SALE, "COUNT_PLOTS_SALE");
 			$strCSV .= " - Участков в продаже: ".$COUNT_PLOTS_SALE."\n";
@@ -385,6 +391,20 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 	$strCSV .= " - Продано: ".$plotCntSold."\n";
 	$strCSV .= " - Технический: ".$plotCntOther."\n\n";
 
+}
+
+// деактивируем участки, которых нет в фиде
+foreach ($arPlot as $keyPlot => $valuePlot) {
+	if (!in_array($keyPlot,$arPlotUpdate)) {
+		if ($valuePlot['ACTIVE'] == 'Y')
+		{
+			$el = new CIBlockElement;
+			if($el->update($valuePlot['ID'], [ "ACTIVE" => "N"]))
+				$strCSV .= "Участок: ".$valuePlot['NAME']." - деактивирован! \n";
+			else
+				$strCSV .= "Ошибка деактивации: ".$plotName." - ".$el->LAST_ERROR."\n";
+		}
+	}
 }
 
 echo str_replace("\n","<br>",$strCSV);

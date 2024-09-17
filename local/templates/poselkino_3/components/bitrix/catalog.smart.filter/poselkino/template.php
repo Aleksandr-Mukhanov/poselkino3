@@ -231,41 +231,57 @@ $this->setFrameMode(true);
 									</div>
 						    <?endforeach;*/?>
 								<?//if($USER->IsAdmin()){?>
-									<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
-						        <input
-						          type="checkbox"
-											class="custom-control-input"
-						          value="dacha"
-						          name="type_permitted"
-						          id="dacha"
-						          <? echo $arResult["ITEMS"][33]["VALUES"][108]["CHECKED"] ? 'checked="checked"' : '' ?>
-						        />
-							      <label class="custom-control-label" data-role="label_dacha" for="dacha">Дачный</label>
-									</div>
-									<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
-						        <input
-						          type="checkbox"
-											class="custom-control-input"
-						          value="ihs"
-						          name="type_permitted"
-						          id="ihs"
-						          <? echo $arResult["ITEMS"][33]["VALUES"][228]["CHECKED"] ? 'checked="checked"' : '' ?>
-						        />
-							      <label class="custom-control-label" data-role="label_ihs" for="ihs">ИЖС</label>
-									</div>
-									<div class="hide">
-										<?foreach($arResult["ITEMS"][33]["VALUES"] as $val => $ar): // Вид разрешенного использования?>
-							        <input
-							          type="checkbox"
-							          value="<? echo $ar["HTML_VALUE"] ?>"
-							          name="<? echo $ar["CONTROL_NAME"] ?>"
-							          id="<? echo $ar["CONTROL_ID"] ?>"
-							          <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
-							          onclick="smartFilter.click(this)"
-							        />
-								    <?endforeach;?>
-									</div>
+									<?foreach($arResult["ITEMS"][372]["VALUES"] as $val => $ar): // Топ 100?>
+										<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+											<input
+												type="checkbox"
+												class="custom-control-input"
+												value="<? echo $ar["HTML_VALUE"] ?>"
+												name="<? echo $ar["CONTROL_NAME"] ?>"
+												id="<? echo $ar["CONTROL_ID"] ?>"
+												<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+												onclick="smartFilter.click(this)"
+											/>
+											<label class="custom-control-label <? echo $ar["DISABLED"] ? 'disabled': '' ?>" data-role="label_<?=$ar["CONTROL_ID"]?>" for="<? echo $ar["CONTROL_ID"] ?>"><?=$arResult["ITEMS"][372]["NAME"]?></label>
+										</div>
+									<?endforeach;?>
 								<?//}?>
+
+								<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+					        <input
+					          type="checkbox"
+										class="custom-control-input"
+					          value="dacha"
+					          name="type_permitted"
+					          id="dacha"
+					          <? echo $arResult["ITEMS"][33]["VALUES"][108]["CHECKED"] ? 'checked="checked"' : '' ?>
+					        />
+						      <label class="custom-control-label" data-role="label_dacha" for="dacha">Дачный</label>
+								</div>
+								<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
+					        <input
+					          type="checkbox"
+										class="custom-control-input"
+					          value="ihs"
+					          name="type_permitted"
+					          id="ihs"
+					          <? echo $arResult["ITEMS"][33]["VALUES"][228]["CHECKED"] ? 'checked="checked"' : '' ?>
+					        />
+						      <label class="custom-control-label" data-role="label_ihs" for="ihs">ИЖС</label>
+								</div>
+								<div class="hide">
+									<?foreach($arResult["ITEMS"][33]["VALUES"] as $val => $ar): // Вид разрешенного использования?>
+						        <input
+						          type="checkbox"
+						          value="<? echo $ar["HTML_VALUE"] ?>"
+						          name="<? echo $ar["CONTROL_NAME"] ?>"
+						          id="<? echo $ar["CONTROL_ID"] ?>"
+						          <? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
+						          onclick="smartFilter.click(this)"
+						        />
+							    <?endforeach;?>
+								</div>
+
 								<?foreach($arResult["ITEMS"][116]["VALUES"] as $val => $ar): //dump($ar); // Акция?>
 									<div class="custom-control custom-checkbox custom-control-inline align-items-center h-100">
 										<input

@@ -162,13 +162,27 @@ switch ($km_MKAD) {
 	$correctText = $ourDeclension->get($cntPos);
 
 	// dump($_COOKIE); // разбираем куки
-	$arComparison = []; $arFavorites = [];
-	if(isset($_COOKIE['comparison_vil'])){
+	$arComparison = $arComparisonPlots = $arComparisonHouses = [];
+	$arFavorites = $arFavoritesPlots = $arFavoritesHouses = [];
+
+	if(isset($_COOKIE['comparison_vil']))
 		$arComparison = explode('-',$_COOKIE['comparison_vil']);
-	}
-	if(isset($_COOKIE['favorites_vil'])){
+
+	if (isset($_COOKIE['comparison_plots']))
+		$arComparisonPlots = explode('-',$_COOKIE['comparison_plots']);
+
+	if (isset($_COOKIE['comparison_houses']))
+		$arComparisonHouses = explode('-',$_COOKIE['comparison_houses']);
+
+	if(isset($_COOKIE['favorites_vil']))
 		$arFavorites = explode('-',$_COOKIE['favorites_vil']);
-	}
+
+	if(isset($_COOKIE['favorites_plots']))
+		$arFavoritesPlots = explode('-',$_COOKIE['favorites_plots']);
+
+	if(isset($_COOKIE['favorites_houses']))
+		$arFavoritesHouses = explode('-',$_COOKIE['favorites_houses']);
+
 	$comparison = (in_array($arResult['ID'],$arComparison)) ? 'Y' : 'N';
 	$favorites = (in_array($arResult['ID'],$arFavorites)) ? 'Y' : 'N';
 	$comp_active = ($comparison == 'Y') ? 'active' : '';
@@ -187,6 +201,8 @@ switch ($km_MKAD) {
 		default:
 			$colorIcon = '78a86d'; $colorBG = 'edf8ea'; break;
 	}
+
+	$statusSold = ($arResult['PROPERTIES']['SALES_PHASE']['VALUE_XML_ID'] == 'sold') ? true : false;
 
 	$SETTLEM_KM = (float)$arResult['PROPERTIES']['SETTLEM_KM']['VALUE'];
 	$TOWN_KM = (float)$arResult['PROPERTIES']['TOWN_KM']['VALUE'];
@@ -210,11 +226,11 @@ switch ($km_MKAD) {
 						</svg> <span><?=$arResult['PROPERTIES']['SALES_PHASE']['VALUE'] // Этап продаж?></span>
 					</div>
 				</div>
-        <?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
-          <a class="ml-4 area-link" href="/poselki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/">
+        <?if($arResult['PROPERTIES'][REGION_CODE]['VALUE']):?>
+          <a class="ml-4 area-link" href="/poselki/<?=$arResult['PROPERTIES'][REGION_CODE]['VALUE_XML_ID']?>-rayon/">
             <svg xmlns="http://www.w3.org/2000/svg" width="9.24" height="13.193" viewBox="0 0 9.24 13.193" class="inline-svg">
               <path d="M16.09 1.353a4.62 4.62 0 0 0-6.534 0 5.263 5.263 0 0 0-.435 6.494l3.7 5.346 3.7-5.339a5.265 5.265 0 0 0-.431-6.501zm-3.224 4.912a1.687 1.687 0 1 1 1.687-1.687 1.689 1.689 0 0 1-1.687 1.687z" transform="translate(-8.203)" />
-            </svg><?=$arResult['PROPERTIES']['REGION']['VALUE'] // Район?> район</a>
+            </svg><?=$arResult['PROPERTIES'][REGION_CODE]['VALUE'] // Район?> район</a>
         <?endif;?>
 			</div>
 		</div>
@@ -256,7 +272,7 @@ switch ($km_MKAD) {
 							<div class="slider__label">Акция<?if($arResult['PROPERTIES']['SALE_SUM']['VALUE']){?> - <?=$arResult['PROPERTIES']['SALE_SUM']['VALUE']?>%<?}?></div>
 						<?endif?>
 					<?}?>
-					<?if(($arResult['PROPERTIES']['TOP_100']['VALUE'] || $arResult['TOP_100']) && $arResult['PROPERTIES']['SALES_PHASE']['VALUE_XML_ID'] != 'sold'){?>
+					<?if(($arResult['PROPERTIES']['TOP_100']['VALUE'] || $arResult['TOP_100']) && !$statusSold){?>
 						<div class="photo__top">
 							<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M0 0H50V35C50 43.2843 43.2843 50 35 50H15C6.71573 50 0 43.2843 0 35V0Z" fill="#4B833E"></path>
@@ -407,7 +423,9 @@ switch ($km_MKAD) {
 		        // $frame = 'data-iframe="true"';
 						$frame = 'data-type="iframe"';
 			    }else{
-		        $planIMG = CFile::GetPath($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE']);
+		        // $planIMG = CFile::GetPath($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE']);
+						$arPlanIMG = CFile::ResizeImageGet($arResult['PROPERTIES']['PLAN_IMG'.$nProp]['VALUE'], array('width'=>3000, 'height'=>3000), BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+						$planIMG = $arPlanIMG['src'];
 		        $frame = '';
 			    }
 			  ?>
@@ -491,11 +509,11 @@ switch ($km_MKAD) {
 				<div class="row">
 					<div class="col-12">
 					    <div class="d-flex flex-wrap w-100 mb-1">
-	                <?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе
-	                    $idEnumHW = $arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0];
-	                    $valEnumHW = $arResult['PROPERTIES']['SHOSSE']['VALUE_XML_ID'][0];
+	                <?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]): // если есть шоссе
+	                    $idEnumHW = $arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0];
+	                    $valEnumHW = $arResult['PROPERTIES'][ROAD_CODE]['VALUE_XML_ID'][0];
 	                    $colorHW = getColorRoad($idEnumHW);
-	                    $nameHW = $arResult['PROPERTIES']['SHOSSE']['VALUE'][0];
+	                    $nameHW = $arResult['PROPERTIES'][ROAD_CODE]['VALUE'][0];
 	                ?>
                     <a class="metro z-index-1 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
                         <span class="metro-color <?=$colorHW?>"></span>
@@ -507,11 +525,11 @@ switch ($km_MKAD) {
 		                </a>
 	            </div>
 					    <div class="d-flex w-100">
-                  <?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть шоссе
-                      $idEnumHW2 = $arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1];
-                      $valEnumHW2 = $arResult['PROPERTIES']['SHOSSE']['VALUE_XML_ID'][1];
+                  <?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][1]): // если есть шоссе
+                      $idEnumHW2 = $arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][1];
+                      $valEnumHW2 = $arResult['PROPERTIES'][ROAD_CODE]['VALUE_XML_ID'][1];
                       $colorHW2 = getColorRoad($idEnumHW2);
-                      $nameHW2 = $arResult['PROPERTIES']['SHOSSE']['VALUE'][1];
+                      $nameHW2 = $arResult['PROPERTIES'][ROAD_CODE]['VALUE'][1];
                   ?>
                     <a class="metro z-index-1 highway-color pl-0" href="/poselki/<?=$valEnumHW2?>-shosse/">
                         <span class="metro-color <?=$colorHW2?>"></span>
@@ -520,9 +538,9 @@ switch ($km_MKAD) {
                   <?endif;?>
 									<?if($arResult['PROPERTIES']['SHOSSE_DOP']['VALUE'][0]): // если есть доп. шоссе
                       $valEnumHW2 = $arResult['PROPERTIES']['SHOSSE_DOP']['VALUE'][0];
-											$idEnumHW2 = getNamesList($valEnumHW2,'SHOSSE')['ID'];
+											$idEnumHW2 = getNamesList($valEnumHW2,ROAD_CODE)['ID'];
                       $colorHW2 = getColorRoad($idEnumHW2);
-                      $nameHW2 = getNamesList($valEnumHW2,'SHOSSE')['NAME'];
+                      $nameHW2 = getNamesList($valEnumHW2,ROAD_CODE)['NAME'];
                   ?>
                     <a class="metro z-index-1 highway-color pl-0" href="/poselki/<?=$valEnumHW2?>-shosse/">
                         <span class="metro-color <?=$colorHW2?>"></span>
@@ -599,7 +617,7 @@ switch ($km_MKAD) {
 				<a class="btn btn-warning rounded-pill w-100" href="#" data-toggle="modal" data-target="#feedbackModal" data-id-button='SIGN_UP_TO_VIEW' data-title='Записаться на просмотр'>Записаться на просмотр</a>
 				<div class="mt-4 text-lg-center">На просмотр уже записались: <b><?=$cntPos?> <?=$correctText?></b></div>
 				<input type="hidden" id="posInfo" data-namePos='<?=$arResult['NAME']?>' data-codePos='<?=$arResult['CODE']?>' data-highwayPos='<?=$nameHW?>' data-idPos='<?=$arResult['ID']?>' data-cntPos='<?=$arResult['PROPERTIES']['UP_TO_VIEW']['VALUE']?>' data-manager='<?=$arResult['PROPERTIES']['MANAGER']['VALUE']?>'>
-				<?if($arResult['PROPERTIES']['SITE']['VALUE']):
+				<?if($arResult['PROPERTIES']['SITE']['VALUE'] && !$statusSold):
 					$arSite = explode('//',$arResult['PROPERTIES']['SITE']['VALUE']);?>
 					<div class="w-100 text-lg-center mt-3">
 						<noindex><p>Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arSite[1]?></a></p></noindex>
@@ -627,12 +645,12 @@ switch ($km_MKAD) {
 						<div id="villageMapBalliin">
 							<div class="map-baloon">
 								<a href="/poselki/<?=$url_km_MKAD?>/"><span class="metro-other" style="margin-left: 0;"><?=$km_MKAD?> км от <?=ROAD?></span></a><br>
-								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе ?>
+								<?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]): // если есть шоссе ?>
 									<a href="/poselki/<?=$valEnumHW?>-shosse/" class="highway-color">
 										<span class="metro-color <?=$colorHW?>"></span>
 										<span class="metro-name"><?=$nameHW?> шоссе</span></a>
 								<?endif;?>
-								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть шоссе ?>
+								<?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][1]): // если есть шоссе ?>
 									<br><a href="/poselki/<?=$valEnumHW2?>-shosse/" class="highway-color">
 										<span class="metro-color <?=$colorHW2?>"></span>
 										<span class="metro-name"><?=$nameHW2?> шоссе</span></a>
@@ -744,7 +762,7 @@ switch ($km_MKAD) {
 <?if($arResult["NEWS"]){?>
 	<div class="about about-home-portal bg-white block-articles">
 		<div class="container">
-			<h2>Новости о посёлке <?=$arResult["NAME"]?></h2>
+			<h2>Что нового в посёлке КП <?=$arResult["NAME"]?></h2>
 			<?foreach ($arResult["NEWS"] as $value) {
 				// обрежем текст
 				$countText = strlen($value["PREVIEW_TEXT"]);
@@ -856,16 +874,52 @@ switch ($km_MKAD) {
 <?}?>
 
 <?if($arResult["arHouses"]):?>
-<div id="home">
+ <div id="home">
 	<div class="house-in-village area-in-village page__content-list">
 		<div class="container">
 			<h2>Дома в этом посёлке</h2>
 			<div class="list--grid">
 				<?foreach ($arResult["arHouses"] as $id => $house) {
-					$offerURL = '/kupit-dom/'.$arResult['CODE'].'-dom-'.$house['ID'].'/';?>
+					$offerURL = '/kupit-dom/'.$arResult['CODE'].'-dom-'.$house['ID'].'/';
+
+					$comparisonHouses = (in_array($house['ID'],$arComparisonHouses)) ? 'Y' : 'N';
+					$favoritesHouses = (in_array($house['ID'],$arFavoritesHouses)) ? 'Y' : 'N';
+					$comp_activeHouses = ($comparisonHouses == 'Y') ? 'active' : '';
+					$fav_activeHouses = ($favoritesHouses == 'Y') ? 'active' : '';
+					$comp_textHouses = ($comparisonHouses != 'Y') ? 'Добавить к сравнению' : 'Удалить из сравнения';
+					$fav_textHouses = ($favoritesHouses != 'Y') ? 'Добавить в избранное' : 'Удалить из избранного';
+				?>
 				<div class="card-house">
 					<div class="d-flex flex-wrap bg-white card-grid">
 						<div class="card-house__photo photo">
+							<div class="photo__buttons in_village">
+			            <button title="<?= $comp_textHouses ?>" class="comparison-click <?= $comp_activeHouses ?>" data-id="<?= $house['ID'] ?>" data-cookie="comparison_houses">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
+			                    <g transform="translate(-1216.699 -36.35)">
+			                        <path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)"/>
+			                        <path d="M0 0v8.468" class="s-1" transform="translate(1233.321 37)"/>
+			                        <g transform="translate(.586 .586)">
+			                            <path d="M0 0v4.297" class="s-2" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-2" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                        <path d="M0 0v13.215" class="s-1" transform="translate(1222.807 40.041)"/>
+			                        <path d="M0 0v7.641" class="s-1" transform="translate(1228.265 45.499)"/>
+			                    </g>
+			                </svg>
+			            </button>
+			            <button title="<?= $fav_textHouses ?>" class="favorites-click <?= $fav_activeHouses ?>" data-id="<?= $house['ID'] ?>" data-cookie="favorites_houses">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
+			                    <g transform="translate(.05 -26.655)">
+			                        <path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1"/>
+			                        <circle cx="4.5" cy="4.5" r="4.5" class="s-2" transform="translate(14.96 26.655)"/>
+			                        <g transform="translate(-1213.44 -18.727)">
+			                            <path d="M0 0v4.297" class="s-3" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-3" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                    </g>
+			                </svg>
+			            </button>
+			        </div>
 							<div class="card-photo__list">
 								<?foreach ($house['IMG'] as $value) {?>
 									<img class="card-photo__item" src="<?=$value['src']?>" alt="" />
@@ -915,24 +969,64 @@ switch ($km_MKAD) {
 			</a>
 		</div>
 	</div>
-</div>
+ </div>
 
 <?elseif(!$arResult["arHouses"] && $arResult["arPlots"]):?>
-<div id="area">
+
+ <div id="area">
 	<div class="area-in-village page__content-list">
 		<div class="container">
 			<h2>Участки в этом посёлке</h2>
 			<div class="list--grid">
 				<?foreach ($arResult["arPlots"] as $id => $plot) {
 					$offerURL = '/kupit-uchastki/uchastok-'.$plot['ID'].'/';
+
 					if ($plot["IMG"])
 						array_unshift($arResult['PHOTO_VILLAGE'],$plot["IMG"]); // положим в начало
+
 					shuffle($arResult['PHOTO_VILLAGE']);
-					if (count($arResult['PHOTO_VILLAGE']) > 5) $arResult['PHOTO_VILLAGE'] = array_slice($arResult['PHOTO_VILLAGE'],0,5);
+
+					if (count($arResult['PHOTO_VILLAGE']) > 5)
+						$arResult['PHOTO_VILLAGE'] = array_slice($arResult['PHOTO_VILLAGE'],0,5);
+
+					$comparisonPlots = (in_array($plot['ID'],$arComparisonPlots)) ? 'Y' : 'N';
+					$favoritesPlots = (in_array($plot['ID'],$arFavoritesPlots)) ? 'Y' : 'N';
+					$comp_activePlots = ($comparisonPlots == 'Y') ? 'active' : '';
+					$fav_activePlots = ($favoritesPlots == 'Y') ? 'active' : '';
+					$comp_textPlots = ($comparisonPlots != 'Y') ? 'Добавить к сравнению' : 'Удалить из сравнения';
+					$fav_textPlots = ($favoritesPlots != 'Y') ? 'Добавить в избранное' : 'Удалить из избранного';
 				?>
 				<div class="card-house">
 					<div class="d-flex flex-wrap bg-white card-grid">
 						<div class="card-house__photo photo">
+							<div class="photo__buttons in_village">
+			            <button title="<?= $comp_textPlots ?>" class="comparison-click <?= $comp_activePlots ?>" data-id="<?= $plot['ID'] ?>" data-cookie="comparison_plots">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
+			                    <g transform="translate(-1216.699 -36.35)">
+			                        <path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)"/>
+			                        <path d="M0 0v8.468" class="s-1" transform="translate(1233.321 37)"/>
+			                        <g transform="translate(.586 .586)">
+			                            <path d="M0 0v4.297" class="s-2" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-2" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                        <path d="M0 0v13.215" class="s-1" transform="translate(1222.807 40.041)"/>
+			                        <path d="M0 0v7.641" class="s-1" transform="translate(1228.265 45.499)"/>
+			                    </g>
+			                </svg>
+			            </button>
+			            <button title="<?= $fav_textPlots ?>" class="favorites-click <?= $fav_activePlots ?>" data-id="<?= $plot['ID'] ?>" data-cookie="favorites_plots">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
+			                    <g transform="translate(.05 -26.655)">
+			                        <path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1"/>
+			                        <circle cx="4.5" cy="4.5" r="4.5" class="s-2" transform="translate(14.96 26.655)"/>
+			                        <g transform="translate(-1213.44 -18.727)">
+			                            <path d="M0 0v4.297" class="s-3" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-3" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                    </g>
+			                </svg>
+			            </button>
+			        </div>
 							<div class="owl-carousel card-photo__list">
 								<?foreach ($arResult['PHOTO_VILLAGE'] as $value) {?>
 									<img class="card-photo__item" src="<?=$value['src']?>" alt="" />
@@ -957,12 +1051,12 @@ switch ($km_MKAD) {
 								<div class="card-house__inline-value"><?=$plot['PLOTTAGE']?> соток</div>
 							</div>
 
-							<?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
-			          <div class="card-house__area"><a href="/kupit-uchastki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?=$arResult['PROPERTIES']['REGION']['VALUE']?> район</a></div>
+							<?if($arResult['PROPERTIES'][REGION_CODE]['VALUE']):?>
+			          <div class="card-house__area"><a href="/kupit-uchastki/<?=$arResult['PROPERTIES'][REGION_CODE]['VALUE_XML_ID']?>-rayon/"><?=$arResult['PROPERTIES'][REGION_CODE]['VALUE']?> район</a></div>
 			        <?endif;?>
 
 							<div class="offer-house__metro metro_no_top">
-								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]):?>
+								<?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]):?>
 									<a class="metro z-index-1 highway-color" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
 										<span class="metro-color <?=$colorHW?>"></span>
 										<span class="metro-name"><?=$nameHW?> шоссе</span>
@@ -995,7 +1089,7 @@ switch ($km_MKAD) {
 			</a>
 		</div>
 	</div>
-</div>
+ </div>
 <?endif;?>
 
 <div class="bg-white feedback-sale-form">
@@ -1431,22 +1525,62 @@ switch ($km_MKAD) {
 		</div>
 	</div>
 </div>
+
 <?if($arResult["arHouses"] && $arResult["arPlots"]):?>
-<div id="area">
+ <div id="area">
 	<div class="area-in-village page__content-list">
 		<div class="container">
 			<h2>Участки в этом посёлке</h2>
 			<div class="list--grid">
 				<?foreach ($arResult["arPlots"] as $id => $plot) { // dump($plot);
 					$offerURL = '/kupit-uchastki/uchastok-'.$plot['ID'].'/';
+
 					if ($plot["IMG"])
 						array_unshift($arResult['PHOTO_VILLAGE'],$plot["IMG"]); // положим в начало
+
 					shuffle($arResult['PHOTO_VILLAGE']);
-					if (count($arResult['PHOTO_VILLAGE']) > 5) $arResult['PHOTO_VILLAGE'] = array_slice($arResult['PHOTO_VILLAGE'],0,5);
+
+					if (count($arResult['PHOTO_VILLAGE']) > 5)
+						$arResult['PHOTO_VILLAGE'] = array_slice($arResult['PHOTO_VILLAGE'],0,5);
+
+					$comparisonPlots = (in_array($plot['ID'],$arComparisonPlots)) ? 'Y' : 'N';
+					$favoritesPlots = (in_array($plot['ID'],$arFavoritesPlots)) ? 'Y' : 'N';
+					$comp_activePlots = ($comparisonPlots == 'Y') ? 'active' : '';
+					$fav_activePlots = ($favoritesPlots == 'Y') ? 'active' : '';
+					$comp_textPlots = ($comparisonPlots != 'Y') ? 'Добавить к сравнению' : 'Удалить из сравнения';
+					$fav_textPlots = ($favoritesPlots != 'Y') ? 'Добавить в избранное' : 'Удалить из избранного';
 				?>
 				<div class="card-house">
 					<div class="d-flex flex-wrap bg-white card-grid">
 						<div class="card-house__photo photo">
+							<div class="photo__buttons in_village">
+			            <button title="<?= $comp_textPlots ?>" class="comparison-click <?= $comp_activePlots ?>" data-id="<?= $plot['ID'] ?>" data-cookie="comparison_plots">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="19.42" height="17.556" viewBox="0 0 19.42 17.556" class="inline-svg add-comparison">
+			                    <g transform="translate(-1216.699 -36.35)">
+			                        <path d="M0 0v16.139" class="s-1" transform="translate(1217.349 37)"/>
+			                        <path d="M0 0v8.468" class="s-1" transform="translate(1233.321 37)"/>
+			                        <g transform="translate(.586 .586)">
+			                            <path d="M0 0v4.297" class="s-2" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-2" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                        <path d="M0 0v13.215" class="s-1" transform="translate(1222.807 40.041)"/>
+			                        <path d="M0 0v7.641" class="s-1" transform="translate(1228.265 45.499)"/>
+			                    </g>
+			                </svg>
+			            </button>
+			            <button title="<?= $fav_textPlots ?>" class="favorites-click <?= $fav_activePlots ?>" data-id="<?= $plot['ID'] ?>" data-cookie="favorites_plots">
+			                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" class="inline-svg add-heart">
+			                    <g transform="translate(.05 -26.655)">
+			                        <path d="M19.874 30.266a5.986 5.986 0 0 0-8.466 0l-.591.591-.6-.6a5.981 5.981 0 0 0-8.466-.009 5.981 5.981 0 0 0 .009 8.466l8.608 8.608a.614.614 0 0 0 .871 0l8.626-8.594a6 6 0 0 0 .009-8.47zm-.88 7.595L10.8 46.019l-8.169-8.172a4.745 4.745 0 1 1 6.71-6.71l1.036 1.036a.617.617 0 0 0 .875 0l1.027-1.027a4.748 4.748 0 0 1 6.715 6.715z" class="s-1"/>
+			                        <circle cx="4.5" cy="4.5" r="4.5" class="s-2" transform="translate(14.96 26.655)"/>
+			                        <g transform="translate(-1213.44 -18.727)">
+			                            <path d="M0 0v4.297" class="s-3" transform="translate(1232.735 48)"/>
+			                            <path d="M0 0v4.297" class="s-3" transform="rotate(90 592.368 642.516)"/>
+			                        </g>
+			                    </g>
+			                </svg>
+			            </button>
+			        </div>
 							<div class="owl-carousel card-photo__list">
 								<?foreach ($arResult['PHOTO_VILLAGE'] as $value) {?>
 									<img class="card-photo__item" src="<?=$value['src']?>" alt="" />
@@ -1470,12 +1604,12 @@ switch ($km_MKAD) {
 								<div class="card-house__inline-value"><?=$plot['PLOTTAGE']?> соток</div>
 							</div>
 
-							<?if($arResult['PROPERTIES']['REGION']['VALUE']):?>
-			          <div class="card-house__area"><a href="/kupit-uchastki/<?=$arResult['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?=$arResult['PROPERTIES']['REGION']['VALUE']?> район</a></div>
+							<?if($arResult['PROPERTIES'][REGION_CODE]['VALUE']):?>
+			          <div class="card-house__area"><a href="/kupit-uchastki/<?=$arResult['PROPERTIES'][REGION_CODE]['VALUE_XML_ID']?>-rayon/"><?=$arResult['PROPERTIES'][REGION_CODE]['VALUE']?> район</a></div>
 			        <?endif;?>
 
 							<div class="offer-house__metro metro_no_top">
-								<?if($arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]):?>
+								<?if($arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]):?>
 									<a class="metro z-index-1 highway-color" href="/kupit-uchastki/<?=$valEnumHW?>-shosse/">
 										<span class="metro-color <?=$colorHW?>"></span>
 										<span class="metro-name"><?=$nameHW?> шоссе</span>
@@ -1503,8 +1637,9 @@ switch ($km_MKAD) {
 				</svg></a>
 		</div>
 	</div>
-</div>
+ </div>
 <?endif;?>
+
 <div class="about about-home-portal bg-white">
 	<div class="container">
 		<div class="row">
@@ -1692,7 +1827,7 @@ switch ($km_MKAD) {
                     </g>
                 </svg></a>
             </p>
-            <?if($arResult['PROPERTIES']['SITE']['VALUE']):?>
+            <?if($arResult['PROPERTIES']['SITE']['VALUE'] && !$statusSold):?>
                 <p class="w-100 mt-3">
                     Сайт поселка: <a href="<?=$arResult['PROPERTIES']['SITE']['VALUE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['NAME']?></a>
                 </p>
@@ -2002,7 +2137,7 @@ switch ($km_MKAD) {
 			$arrFilter = [
 				'!ID' => $arResult['ID'],
 				'PROPERTY_DOMA' => $housesValEnum,
-				'PROPERTY_SHOSSE' => $arResult['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'],
+				'PROPERTY_SHOSSE' => $arResult['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'],
 				'>=PROPERTY_MKAD' => $km_MKAD - 10,
 				'<=PROPERTY_MKAD' => $km_MKAD + 10,
 				'PROPERTY_GAS' => $arResult['PROPERTIES']['GAS']['VALUE_ENUM_ID'],

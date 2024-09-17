@@ -9,7 +9,7 @@ $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>2,"ACTIVE"=>"Y");
 $arSelect = Array("ID");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->Fetch()){ // dump($arElement);
 	$cntAllOtz++;
 }
 
@@ -451,7 +451,7 @@ global $arrFilter;
 					 		"AJAX_OPTION_STYLE" => "Y",
 					 		"CACHE_FILTER" => "N",
 					 		"CACHE_GROUPS" => "Y",
-					 		"CACHE_TIME" => "36000000",
+					 		"CACHE_TIME" => "86400",
 					 		"CACHE_TYPE" => "A",
 					 		"CHECK_DATES" => "Y",
 					 		"DETAIL_URL" => "",

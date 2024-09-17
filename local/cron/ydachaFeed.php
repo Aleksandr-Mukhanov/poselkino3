@@ -55,7 +55,7 @@ $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"PROPERTY_DEVELOPER_ID" => $xmlDeveloper);
 $arSelect = Array("ID","NAME","CODE",'PREVIEW_PICTURE',"PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->Fetch()){ // dump($arElement);
 
 	foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $value)
 		$shosse[] = $arShosse[$value];
@@ -102,9 +102,9 @@ while($arElement = $rsElements->GetNext()){ // dump($arElement);
 // получим участки девелоперов
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>5,"PROPERTY_VILLAGE" => $arVillageIds);
-$arSelect = Array("ID","NAME","PROPERTY_DEVELOPER_ID","PROPERTY_NUMBER","PROPERTY_VILLAGE","PROPERTY_DATE_FEED");
+$arSelect = Array("ID","NAME","ACTIVE","PROPERTY_DEVELOPER_ID","PROPERTY_NUMBER","PROPERTY_VILLAGE","PROPERTY_DATE_FEED");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while($arElement = $rsElements->GetNext()){ // dump($arElement);
+while($arElement = $rsElements->Fetch()){ // dump($arElement);
 	$keyElement = $arElement['PROPERTY_DEVELOPER_ID_VALUE'].'_'.$arElement['PROPERTY_VILLAGE_VALUE'].'_'.$arElement['PROPERTY_NUMBER_VALUE'];
   $arPlot[$keyElement] = $arElement;
 } // dump($arPlot);
@@ -186,6 +186,7 @@ foreach ($offers as $offer)
 	    $plotCode = 'kupit-uchastok-'.$vilCode.'-'.$PLOTTAGE.'-sotok-'.$vilMKAD.'-km-mkad-id-'.$NUMBER;
 	    $PREVIEW_TEXT = $offer->{'description'};
 	    $keyPlot = $idDeveloper.'_'.$idVil.'_'.$NUMBER;
+			$arPlotUpdate[] = $keyPlot;
 
 			// узнаем мин стоимость сотки
 			if($PRICE && $PLOTTAGE)
@@ -402,6 +403,20 @@ if ($arUpdateVillage)
 		// 	CIBlockElement::SetPropertyValues($idVil, 1, [$HOME_VALUE_MIN,$HOME_VALUE_MAX], "HOME_VALUE");
 		// 	$strCSV .= "- Стоимость домов: min - ".$HOME_VALUE_MIN.", max - ".$HOME_VALUE_MAX."\n";
 		// }
+	}
+}
+
+// деактивируем участки, которых нет в фиде
+foreach ($arPlot as $keyPlot => $valuePlot) {
+	if (!in_array($keyPlot,$arPlotUpdate)) {
+		if ($valuePlot['ACTIVE'] == 'Y')
+		{
+			$el = new CIBlockElement;
+			if($el->update($valuePlot['ID'], [ "ACTIVE" => "N"]))
+				$strCSV .= "Участок: ".$valuePlot['NAME']." - деактивирован! \n";
+			else
+				$strCSV .= "Ошибка деактивации: ".$plotName." - ".$el->LAST_ERROR."\n";
+		}
 	}
 }
 

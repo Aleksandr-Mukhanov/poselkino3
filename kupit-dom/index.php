@@ -78,7 +78,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					<div class="show-mobile-filter" style="display: none;">
 							<?$APPLICATION->IncludeComponent("bitrix:catalog.smart.filter", "houses", Array(
 									"CACHE_GROUPS" => "N",	// Учитывать права доступа
-									"CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+									"CACHE_TIME" => "86400",	// Время кеширования (сек.)
 									"CACHE_TYPE" => "A",	// Тип кеширования
 									"CONVERT_CURRENCY" => "N",
 									"DISPLAY_ELEMENT_COUNT" => "Y",	// Показывать количество
@@ -269,7 +269,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 						"BROWSER_TITLE" => "-",
 						"CACHE_FILTER" => "Y",
 						"CACHE_GROUPS" => "N",
-						"CACHE_TIME" => "36000000",
+						"CACHE_TIME" => "86400",
 						"CACHE_TYPE" => "A",
 						"COMPARE_NAME" => "CATALOG_COMPARE_HOUSE",
 						"COMPARE_PATH" => "",
@@ -426,7 +426,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 							"AJAX_OPTION_STYLE" => "Y",
 							"CACHE_FILTER" => "Y",
 							"CACHE_GROUPS" => "N",
-							"CACHE_TIME" => "36000000",
+							"CACHE_TIME" => "86400",
 							"CACHE_TYPE" => "A",
 							"CHECK_DATES" => "Y",
 							"DETAIL_URL" => "",

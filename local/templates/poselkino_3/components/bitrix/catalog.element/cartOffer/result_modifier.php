@@ -37,7 +37,7 @@ $areaHouse = $arResult['PROPERTIES']['AREA_HOUSE']['VALUE'];
 $floors = $arResult['PROPERTIES']['FLOORS']['VALUE'];
 $price = $arResult['PROPERTIES']['PRICE']['VALUE'];
 $plottage = $arResult['PROPERTIES']['PLOTTAGE']['VALUE'];
-$number = $arResult['PROPERTIES']['NUMBER']['VALUE'];
+$number = ($arResult['PROPERTIES']['NUMBER']['VALUE']) ? $arResult['PROPERTIES']['NUMBER']['VALUE'] : $arResult['ID'];
 
 // получим поселок
 $arOrder = ['SORT'=>'ASC'];
@@ -47,26 +47,26 @@ if ($villageCode)
 else
 	$arFilter = ['IBLOCK_ID'=>IBLOCK_ID,'ID'=>$villageID];
 
-$arSelect = Array('ID','NAME','CODE','PROPERTY_MKAD','PROPERTY_SHOSSE','PROPERTY_REGION','PROPERTY_TYPE','PROPERTY_SETTLEM','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_ELECTRO_DONE','PROPERTY_ELECTRO_KVT','PROPERTY_PROVEDEN_GAZ','PROPERTY_PROVEDENA_VODA','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_DEVELOPER_ID','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_UP_TO_VIEW','PROPERTY_CONTACTS','PROPERTY_PHONE','PROPERTY_PHONE','PROPERTY_PRICE_ARRANGE_INT','PROPERTY_SRC_MAP','PROPERTY_SITE','PROPERTY_RATING','PROPERTY_DOP_FOTO','PROPERTY_MANAGER','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME');
+$arSelect = Array('ID','NAME','CODE','PROPERTY_SALES_PHASE','PROPERTY_MKAD','PROPERTY_'.ROAD_CODE,'PROPERTY_'.REGION_CODE,'PROPERTY_TYPE','PROPERTY_SETTLEM','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_ELECTRO_DONE','PROPERTY_ELECTRO_KVT','PROPERTY_PROVEDEN_GAZ','PROPERTY_PROVEDENA_VODA','PROPERTY_LAND_CAT','PROPERTY_TYPE_USE','PROPERTY_LEGAL_FORM','PROPERTY_DEVELOPER_ID','PROPERTY_COORDINATES','PROPERTY_AUTO_NO_JAMS','PROPERTY_TRAIN_TRAVEL_TIME','PROPERTY_TRAIN_VOKZAL','PROPERTY_TRAIN_PRICE','PROPERTY_TRAIN_PRICE_TAXI','PROPERTY_TRAIN_ID_YANDEX','PROPERTY_BUS_VOKZAL','PROPERTY_BUS_TIME_KM','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME','PROPERTY_UP_TO_VIEW','PROPERTY_CONTACTS','PROPERTY_PHONE','PROPERTY_PHONE','PROPERTY_PRICE_ARRANGE_INT','PROPERTY_SRC_MAP','PROPERTY_SITE','PROPERTY_RATING','PROPERTY_DOP_FOTO','PROPERTY_MANAGER','PROPERTY_PLAN_IMG','PROPERTY_PLAN_IMG_IFRAME');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 if ($arElement = $rsElements->GetNext())
-{
+{ // dump($arElement);
 	$villageID = $arElement['ID'];
 
   $i = 0;
-  foreach ($arElement['PROPERTY_SHOSSE_VALUE'] as $key => $value) {
+  foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $key => $value) {
     if ($i == 0) $arShosseOne['VALUE_ENUM_ID'] = $key;
     $strShosse = ($strShosse) ? $strShosse.', '.$value : $value;
     $i++;
   }
 
-  $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>"SHOSSE","ID"=>$arShosseOne['VALUE_ENUM_ID']]);
+  $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>ROAD_CODE,"ID"=>$arShosseOne['VALUE_ENUM_ID']]);
 	if($enumFields = $propEnums->GetNext()){ // dump($enumFields);
     $arShosseOne['VALUE_XML_ID'] = $enumFields['XML_ID'];
     $arShosseOne['VALUE'] = $enumFields['VALUE'];
   }
 
-  $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>"REGION","ID"=>$arElement['PROPERTY_REGION_ENUM_ID']]);
+  $propEnums = CIBlockPropertyEnum::GetList([],["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE,"ID"=>$arElement['PROPERTY_'.REGION_CODE.'_ENUM_ID']]);
 	if($enumFields = $propEnums->GetNext()){ // dump($enumFields);
     $arRegionXML = $enumFields['XML_ID'];
   }
@@ -94,6 +94,7 @@ if ($arElement = $rsElements->GetNext())
     'ID' => $arElement['ID'],
     'NAME' => $arElement['NAME'],
     'CODE' => $arElement['CODE'],
+		'SALES_PHASE' => $arElement['PROPERTY_SALES_PHASE_ENUM_ID'],
     'MKAD' => $arElement['PROPERTY_MKAD_VALUE'],
     'SHOSSE' => $strShosse,
     'SHOSSE_ONE' => $arShosseOne,
@@ -135,6 +136,9 @@ if ($arElement = $rsElements->GetNext())
   ];
 
 	$arResult['PHOTO_VILLAGE'] = $arElement['PROPERTY_DOP_FOTO_VALUE'];
+} else { // если нет поселка, то 404
+	CHTTP::SetStatus("404 Not Found");
+	@define("ERROR_404", "Y");
 }
 
 if ($offerType == 'plots') // если участки
@@ -199,7 +203,7 @@ if ($offerType == 'plots') // если участки
   // $seoH1 = 'Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.formatPrice($price).' рублей в поселке '.$arVillage['NAME'].'';
 	$seoH1 = 'Продажа участка № '.$number.' в коттеджном поселке '.$arVillage['NAME'];
   // $setDescription = '▶ Земельный участок '.$plottage.' соток, '.$arVillage['MKAD'].' км от МКАД, цена '.formatPrice($price).' рублей, в поселке '.$arVillage['NAME'].', '.$arVillage['SHOSSE'].' шоссе, '.$arVillage['REGION'].' район ▶ Обзор от «Посёлкино» - это: ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
-	$setDescription = 'Продажа участка в КП '.$arVillage['NAME'].' на '.$arVillage['SHOSSE'].' шоссе в '.REGION_KOY.' области. '.$arVillage['MKAD'].' км от МКАД. Площадь участка '.$plottage.' соток, стоимость сотки от '.formatPrice($price).' руб. Коммуникации: на участке, газ '.$arVillage['PROVEDEN_GAZ'].'. Рейтинг поселка - '.$arVillage['RATING'].'. Количество отзывов - '.$arVillage['CNT_REVIEWS'].'.';
+	$setDescription = 'Продажа участка в КП '.$arVillage['NAME'].' на '.$arVillage['SHOSSE'].' шоссе в '.REGION_KOY.' области, номер участка '.$number.'. '.$arVillage['MKAD'].' км от МКАД. Площадь участка '.$plottage.' соток, стоимость сотки от '.formatPrice($price).' руб. Коммуникации: на участке, газ '.$arVillage['PROVEDEN_GAZ'].'. Рейтинг поселка - '.$arVillage['RATING'].'. Количество отзывов - '.$arVillage['CNT_REVIEWS'].'.';
 
 }else{ // если дома
 

@@ -35,6 +35,7 @@ function formatPricePoint($price){
 }
 
 // заявки по умолчанию
+define('defaultName', 'Посёлкино');
 define('defaultEmail', 'start@poselkino.ru');
 define('defaultPhone', '+7 (926) 108-73-32');
 define('defaultAmoID', '3584062'); // Юлия С. / Дмитрий
@@ -47,13 +48,21 @@ switch ($_SERVER['HTTP_HOST']) {
 	case 'spb.poselkino.ru':
 		define('IBLOCK_ID', 7); // инфоблок Поселков
 		define('SHOW_PLOTS', 'N'); // показывать участки
+		define('SHOW_HOUSES', 'N'); // показывать дома
 		define('ROAD', 'КАД'); // шоссе
 		define('ROAD_URL', 'kad'); // шоссе в url
+		define('ROAD_HL', 21); // id HL шоссе
+		define('ROAD_CODE', 'SHOSSE'); // код св-ва шоссе
+		define('ROAD_PROP_ID', 229); // id св-ва шоссе
 		define('REGION_CITY', 'Санкт-Петербурга'); // город области
 		define('REGION_KOY', 'Ленинградской'); // область
+		define('REGION_LETTER', 'ЛО'); // область 2 буквы
 		define('REGION_SHORT', 'Ленобласти'); // область коротко
 		define('REGION_SHORT_WHERE', 'Ленобласти'); // область коротко Род.п.
 		define('REGION_SHORT_WHAT', 'Ленобласти'); // область коротко Род.п.
+		define('REGION_HL', 20); // id HL района
+		define('REGION_CODE', 'REGION'); // код св-ва района
+		define('REGION_PROP_ID', 228); // id св-ва района
 		define('FILTER_MAP', 'map_spb'); // фильтр в карте
 		define('MAP_CENTER', '59.938955, 30.315644'); // центр карты
 		define('PROP_SOLD_ID', 388); // проданные в SALES_PHASE
@@ -74,17 +83,66 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PLOTS_PROP_SHOSSE', 369); // Шоссе участков
 		define('HOUSE_PROP_REGION', 384); // Район домов
 		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
+		define('PROP_OBLAST', 319); // Область
+		break;
+	case 'kaluga.poselkino.ru':
+		define('IBLOCK_ID', 1); // инфоблок Поселков
+		define('SHOW_PLOTS', 'N'); // показывать участки
+		define('SHOW_HOUSES', 'N'); // показывать дома
+		define('ROAD', 'МКАД'); // шоссе
+		define('ROAD_URL', 'mkad'); // шоссе в url
+		define('ROAD_HL', 26); // id HL шоссе
+		define('ROAD_CODE', 'SHOSSE_KALUGA'); // код св-ва шоссе
+		define('ROAD_PROP_ID', 393); // id св-ва шоссе
+		define('REGION_CITY', 'Калуги'); // город области
+		define('REGION_KOY', 'Калужской'); // область
+		define('REGION_LETTER', 'КО'); // область 2 буквы
+		define('REGION_SHORT', 'Калужской области'); // область коротко
+		define('REGION_SHORT_WHERE', 'Калужской области'); // область коротко Род.п.
+		define('REGION_SHORT_WHAT', 'Калужской области'); // область коротко Род.п.
+		define('REGION_HL', 25); // id HL района
+		define('REGION_CODE', 'REGION_KALUGA'); // код св-ва района
+		define('REGION_PROP_ID', 392); // id св-ва района
+		define('FILTER_MAP', 'map'); // фильтр в карте
+		define('MAP_CENTER', '55.76, 37.64'); // центр карты
+		define('PROP_SOLD_ID', 254); // проданные в SALES_PHASE
+		define('PROP_HIDE_ID', 273); // убрать из каталога в HIDE_POS
+		define('PROP_NO_DOM', 3); // Участки в DOMA
+		define('PROP_WITH_DOM', 4); // Дома в DOMA
+		define('PROP_HOUSE_PLOT', 256); // Дома и участки в DOMA
+		define('PROP_DACHA', 1); // Дачный поселок в TYPE
+		define('PROP_COTTAGE', 2); // Коттеджный поселок в TYPE
+		define('PROP_FARMING', 171); // Фермерство в TYPE
+		define('PROP_ELECTRO_Y', 12); // Электричество в ELECTRO
+		define('PROP_GAS_Y', 15); // Газ в GAS
+		define('PROP_PLUMBING_Y', 18); // Водопровод в PLUMBING
+		define('PROP_COORDINATES', 58); // Координаты поселка
+		define('PROP_PRICE_SOTKA', 8); // Цена за сотку
+		define('PLOTS_PROP_AREA', 621); // Область участков
+		define('PLOTS_PROP_REGION', 193); // Район участков
+		define('PLOTS_PROP_SHOSSE', 194); // Шоссе участков
+		define('HOUSE_PROP_REGION', 384); // Район домов
+		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
+		define('PROP_OBLAST', 593); // Область
 		break;
 	default:
 		define('IBLOCK_ID', 1); // инфоблок Поселков
 		define('SHOW_PLOTS', 'Y'); // показывать участки
+		define('SHOW_HOUSES', 'Y'); // показывать дома
 		define('ROAD', 'МКАД'); // шоссе
 		define('ROAD_URL', 'mkad'); // шоссе в url
+		define('ROAD_HL', 16); // id HL шоссе
+		define('ROAD_CODE', 'SHOSSE'); // код св-ва шоссе
+		define('ROAD_PROP_ID', 5); // id св-ва шоссе
 		define('REGION_CITY', 'Москвы'); // город области
 		define('REGION_KOY', 'Московской'); // область
+		define('REGION_LETTER', 'МО'); // область 2 буквы
 		define('REGION_SHORT', 'Подмосковью'); // область коротко
 		define('REGION_SHORT_WHERE', 'Подмосковье'); // область коротко Род.п.
 		define('REGION_SHORT_WHAT', 'Подмосковья'); // область коротко Род.п.
+		define('REGION_HL', 17); // id HL района
+		define('REGION_CODE', 'REGION'); // код св-ва района
+		define('REGION_PROP_ID', 4); // id св-ва района
 		define('FILTER_MAP', 'map'); // фильтр в карте
 		define('MAP_CENTER', '55.76, 37.64'); // центр карты
 		define('PROP_SOLD_ID', 254); // проданные в SALES_PHASE
@@ -105,7 +163,42 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PLOTS_PROP_SHOSSE', 194); // Шоссе участков
 		define('HOUSE_PROP_REGION', 384); // Район домов
 		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
+		define('PROP_OBLAST', 127); // Область
 		break;
+}
+
+// отправка в telegram
+function sendTelegram($chatID,$text){
+
+	$token = '7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0';
+
+	$getQuery = array(
+    "chat_id" => $chatID,
+    "text"  	=> $text,
+	);
+	$ch = curl_init("https://api.telegram.org/bot". $token ."/sendMessage?" . http_build_query($getQuery));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HEADER, false);
+	$resultQuery = curl_exec($ch);
+	curl_close($ch);
+
+	return $resultQuery;
+
+	// $params = array(
+  //   'chat_id' => $chatID, // id получателя сообщения
+  //   'text' => $text, // текст сообщения
+  //   // 'parse_mode' => 'HTML', // режим отображения сообщения, не обязательный параметр
+	// );
+	//
+	// $curl = curl_init();
+	// curl_setopt($curl, CURLOPT_URL, 'https://api.telegram.org/bot' . $token . '/sendMessage'); // адрес api телеграмм
+	// curl_setopt($curl, CURLOPT_POST, true); // отправка данных методом POST
+	// curl_setopt($curl, CURLOPT_TIMEOUT, 10); // максимальное время выполнения запроса
+	// curl_setopt($curl, CURLOPT_POSTFIELDS, $params); // параметры запроса
+	// curl_exec($curl); // запрос к api
+	// curl_close($curl);
+
+	// return $result;
 }
 
 // название в title

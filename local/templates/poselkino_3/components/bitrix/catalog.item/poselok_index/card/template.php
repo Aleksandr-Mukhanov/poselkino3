@@ -201,8 +201,19 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
 	</div>
 	<div class="offer-house__info">
 		<div class="offer-house__title"><?=$nameDomPos?> <?=$productTitle?></div>
-        <?if($item['PROPERTIES']['REGION']['VALUE']):?>
-          <div class="offer-house__area"><a class="z-index-1 position-relative" href="/poselki/<?=$item['PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?=$item['PROPERTIES']['REGION']['VALUE']?> район</a></div>
+        <?if($item['PROPERTIES'][REGION_CODE]['VALUE']):?>
+					<?if($item['PROPERTIES'][REGION_CODE]['PROPERTY_TYPE'] == 'L'):?>
+	          <div class="offer-house__area">
+							<a class="z-index-1 position-relative" href="/poselki/<?=$item['PROPERTIES'][REGION_CODE]['VALUE_XML_ID']?>-rayon/"><?=$item['PROPERTIES'][REGION_CODE]['VALUE']?> район</a>
+						</div>
+	        <?else:
+						$regionCode = $item['PROPERTIES'][REGION_CODE]['VALUE'];
+						$regionName = getElHL(REGION_HL,[],['UF_XML_ID'=>$regionCode],['ID','UF_NAME']);
+						$regionName = array_values($regionName)[0]['UF_NAME'];?>
+	          <div class="offer-house__area">
+							<a class="z-index-1 position-relative" href="/poselki/<?=$regionCode?>-rayon/"><?=$regionName?> район</a>
+						</div>
+					<?endif;?>
         <?endif;?>
         <div class="raiting" style="padding: 15px 20px 5px;">
           <div class="line-raiting">
@@ -221,11 +232,11 @@ $amlazySkip = ($arParams['TEMPLATE_CARD'] == 'map') ? 'data-amlazy-skip' : ''; /
             </svg><?=$reviewsText?></a></div>
         </div> -->
 		<div class="offer-house__metro">
-			<?if($item['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе
-				$idEnumHW = $item['PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0];
-				$valEnumHW = $item['PROPERTIES']['SHOSSE']['VALUE_XML_ID'][0];
+			<?if($item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]): // если есть шоссе
+				$idEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0];
+				$valEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_XML_ID'][0];
 				$colorHW = getColorRoad($idEnumHW);
-				$nameHW = $item['PROPERTIES']['SHOSSE']['VALUE'][0];
+				$nameHW = $item['PROPERTIES'][ROAD_CODE]['VALUE'][0];
 			?>
 				<a class="metro z-index-1 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
 					<span class="metro-color <?=$colorHW?>"></span>

@@ -33,8 +33,8 @@ if($_REQUEST['PAGEN_1'] > $arResult['NavPageCount']){ // 404 на несущес
 	@define("ERROR_404", "Y");
 }
 
-$strNavQueryString = ($arResult["NavQueryString"] != "" ? $arResult["NavQueryString"]."&amp;" : "");
-$strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["NavQueryString"] : "");
+// $strNavQueryString = ($arResult["NavQueryString"] != "" ? $arResult["NavQueryString"]."&amp;" : "");
+// $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["NavQueryString"] : "");
 
 if($arResult["bDescPageNumbering"] === true):
 	$bFirst = true;

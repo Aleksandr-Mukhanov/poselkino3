@@ -176,7 +176,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 	 <?endif;?>
 		<div class="order-1 order-md-2 col-lg-8 col-md-7">
 			<div class="village-slider">
-				<?if($offerType == 'plots'){?>
+				<?//if($offerType == 'plots'){?>
 				<div class="slider__header">
 					<div class="photo__top">
 						<svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,7 +213,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 						</button>
 					</div>
 				</div>
-				<?}?>
+				<?//}?>
 				<div class="village-slider__list" id="village-slider">
 					<?foreach ($offerPhoto as $photo){ // Основные фото?>
 						<img class="village-slider__item" src="<?=$photo['src']?>" style="background: #eee;object-fit: cover;" alt="" itemprop="image" lazyload>
@@ -573,7 +573,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 						</g>
 					</svg></a>
 				</p>
-				<?if($arResult['arVillage']['SITE']):?>
+				<?if($arResult['arVillage']['SITE'] && $arResult['arVillage']['SALES_PHASE'] != 254):?>
 					<p class="w-100 mt-3">
 						Сайт поселка: <a href="<?=$arResult['arVillage']['SITE']?>" class="text-success font-weight-bold" target="_blank" rel="dofollow"><?=$arResult['arVillage']['NAME']?></a>
 					</p>
@@ -686,7 +686,7 @@ $fav_text = ($favorites != 'Y') ? 'Добавить в избранное' : 'У
 								<?}?>
               </div>
               <div class="photo__count">
-								<span class="current">1</span> / <span class="count"><?=count($house['IMG'])?></span>
+								<span class="current">1</span> / <span class="count"><?=($house['IMG'])?count($house['IMG']):0?></span>
               </div>
             </div>
             <div class="offer-house__info card-house__content px-3">

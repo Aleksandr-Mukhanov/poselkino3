@@ -59,7 +59,7 @@ global $arrFilter;
 		        	"poselkino_index",
 		        	array(
 		        		"CACHE_GROUPS" => "Y",
-		        		"CACHE_TIME" => "36000000",
+		        		"CACHE_TIME" => "86400",
 		        		"CACHE_TYPE" => "N",
 		        		"CONVERT_CURRENCY" => "N",
 		        		"DISPLAY_ELEMENT_COUNT" => "Y",
@@ -450,7 +450,7 @@ global $arrFilter;
 					 		"AJAX_OPTION_STYLE" => "Y",
 					 		"CACHE_FILTER" => "N",
 					 		"CACHE_GROUPS" => "Y",
-					 		"CACHE_TIME" => "36000000",
+					 		"CACHE_TIME" => "86400",
 					 		"CACHE_TYPE" => "A",
 					 		"CHECK_DATES" => "Y",
 					 		"DETAIL_URL" => "",

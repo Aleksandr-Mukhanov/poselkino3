@@ -35,7 +35,7 @@ $iblockID = ($offerType == 'plots') ? 5 : 6;?>
     		"BRAND_USE" => "N",
     		"BROWSER_TITLE" => "-",
     		"CACHE_GROUPS" => "N",
-    		"CACHE_TIME" => "36000000",
+    		"CACHE_TIME" => "86400",
     		"CACHE_TYPE" => "A",
     		"CHECK_SECTION_ID_VARIABLE" => "N",
     		"COMPARE_PATH" => "",

@@ -39,13 +39,13 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 // км от МКАД
 	$i = 0;
 	for($x=10; $x<=80; $x+=5){ $i++;
-		$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-'.$x.'-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-		$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-'.$x.'-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+		$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-'.$x.'-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+		$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-'.$x.'-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 	}
-	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-100-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-100-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-120-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-120-km-ot-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-100-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-100-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-120-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-120-km-ot-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 
 // Цена
 	$urlPrice = [
@@ -283,8 +283,8 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 // шоссе до МКАД и газ
 	foreach ($arShosse as $shosse => $value) {
 		for ($i=10; $i < 60; $i+=10) { // до МКАД
-			$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-			$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+			$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+			$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/'.$shosse.'-shosse-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 		}
 		$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/'.$shosse.'-shosse-gaz/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 		$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/'.$shosse.'-shosse-gaz/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
@@ -296,13 +296,13 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	}
 // до МКАД газ
 	for ($i=10; $i < 60; $i+=10) {
-		$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/gaz-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-		$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/gaz-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+		$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/gaz-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+		$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/gaz-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 	}
 // до МКАД ИЖС
 	// for ($i=10; $i < 60; $i+=10) {
-	// 	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-	// 	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-'.$i.'-km-mkad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	// 	$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/do-'.$i.'-km-kad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+	// 	$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/do-'.$i.'-km-kad-izhs/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 	// }
 
 // стоимость
@@ -367,8 +367,8 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 // коммуникации и МКАД
 	foreach ($commun2 as $commun) {
 		for ($i=10; $i < 60; $i+=10) { // до МКАД
-			$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/'.$commun.'-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
-			$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/'.$commun.'-do-'.$i.'-km-mkad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+			$xml_content .= '<url><loc>https://spb.poselkino.ru/kupit-uchastki/'.$commun.'-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
+			$xml_content .= '<url><loc>https://spb.poselkino.ru/poselki/'.$commun.'-do-'.$i.'-km-kad/</loc><lastmod>'.date('c').'</lastmod><priority>1</priority></url>';
 		}
 	}
 

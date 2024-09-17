@@ -265,6 +265,7 @@
           $arArea = [
             'poselkino.ru' => 'Московская область',
             'spb.poselkino.ru' => 'Ленинградская область',
+            'kaluga.poselkino.ru' => 'Калужская область',
           ];
           foreach ($arArea as $key => $value) {
             $btnType = ($_SERVER['HTTP_HOST'] == $key) ? 'btn-warning' : 'btn-outline-warning'?>

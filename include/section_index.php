@@ -58,7 +58,7 @@ global $arrFilter;
 		"BROWSER_TITLE" => "-",
 		"CACHE_FILTER" => "Y",
 		"CACHE_GROUPS" => "N",
-		"CACHE_TIME" => "36000000",
+		"CACHE_TIME" => "86400",
 		"CACHE_TYPE" => "A",
 		"COMPATIBLE_MODE" => "N",
 		"COMPONENT_TEMPLATE" => "poselkino",

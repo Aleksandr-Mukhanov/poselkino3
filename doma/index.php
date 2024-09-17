@@ -42,7 +42,7 @@ $APPLICATION->SetTitle("Дома");?>
         		"BROWSER_TITLE" => "-",
         		"CACHE_FILTER" => "N",
         		"CACHE_GROUPS" => "Y",
-        		"CACHE_TIME" => "36000000",
+        		"CACHE_TIME" => "86400",
         		"CACHE_TYPE" => "A",
         		"COMPARE_NAME" => "CATALOG_COMPARE_HOUSE",
         		"COMPARE_PATH" => "",

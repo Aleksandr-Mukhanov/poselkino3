@@ -4,7 +4,7 @@ $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
   ["IBLOCK_ID"=>1,"CODE"=>"SHOSSE"]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arShosse[$enumFields['XML_ID']] = [
     'ID' => $enumFields['ID'],
     'NAME' => $enumFields['VALUE'],
@@ -16,7 +16,7 @@ $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
   ["IBLOCK_ID"=>1,"CODE"=>"REGION"]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
 }
 

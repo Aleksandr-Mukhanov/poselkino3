@@ -35,7 +35,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/kommunikatsii-do-".$mkadKM."-km-mkad/";
   $urlNoDom = "/kupit-uchastki/kommunikatsii-do-".$mkadKM."-km-mkad/";
-  $urlWithDom = "/poselki/kupit-dom/kommunikatsii-do-".$mkadKM."-km-mkad/";
+  $urlWithDom = "/kupit-dom/kommunikatsii-do-".$mkadKM."-km-mkad/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -71,7 +71,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/svet-do-".$mkadKM."-km-mkad/";
   $urlNoDom = "/kupit-uchastki/svet-do-".$mkadKM."-km-mkad/";
-  $urlWithDom = "/poselki/kupit-dom/svet-do-".$mkadKM."-km-mkad/";
+  $urlWithDom = "/kupit-dom/svet-do-".$mkadKM."-km-mkad/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -107,7 +107,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/gaz-do-".$mkadKM."-km-mkad/";
   $urlNoDom = "/kupit-uchastki/gaz-do-".$mkadKM."-km-mkad/";
-  $urlWithDom = "/poselki/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
+  $urlWithDom = "/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -143,7 +143,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/voda-do-".$mkadKM."-km-mkad/";
   $urlNoDom = "/kupit-uchastki/voda-do-".$mkadKM."-km-mkad/";
-  $urlWithDom = "/poselki/kupit-dom/voda-do-".$mkadKM."-km-mkad/";
+  $urlWithDom = "/kupit-dom/voda-do-".$mkadKM."-km-mkad/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -179,7 +179,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$rayon."-rayon-kommunikatsii/";
   $urlNoDom = "/kupit-uchastki/".$rayon."-rayon-kommunikatsii/";
-  $urlWithDom = "/poselki/kupit-dom/".$rayon."-rayon-kommunikatsii/";
+  $urlWithDom = "/kupit-dom/".$rayon."-rayon-kommunikatsii/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -215,7 +215,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$rayon."-rayon-svet/";
   $urlNoDom = "/kupit-uchastki/".$rayon."-rayon-svet/";
-  $urlWithDom = "/poselki/kupit-dom/".$rayon."-rayon-svet/";
+  $urlWithDom = "/kupit-dom/".$rayon."-rayon-svet/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -251,7 +251,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$rayon."-rayon-gaz/";
   $urlNoDom = "/kupit-uchastki/".$rayon."-rayon-gaz/";
-  $urlWithDom = "/poselki/kupit-dom/".$rayon."-rayon-gaz/";
+  $urlWithDom = "/kupit-dom/".$rayon."-rayon-gaz/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -287,15 +287,17 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$rayon."-rayon-voda/";
   $urlNoDom = "/kupit-uchastki/".$rayon."-rayon-voda/";
-  $urlWithDom = "/poselki/kupit-dom/".$rayon."-rayon-voda/";
+  $urlWithDom = "/kupit-dom/".$rayon."-rayon-voda/";
   $onlyParam = true;
   $SEO_text_add = true;
 
-}elseif($typeURL == 'snt' && $rayon){ // novoryazanskoe-shosse-snt
+}elseif($typeURL == 'snt' && $rayon){ // istrinskiy-rayon-snt
 
   $newTitle = 'Купить земельный участок в СНТ '.$arNames['NAME_KOGO'].' района';
 	$newDesc = '▶ Участки СНТ в '.$arNames['NAME_KOM'].' районе ▶ Полная база земельных участков СНТ по '.$arNames['NAME_KOMU'].' направлению ★★★ Независимый рейтинг!  ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Стоимость коммуникаций!';
 	$h1 = 'Земельные участки СНТ в '.$arNames['NAME_KOM'].' районе';
+
+  if ($pagen) $pageTitleDesc = 'Поселки СНТ '.$arNames['NAME'].' район';
 
 }elseif($commun == 'kommunikaciyami' && $shosse){ // varshavskoe-shosse-kommunikatsii
 
@@ -335,7 +337,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-kommunikatsii/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-kommunikatsii/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-kommunikatsii/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-kommunikatsii/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -377,7 +379,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-svet/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-svet/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-svet/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-svet/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -416,7 +418,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-gaz/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-gaz/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-gaz/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-gaz/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -455,7 +457,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-voda/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-voda/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-voda/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-voda/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -491,7 +493,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-do-".$mkadKM."-km-mkad/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-do-".$mkadKM."-km-mkad/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-do-".$mkadKM."-km-mkad/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-do-".$mkadKM."-km-mkad/";
   $onlyParam = true;
   $SEO_text_add = true;
 
@@ -524,7 +526,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-ryadom-s-lesom/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-ryadom-s-lesom/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-ryadom-s-lesom/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-ryadom-s-lesom/";
   $onlyParam = true;
   // $SEO_text_add = true;
 
@@ -557,7 +559,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-u-vody/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-u-vody/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-u-vody/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-u-vody/";
   $onlyParam = true;
   // $SEO_text_add = true;
 
@@ -590,7 +592,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-izhs/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-izhs/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-izhs/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-izhs/";
   $onlyParam = true;
   // $SEO_text_add = true;
 
@@ -623,7 +625,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/".$shosse."-shosse-snt/";
   $urlNoDom = "/kupit-uchastki/".$shosse."-shosse-snt/";
-  $urlWithDom = "/poselki/kupit-dom/".$shosse."-shosse-snt/";
+  $urlWithDom = "/kupit-dom/".$shosse."-shosse-snt/";
   $onlyParam = true;
   // $SEO_text_add = true;
 
@@ -659,7 +661,7 @@ if($commun == 'kommunikaciyami' && $mkadKM){ // kommunikatsii-do-30-km-mkad
   }
   $urlAll = "/poselki/do-".$mkadKM."-km-mkad-izhs/";
   $urlNoDom = "/kupit-uchastki/do-".$mkadKM."-km-mkad-izhs/";
-  $urlWithDom = "/poselki/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
+  $urlWithDom = "/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
   $onlyParam = true;
   $SEO_text_add = true;
 

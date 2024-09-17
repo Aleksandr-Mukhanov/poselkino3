@@ -23,7 +23,7 @@ $this->setFrameMode(true);
 
 		<div class="map-filter__buttons--header">
 			<?$activeHighway = '';// ставим активность если надо
-			 foreach($arResult["ITEMS"][5]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
+			 foreach($arResult["ITEMS"][ROAD_PROP_ID]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
 				if ($ar["CHECKED"]) $activeHighway = 'active';
 			 }?>
 			<button class="btn btn-outline-warning rounded-pill Highway <?=$activeHighway?>" id="toggleHighway" type="button">Шоссе</button>
@@ -70,7 +70,7 @@ $this->setFrameMode(true);
         $arShosse['vostok']['NAME'] = 'Восток';
         $arShosse['zapad']['NAME'] = 'Запад';
         $arShosse['other']['NAME'] = 'Другие';
-        foreach($arResult["ITEMS"][5]["VALUES"] as $val => $ar){
+        foreach($arResult["ITEMS"][ROAD_PROP_ID]["VALUES"] as $val => $ar){
           // echo $ar['VALUE'].' - '.$ar['URL_ID'].'<br>';
           switch ($ar['URL_ID']) {
             case 'dmitrovskoe': $arShosse['sever']['SHOSSE'][] = $ar; break;
@@ -135,7 +135,7 @@ $this->setFrameMode(true);
 			<h2 class="mt-4 mb-0">Районы МО</h2>
 			<? // Группируем районы по первым буквам названий
         $prevLetter = '';
-        foreach ($arResult["ITEMS"][4]["VALUES"] as $key => $value) {
+        foreach ($arResult["ITEMS"][REGION_PROP_ID]["VALUES"] as $key => $value) {
           $firstLetter = mb_strtoupper(mb_substr($value['VALUE'], 0, 1));
           if ($firstLetter != $prevLetter) $prevLetter = $firstLetter;
           $arRegion[$firstLetter][] = $value;
@@ -348,7 +348,7 @@ $this->setFrameMode(true);
 											</div>
 										</div>
 										<?$activeAreas = '';// ставим активность если надо
-								     foreach($arResult["ITEMS"][4]["VALUES"] as $val => $ar){ //dump($ar); // Шоссе
+								     foreach($arResult["ITEMS"][REGION_PROP_ID]["VALUES"] as $val => $ar){ //dump($ar); // район
 								      if ($ar["CHECKED"]) $activeAreas = 'active';
 								     }?>
 										<div class="col-xl-2 col-lg-2 col-md-2 mt-4 mt-lg-0"><a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a></div>

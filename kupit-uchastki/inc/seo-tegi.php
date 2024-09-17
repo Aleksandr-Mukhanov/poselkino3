@@ -401,8 +401,12 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
             }
             // подсчитаем участки у поселков
             foreach ($arTegs[$teg]['villages'] as $villageID)
-              $villagePlotsCnt[] = count($arVillagePlots[$villageID]);
-            $arTagsPotsCnt = array_sum($villagePlotsCnt);
+              if ($arVillagePlots[$villageID])
+                $villagePlotsCnt[] = count($arVillagePlots[$villageID]);
+
+            if ($villagePlotsCnt)
+              $arTagsPotsCnt = array_sum($villagePlotsCnt);
+
             unset($villagePlotsCnt);
 
             $activeTeg = ($ourDir == $arTegs[$teg]['url'] || $tegReq == $teg) ? 'class="active"' : ''; ?>
@@ -442,14 +446,17 @@ if ($onlyParam) { // если не нужен url тега (3 уровень)
 
                                 // подсчитаем участки у поселков
                                 foreach ($arTegs[$teg]['villages'] as $villageID)
-                                  $villagePlotsCnt[] = count($arVillagePlots[$villageID]);
-                                $arTagsPotsCnt = array_sum($villagePlotsCnt);
+                                  if ($arVillagePlots[$villageID])
+                                    $villagePlotsCnt[] = count($arVillagePlots[$villageID]);
+
+                                if ($villagePlotsCnt)
+                                  $arTagsPotsCnt = array_sum($villagePlotsCnt);
+
                                 unset($villagePlotsCnt);
 
                                 $activeTeg = ($ourDir == $arTegs[$teg]['url'] || $tegReq == $teg) ? 'class="active"' : ''; ?>
                                 <div class="tag-list__item">
-                                    <a href="<?= $arTegs[$teg]['url'] ?>" <?= $activeTeg ?>><?= $arTegs[$teg]['name'] ?> <span
-                                                class="text-secondary"><?= $arTagsPotsCnt ?></span></a>
+                                    <a href="<?= $arTegs[$teg]['url'] ?>" <?= $activeTeg ?>><?= $arTegs[$teg]['name'] ?> <span class="text-secondary"><?= $arTagsPotsCnt ?></span></a>
                                 </div>
                                 <?
                             }

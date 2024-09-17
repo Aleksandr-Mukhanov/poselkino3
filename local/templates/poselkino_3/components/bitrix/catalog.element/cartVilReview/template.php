@@ -173,7 +173,7 @@ switch ($km_MKAD) {
 						<div class="card-house__raiting d-flex">
 							<div class="line-raiting">
 								<div class="line-raiting__star">
-									<div class="line-raiting__star--wrap" style="width: <?= $arResult['ratingItogo'] * 100 / 5 ?>%;"></div>
+									<div class="line-raiting__star--wrap" style="width: <?=($arResult['ratingItogo']) ? $arResult['ratingItogo'] * 100 / 5 : 0?>%;"></div>
 								</div>
 								<div class="line-raiting__title"><?=$arResult['ratingItogo']?></div>
 							</div>

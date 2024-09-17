@@ -5,8 +5,27 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 	Loader::includeModule('highloadblock');
   Loader::includeModule('iblock');
 
-	$token = '7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0';
-	$chat_id = 461529239;
+	// dump($_SERVER["DOCUMENT_ROOT"]);
+
+	// получим поселки земекса
+	// $arOrder = Array('SORT'=>'ASC');
+  // $arFilter = Array('IBLOCK_ID'=>1,"PROPERTY_DEVELOPER_ID" => 'Zemelniy-Ekspress','!PROPERTY_SITE'=>false,'!PROPERTY_SALES_PHASE'=>254);
+  // $arSelect = Array('ID','NAME','PROPERTY_SITE');
+  // $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  // while($arElements = $rsElements->Fetch()){
+	// 	echo $arElements['PROPERTY_SITE_VALUE'].'<br>';
+	// }
+
+	// https://api.telegram.org/bot7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0/getUpdates
+	// 7339729126 - мой теле2
+
+	// $token = '7073227220:AAGhNegb0u10BDbw9cbrZ37iF3nmsKw8_N0';
+	// $chat_id = 461529239;
+
+	// sendTelegram($chat_id,'тестовое');
+
+	// $result = sendTelegram($chat_id,'тестовое');
+	// dump($result);
 
 	// $getQuery = array(
   //   "chat_id" 	=> $chat_id,
@@ -86,7 +105,7 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 
 	// // тестовая отправка
 	// $mailFields = array(
-	// 	"NAME" => 'Тестинг1',
+	// 	"NAME" => 'Тест Поселкино',
 	// );
 	// if ($result = CEvent::Send("TEST_SEND", "s1", $mailFields)) echo "Сообщение успешно отправлено!";
 	// else echo "Error: ".$result->LAST_ERROR;

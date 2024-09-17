@@ -38,6 +38,7 @@
 global $arrFilter;
 	$arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
 	$arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+	$arrFilter['PROPERTY_OBLAST'] = PROP_HIDE_ID; // метка области
 ?>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",
@@ -58,7 +59,7 @@ global $arrFilter;
 		"BROWSER_TITLE" => "-",
 		"CACHE_FILTER" => "N",
 		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
+		"CACHE_TIME" => "86400",
 		"CACHE_TYPE" => "A",
 		"COMPATIBLE_MODE" => "N",
 		"COMPONENT_TEMPLATE" => "poselkino",

@@ -4,21 +4,44 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 
 use Bitrix\Main\Loader;
 	Loader::includeModule('iblock');
+	Loader::includeModule('highloadblock');
+use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 $i=0;
+
+// получим девелоперов ТОП 100
+$arElHL = getElHL(5,[],['UF_TOP100'=>true],['ID','UF_XML_ID']);
+foreach ($arElHL as $value)
+	$arDevelopersTOP100[] = $value['UF_XML_ID'];
+
+// распределение менеджерам по шоссе
+$arElHL = getElHL(16,[],[],['ID','UF_NAME','UF_MANAGER']);
+foreach ($arElHL as $value)
+	$arHighway[$value['UF_NAME']] = $value['UF_MANAGER'];
 
 // получим поселки
 $arOrder = ['SORT'=>'ASC'];
-$arFilter = ['IBLOCK_ID'=>1,'PROPERTY_IN_YA_FEED'=>283];
-$arSelect = ['ID','NAME','PREVIEW_TEXT','PROPERTY_DOMA','DETAIL_PAGE_URL','DATE_CREATE','PROPERTY_REGION','PROPERTY_MKAD','PROPERTY_PLOTTAGE','PROPERTY_HOUSE_AREA','PROPERTY_DOP_FOTO','PROPERTY_SHOSSE','PROPERTY_COST_LAND_IN_CART','PROPERTY_COORDINATES','PROPERTY_LOCATION_YA_REAL'];
+// $arFilter = ['IBLOCK_ID'=>1,'PROPERTY_IN_YA_FEED'=>283];
+$arFilter = [
+	"IBLOCK_ID" => 1,
+	"ACTIVE" => "Y",
+	"!PROPERTY_SALES_PHASE" => 254, // уберем проданные
+	"!PROPERTY_HIDE_POS" => 273, // метка убрать из каталога
+	[
+		"LOGIC" => "OR",
+		"PROPERTY_DEVELOPER_ID" => $arDevelopersTOP100,
+		"PROPERTY_TOP_100" => 554, // Y
+	]
+];
+$arSelect = ['ID','NAME','PREVIEW_TEXT','PROPERTY_DOMA','DATE_CREATE','PROPERTY_REGION','PROPERTY_MKAD','PROPERTY_PLOTTAGE','PROPERTY_HOUSE_AREA','PROPERTY_DOP_FOTO','PROPERTY_SHOSSE','PROPERTY_COST_LAND_IN_CART','PROPERTY_COORDINATES','PROPERTY_LOCATION_YA_REAL','PROPERTY_MANAGER'];
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-while ($arElement = $rsElements->GetNext()) { // dump($arElement);
+while ($arElement = $rsElements->Fetch()) { // dump($arElement);
 	$arVillage[$arElement['ID']] = $arElement;
 	$arVillageIDs[] = $arElement['ID'];
 }
 
 // получим участки
 $arOrder = ['SORT'=>'ASC'];
-$arFilter = ['IBLOCK_ID'=>5,'PROPERTY_VILLAGE'=>$arVillageIDs];
+$arFilter = ['IBLOCK_ID'=>5,'ACRIVE'=>'Y','PROPERTY_VILLAGE'=>$arVillageIDs];
 $arSelect = ['ID','NAME','DETAIL_PAGE_URL','PROPERTY_VILLAGE','PROPERTY_PRICE','PROPERTY_PLOTTAGE'];
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while ($arElementPlot = $rsElements->GetNext())
@@ -36,87 +59,115 @@ while ($arElementPlot = $rsElements->GetNext())
   $unit = ($villageTypeID == 3 || $villageTypeID == 256) ? 'сотка' : 'кв. м';
   $area = ($villageTypeID == 3 || $villageTypeID == 256) ? '<lot-area><value>'.$arElementPlot['PROPERTY_PLOTTAGE_VALUE'].'</value><unit>сотка</unit></lot-area>' : '<area><value>'.$arElement['PROPERTY_HOUSE_AREA_VALUE'][0].'</value><unit>кв. м</unit></area>';
 
-	// разбивка по шоссе
+	$manager = $arElement['PROPERTY_VILLAGE_VALUE'];
 	$highway = array_values($arElement['PROPERTY_SHOSSE_VALUE'])[0];
-	switch ($highway) {
-		case 'Дмитровское':
-			$toName = 'Иван';
-			$toPhone = '+74951860665';
-			break;
-		case 'Рогачёвское':
-			$toName = 'Иван';
-			$toPhone = '+74951860665';
-			break;
-		case 'Ленинградское':
-			$toName = 'Иван';
-			$toPhone = '+74951860665';
-			break;
-		case 'Пятницкое':
-			$toName = 'Андрей';
-			$toPhone = '+74958590209';
-			break;
-		case 'Волоколамское':
-			$toName = 'Андрей';
-			$toPhone = '+74958590209';
-			break;
-		case 'Новорижское':
-			$toName = 'Андрей';
-			$toPhone = '+74958590209';
-			break;
-		case 'Ильинское':
-			$toName = 'Андрей';
-			$toPhone = '+74958590209';
-			break;
-		case 'Рублевское':
-			$toName = 'Андрей';
-			$toPhone = '+74958590209';
-			break;
-		case 'Горьковское':
-			$toName = 'Владислав';
-			$toPhone = '+74958590208';
-			break;
-		case 'Щелковское':
-			$toName = 'Владислав';
-			$toPhone = '+74958590208';
-			break;
-		case 'Носовихинское':
-			$toName = 'Владислав';
-			$toPhone = '+74958590208';
-			break;
-		case 'Егорьевское':
-			$toName = 'Игорь';
-			$toPhone = '+74951541673';
-			break;
-		case 'Новорязанское':
-			$toName = 'Игорь';
-			$toPhone = '+74951541673';
-			break;
-		case 'Каширское':
-			$toName = 'Дмитрий';
-			$toPhone = '+74951724409';
-			break;
-		case 'Симферопольское':
-			$toName = 'Лилия';
-			$toPhone = '+74954456119';
-			break;
-		case 'Варшавское':
-			$toName = 'Лилия';
-			$toPhone = '+74954456119';
-			break;
-		case 'Калужское':
-			$toName = 'Лилия';
-			$toPhone = '+74954456119';
-			break;
-		case 'Киевское':
-			$toName = 'Лилия';
-			$toPhone = '+74954456119';
-			break;
 
-		default:
-			$toName = 'Посёлкино';
-			$toPhone = '+74951860665';
-			break;
+	if ($manager) // менеджер у поселка
+	{
+		$arElHL = getElHL(13,[],['UF_XML_ID'=>$manager],['*']);
+		$arManager = array_values($arElHL)[0];
+		if ($arManager['UF_XML_ID']) $toName = $arManager['UF_XML_ID'];
+		if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
+		if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
+		if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+		if ($arManager['UF_TG_ID']) $toTelegram = $arManager['UF_TG_ID'];
 	}
+	elseif ($arHighway[$highway]) // менеджер у шоссе
+	{
+		$arElHL = getElHL(13,[],['ID'=>$arHighway[$highway]],['*']);
+		$arManager = array_values($arElHL)[0];
+		if ($arManager['UF_XML_ID']) $toName = $arManager['UF_XML_ID'];
+		if ($arManager['UF_EMAIL']) $toEmail = $arManager['UF_EMAIL'];
+		if ($arManager['UF_PHONE']) $toPhone = $arManager['UF_PHONE'];
+		if ($arManager['UF_AMO_ID']) $responsibleUserId = $arManager['UF_AMO_ID'];
+		if ($arManager['UF_TG_ID']) $toTelegram = $arManager['UF_TG_ID'];
+	}
+
+	if (!$toName) $toName = defaultName;
+	if (!$toEmail) $toEmail = defaultEmail;
+	if (!$toPhone) $toPhone = defaultPhone;
+	if (!$responsibleUserId) $responsibleUserId = defaultAmoID;
+
+	// разбивка по шоссе
+	// switch ($highway) {
+	// 	case 'Дмитровское':
+	// 		$toName = 'Иван';
+	// 		$toPhone = '+74951860665';
+	// 		break;
+	// 	case 'Рогачёвское':
+	// 		$toName = 'Иван';
+	// 		$toPhone = '+74951860665';
+	// 		break;
+	// 	case 'Ленинградское':
+	// 		$toName = 'Иван';
+	// 		$toPhone = '+74951860665';
+	// 		break;
+	// 	case 'Пятницкое':
+	// 		$toName = 'Андрей';
+	// 		$toPhone = '+74958590209';
+	// 		break;
+	// 	case 'Волоколамское':
+	// 		$toName = 'Андрей';
+	// 		$toPhone = '+74958590209';
+	// 		break;
+	// 	case 'Новорижское':
+	// 		$toName = 'Андрей';
+	// 		$toPhone = '+74958590209';
+	// 		break;
+	// 	case 'Ильинское':
+	// 		$toName = 'Андрей';
+	// 		$toPhone = '+74958590209';
+	// 		break;
+	// 	case 'Рублевское':
+	// 		$toName = 'Андрей';
+	// 		$toPhone = '+74958590209';
+	// 		break;
+	// 	case 'Горьковское':
+	// 		$toName = 'Владислав';
+	// 		$toPhone = '+74958590208';
+	// 		break;
+	// 	case 'Щелковское':
+	// 		$toName = 'Владислав';
+	// 		$toPhone = '+74958590208';
+	// 		break;
+	// 	case 'Носовихинское':
+	// 		$toName = 'Владислав';
+	// 		$toPhone = '+74958590208';
+	// 		break;
+	// 	case 'Егорьевское':
+	// 		$toName = 'Игорь';
+	// 		$toPhone = '+74951541673';
+	// 		break;
+	// 	case 'Новорязанское':
+	// 		$toName = 'Игорь';
+	// 		$toPhone = '+74951541673';
+	// 		break;
+	// 	case 'Каширское':
+	// 		$toName = 'Дмитрий';
+	// 		$toPhone = '+74951724409';
+	// 		break;
+	// 	case 'Симферопольское':
+	// 		$toName = 'Лилия';
+	// 		$toPhone = '+74954456119';
+	// 		break;
+	// 	case 'Варшавское':
+	// 		$toName = 'Лилия';
+	// 		$toPhone = '+74954456119';
+	// 		break;
+	// 	case 'Калужское':
+	// 		$toName = 'Лилия';
+	// 		$toPhone = '+74954456119';
+	// 		break;
+	// 	case 'Киевское':
+	// 		$toName = 'Лилия';
+	// 		$toPhone = '+74954456119';
+	// 		break;
+	//
+	// 	default:
+	// 		$toName = 'Посёлкино';
+	// 		$toPhone = '+74951860665';
+	// 		break;
+	// }
 
 	$toCategory = ($toPhone == '+74951860665') ? 'agency' : 'developer';
 

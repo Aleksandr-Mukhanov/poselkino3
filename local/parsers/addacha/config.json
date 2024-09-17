@@ -1,0 +1,22 @@
+{
+        "max_logs_size" : 10485760,
+        "addacha":
+        {
+            "use_logs" : true,
+
+            "output_errores" : true,
+            "output_warnings" : true,
+            "output_plots" : true,
+            "output_villages" : true,
+
+            "create_new_files": false,
+            "max_copies" : 1,
+            "max_images" : 1,
+
+            "keep_zero_villages" : false,
+
+            "base_site_link" : "https://addacha.ru",
+            "village_filename" : "villages_addacha",
+            "plots_filename" : "plots_addacha"
+        }
+    }

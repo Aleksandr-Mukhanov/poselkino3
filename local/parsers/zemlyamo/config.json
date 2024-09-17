@@ -1,0 +1,22 @@
+{
+        "max_logs_size" : 10485760,
+        "zemlyamo":
+        {
+            "use_logs" : false,
+
+            "output_errores" : true,
+            "output_warnings" : true,
+            "output_plots" : true,
+            "output_villages" : true,
+
+            "create_new_files": false,
+            "max_copies" : 1,
+            "max_images" : 1,
+
+            "keep_zero_villages" : false,
+
+            "base_site_link" : "https://zemlyamo.ru",
+            "village_filename" : "villages_zemlyamo",
+            "plots_filename" : "plots_zemlyamo"
+        }
+    }

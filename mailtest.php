@@ -1,1 +1,0 @@
-<?php if(mail('test-6lbc31pe6@srv1.mail-tester.com', 'test', 'test', 'From: lead@poselkino.ru')) echo 'OK'; else 'ERROR' ?>

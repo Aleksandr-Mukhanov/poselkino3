@@ -20,6 +20,10 @@ html {
   display: none;
 }
 
+.page-comparison.slider .comparison-content.hide{
+  display: none;
+}
+
 .page-title.title_h2 h1 {
   font-size: 24px;
   font-weight: 400;
@@ -4026,4 +4030,10 @@ p.mesOk {
 
 .page-blog .content__title h1 {
   text-align: center;
+}
+
+.list--grid .card-house .photo__buttons.in_village{
+  top: 10px;
+  right: 10px;
+  z-index: 1;
 }

@@ -87,7 +87,7 @@ if ($item["PREVIEW_PICTURE"] && $item['PROPERTIES']['DOP_FOTO']['VALUE'])
 
 $showAllPhoto = false;
 $itemPhotos = $item['PROPERTIES']['DOP_FOTO']['VALUE'];
-$itemPhotosCnt = count($itemPhotos);
+$itemPhotosCnt = ($itemPhotos) ? count($itemPhotos) : 0;
 
 if ($itemPhotosCnt > 5) {
 	$itemPhotos = array_slice($itemPhotos,0,5);
@@ -156,6 +156,12 @@ switch ($km_MKAD) {
         break;
     case $km_MKAD <= 80:
         $url_km_MKAD = "do-80-km-ot-".ROAD_URL;
+        break;
+    case $km_MKAD <= 100:
+        $url_km_MKAD = "do-100-km-ot-".ROAD_URL;
+        break;
+    case $km_MKAD <= 120:
+        $url_km_MKAD = "do-120-km-ot-".ROAD_URL;
         break;
 
     default:
@@ -254,12 +260,12 @@ foreach ($arDevelopers as $value)
                 <div class="card-house__title">
                     <a href="<?= $item['DETAIL_PAGE_URL'] ?>" style="cursor: pointer;"><?= $nameDomPos ?> <?= $productTitle ?></a>
                 </div>
-                <? if ($item['DISPLAY_PROPERTIES']['REGION']['VALUE']): ?>
+                <? if ($item['PROPERTIES'][REGION_CODE]['VALUE']): ?>
                     <div class="card-house__area">
-                      <?if($ourDir == '/poselki/'.$item['DISPLAY_PROPERTIES']['REGION']['VALUE_XML_ID'].'-rayon/'):?>
-                        <a><?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE']?> район</a>
+                      <?if($ourDir == '/poselki/'.$item['PROPERTIES'][REGION_CODE]['VALUE_XML_ID'].'-rayon/'):?>
+                        <a><?= $item['PROPERTIES'][REGION_CODE]['VALUE']?> район</a>
                       <?else:?>
-                        <a href="/poselki/<?=$item['DISPLAY_PROPERTIES']['REGION']['VALUE_XML_ID']?>-rayon/"><?= $item['DISPLAY_PROPERTIES']['REGION']['VALUE']?> район</a>
+                        <a href="/poselki/<?=$item['PROPERTIES'][REGION_CODE]['VALUE_XML_ID']?>-rayon/"><?= $item['PROPERTIES'][REGION_CODE]['VALUE']?> район</a>
                       <?endif;?>
                     </div>
                 <? endif; ?>
@@ -284,11 +290,11 @@ foreach ($arDevelopers as $value)
             </div>
         </div>
         <div class="card-house__metro mt-2 mt-lg-3">
-          <? if ($item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0]): // если есть шоссе
-              $idEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][0];
-              $valEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_XML_ID'][0];
+          <? if ($item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0]): // если есть шоссе
+              $idEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][0];
+              $valEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_XML_ID'][0];
               $colorHW = getColorRoad($idEnumHW);
-              $nameHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE'][0];
+              $nameHW = $item['PROPERTIES'][ROAD_CODE]['VALUE'][0];
               ?>
               <div class="d-flex flex-wrap w-100 mt-1 mt-lg-2">
                 <?if($ourDir == '/poselki/'.$valEnumHW.'-shosse/'): $closeTag = '</span>';?>
@@ -304,11 +310,11 @@ foreach ($arDevelopers as $value)
                 </a>
               </div>
           <? endif; ?>
-          <? if ($item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1]): // если есть 2-е шоссе
-              $idEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_ENUM_ID'][1];
-              $valEnumHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE_XML_ID'][1];
+          <? if ($item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][1]): // если есть 2-е шоссе
+              $idEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_ENUM_ID'][1];
+              $valEnumHW = $item['PROPERTIES'][ROAD_CODE]['VALUE_XML_ID'][1];
               $colorHW = getColorRoad($idEnumHW);
-              $nameHW = $item['DISPLAY_PROPERTIES']['SHOSSE']['VALUE'][1];
+              $nameHW = $item['PROPERTIES'][ROAD_CODE]['VALUE'][1];
           ?>
               <div class="d-flex w-100 mt-1 mt-lg-2">
                 <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">
@@ -319,9 +325,9 @@ foreach ($arDevelopers as $value)
           <? endif; ?>
           <? if ($item['PROPERTIES']['SHOSSE_DOP']['VALUE'][0]): // если есть доп. шоссе
               $valEnumHW = $item['PROPERTIES']['SHOSSE_DOP']['VALUE'][0];
-              $idEnumHW = getNamesList($valEnumHW,'SHOSSE')['ID'];
+              $idEnumHW = getNamesList($valEnumHW,ROAD_CODE)['ID'];
               $colorHW = getColorRoad($idEnumHW);
-              $nameHW = getNamesList($valEnumHW,'SHOSSE')['NAME'];
+              $nameHW = getNamesList($valEnumHW,ROAD_CODE)['NAME'];
           ?>
               <div class="d-flex w-100 mt-1 mt-lg-2">
                 <a class="metro z-index-1 pl-0 highway-color" href="/poselki/<?=$valEnumHW?>-shosse/">

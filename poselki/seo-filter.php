@@ -18,7 +18,7 @@ if ($shosse) { // шоссе
   $APPLICATION->AddChainItem($arNames['NAME'].' шоссе',"/poselki/".$shosse."-shosse/",true);
   $urlAll = '/poselki/'.$shosse.'-shosse/';
   $urlNoDom = '/kupit-uchastki/'.$shosse.'-shosse/';
-  $urlWithDom = '/poselki/'.$shosse.'-shosse/kupit-dom/';
+  $urlWithDom = '/kupit-dom/'.$shosse.'-shosse/';
   if ($pagen) $pageTitleDesc = 'Поселки '.$arNames['NAME'].' шоссе'; // если пагинация
 
   // url для км от МКАД
@@ -28,7 +28,7 @@ if ($shosse) { // шоссе
         $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
@@ -44,7 +44,7 @@ if ($shosse) { // шоссе
         $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-'.$nameTeg.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$shosse.'-shosse-'.$nameTeg.'/';
+        $urlTeg = '/kupit-dom/'.$shosse.'-shosse-'.$nameTeg.'/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$shosse.'-shosse-'.$nameTeg.'/';
@@ -70,7 +70,7 @@ if ($rayon) { // район
   $APPLICATION->AddChainItem($arNames['NAME'].' район',"/poselki/".$rayon."-rayon/",true);
   $urlAll = '/poselki/'.$rayon.'-rayon/';
   $urlNoDom = '/kupit-uchastki/'.$rayon.'-rayon/';
-  $urlWithDom = '/poselki/'.$rayon.'-rayon/kupit-dom/';
+  $urlWithDom = '/kupit-dom/'.$rayon.'-rayon/';
   if ($pagen) $pageTitleDesc = $arNames['NAME'].' район поселки'; // если пагинация
 
   // url для С газом
@@ -79,7 +79,7 @@ if ($rayon) { // район
       $urlTeg = "/kupit-uchastki/".$rayon."-rayon-gaz/";
       break;
     case 'withDom': // Дома
-      $urlTeg = "/poselki/kupit-dom/".$rayon."-rayon-gaz/";
+      $urlTeg = "/kupit-dom/".$rayon."-rayon-gaz/";
       break;
     default: // Поселки
       $urlTeg = "/poselki/".$rayon."-rayon-gaz/";
@@ -144,7 +144,7 @@ if ($domPos) { // если выбор с домом или без
       $UF_Code = 'kupit-dom';
       $propFilter = 'PROPERTY_17';
       $nameDomPos = 'Купить дом';
-      $APPLICATION->AddChainItem('Дома',"/poselki/kupit-dom/",true);
+      $APPLICATION->AddChainItem('Дома',"/kupit-dom/",true);
       break;
     default:
       CHTTP::SetStatus("404 Not Found");
@@ -210,7 +210,7 @@ if ($mkadKM) { // выбор по км от мкад
           $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
           break;
         case 'withDom': // Дома
-          $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
           break;
         default: // Поселки
           $urlTeg = '/poselki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
@@ -224,7 +224,7 @@ if ($mkadKM) { // выбор по км от мкад
         $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-mkad/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/poselki/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
         break;
       default: // Поселки
         $urlTeg = "/poselki/gaz-do-".$mkadKM."-km-mkad/";;
@@ -237,7 +237,7 @@ if ($mkadKM) { // выбор по км от мкад
         $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-mkad-izhs/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/poselki/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
         break;
       default: // Поселки
         $urlTeg = "/poselki/do-".$mkadKM."-km-mkad-izhs/";
@@ -339,7 +339,7 @@ if($priceURL){ // выборка по цене
         $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
+        $urlTeg = '/kupit-dom/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
         break;
     }
     $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
@@ -486,7 +486,7 @@ if($commun){ // коммуникации
         $urlTeg = '/kupit-uchastki/'.$val.'-shosse-'.$commun2.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-'.$commun2.'/';
+        $urlTeg = '/kupit-dom/'.$val.'-shosse-'.$commun2.'/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$val.'-shosse-'.$commun2.'/';
@@ -501,7 +501,7 @@ if($commun){ // коммуникации
         $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-mkad/';
@@ -640,7 +640,7 @@ if($typeURL){ // другие URL
   $urlAll = "/poselki/".$typeURL."/";
   // if($typeURL != 'ryadom-avtobusnaya-ostanovka'){
     $urlNoDom = "/kupit-uchastki/".$typeURL."/";
-    $urlWithDom = "/poselki/kupit-dom-".$typeURL."/";
+    $urlWithDom = "/kupit-dom/".$typeURL."/";
   // }
   if($typeURL == 'kupit-letnij-dom' || $typeURL == 'kupit-zimnij-dom'){
     $urlAll = '/poselki/';
@@ -658,7 +658,7 @@ if($typeURL){ // другие URL
             $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
             break;
           case 'withDom': // Дома
-            $urlTeg = '/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-dom/do-'.$i.'-km-mkad-izhs/';
             break;
           default: // Поселки
             $urlTeg = '/poselki/do-'.$i.'-km-mkad-izhs/';

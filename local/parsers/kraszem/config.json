@@ -1,0 +1,22 @@
+{
+        "max_logs_size" : 10485760,
+        "kraszem":
+        {
+            "use_logs" : true,
+
+            "output_errores" : true,
+            "output_warnings" : true,
+            "output_plots" : true,
+            "output_villages" : true,
+
+            "create_new_files": false,
+            "max_copies" : 1,
+            "max_images" : 1,
+
+            "keep_zero_villages" : false,
+
+            "base_site_link" : "https://kraszem.ru",
+            "village_filename" : "villages_kraszem",
+            "plots_filename" : "plots_kraszem"
+        }
+    }

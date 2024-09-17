@@ -38,7 +38,7 @@ $offerName = ($offerType == 'plots') ? 'Участок' : 'Дом';
 				<div class="offer-house__info card-house__content px-3">
 					<div class="offer-house__title">
 						<a href="<?=$arOffer['URL']?>">
-							<?=$offerName?> <?=round($arOffer['PROPERTIES']['PLOTTAGE']['VALUE'])?> соток в посёлке <?=$arVillage['NAME']?>
+							<?=$offerName?> <?=($arOffer['PROPERTIES']['PLOTTAGE']['VALUE'])?round($arOffer['PROPERTIES']['PLOTTAGE']['VALUE']).' соток':''?> в посёлке <?=$arVillage['NAME']?>
 						</a>
 					</div>
 					<?if($arVillage['PROPERTY_REGION_VALUE']):?>

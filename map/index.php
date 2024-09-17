@@ -47,6 +47,7 @@ use Bitrix\Main\Page\Asset;
   global $arrFilter;
 	 $arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
    $arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+   $arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
 
   require_once $_SERVER["DOCUMENT_ROOT"].'/poselki/seo-filter.php';
 
@@ -65,7 +66,7 @@ use Bitrix\Main\Page\Asset;
 
   $arOurPage = explode('/map/',$ourPage);
   $canonicalURL = ($developerCode) ? '/developery' : $arOurPage[0];
-  $APPLICATION->SetPageProperty('canonical', 'https://poselkino.ru'.$canonicalURL.'/');
+  $APPLICATION->SetPageProperty('canonical', 'https://'.$_SERVER['HTTP_HOST'].$canonicalURL.'/');
   $APPLICATION->SetPageProperty('robots', 'noindex, follow');
 ?>
 <main class="page page-map">
@@ -84,7 +85,7 @@ use Bitrix\Main\Page\Asset;
         FILTER_MAP,
         array(
           "CACHE_GROUPS" => "N",
-          "CACHE_TIME" => "36000000",
+          "CACHE_TIME" => "86400",
           "CACHE_TYPE" => "A",
           "CONVERT_CURRENCY" => "N",
           "DISPLAY_ELEMENT_COUNT" => "Y",
@@ -132,7 +133,7 @@ use Bitrix\Main\Page\Asset;
       		"BROWSER_TITLE" => "-",
       		"CACHE_FILTER" => "Y",
       		"CACHE_GROUPS" => "N",
-      		"CACHE_TIME" => "36000000",
+      		"CACHE_TIME" => "86400",
       		"CACHE_TYPE" => "A", // $cache
       		"COMPATIBLE_MODE" => "N",
       		"COMPONENT_TEMPLATE" => "poselkino",

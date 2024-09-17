@@ -1,7 +1,8 @@
 <?
-$APPLICATION->SetTitle("Инфраструктура в КП “".$arVillage['NAME']."”");
+$APPLICATION->SetTitle("Инфраструктура рядом c КП “".$arVillage['NAME']."”");
 $APPLICATION->SetPageProperty("title", "Инфраструктура коттеджного поселка “".$arVillage['NAME']."”");
-$APPLICATION->SetPageProperty("description", "Инфраструктура и обустройство в поселке “".$arVillage['NAME']."”. Свет, газ, охрана, ".$roadsInName['WHAT']." в поселке. Рядом магазин, школа и ж/д станция.");?>
+$APPLICATION->SetPageProperty("description", "Инфраструктура и обустройство в поселке “".$arVillage['NAME']."”. Свет, газ, охрана, ".$roadsInName['WHAT']." в поселке. Рядом магазин, школа и ж/д станция.");
+?>
 <section class="page">
   <div class="container page__container">
     <?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "kalipso", Array(
@@ -53,27 +54,18 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
             </div>
           </div>
         <?endif;?>
-        <div class="col-lg-3 col-md-6">
-          <div class="infrastructure-item">
-            <div class="infrastructure-item__icon">
-              <svg class="icon icon-shop">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-shop"></use>
-              </svg>
-            </div>
-            <div class="infrastructure-item__name">Магазины, стройматериалы <br>на территории поселка</div>
-          </div>
-        </div>
+
         <?if(in_array('Охрана', $arVillage['PROPERTY_ARRANGE_VALUE'])): // Обустройство поселка: Охрана?>
-        <div class="col-lg-3 col-md-6">
-          <div class="infrastructure-item">
-            <div class="infrastructure-item__icon">
-              <svg class="icon icon-video">
-                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-video"></use>
-              </svg>
+          <div class="col-lg-3 col-md-6">
+            <div class="infrastructure-item">
+              <div class="infrastructure-item__icon">
+                <svg class="icon icon-video">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-video"></use>
+                </svg>
+              </div>
+              <div class="infrastructure-item__name">Безопасность — <br>охрана и КПП на въезде</div>
             </div>
-            <div class="infrastructure-item__name">Безопасность — <br>охрана и КПП на въезде</div>
           </div>
-        </div>
         <?endif;?>
         <div class="col-lg-3 col-md-6">
           <div class="infrastructure-item">
@@ -115,6 +107,17 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
             <div class="infrastructure-item__name">Лес на расстоянии <br><?=$arVillage['PROPERTY_FOREST_KM_VALUE']*1000?> метров</div>
           </div>
         </div>
+
+        <!-- <div class="col-lg-3 col-md-6">
+          <div class="infrastructure-item">
+            <div class="infrastructure-item__icon">
+              <svg class="icon icon-shop">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="<?=SITE_TEMPLATE_PATH?>/images/sprite.svg#icon-shop"></use>
+              </svg>
+            </div>
+            <div class="infrastructure-item__name">Магазины, стройматериалы <br>на территории поселка</div>
+          </div>
+        </div>
         <div class="col-lg-3 col-md-6">
           <div class="infrastructure-item">
             <div class="infrastructure-item__icon">
@@ -154,8 +157,45 @@ $APPLICATION->SetPageProperty("description", "Инфраструктура и о
             </div>
             <div class="infrastructure-item__name">Церковь</div>
           </div>
-        </div>
+        </div> -->
+
       </div>
+
+      <?//if($USER->IsAdmin()){?>
+        <?if($arVillage['ON_TERRITORY']){?>
+          <br><br>
+          <h2>Что есть на территории поселка:</h2>
+          <div class="row infrastructure-list">
+            <?foreach ($arVillage['ON_TERRITORY'] as $code => $value) {?>
+              <div class="col-lg-3 col-md-6">
+                <div class="infrastructure-item">
+                  <div class="infrastructure-item__icon on_territory">
+                    <?=file_get_contents('https://poselkino.ru/assets/img/svg_sites/'.$code.'.svg');?>
+                  </div>
+                  <div class="infrastructure-item__name"><?=$value?></div>
+                </div>
+              </div>
+            <?}?>
+          </div>
+        <?}?>
+        <?if($arVillage['IN_RADIUS_5_KM']){?>
+          <br><br>
+          <h2>Что есть в радиусе 5 км:</h2>
+          <div class="row infrastructure-list">
+            <?foreach ($arVillage['IN_RADIUS_5_KM'] as $code => $value) {?>
+              <div class="col-lg-3 col-md-6">
+                <div class="infrastructure-item">
+                  <div class="infrastructure-item__icon on_territory">
+                    <?=file_get_contents('https://poselkino.ru/assets/img/svg_sites/'.$code.'.svg');?>
+                  </div>
+                  <div class="infrastructure-item__name"><?=$value?></div>
+                </div>
+              </div>
+            <?}?>
+          </div>
+        <?}?>
+      <?//}?>
+
     </div>
   </div>
 </section>
