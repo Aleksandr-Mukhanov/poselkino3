@@ -86,7 +86,7 @@ foreach ($arURLFeed as $idVil => $urlFeed)
 // получим поселки
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"ID" => $arVillageIds);
-$arSelect = Array("ID","NAME","PREVIEW_PICTURE","PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH');
+$arSelect = Array("ID","NAME","PREVIEW_PICTURE","PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH','PROPERTY_OBLAST');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch()){ // dump($arElement);
 
@@ -102,6 +102,8 @@ while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		default:
 			$vilType = 287; break; // Фермерство
 	}
+
+	$propAreaID = getPlotAreaID($arElement['PROPERTY_OBLAST_ENUM_ID']);
 
 	foreach ($arElement['PROPERTY_WATER_VALUE'] as $value)
 		$arWater[] = $arPlotsWater[$value];
@@ -126,6 +128,7 @@ while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		'WATER' => $arWater,
 		'LES' => $arPlotsLes[$arElement['PROPERTY_LES_VALUE']],
 		'PLYAZH' => ($arElement['PROPERTY_PLYAZH_ENUM_ID'] == 42) ? 300 : 0,
+		'AREA' => $propAreaID
   ];
 	unset($arWater); unset($shosse);
 } // dump($arVillage);
@@ -186,7 +189,7 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 	    $NUMBER = $plotId;
 	    $PLOTTAGE = str_replace(',','.',$plotArea);
 
-			if (in_array($idVil,[6809,3613,4077,6149,5639,9428,11079]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Коськово
+			if (in_array($idVil,[6809,3613,4077,6149,5639,9428,11079]) && $PLOTTAGE <= 6) continue; // ЭК Пирогово, Рижские зори, Малинки Парк, Первый, Лапино, Коськово, Сбоево
 			if (in_array($idVil,[8413,8746,5350]) && $PLOTTAGE <= 7) continue; // Карцево, Решетниково, Яркое
 
 			// формула добавления участков
@@ -281,6 +284,7 @@ foreach ($arURLFeed as $idVil => $urlFeed) {
 					$PROP['WATER'] = $arOfferVillage['WATER'];
 					$PROP['LES'] = $arOfferVillage['LES'];
 					$PROP['PLYAZH'] = $arOfferVillage['PLYAZH'];
+					$PROP['AREA'] = $arOfferVillage['AREA'];
 			    // $PROP['DOP_PHOTO'] = $DOP_PHOTO;
 
 			    $arLoadProductArray = Array(

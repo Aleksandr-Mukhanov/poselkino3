@@ -36,6 +36,8 @@ if ($_POST['create'])
 
   // symlink($path."/favicon.png",$_SERVER['DOCUMENT_ROOT']."/favicon.png");
 
+  // symlink($path."/kupit-uchastki",$_SERVER['DOCUMENT_ROOT']."/kupit-uchastki");
+
    // if (file_exists($_SERVER['DOCUMENT_ROOT']."/bitrix"))
    //    $strError = "В текущей папке уже существует папка bitrix";
    // elseif (is_dir($full_path))

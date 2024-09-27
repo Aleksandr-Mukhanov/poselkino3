@@ -1,36 +1,20 @@
 <?
-// получим список шоссе
-// $arElHL = getElHL(ROAD_HL,[],[],['ID','UF_NAME','UF_XML_ID']);
-// foreach ($arElHL as $elHL)
-//   $arShosse[$elHL['UF_XML_ID']] = [
-//     'ID' => $elHL['ID'],
-//     'NAME' => $elHL['UF_NAME'],
-//   ];
-
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
   ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>ROAD_CODE]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arShosse[$enumFields['XML_ID']] = [
     'ID' => $enumFields['ID'],
     'NAME' => $enumFields['VALUE'],
   ];
 }
 
-// получим список районов
-// $arElHL = getElHL(REGION_HL,[],[],['ID','UF_NAME','UF_XML_ID']);
-// foreach ($arElHL as $elHL)
-//   $arRegion[$elHL['UF_XML_ID']] = [
-//     'ID' => $elHL['ID'],
-//     'NAME' => $elHL['UF_NAME'],
-//   ];
-
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
   ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = [
     'ID' => $enumFields['ID'],
     'NAME' => $enumFields['VALUE'],

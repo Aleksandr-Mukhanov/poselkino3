@@ -15,7 +15,7 @@
 
 // получим наши поселки
 $arOrder = Array("SORT" => "ASC");
-$arFilterVillageTags = Array("IBLOCK_ID" => 1, "ACTIVE" => "Y", "ID" => $arVillageIDs_tags);
+$arFilterVillageTags = Array("IBLOCK_ID" => 1, "ACTIVE" => "Y", "ID" => $arVillageIDs_tags,"PROPERTY_AREA"=>PLOTS_PROP_AREA);
 if ($arrFilterVillage) array_push($arFilterVillageTags, $arrFilterVillage);
 $arSelect = Array("ID", "PROPERTY_5", "PROPERTY_6", "PROPERTY_PROVEDEN_GAZ", "PROPERTY_ELECTRO_DONE",'PROPERTY_PROVEDENA_VODA', "PROPERTY_33", "PROPERTY_45", "PROPERTY_47", "PROPERTY_8", "PROPERTY_20", "PROPERTY_77", "PROPERTY_79");
 $rsElements = CIBlockElement::GetList($arOrder, $arFilterVillageTags, false, false, $arSelect);

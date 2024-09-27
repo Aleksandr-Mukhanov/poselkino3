@@ -29,8 +29,7 @@ while($arElement = $rsElements->Fetch())
 // получим кол-во участков
 $cntAllPlots = 0;
 $arOrder = Array("SORT"=>"ASC");
-$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y");
-if (!in_array($_SERVER['HTTP_HOST'],SITES_DIR)) $arFilter['!PROPERTY_AREA'] = 552; // исключим СПБ
+$arFilter = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_AREA"=>PLOTS_PROP_AREA);
 $arSelect = Array("ID");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch())

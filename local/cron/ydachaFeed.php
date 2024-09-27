@@ -53,7 +53,7 @@ $strCSV .= "XML Developer: ".$xmlDeveloper."\n\n";
 
 $arOrder = Array("SORT"=>"ASC");
 $arFilter = Array("IBLOCK_ID"=>1,"PROPERTY_DEVELOPER_ID" => $xmlDeveloper);
-$arSelect = Array("ID","NAME","CODE",'PREVIEW_PICTURE',"PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH');
+$arSelect = Array("ID","NAME","CODE",'PREVIEW_PICTURE',"PROPERTY_DEVELOPER_ID","PROPERTY_DATE_FEED","PROPERTY_COUNT_PLOTS","PROPERTY_COUNT_PLOTS_SOLD","PROPERTY_COUNT_PLOTS_SALE","PROPERTY_MKAD",'PROPERTY_REGION','PROPERTY_SHOSSE','PROPERTY_TYPE','PROPERTY_ELECTRO','PROPERTY_GAS','PROPERTY_PLUMBING','PROPERTY_BUS','PROPERTY_TRAIN','PROPERTY_WATER','PROPERTY_LES','PROPERTY_PLYAZH','PROPERTY_OBLAST');
 $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while($arElement = $rsElements->Fetch()){ // dump($arElement);
 
@@ -69,6 +69,8 @@ while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		default:
 			$vilType = 287; break; // Фермерство
 	}
+
+	$propAreaID = getPlotAreaID($arElement['PROPERTY_OBLAST_ENUM_ID']);
 
 	foreach ($arElement['PROPERTY_WATER_VALUE'] as $value)
 		$arWater[] = $arPlotsWater[$value];
@@ -94,6 +96,7 @@ while($arElement = $rsElements->Fetch()){ // dump($arElement);
 		'WATER' => $arWater,
 		'LES' => $arPlotsLes[$arElement['PROPERTY_LES_VALUE']],
 		'PLYAZH' => ($arElement['PROPERTY_PLYAZH_ENUM_ID'] == 42) ? 300 : 0,
+		'AREA' => $propAreaID
   ];
 	$arVillageIds[] = $arElement['ID'];
 	unset($arWater); unset($shosse);
@@ -289,6 +292,7 @@ foreach ($offers as $offer)
 					$PROP['WATER'] = $arOfferVillage['WATER'];
 					$PROP['LES'] = $arOfferVillage['LES'];
 					$PROP['PLYAZH'] = $arOfferVillage['PLYAZH'];
+					$PROP['AREA'] = $arOfferVillage['AREA'];
 			    // if ($DOP_PHOTO) $PROP['DOP_PHOTO'] = $DOP_PHOTO;
 
 			    $arLoadProductArray = Array(

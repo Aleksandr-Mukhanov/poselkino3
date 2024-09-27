@@ -43,6 +43,10 @@ foreach($villages as $village_num => $li)
     $parser->add_village_info('name', $li->textContent);
     $parser->add_village_info('plots_count', $village_page->query('//ul[@class="listpanel-head"]/li[3]')[0]->textContent);
 
+    // получим сотка от
+    $sotka_ot = $village_page->query('//div[@class="priceWrap price_to"]/div[@class="price"]/span[1]/span[@class="textSecondary "]')[0];
+    $parser->add_village_info('sotka_ot', $sotka_ot->textContent);
+
     //Получение участков данного поселка
     $plots = iterator_to_array($village_page->query('//tbody[@id="mse2_results"]/tr'));
     foreach ($village_page->query('//div[@class="nav-links rows mse2_pagination"]/a') as $add_page)
@@ -279,7 +283,7 @@ class Parser
         'one_price_from' => 'Стоимость сотки ОТ', 'one_price_to' => 'Стоимость сотки ДО',
         'price_from' => 'Стоимость участков ОТ', 'price_to' => 'Стоимость участков ДО',
         'area_from' => 'Площадь участков ОТ', 'area_to' => 'Площадь участков ДО',
-        'plots_count' => 'Участков в поселке', 'plots_on_sale' => 'Участков в продаже'];
+        'plots_count' => 'Участков в поселке', 'plots_on_sale' => 'Участков в продаже', 'sotka_ot' => 'Сотка от'];
 
         $this->plot_arr = ['name' => 'Название поселка', 'last_update' => 'Последнее обновление', 'num_id' => 'Номер участка',
         'price' => 'Стоимость участка', 'area' => 'Площадь участка',
@@ -488,6 +492,13 @@ class Parser
                 if (!in_array($info, $this->gallery_links))
                     $this->gallery_links[] = $info;
 
+                break;
+            case 'sotka_ot':
+                if ($info == null || $info == ''){
+                    $this->reg_parse_error('sotka ot not found', "Сотка от в поселке ".$this->village_arr['name']." не найдено");
+                    break;
+                }
+                $this->village_arr['sotka_ot'] = (int)preg_replace('/[^0-9]/', '', $info);
                 break;
             default:
                 debug_output('Нет такого ключа как '.$attribute);

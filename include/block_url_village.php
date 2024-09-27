@@ -2,7 +2,7 @@
 // получим список шоссе
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"SHOSSE"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>ROAD_CODE]
 );
 while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arShosse[$enumFields['XML_ID']] = [
@@ -14,10 +14,28 @@ while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
 // получим список районов
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"REGION"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE]
 );
 while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
+}
+
+if (DOMEN != 'mo') {
+  // получим участки
+  $arOrder = ['SORT'=>'ASC'];
+  $arFilter = ['IBLOCK_ID'=>5,'ACTIVE'=>'Y','PROPERTY_AREA'=>PLOTS_PROP_AREA];
+
+  if (DOMEN == 'spb')
+    $arSelect = ['ID','PROPERTY_REGION_SPB','PROPERTY_SHOSSE_SPB'];
+  else
+    $arSelect = ['ID','PROPERTY_'.REGION_CODE,'PROPERTY_'.ROAD_CODE];
+
+  $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  while ($arElement = $rsElements->Fetch()) {
+  	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_VALUE']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
+    foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $value)
+      $arShosseUse[$value] = $value;
+  }
 }
 
 $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
@@ -49,7 +67,8 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
       <div class="tab-pane fade <?if(!$_REQUEST['show_rayon'])echo'show active';?>" id="highwayTab" role="tabpanel" aria-labelledby="highwayTab-tab">
         <div class="row">
           <?foreach ($arShosse as $key => $value):
-            $colorHW = getColorRoad($value['ID']);?>
+            $colorHW = getColorRoad($value['ID']);
+            if ($arShosseUse && !array_key_exists($value['ID'],$arShosseUse)) continue;?>
             <div class="col-lg-3 col-md-4 col-sm-6">
               <a class="metro-title highway-color" href="/poselki/<?=$key?>-shosse/">
                 <div class="metro-title__color <?=$colorHW?>"></div>
@@ -61,7 +80,8 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
       </div>
       <div class="tab-pane fade <?if($_REQUEST['show_rayon'])echo'show active';?>" id="areaTab" role="tabpanel" aria-labelledby="areaTab-tab">
         <div class="row">
-          <?foreach ($arRegion as $key => $value): $i++;?>
+          <?foreach ($arRegion as $key => $value):
+            if ($arRegionUse && !array_key_exists($value['ID'],$arRegionUse)) continue;?>
             <div class="col-lg-3 col-md-4 col-sm-6">
               <a class="metro-title" href="/poselki/<?=$key?>-rayon/">
                 <div class="metro-title__title"><?=$value?></div>

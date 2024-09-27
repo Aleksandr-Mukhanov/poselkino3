@@ -1,12 +1,13 @@
 <? require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 
 global $arrFilter;
-$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
-$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+$arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
+$arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+$arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
 
-$APPLICATION->SetTitle("Поселки в Московской области");
-$APPLICATION->SetPageProperty("title", "Поселки в Московской области – лучшие поселки на карте Подмосковья");
-$APPLICATION->SetPageProperty("description", "Поселки в Московской области ➤Цены от " . getMetaInfo($arrFilter)['minPrice'] . " руб.➤Кол-во объявлений - " . getMetaInfo($arrFilter)['cntPos'] . " ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота");
+$APPLICATION->SetTitle("Поселки в ".REGION_KOY." области");
+$APPLICATION->SetPageProperty("title", "Поселки в ".REGION_KOY." области – лучшие поселки на карте Подмосковья");
+$APPLICATION->SetPageProperty("description", "Поселки в ".REGION_KOY." области ➤Цены от " . getMetaInfo($arrFilter)['minPrice'] . " руб.➤Кол-во объявлений - " . getMetaInfo($arrFilter)['cntPos'] . " ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота");
 
 // dump($_REQUEST);
 $shosse = $_REQUEST['SHOSSE_CODE'];
@@ -27,9 +28,9 @@ $ourDir = $APPLICATION->GetCurDir();
 
 $newTitle = false;
 $newDesc = false;
-$h1 = 'Поселки в Московской области';
+$h1 = 'Поселки в '.REGION_KOY.' области';
 $h2 = '<h2 class="h2">Земельные участки под дом и дачу с хорошим месторасположением</h2>';
-$SEO_text = '<p>База коттеджных и дачных поселков в Московской области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
+$SEO_text = '<p>База коттеджных и дачных поселков в '.REGION_KOY.' области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от '.ROAD.' и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
 $urlWithDom = '/kupit-dom/';
@@ -56,7 +57,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
     } else { // универсальные
         $h1 = $pageTitleDesc . ' - Страница ' . $pagen;
         $newTitle = $pageTitleDesc . ' - Страница ' . $pagen . ' | сайт Посёлкино';
-        $newDesc = $pageTitleDesc . ' - Страница ' . $pagen . '. Сайт Посёлкино - вся загородная недвижимость в Московской области';
+        $newDesc = $pageTitleDesc . ' - Страница ' . $pagen . '. Сайт Посёлкино - вся загородная недвижимость в '.REGION_KOY.' области';
     }
 }
 ?>
@@ -92,7 +93,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                         "FILTER_NAME" => "arrFilter",
                         "FILTER_VIEW_MODE" => "horizontal",
                         "HIDE_NOT_AVAILABLE" => "N",
-                        "IBLOCK_ID" => "1",
+                        "IBLOCK_ID" => IBLOCK_ID,
                         "IBLOCK_TYPE" => "content",
                         "PAGER_PARAMS_NAME" => "arrPager",
                         "POPUP_POSITION" => "left",
@@ -162,8 +163,8 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                         // dump($arrFilter);
                         $posNoDom = false;
                         $posWithDom = false;
-                        if ($arrFilter['=PROPERTY_2'][0] == 3) $posNoDom = true;
-                        if ($arrFilter['=PROPERTY_2'][0] == 4) $posWithDom = true;
+                        if ($arrFilter['=PROPERTY_DOMA'][0] == PROP_NO_DOM) $posNoDom = true;
+                        if ($arrFilter['=PROPERTY_DOMA'][0] == PROP_WITH_DOM) $posWithDom = true;
                         ?>
                         <? if (!$priceURL && !$areaUrl): // убираем для цены и площади?>
                             <li class="nav-item"><a class="nav-link btn <?= (!$posNoDom && !$posWithDom) ? 'btn-success' : 'btn-outline-secondary'; ?> rounded-pill" href="<?= htmlspecialcharsbx($urlAll) ?>">Поселки</a></li>
@@ -210,7 +211,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                           дороже
                       </option>
                       <option value="mkad" <? if ($_REQUEST['sort'] == 'mkad') echo 'selected' ?>>Удаленность от
-                          МКАД
+                          <?=ROAD?>
                       </option>
                     </select>
                 </div>

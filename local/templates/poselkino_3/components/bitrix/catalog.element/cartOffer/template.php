@@ -91,7 +91,7 @@ switch ($km_MKAD) {
 $plottage = ($offerType == 'plots') ? 'PLOTTAGE' : 'AREA_HOUSE';
 $plottageVal = $arResult['PROPERTIES'][$plottage]['VALUE'];
 
-$oneKVMetr = ($plottageVal) ? round((int)$arResult['PROPERTIES']['PRICE']['VALUE'] / (int)$plottageVal) : 0;
+$oneKVMetr = ($plottageVal) ? round((int)$arResult['PROPERTIES']['PRICE']['VALUE'] / (float)$plottageVal) : 0;
 // выводим правильное окончание
 $plottageDeclension = new Declension('сотка', 'сотки', 'соток');
 $plottageText = ($plottageVal && $offerType == 'plots') ? $plottageDeclension->get($plottageVal) : 'кв.м.';

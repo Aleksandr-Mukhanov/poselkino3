@@ -9,6 +9,7 @@ use Bitrix\Main\Grid\Declension;
 // dump($arResult);
 
 $offerType = $_REQUEST['OFFER_TYPE'];
+$show404 = false;
 
 // водный знак
 $arWaterMark = [
@@ -137,8 +138,7 @@ if ($arElement = $rsElements->GetNext())
 
 	$arResult['PHOTO_VILLAGE'] = $arElement['PROPERTY_DOP_FOTO_VALUE'];
 } else { // если нет поселка, то 404
-	CHTTP::SetStatus("404 Not Found");
-	@define("ERROR_404", "Y");
+	$show404 = true;
 }
 
 if ($offerType == 'plots') // если участки
@@ -279,7 +279,8 @@ if (is_object($cp))
 	$cp->arResult['VILLAGE_NAME'] = $arVillage['NAME'];
 	$cp->arResult['VILLAGE_CODE'] = $arVillage['CODE'];
 	$cp->arResult['NUMBER'] = $number;
-	$cp->SetResultCacheKeys(array('SEO_TITLE','SEO_DESCRIPTION','VILLAGE_NAME','VILLAGE_CODE','NUMBER')); //cache keys in $arResult array
+	$cp->arResult['SHOW_404'] = $show404;
+	$cp->SetResultCacheKeys(array('SEO_TITLE','SEO_DESCRIPTION','VILLAGE_NAME','VILLAGE_CODE','NUMBER','SHOW_404')); //cache keys in $arResult array
 }
 
 $component = $this->getComponent();

@@ -6,13 +6,13 @@ $h2 = '<h2 class="h2">Земельные участки под дом и дач�
 $SEO_text = '<p>База коттеджных и дачных поселков в '.REGION_KOY.' области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от МКАД и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
-$urlWithDom = '/poselki/kupit-dom/';
+$urlWithDom = (DOMEN == 'mo') ? '/kupit-dom/' : '';
 $urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 
 // получим участки
 $cnt = 0; $minPrice = 999999999;
 $arOrder = Array("SORT"=>"ASC");
-$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","!PROPERTY_AREA"=>PLOTS_PROP_AREA); // исключим СПБ
+$arFilterPlotsAll = Array("IBLOCK_ID"=>5,"ACTIVE"=>"Y","PROPERTY_AREA"=>PLOTS_PROP_AREA);
 $arSelect = Array("ID","NAME","PROPERTY_PRICE","PROPERTY_VILLAGE");
 $rsElements = CIBlockElement::GetList($arOrder,$arFilterPlotsAll,false,false,$arSelect);
 while ($arElement = $rsElements->Fetch()) { // dump($arElement);
@@ -22,11 +22,11 @@ while ($arElement = $rsElements->Fetch()) { // dump($arElement);
 	$arVillageIDs_tags[] = $arElement['PROPERTY_VILLAGE_VALUE'];
 	$arVillagePlots[$arElement['PROPERTY_VILLAGE_VALUE']][] = $arElement['ID'];
 }
-$arVillageIDs_tags = array_unique($arVillageIDs_tags);
+if ($arVillageIDs_tags) $arVillageIDs_tags = array_unique($arVillageIDs_tags);
 // dump($arVillagePlots);
 
 $newH1 = 'Продажа участков в '.REGION_KOY.' области';
-$newTitle = 'Купить участок в Подмосковье недорого - земельные участки в '.REGION_KOY.' области цены';
+$newTitle = 'Купить участок в '.REGION_SHORT_WHERE.' недорого - земельные участки в '.REGION_KOY.' области цены';
 $newDesc = 'Купить участок земли в поселках '.REGION_KOY.' области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.' ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
 
 $shosse = $_REQUEST['SHOSSE_CODE'];
@@ -56,6 +56,9 @@ if ($pagen) { // дописываем страницу в пагинации
 $APPLICATION->SetTitle($newH1);
 $APPLICATION->SetPageProperty("title", $newTitle);
 $APPLICATION->SetPageProperty("description", $newDesc);
+
+global $arrFilterPlots;
+$arrFilterPlots['PROPERTY_AREA'] = PLOTS_PROP_AREA;
 ?>
 <main class="page page-va-list">
 	<div class="page-search__filter bg-white">
@@ -148,6 +151,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 						<li class="nav-item">
 							<a class="nav-link btn btn-outline-secondary rounded-pill" href="<?=htmlspecialcharsbx($urlAll)?>">Поселки</a>
 						</li>
+						<? if ($urlWithDom): // убираем у цены, если участки?>
 						<li class="nav-item">
 							<a class="nav-link btn btn-outline-secondary rounded-pill" href="<?=htmlspecialcharsbx($urlWithDom)?>">
 								<svg xmlns="http://www.w3.org/2000/svg" width="17.323" height="15.8" viewBox="0 0 17.323 15.8" class="inline-svg">
@@ -155,6 +159,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 								</svg>
 							Дома</a>
 						</li>
+						<? endif; ?>
 						<li class="nav-item">
 							<a class="nav-link btn btn-success rounded-pill" href="<?=htmlspecialcharsbx($urlNoDom)?>">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16.523" height="16.523" viewBox="0 0 16.523 16.523" class="inline-svg">
@@ -206,7 +211,6 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					while ($arElement = $rsElements->Fetch())
 						$arVillageIDs[] = $arElement['ID'];
 
-					global $arrFilterPlots;
 					$arrFilterPlots['PROPERTY_VILLAGE'] = $arVillageIDs;
 				}
 
@@ -245,7 +249,6 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					$sectionSortField = 'RAND';
 					$sectionSortOrder = 'asc';
 				}
-				$arrFilterPlots['!PROPERTY_AREA'] = PLOTS_PROP_AREA; // исключим СПБ
 				?>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog.section",
@@ -404,7 +407,7 @@ $APPLICATION->SetPageProperty("description", $newDesc);
 					</div>
 					<?global $arrFilterOffers;
 					$arrFilterOffers = ['!PROPERTY_ACTION' => false]; // показывать только акции
-					$arrFilterOffers['!PROPERTY_AREA'] = PLOTS_PROP_AREA; // исключим СПБ?>
+					$arrFilterOffers['PROPERTY_AREA'] = PLOTS_PROP_AREA;?>
 					<?$APPLICATION->IncludeComponent(
 						"bitrix:news.list",
 						"offers_index",

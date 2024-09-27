@@ -1,8 +1,8 @@
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Участок / дом детально");
-use Bitrix\Main\Page\Asset;
+// use Bitrix\Main\Page\Asset;
   // Яндекс.Карты
-  Asset::getInstance()->addJs("https://api-maps.yandex.ru/2.1/?lang=ru_RU");
+  // Asset::getInstance()->addJs("https://api-maps.yandex.ru/2.1/?lang=ru_RU");
 $offerType = $_REQUEST['OFFER_TYPE'];
 $iblockID = ($offerType == 'plots') ? 5 : 6;?>
 <main class="page page-home">

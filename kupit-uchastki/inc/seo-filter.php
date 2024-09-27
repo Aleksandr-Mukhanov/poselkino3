@@ -1,7 +1,10 @@
 <?
 use Bitrix\Main\Grid\Declension;
-$arrFilterVillage['IBLOCK_ID'] = 1;
-$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
+$arrFilterVillage['IBLOCK_ID'] = IBLOCK_ID;
+if (DOMEN == 'spb')
+  $onlyShosse = ['moskovskoe','kievskoe','novopriozerskoe','murmanskoe'];
+else
+  $onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
 $nameShosseDir = ['north','east','south','west'];
 
 if ($shosse)
@@ -11,7 +14,7 @@ if ($shosse)
     @define("ERROR_404", "Y");
   }
 
-  $arrFilterVillage['PROPERTY_SHOSSE'] = getNamesList($shosse,'SHOSSE')['ID'];
+  $arrFilterVillage['PROPERTY_'.ROAD_CODE] = getNamesList($shosse,'SHOSSE')['ID'];
 
   $arNames = getNamesList($shosse,'SHOSSE');
   $APPLICATION->AddChainItem($arNames['NAME'].' шоссе','/kupit-uchastki/'.$shosse.'-shosse/',false);
@@ -50,7 +53,7 @@ if ($rayon)
     @define("ERROR_404", "Y");
   }
 
-  $arrFilterVillage['PROPERTY_REGION'] = getNamesList($rayon,'REGION')['ID'];
+  $arrFilterVillage['PROPERTY_'.REGION_CODE] = getNamesList($rayon,'REGION')['ID'];
 
   $arNames = getNamesList($rayon,'REGION');
   $APPLICATION->AddChainItem($arNames['NAME'].' район','/kupit-uchastki/'.$rayon.'-rayon/',true);

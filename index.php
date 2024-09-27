@@ -1,6 +1,6 @@
 <?require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
-$APPLICATION->SetPageProperty("description", "Единая база загородной недвижимости. Обзор коттеджных и дачных поселков в Московской области ✔Отзывы покупателей ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Юридическая чистота");
-$APPLICATION->SetPageProperty("title", "Продажа загородной недвижимости в Московской области | Поселкино");
+$APPLICATION->SetPageProperty("description", "Единая база загородной недвижимости. Обзор коттеджных и дачных поселков в ".REGION_KOY." области ✔Отзывы покупателей ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Юридическая чистота");
+$APPLICATION->SetPageProperty("title", "Продажа загородной недвижимости в ".REGION_KOY." области | Поселкино");
 $APPLICATION->SetTitle("Главная");
 
 // получим кол-во отзывов
@@ -14,8 +14,9 @@ while($arElement = $rsElements->Fetch()){ // dump($arElement);
 }
 
 global $arrFilter;
-	$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
-	$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+	$arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
+	$arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+	$arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
 ?>
 <main class="page page-home">
   <!-- Hero-->

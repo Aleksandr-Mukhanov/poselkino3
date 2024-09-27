@@ -56,7 +56,7 @@ if ($shosse) { // шоссе
 
   // теги для шоссе
   $arTegsShow = ['mkad_20','mkad_30','mkad_50','gaz','voda','izhs','snt','ryadom-s-lesom','u-vody'];
-  array_push($arTegsShow,'do-1-milliona','do-2-milliona'); // было только участки и дома
+  // array_push($arTegsShow,'do-1-milliona','do-2-milliona'); // было только участки и дома
 }
 
 if ($rayon) { // район
@@ -173,7 +173,7 @@ if($typePos && $domPos){ // если и по типу и по дому - мет�
   }
 }
 
-if ($mkadKM) { // выбор по км от мкад
+if ($mkadKM) { // выбор по км от МКАД
   if(is_numeric($mkadKM)){
     switch ($mkadKM) {
       case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
@@ -202,7 +202,7 @@ if ($mkadKM) { // выбор по км от мкад
     $mkadKM_do = $mkadKM + 10; // до + 10
     $arrFilter['><PROPERTY_6'] = [$mkadKM_ot,$mkadKM_do];
     // dump($arrFilter);
-    $APPLICATION->AddChainItem('До '.$mkadKM.' км от МКАД',"/poselki/do-".$mkadKM."-km-ot-mkad/",true);
+    $APPLICATION->AddChainItem('До '.$mkadKM.' км от '.ROAD,"/poselki/do-".$mkadKM."-km-ot-mkad/",true);
     // url для Шоссе
     foreach ($onlyShosse as $key => $val) {
       switch ($domPos) {
@@ -381,7 +381,7 @@ if($areaUrl){ // выборка по площади
         break;
     }
     if($area_ot < 0)$area_ot = 0;
-    $arrFilter['><PROPERTY_11'] = [$area_ot,$area_do]; // dump($arrFilter);
+    $arrFilter['><PROPERTY_PLOTTAGE'] = [$area_ot,$area_do]; // dump($arrFilter);
 
     switch ($areaType) { // склонение
       case 'sotok':
@@ -405,7 +405,7 @@ if($classCode){ // выборка по классу econom / biznes / komfort / 
   // echo 'ddd: '.$classCode;
   switch ($classCode) {
     case 'econom':
-      $arrFilter['<=PROPERTY_8'] = 100000; // Цена за сотку
+      $arrFilter['<=PROPERTY_PRICE_SOTKA'] = 100000; // Цена за сотку
       $nameClass = 'эконом';$nameClass2 = 'Эконом';
       break;
     case 'komfort':
@@ -582,7 +582,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'ryadom-zhd-stanciya':
-      $arrFilter['<=PROPERTY_71'] = 5; // Ближайшая ж/д станция расстояние до поселка, км
+      $arrFilter['<=PROPERTY_RAILWAY_KM'] = 5; // Ближайшая ж/д станция расстояние до поселка, км
       $inChainItem = 'Рядом Ж/Д станция';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -593,7 +593,7 @@ if($typeURL){ // другие URL
       }
       break;
     case 'ryadom-avtobusnaya-ostanovka':
-      $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Рядом автобусная остановка';
       if ($pagen) { // если пагинация
         switch ($domPos) {
@@ -610,11 +610,11 @@ if($typeURL){ // другие URL
       $h1 = 'Промышленные поселки в Московской области';
       break;
     case 'kupit-letnij-dom':
-      // $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      // $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Купить летний дом';
       break;
     case 'kupit-zimnij-dom':
-      // $arrFilter['<=PROPERTY_67'] = 3; // Автобус (расстояние от остановки, км)
+      // $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
       $inChainItem = 'Купить зимний дом';
       break;
     case 's-infrastrukturoj':
@@ -672,6 +672,6 @@ if($typeURL){ // другие URL
 }
 
 if($developerCode){ // по девелоперу
-  $arrFilter['=PROPERTY_122'] = $developerCode; // Вид разрешенного использования
+  $arrFilter['=PROPERTY_DEVELOPER_ID'] = $developerCode; // Вид разрешенного использования
 }
 ?>

@@ -36,7 +36,7 @@ function formatPricePoint($price){
 
 // заявки по умолчанию
 define('defaultName', 'Посёлкино');
-define('defaultEmail', 'start@poselkino.ru');
+define('defaultEmail', 'sobolevau75@gmail.com');
 define('defaultPhone', '+7 (926) 108-73-32');
 define('defaultAmoID', '3584062'); // Юлия С. / Дмитрий
 
@@ -46,6 +46,7 @@ define('SITES_DIR',['spb.poselkino.ru']);
 // сопопоставим id
 switch ($_SERVER['HTTP_HOST']) {
 	case 'spb.poselkino.ru':
+		define('DOMEN', 'spb'); // определение домена
 		define('IBLOCK_ID', 7); // инфоблок Поселков
 		define('SHOW_PLOTS', 'N'); // показывать участки
 		define('SHOW_HOUSES', 'N'); // показывать дома
@@ -54,6 +55,7 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('ROAD_HL', 21); // id HL шоссе
 		define('ROAD_CODE', 'SHOSSE'); // код св-ва шоссе
 		define('ROAD_PROP_ID', 229); // id св-ва шоссе
+		define('REGION_CITY_IM', 'Санкт-Петербург'); // город области в Им. п.
 		define('REGION_CITY', 'Санкт-Петербурга'); // город области
 		define('REGION_KOY', 'Ленинградской'); // область
 		define('REGION_LETTER', 'ЛО'); // область 2 буквы
@@ -86,6 +88,7 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PROP_OBLAST', 319); // Область
 		break;
 	case 'kaluga.poselkino.ru':
+		define('DOMEN', 'kaluga'); // определение домена
 		define('IBLOCK_ID', 1); // инфоблок Поселков
 		define('SHOW_PLOTS', 'N'); // показывать участки
 		define('SHOW_HOUSES', 'N'); // показывать дома
@@ -94,6 +97,7 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('ROAD_HL', 26); // id HL шоссе
 		define('ROAD_CODE', 'SHOSSE_KALUGA'); // код св-ва шоссе
 		define('ROAD_PROP_ID', 393); // id св-ва шоссе
+		define('REGION_CITY_IM', 'Калуга'); // город области в Им. п.
 		define('REGION_CITY', 'Калуги'); // город области
 		define('REGION_KOY', 'Калужской'); // область
 		define('REGION_LETTER', 'КО'); // область 2 буквы
@@ -126,6 +130,7 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('PROP_OBLAST', 593); // Область
 		break;
 	default:
+		define('DOMEN', 'mo'); // определение домена
 		define('IBLOCK_ID', 1); // инфоблок Поселков
 		define('SHOW_PLOTS', 'Y'); // показывать участки
 		define('SHOW_HOUSES', 'Y'); // показывать дома
@@ -134,6 +139,7 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('ROAD_HL', 16); // id HL шоссе
 		define('ROAD_CODE', 'SHOSSE'); // код св-ва шоссе
 		define('ROAD_PROP_ID', 5); // id св-ва шоссе
+		define('REGION_CITY_IM', 'Москва'); // город области в Им. п.
 		define('REGION_CITY', 'Москвы'); // город области
 		define('REGION_KOY', 'Московской'); // область
 		define('REGION_LETTER', 'МО'); // область 2 буквы
@@ -165,6 +171,21 @@ switch ($_SERVER['HTTP_HOST']) {
 		define('HOUSE_PROP_SHOSSE', 385); // Шоссе домов
 		define('PROP_OBLAST', 127); // Область
 		break;
+}
+
+function getPlotAreaID($villageAreaID){
+	switch ($villageAreaID) {
+		case 319:
+			$propAreaID = 552; break; // Ленинградская
+		case 593:
+			$propAreaID = 621; break; // Калужская
+
+		default:
+			$propAreaID = 551; break; // Московская
+			break;
+	}
+
+	return $propAreaID;
 }
 
 // отправка в telegram

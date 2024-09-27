@@ -7,6 +7,31 @@ use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 
 	// dump($_SERVER["DOCUMENT_ROOT"]);
 
+	// $arOrder = Array('SORT'=>'ASC');
+  // $arFilter = Array('IBLOCK_ID'=>1);
+  // $arSelect = Array('ID','NAME','PROPERTY_OBLAST');
+  // $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  // while($arElements = $rsElements->Fetch()){
+	// 	$arPropAreaID[$arElements['ID']] = getPlotAreaID($arElements['PROPERTY_OBLAST_ENUM_ID']);
+	// } //dump($arPropAreaID);
+	//
+	// $arOrder = Array('SORT'=>'ASC');
+  // $arFilter = Array('IBLOCK_ID'=>7);
+  // $arSelect = Array('ID','NAME','PROPERTY_OBLAST');
+  // $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  // while($arElements = $rsElements->Fetch()){
+	// 	$arPropAreaID[$arElements['ID']] = getPlotAreaID($arElements['PROPERTY_OBLAST_ENUM_ID']);
+	// } //dump($arPropAreaID);
+	//
+	// $arOrder = Array('SORT'=>'ASC');
+  // $arFilter = Array('IBLOCK_ID'=>5,'ACTIVE'=>'Y');
+  // $arSelect = Array('ID','PROPERTY_VILLAGE');
+  // $rsElements = \CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  // while($arElement = $rsElements->Fetch()){ dump($arElement);
+	// 	$propAreaID = $arPropAreaID[$arElement['PROPERTY_VILLAGE_VALUE']]; dump($propAreaID);
+	// 	// CIBlockElement::SetPropertyValues($arElement['ID'], 5, $propAreaID, "AREA");
+	// }
+
 	// получим поселки земекса
 	// $arOrder = Array('SORT'=>'ASC');
   // $arFilter = Array('IBLOCK_ID'=>1,"PROPERTY_DEVELOPER_ID" => 'Zemelniy-Ekspress','!PROPERTY_SITE'=>false,'!PROPERTY_SALES_PHASE'=>254);

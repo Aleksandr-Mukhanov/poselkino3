@@ -29,8 +29,9 @@ $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
 while ($arElement = $rsElements->Fetch())
 { // dump($arElement);
   $i++;
-  if (!$arElement['PROPERTY_TOP_100_VALUE'])
-    dump($arElement);
+  if (!$arElement['PROPERTY_TOP_100_VALUE']) {
+		dump($arElement);
     // CIBlockElement::SetPropertyValues($arElement['ID'], $iBlockID, 554, "TOP_100");
+	}
 }
 echo 'Всего: '.$i.'<br>';

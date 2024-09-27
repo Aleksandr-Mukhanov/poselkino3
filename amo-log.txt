@@ -3672,3 +3672,113 @@
 Код: 400
 
 
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '18.09.2024 11:25:57',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Анна (Изумрудная бухта) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Земкомфорт',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Анна',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (916) 073-1316',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '25.09.2024 09:25:36',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Юлия (Полесье) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Сottage Poselki',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Юлия',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (977) 870-0701',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+

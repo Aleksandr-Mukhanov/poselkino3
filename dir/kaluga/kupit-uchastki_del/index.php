@@ -26,8 +26,8 @@ if ($arVillageIDs_tags) $arVillageIDs_tags = array_unique($arVillageIDs_tags);
 // dump($arVillagePlots);
 
 $newH1 = 'Продажа участков в '.REGION_KOY.' области';
-$newTitle = 'Купить участок в '.REGION_KOY.' области недорого - земельные участки в '.REGION_KOY.' области цены';
-$newDesc = 'Купить участок земли в поселках '.REGION_KOY.' области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.' ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота ✔Независимый рейтинг ✔Честный обзор';
+$newTitle = 'Купить участок в '.REGION_SHORT_WHERE.' недорого - земельные участки в '.REGION_KOY.' области цены';
+$newDesc = 'Купить участок земли в поселках '.REGION_KOY.' области ➤Цены от '.formatPrice($minPrice).' руб. ➤Кол-во объявлений - '.$cnt.'. Poselkino Калуга - коттеджные поселки, участки и дома. ★★★ Независимый рейтинг. Честные отзывы и юридическая чистота!';
 
 $shosse = $_REQUEST['SHOSSE_CODE'];
 $rayon = $_REQUEST['RAYON_CODE'];

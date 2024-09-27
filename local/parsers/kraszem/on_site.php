@@ -83,6 +83,9 @@ foreach ($arFileVillages as $key => $village)
         'COUNT_PLOTS_SOLD' => $arVillageInfo[8],
         'COUNT_PLOTS_SALE' => $arVillageInfo[9],
       ];
+
+			// Сотка от
+			if ($arVillageInfo[10]) $arVillageFeed[$arVillageInfo[0]]['PRICE_SOTKA_MIN'] = $arVillageInfo[10];
     } else
 			$strCSV .= "Нет поселка в файле: ".$arVillageInfo[0]."\n";
   }

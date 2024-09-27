@@ -158,7 +158,7 @@ if (!$arTegs['kashirskoe']['url']) {
 }
 
 for ($i = 10; $i < 60; $i += 10) { // до МКАД
-    $arTegs['mkad_' . $i]['name'] = $i . 'км от МКАД';
+    $arTegs['mkad_' . $i]['name'] = $i . 'км от '.ROAD;
     if (!$arTegs['mkad_' . $i]['url']) {
         switch ($domPos) {
             case 'noDom': // Участки

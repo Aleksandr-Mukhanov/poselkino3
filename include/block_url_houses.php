@@ -2,7 +2,7 @@
 // получим список шоссе
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"SHOSSE"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>ROAD_CODE]
 );
 while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
   $arShosse[$enumFields['XML_ID']] = [
@@ -14,7 +14,7 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
 // получим список районов
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"REGION"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE]
 );
 while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
@@ -24,7 +24,7 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
   <ul class="nav nav-tabs" id="addressTabHouses" role="tablist">
     <li class="nav-item"><a class="nav-link <?if(!$_REQUEST['show_rayon'])echo'active';?>" id="highwayTab-tab" data-toggle="tab" href="#highwayTabHouses" role="tab" aria-controls="highwayTab" aria-selected="true">Шоссе</a></li>
     <li class="nav-item"><a class="nav-link <?if($_REQUEST['show_rayon'])echo'active';?>" id="areaTab-tab" data-toggle="tab" href="#areaTabHouses" role="tab" aria-controls="areaTab" aria-selected="false">Районы</a></li>
-    <li class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabHouses" role="tab" aria-controls="mkadTab" aria-selected="false">от МКАД</a></li>
+    <li class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabHouses" role="tab" aria-controls="mkadTab" aria-selected="false">от <?=ROAD?></a></li>
     <li class="nav-item"><a class="nav-link" id="priceTab-tab" data-toggle="tab" href="#priceTabHouses" role="tab" aria-controls="priceTab" aria-selected="false">Цена</a></li>
     <li class="nav-item"><a class="nav-link" id="sizeTab-tab" data-toggle="tab" href="#sizeTabHouses" role="tab" aria-controls="sizeTab" aria-selected="false">Площадь</a></li>
     <li class="nav-item"><a class="nav-link" id="classTab-tab" data-toggle="tab" href="#classTabHouses" role="tab" aria-controls="classTab" aria-selected="false">Класс</a></li>

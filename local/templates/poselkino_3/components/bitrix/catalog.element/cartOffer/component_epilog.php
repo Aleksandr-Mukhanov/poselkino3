@@ -11,6 +11,11 @@ use Bitrix\Main\Loader;
 
 global $APPLICATION;
 
+if ($arResult['SHOW_404']) {
+  CHTTP::SetStatus("404 Not Found");
+	@define("ERROR_404", "Y");
+}
+
 $APPLICATION->SetPageProperty('title',$arResult['SEO_TITLE']);
 $APPLICATION->SetPageProperty('description', $arResult['SEO_DESCRIPTION']);
 

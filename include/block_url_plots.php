@@ -2,9 +2,9 @@
 // получим список шоссе
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"SHOSSE"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>ROAD_CODE]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arShosse[$enumFields['XML_ID']] = [
     'ID' => $enumFields['ID'],
     'NAME' => $enumFields['VALUE'],
@@ -14,10 +14,28 @@ while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
 // получим список районов
 $propEnums = CIBlockPropertyEnum::GetList(
   ["SORT"=>"ASC","VALUE"=>"ASC"],
-  ["IBLOCK_ID"=>1,"CODE"=>"REGION"]
+  ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE]
 );
-while($enumFields = $propEnums->GetNext()){ // dump($enumFields);
+while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
   $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
+}
+
+if (DOMEN != 'mo') {
+  // получим участки
+  $arOrder = ['SORT'=>'ASC'];
+  $arFilter = ['IBLOCK_ID'=>5,'ACTIVE'=>'Y','PROPERTY_AREA'=>PLOTS_PROP_AREA];
+
+  if (DOMEN == 'spb')
+    $arSelect = ['ID','PROPERTY_REGION_SPB','PROPERTY_SHOSSE_SPB'];
+  else
+    $arSelect = ['ID','PROPERTY_'.REGION_CODE,'PROPERTY_'.ROAD_CODE];
+
+  $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+  while ($arElement = $rsElements->Fetch()) {
+  	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_VALUE']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
+    foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $value)
+      $arShosseUse[$value] = $value;
+  }
 }
 
 $urlPlotsHide = (CSite::InDir('/kupit-uchastki/')) ? '' : 'hide';
@@ -26,19 +44,20 @@ $urlPlotsHide = (CSite::InDir('/kupit-uchastki/')) ? '' : 'hide';
   <div class="nav nav-tabs" id="addressTabPlots" role="tablist">
     <div class="nav-item"><a class="nav-link <?if(!$_REQUEST['show_rayon'])echo'active';?>" id="highwayTab-tab" data-toggle="tab" href="#highwayTabPlots" role="tab" aria-controls="highwayTab" aria-selected="true">Шоссе</a></div>
     <div class="nav-item"><a class="nav-link <?if($_REQUEST['show_rayon'])echo'active';?>" id="areaTab-tab" data-toggle="tab" href="#areaTabPlots" role="tab" aria-controls="areaTab" aria-selected="false">Районы</a></div>
-    <div class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabPlots" role="tab" aria-controls="mkadTab" aria-selected="false">от МКАД</a></div>
+    <div class="nav-item"><a class="nav-link" id="mkadTab-tab" data-toggle="tab" href="#mkadTabPlots" role="tab" aria-controls="mkadTab" aria-selected="false">от <?=ROAD?></a></div>
     <div class="nav-item"><a class="nav-link" id="priceTab-tab" data-toggle="tab" href="#priceTabPlots" role="tab" aria-controls="priceTab" aria-selected="false">Цена</a></div>
     <div class="nav-item"><a class="nav-link" id="sizeTab-tab" data-toggle="tab" href="#sizeTabPlots" role="tab" aria-controls="sizeTab" aria-selected="false">Площадь</a></div>
     <div class="nav-item"><a class="nav-link" id="classTab-tab" data-toggle="tab" href="#classTabPlots" role="tab" aria-controls="classTab" aria-selected="false">Класс</a></div>
     <div class="nav-item"><a class="nav-link" id="communicationsTab-tab" data-toggle="tab" href="#communicationsTabPlots" role="tab" aria-controls="communicationsTab" aria-selected="false">Коммуникации</a></div>
     <div class="nav-item"><a class="nav-link" id="infrastructureTab-tab" data-toggle="tab" href="#infrastructureTabPlots" role="tab" aria-controls="infrastructureTab" aria-selected="false">Инфраструктура</a></div>
-    <!-- <li class="nav-item"><a class="nav-link" id="natureTab-tab" data-toggle="tab" href="#natureTabPlots" role="tab" aria-controls="natureTab" aria-selected="false">Природа</a></li> -->
+    <!-- <div class="nav-item"><a class="nav-link" id="natureTab-tab" data-toggle="tab" href="#natureTabPlots" role="tab" aria-controls="natureTab" aria-selected="false">Природа</a></div> -->
   </div>
   <div class="tab-content">
     <div class="tab-pane fade <?if(!$_REQUEST['show_rayon'])echo'show active';?>" id="highwayTabPlots" role="tabpanel" aria-labelledby="highwayTab-tab">
       <div class="row">
         <?foreach ($arShosse as $key => $value):
-          $colorHW = getColorRoad($value['ID']);?>
+          $colorHW = getColorRoad($value['ID']);
+          if ($arShosseUse && !array_key_exists($key,$arShosseUse)) continue;?>
           <div class="col-lg-3 col-md-4 col-sm-6">
             <a class="metro-title highway-color" href="/kupit-uchastki/<?=$key?>-shosse/">
               <div class="metro-title__color <?=$colorHW?>"></div>
@@ -50,7 +69,8 @@ $urlPlotsHide = (CSite::InDir('/kupit-uchastki/')) ? '' : 'hide';
     </div>
     <div class="tab-pane fade <?if($_REQUEST['show_rayon'])echo'show active';?>" id="areaTabPlots" role="tabpanel" aria-labelledby="areaTab-tab">
       <div class="row">
-        <?foreach ($arRegion as $key => $value): $i++;?>
+        <?foreach ($arRegion as $key => $value):
+          if ($arRegionUse && !array_key_exists($key,$arRegionUse)) continue;?>
           <div class="col-lg-3 col-md-4 col-sm-6">
             <a class="metro-title" href="/kupit-uchastki/<?=$key?>-rayon/">
               <div class="metro-title__title"><?=$value?></div>

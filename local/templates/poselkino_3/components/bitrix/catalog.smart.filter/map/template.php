@@ -27,7 +27,7 @@ $this->setFrameMode(true);
 				if ($ar["CHECKED"]) $activeHighway = 'active';
 			 }?>
 			<button class="btn btn-outline-warning rounded-pill Highway <?=$activeHighway?>" id="toggleHighway" type="button">Шоссе</button>
-			<button class="btn btn-outline-warning rounded-pill" id="toggleAreas" type="button">Районы МО</button>
+			<button class="btn btn-outline-warning rounded-pill" id="toggleAreas" type="button">Районы <?=REGION_LETTER?></button>
 		</div>
 		<div class="map-filter__select--type mt-2">
 			<div class="hide">
@@ -61,15 +61,17 @@ $this->setFrameMode(true);
 			<h2 class="mt-4 mb-0">Шоссе</h2>
 			<div class="row">
 				<? // переберем шоссе
-        $arShosse['sever']['NAME'] = 'Север';
-        $arShosse['sever-vostok']['NAME'] = 'Северо-Восток';
-        $arShosse['sever-zapad']['NAME'] = 'Северо-Запад';
-        $arShosse['ug']['NAME'] = 'Юг';
-        $arShosse['ug-vostok']['NAME'] = 'Юго-Восток';
-        $arShosse['ug-zapad']['NAME'] = 'Юго-Запад';
-        $arShosse['vostok']['NAME'] = 'Восток';
-        $arShosse['zapad']['NAME'] = 'Запад';
-        $arShosse['other']['NAME'] = 'Другие';
+				if (DOMEN == 'mo'):
+	        $arShosse['sever']['NAME'] = 'Север';
+	        $arShosse['sever-vostok']['NAME'] = 'Северо-Восток';
+	        $arShosse['sever-zapad']['NAME'] = 'Северо-Запад';
+	        $arShosse['ug']['NAME'] = 'Юг';
+	        $arShosse['ug-vostok']['NAME'] = 'Юго-Восток';
+	        $arShosse['ug-zapad']['NAME'] = 'Юго-Запад';
+	        $arShosse['vostok']['NAME'] = 'Восток';
+	        $arShosse['zapad']['NAME'] = 'Запад';
+	        $arShosse['other']['NAME'] = 'Другие';
+				endif;
         foreach($arResult["ITEMS"][ROAD_PROP_ID]["VALUES"] as $val => $ar){
           // echo $ar['VALUE'].' - '.$ar['URL_ID'].'<br>';
           switch ($ar['URL_ID']) {
@@ -132,7 +134,7 @@ $this->setFrameMode(true);
 					</g>
 				</svg>Назад
 			</button>
-			<h2 class="mt-4 mb-0">Районы МО</h2>
+			<h2 class="mt-4 mb-0">Районы <?=REGION_LETTER?></h2>
 			<? // Группируем районы по первым буквам названий
         $prevLetter = '';
         foreach ($arResult["ITEMS"][REGION_PROP_ID]["VALUES"] as $key => $value) {
@@ -351,7 +353,7 @@ $this->setFrameMode(true);
 								     foreach($arResult["ITEMS"][REGION_PROP_ID]["VALUES"] as $val => $ar){ //dump($ar); // район
 								      if ($ar["CHECKED"]) $activeAreas = 'active';
 								     }?>
-										<div class="col-xl-2 col-lg-2 col-md-2 mt-4 mt-lg-0"><a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a></div>
+										<div class="col-xl-2 col-lg-2 col-md-2 mt-4 mt-lg-0"><a class="btn btn-outline-warning rounded-pill w-100 Areas <?=$activeAreas?>" href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы <?=REGION_LETTER?></a></div>
 										<div class="col-xl-3 col-lg-4 mt-40 col-md-5">
 											<div class="d-flex align-items-center justify-content-md-end search-group distance-station">
 												<label class="d-flex mr-2" for="<?echo $arItem["VALUES"]["MAX"]["CONTROL_ID"]?>">Расстояние&nbsp;<br>до ближайшей станции</label>

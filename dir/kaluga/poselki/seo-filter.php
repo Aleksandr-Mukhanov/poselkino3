@@ -338,7 +338,7 @@ if($priceURL){ // выборка по цене
         $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
+        $urlTeg = '/kupit-dom/'.$val.'-shosse-do-'.$priceURL.'-'.$priceType2.'/';
         break;
     }
     $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
@@ -485,7 +485,7 @@ if($commun){ // коммуникации
         $urlTeg = '/kupit-uchastki/'.$val.'-shosse-'.$commun2.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$val.'-shosse-'.$commun2.'/';
+        $urlTeg = '/kupit-dom/'.$val.'-shosse-'.$commun2.'/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$val.'-shosse-'.$commun2.'/';
@@ -500,7 +500,7 @@ if($commun){ // коммуникации
         $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/poselki/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
         break;
       default: // Поселки
         $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-mkad/';
@@ -639,7 +639,7 @@ if($typeURL){ // другие URL
   $urlAll = "/poselki/".$typeURL."/";
   // if($typeURL != 'ryadom-avtobusnaya-ostanovka'){
     $urlNoDom = "/kupit-uchastki/".$typeURL."/";
-    $urlWithDom = "/poselki/kupit-dom-".$typeURL."/";
+    $urlWithDom = "/kupit-dom/".$typeURL."/";
   // }
   if($typeURL == 'kupit-letnij-dom' || $typeURL == 'kupit-zimnij-dom'){
     $urlAll = '/poselki/';
@@ -657,7 +657,7 @@ if($typeURL){ // другие URL
             $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
             break;
           case 'withDom': // Дома
-            $urlTeg = '/poselki/kupit-dom/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-dom/do-'.$i.'-km-mkad-izhs/';
             break;
           default: // Поселки
             $urlTeg = '/poselki/do-'.$i.'-km-mkad-izhs/';
