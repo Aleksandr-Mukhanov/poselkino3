@@ -29,7 +29,7 @@ if ($shosse)
 
   // url для км от МКАД
   for ($i=10; $i < 60; $i+=10) { // до МКАД
-    $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+    $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-'.ROAD_URL.'/';
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
   }
   // url для С газом
@@ -78,23 +78,23 @@ if ($mkadKM)
   if(is_numeric($mkadKM))
   {
     switch ($mkadKM) {
-      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
-      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-mkad"; break;
-      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-mkad"; break;
+      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-".ROAD_URL; break;
+      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-".ROAD_URL; break;
+      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-".ROAD_URL; break;
+      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-".ROAD_URL; break;
+      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-".ROAD_URL; break;
+      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-".ROAD_URL; break;
+      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-".ROAD_URL; break;
+      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-".ROAD_URL; break;
+      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-".ROAD_URL; break;
+      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-".ROAD_URL; break;
+      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-".ROAD_URL; break;
+      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-".ROAD_URL; break;
+      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-".ROAD_URL; break;
+      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-".ROAD_URL; break;
+      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
+      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-".ROAD_URL; break;
+      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-".ROAD_URL; break;
 
       default: CHTTP::SetStatus("404 Not Found"); @define("ERROR_404", "Y"); break;
     }
@@ -105,15 +105,15 @@ if ($mkadKM)
 
     $arrFilterPlots['><PROPERTY_MKAD'] = [$mkadKM_ot,$mkadKM_do];
 
-    $APPLICATION->AddChainItem('Участки до '.$mkadKM.' км от МКАД','',true);
+    $APPLICATION->AddChainItem('Участки до '.$mkadKM.' км от '.ROAD,'',true);
 
     $newTitle = 'Выбрать земельный участок до '.$mkadKM.' от МКАД - Поселкино';
     $newDesc = '▶Продажа земельных участков до '.$mkadKM.' от МКАД с коммуникациями и инфраструктурой. ▶Независимый рейтинг ▶Видео с квадрокоптера ▶Экология местности ▶Отзывы покупателей ▶Юридическая чистота ▶Стоимость коммуникаций!';
-    $newH1 = 'Земельные участки до '.$mkadKM.' км от МКАД';
+    $newH1 = 'Земельные участки до '.$mkadKM.' км от '.ROAD;
 
     // url для Шоссе
     foreach ($onlyShosse as $key => $val) {
-      $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+      $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-'.ROAD_URL.'/';
       $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
     }
     // теги для км от МКАД
@@ -394,7 +394,7 @@ if ($typeURL) // другие URL
     if($typeURL == 'izhs'){
       // url для км от МКАД
       for ($i=10; $i < 60; $i+=10) { // до МКАД
-        $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
+        $urlTeg = '/kupit-uchastki/do-'.$i.'-km-'.ROAD_URL.'-izhs/';
         $arTegs['mkad_'.$i]['url'] = $urlTeg;
       }
     }

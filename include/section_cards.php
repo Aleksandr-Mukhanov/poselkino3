@@ -37,8 +37,9 @@
 
 	if (!CSite::InDir('/poisk/')) { // если не в поиске
 		global $arrFilter;
-			$arrFilter['!PROPERTY_SALES_PHASE'] = [254]; // уберем проданные
-			$arrFilter['!PROPERTY_HIDE_POS'] = 273; // метка убрать из каталога
+			$arrFilter['!PROPERTY_SALES_PHASE'] = [PROP_SOLD_ID]; // уберем проданные
+			$arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из каталога
+			$arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
 	}
 ?>
 <?$APPLICATION->IncludeComponent(
@@ -79,7 +80,7 @@
 		"FILTER_NAME" => "arrFilter",
 		"HIDE_NOT_AVAILABLE" => "N",
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
-		"IBLOCK_ID" => "1",
+		"IBLOCK_ID" => IBLOCK_ID,
 		"IBLOCK_TYPE" => "content",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"LABEL_PROP" => array(

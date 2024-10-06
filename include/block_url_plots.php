@@ -26,15 +26,24 @@ if (DOMEN != 'mo') {
   $arFilter = ['IBLOCK_ID'=>5,'ACTIVE'=>'Y','PROPERTY_AREA'=>PLOTS_PROP_AREA];
 
   if (DOMEN == 'spb')
+  {
     $arSelect = ['ID','PROPERTY_REGION_SPB','PROPERTY_SHOSSE_SPB'];
+    $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+    while ($arElement = $rsElements->Fetch()) {
+      $arRegionUse[$arElement['PROPERTY_REGION_SPB_VALUE']] = $arElement['PROPERTY_REGION_SPB_VALUE'];
+      foreach ($arElement['PROPERTY_SHOSSE_SPB_VALUE'] as $value)
+        $arShosseUse[$value] = $value;
+    }
+  }
   else
+  {
     $arSelect = ['ID','PROPERTY_'.REGION_CODE,'PROPERTY_'.ROAD_CODE];
-
-  $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
-  while ($arElement = $rsElements->Fetch()) {
-  	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_VALUE']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
-    foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $value)
-      $arShosseUse[$value] = $value;
+    $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
+    while ($arElement = $rsElements->Fetch()) {
+    	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_VALUE']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
+      foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $value)
+        $arShosseUse[$value] = $value;
+    }
   }
 }
 
@@ -82,14 +91,14 @@ $urlPlotsHide = (CSite::InDir('/kupit-uchastki/')) ? '' : 'hide';
     <div class="tab-pane fade" id="mkadTabPlots" role="tabpanel" aria-labelledby="mkadTab-tab">
       <div class="row">
         <?for($x=10; $x<=80; $x+=5){?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-<?=$x?>-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-<?=$x?>-km-ot-<?=ROAD_URL?>/">
               <div class="metro-title__title">до <?=$x?> км</div>
             </a></div>
         <?}?>
-        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-100-km-ot-mkad/">
+        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-100-km-ot-<?=ROAD_URL?>/">
             <div class="metro-title__title">до 100 км</div>
           </a></div>
-        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-120-km-ot-mkad/">
+        <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/kupit-uchastki/do-120-km-ot-<?=ROAD_URL?>/">
             <div class="metro-title__title">до 120 км</div>
           </a></div>
       </div>

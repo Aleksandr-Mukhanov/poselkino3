@@ -480,7 +480,7 @@ function getRoadName($value){
 function getNamesList($codeRoad,$codeProp,$iblockID = 1){
 	$iblockID = IBLOCK_ID;
 	$property_enums = CIBlockPropertyEnum::GetList(Array("DEF"=>"DESC", "SORT"=>"ASC"), Array("IBLOCK_ID"=>$iblockID, "CODE"=>$codeProp,"XML_ID" => $codeRoad));
-	if($enum_fields = $property_enums->GetNext()){
+	if($enum_fields = $property_enums->Fetch()){
 		$nameKomu = str_replace(['кое','кий','кой'],'кому',$enum_fields["VALUE"]); // склонение
 		$nameKom = str_replace(['кое','кий','кой'],'ком',$enum_fields["VALUE"]); // склонение
 		$nameKogo = str_replace(['кое','кий','кой'],'кого',$enum_fields["VALUE"]); // склонение

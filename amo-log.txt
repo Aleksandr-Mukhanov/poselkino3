@@ -3782,3 +3782,58 @@
 Код: 400
 
 
+Инфо: array (
+  'url' => '/api/v4/leads/complex',
+  'date' => '28.09.2024 13:55:55',
+)
+Запрос: array (
+  0 => 
+  array (
+    'name' => 'Дмитрий (Полесье) - с сайта',
+    'responsible_user_id' => 10218526,
+    'custom_fields_values' => 
+    array (
+      0 => 
+      array (
+        'field_id' => 650157,
+        'values' => 
+        array (
+          0 => 
+          array (
+            'value' => 'Сottage Poselki',
+          ),
+        ),
+      ),
+    ),
+    '_embedded' => 
+    array (
+      'contacts' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Дмитрий',
+          'responsible_user_id' => 10218526,
+          'custom_fields_values' => 
+          array (
+            0 => 
+            array (
+              'field_code' => 'PHONE',
+              'values' => 
+              array (
+                0 => 
+                array (
+                  'enum_code' => 'WORK',
+                  'value' => '+7 (916) 669-1856',
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+Ответ: '{"validation-errors":[{"request_id":"0","errors":[{"code":"NotSupportedChoice","path":"responsible_user_id","detail":"The value you selected is not a valid choice."},{"code":"NotSupportedChoice","path":"_embedded.contacts.0.responsible_user_id","detail":"The value you selected is not a valid choice."}]}],"title":"Bad Request","type":"https://httpstatus.es/400","status":400,"detail":"Request validation failed"}'
+Код: 400
+
+

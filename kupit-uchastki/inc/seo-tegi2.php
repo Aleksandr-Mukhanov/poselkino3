@@ -181,17 +181,17 @@ if (!$arTegs['kashirskoe']['url']) {
 }
 
 for ($i = 10; $i < 60; $i += 10) { // до МКАД
-    $arTegs['mkad_' . $i]['name'] = $i . 'км от МКАД';
+    $arTegs['mkad_' . $i]['name'] = $i . 'км от '.ROAD;
     if (!$arTegs['mkad_' . $i]['url']) {
         switch ($domPos) {
             case 'noDom': // Участки
-                $urlTeg = '/kupit-uchastki/kupit-uchastok-do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/kupit-uchastki/kupit-uchastok-do-' . $i . '-km-ot-'.ROAD_URL.'/';
                 break;
             case 'withDom': // Дома
-                $urlTeg = '/kupit-uchastki/kupit-dom-dachu-kottedzh-do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/kupit-uchastki/kupit-dom-dachu-kottedzh-do-' . $i . '-km-ot-'.ROAD_URL.'/';
                 break;
             default: // Поселки
-                $urlTeg = '/kupit-uchastki/do-' . $i . '-km-ot-mkad/';
+                $urlTeg = '/kupit-uchastki/do-' . $i . '-km-ot-'.ROAD_URL.'/';
                 break;
         }
         $arTegs['mkad_' . $i]['url'] = $urlTeg;

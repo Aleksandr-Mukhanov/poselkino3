@@ -17,24 +17,22 @@ $propEnums = CIBlockPropertyEnum::GetList(
   ["IBLOCK_ID"=>IBLOCK_ID,"CODE"=>REGION_CODE]
 );
 while($enumFields = $propEnums->Fetch()){ // dump($enumFields);
-  $arRegion[$enumFields['XML_ID']] = $enumFields['VALUE'];
+  $arRegion[$enumFields['XML_ID']] = [
+    'ID' => $enumFields['ID'],
+    'NAME' => $enumFields['VALUE'],
+  ];
 }
 
 if (DOMEN != 'mo') {
-  // получим участки
+  // получим поселки
   $arOrder = ['SORT'=>'ASC'];
-  $arFilter = ['IBLOCK_ID'=>5,'ACTIVE'=>'Y','PROPERTY_AREA'=>PLOTS_PROP_AREA];
-
-  if (DOMEN == 'spb')
-    $arSelect = ['ID','PROPERTY_REGION_SPB','PROPERTY_SHOSSE_SPB'];
-  else
-    $arSelect = ['ID','PROPERTY_'.REGION_CODE,'PROPERTY_'.ROAD_CODE];
-
+  $arFilter = ['IBLOCK_ID'=>IBLOCK_ID,'ACTIVE'=>'Y','PROPERTY_OBLAST'=>PROP_OBLAST];
+  $arSelect = ['ID','PROPERTY_'.REGION_CODE,'PROPERTY_'.ROAD_CODE];
   $rsElements = CIBlockElement::GetList($arOrder,$arFilter,false,false,$arSelect);
   while ($arElement = $rsElements->Fetch()) {
-  	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_VALUE']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
-    foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $value)
-      $arShosseUse[$value] = $value;
+  	$arRegionUse[$arElement['PROPERTY_'.REGION_CODE.'_ENUM_ID']] = $arElement['PROPERTY_'.REGION_CODE.'_VALUE'];
+    foreach ($arElement['PROPERTY_'.ROAD_CODE.'_VALUE'] as $key => $value)
+      $arShosseUse[$key] = $value;
   }
 }
 
@@ -84,7 +82,7 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
             if ($arRegionUse && !array_key_exists($value['ID'],$arRegionUse)) continue;?>
             <div class="col-lg-3 col-md-4 col-sm-6">
               <a class="metro-title" href="/poselki/<?=$key?>-rayon/">
-                <div class="metro-title__title"><?=$value?></div>
+                <div class="metro-title__title"><?=$value['NAME']?></div>
               </a>
             </div>
           <?endforeach;?>
@@ -93,14 +91,14 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
       <div class="tab-pane fade" id="mkadTab" role="tabpanel" aria-labelledby="mkadTab-tab">
         <div class="row">
           <?for($x=10; $x<=80; $x+=5){?>
-            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-<?=$x?>-km-ot-mkad/">
+            <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-<?=$x?>-km-ot-<?=ROAD_URL?>/">
                 <div class="metro-title__title">до <?=$x?> км</div>
               </a></div>
           <?}?>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-100-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-100-km-ot-<?=ROAD_URL?>/">
               <div class="metro-title__title">до 100 км</div>
             </a></div>
-          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-120-km-ot-mkad/">
+          <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/do-120-km-ot-<?=ROAD_URL?>/">
               <div class="metro-title__title">до 120 км</div>
             </a></div>
         </div>
@@ -121,7 +119,7 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-3-mln-rub/"><div class="metro-title__title">Участки 3 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-4-mln-rub/"><div class="metro-title__title">Участки 4 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-do-5-mln-rub/"><div class="metro-title__title">Участки 5 млн руб</div></a></div>
-
+         <?if(DOMEN == 'mo'):?>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-1-mln-rub/"><div class="metro-title__title">Дома 1 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-1,5-mln-rub/"><div class="metro-title__title">Дома 1,5 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-2-mln-rub/"><div class="metro-title__title">Дома 2 млн руб</div></a></div>
@@ -136,6 +134,7 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-15-mln-rub/"><div class="metro-title__title">Дома 15 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-20-mln-rub/"><div class="metro-title__title">Дома 20 млн руб</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-do-30-mln-rub/"><div class="metro-title__title">Дома 30 млн руб</div></a></div>
+         <?endif;?>
         </div>
       </div>
       <div class="tab-pane fade" id="sizeTab" role="tabpanel" aria-labelledby="sizeTab-tab">
@@ -152,7 +151,7 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <?for ($i=30; $i <= 100; $i+=10) {?>
             <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-<?=$i?>-sotok/"><div class="metro-title__title">Участок <?=$i?> соток</div></a></div>
           <?}?>
-
+         <?if(DOMEN == 'mo'):?>
           <?for ($i=2; $i <= 20; $i++) { // дома?>
             <?if($i == 2 || $i == 3 || $i == 4){
               $nameSot = 'сотки'; $urlSot = 'sotki';
@@ -173,6 +172,7 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-300-kv-m/"><div class="metro-title__title">Купить дом 300 кв.м.</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-400-kv-m/"><div class="metro-title__title">Купить дом 400 кв.м.</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-500-kv-m/"><div class="metro-title__title">Купить дом 500 кв.м.</div></a></div>
+         <?endif;?>
         </div>
       </div>
       <div class="tab-pane fade" id="classTab" role="tabpanel" aria-labelledby="classTab-tab">
@@ -188,12 +188,13 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-komfort-class/"><div class="metro-title__title">Участки комфорт класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-elit-class/"><div class="metro-title__title">Участки элитного класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-premium-class/"><div class="metro-title__title">Участки премиум класса</div></a></div>
-
+         <?if(DOMEN == 'mo'):?>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-econom-class/"><div class="metro-title__title">Дома эконом класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-biznes-class/"><div class="metro-title__title">Дома бизнес класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-komfort-class/"><div class="metro-title__title">Дома комфорт класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-elit-class/"><div class="metro-title__title">Дома элитного класса</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-premium-class/"><div class="metro-title__title">Дома премиум класса</div></a></div>
+         <?endif;?>
         </div>
       </div>
       <div class="tab-pane fade" id="communicationsTab" role="tabpanel" aria-labelledby="communicationsTab-tab">
@@ -207,11 +208,12 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-vodoprovodom/"><div class="metro-title__title">Участки с водопроводом</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-gazom/"><div class="metro-title__title">Участки с газом</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-s-kommunikaciyami/"><div class="metro-title__title">Участки с коммуникациями</div></a></div>
-
+         <?if(DOMEN == 'mo'):?>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-elektrichestvom/"><div class="metro-title__title">Дома с электричеством</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-vodoprovodom/"><div class="metro-title__title">Дома с водопроводом</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-gazom/"><div class="metro-title__title">Дома с газом</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-s-kommunikaciyami/"><div class="metro-title__title">Дома с коммуникациями</div></a></div>
+         <?endif;?>
         </div>
       </div>
       <div class="tab-pane fade" id="infrastructureTab" role="tabpanel" aria-labelledby="infrastructureTab-tab">
@@ -224,10 +226,11 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-snt/"><div class="metro-title__title">Участки СНТ</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-izhs/"><div class="metro-title__title">Участки ИЖС</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-ryadom-zhd-stanciya/"><div class="metro-title__title">Участки рядом с Ж/Д станцией</div></a></div>
-
+         <?if(DOMEN == 'mo'):?>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-snt/"><div class="metro-title__title">Дома СНТ</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-izhs/"><div class="metro-title__title">Дома ИЖС</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-ryadom-zhd-stanciya/"><div class="metro-title__title">Дома рядом с Ж/Д станцией</div></a></div>
+         <?endif;?>
         </div>
       </div>
       <div class="tab-pane fade" id="natureTab" role="tabpanel" aria-labelledby="natureTab-tab">
@@ -241,11 +244,12 @@ $urlVillageHide = (CSite::InDir('/kupit-uchastki/')) ? 'hide' : '';
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-vody/"><div class="metro-title__title">Участки у воды</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-ozera/"><div class="metro-title__title">Участки у озера</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-uchastok-u-reki/"><div class="metro-title__title">Участки у реки</div></a></div>
-
+         <?if(DOMEN == 'mo'):?>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-ryadom-s-lesom/"><div class="metro-title__title">Дома рядом с лесом</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-vody/"><div class="metro-title__title">Дома у воды</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-ozera/"><div class="metro-title__title">Дома у озера</div></a></div>
           <div class="col-lg-3 col-md-4 col-sm-6"><a class="metro-title" href="/poselki/kupit-dom-u-reki/"><div class="metro-title__title">Дома у реки</div></a></div>
+         <?endif;?>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ $arrFilter['!PROPERTY_HIDE_POS'] = PROP_HIDE_ID; // метка убрать из
 $arrFilter['PROPERTY_OBLAST'] = PROP_OBLAST; // метка области
 
 $APPLICATION->SetTitle("Поселки в ".REGION_KOY." области");
-$APPLICATION->SetPageProperty("title", "Поселки в ".REGION_KOY." области – лучшие поселки на карте Подмосковья");
+$APPLICATION->SetPageProperty("title", "Поселки в ".REGION_KOY." области – лучшие поселки на карте ".REGION_SHORT_WHAT);
 $APPLICATION->SetPageProperty("description", "Поселки в ".REGION_KOY." области ➤Цены от " . getMetaInfo($arrFilter)['minPrice'] . " руб.➤Кол-во объявлений - " . getMetaInfo($arrFilter)['cntPos'] . " ✔Независимый рейтинг ✔Честный обзор ✔Стоимость коммуникаций ✔Актуальные фото ✔Видео с квадрокоптера ✔Экология местности ✔Отзывы покупателей ✔Юридическая чистота");
 
 // dump($_REQUEST);
@@ -33,7 +33,7 @@ $h2 = '<h2 class="h2">Земельные участки под дом и дач�
 $SEO_text = '<p>База коттеджных и дачных поселков в '.REGION_KOY.' области. Каталог позволяет найти участки по нужным шоссе и районам, по площади и стоимости, по удаленности от '.ROAD.' и коммуникациям. Каждый поселок имеет свой рейтинг, оценку пользователей и отзывы.</p><p>Вы можете узнать всю необходимую информацию об интересующем вас поселке, не выходя из дома. На сайте есть фото и видео обзоры поселков, юридическая информация и объекты неблагоприятной экологии.</p>';
 $urlAll = '/poselki/';
 $urlNoDom = '/kupit-uchastki/';
-$urlWithDom = '/kupit-dom/';
+$urlWithDom = (DOMEN == 'mo') ? '/kupit-dom/' : '';
 $urlMap = (substr($ourDir, -5) == "/map/") ? $ourDir : $ourDir.'map/';
 if ($pagen) $pageTitleDesc = 'Поселки';
 
@@ -231,7 +231,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
         ); ?>
     <? endif; ?>
     <? if ($posNoDom): // показываем Участки ?>
-        <? $arrFilter['=PROPERTY_2'] = [3, 256]; // показывать только участки и дома и участки ?>
+        <? $arrFilter['=PROPERTY_DOMA'] = [PROP_NO_DOM, PROP_HOUSE_PLOT]; // показывать только участки и дома и участки ?>
         <? $APPLICATION->IncludeComponent(
             "bitrix:main.include", "",
             array(
@@ -242,10 +242,10 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
             ),
             false
         ); ?>
-        <? unset($arrFilter['=PROPERTY_2']); // сбрасываем ?>
+        <? unset($arrFilter['=PROPERTY_DOMA']); // сбрасываем ?>
     <? endif; ?>
     <? if ($posWithDom): // показываем Дома ?>
-        <? $arrFilter['=PROPERTY_2'] = [4, 256]; // показывать дома и дома и участки ?>
+        <? $arrFilter['=PROPERTY_DOMA'] = [PROP_WITH_DOM, PROP_HOUSE_PLOT]; // показывать дома и дома и участки ?>
         <? $APPLICATION->IncludeComponent(
             "bitrix:main.include", "",
             Array(
@@ -255,7 +255,7 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
                 "PATH" => "/include/section_cards.php"
             )
         ); ?>
-        <? unset($arrFilter['=PROPERTY_2']); // сбрасываем ?>
+        <? unset($arrFilter['=PROPERTY_DOMA']); // сбрасываем ?>
     <? endif; ?>
     <div class="bg-white page__map-wrapper">
         <div class="container">
@@ -287,8 +287,8 @@ if ($pagen && $pageTitleDesc) { // дописываем страницу в па
             </div>
             <div class="block-page__offer" id="special_offers">
                 <? // если была фильтрация по шоссе и районам
-                if ($arrFilter["=PROPERTY_4"]) $addFilter["=PROPERTY_4"] = $arrFilter["=PROPERTY_4"];
-                if ($arrFilter["=PROPERTY_5"]) $addFilter["=PROPERTY_5"] = $arrFilter["=PROPERTY_5"];
+                if ($arrFilter["=PROPERTY_".REGION_CODE]) $addFilter["=PROPERTY_".REGION_CODE] = $arrFilter["=PROPERTY_".REGION_CODE];
+                if ($arrFilter["=PROPERTY_".ROAD_CODE]) $addFilter["=PROPERTY_".ROAD_CODE] = $arrFilter["=PROPERTY_".ROAD_CODE];
                 $arrFilter = array('!PROPERTY_ACTION' => false); // показывать только акции
                 if ($addFilter) array_push($arrFilter, $addFilter); //dump($arrFilter);?>
                 <? $APPLICATION->IncludeComponent(

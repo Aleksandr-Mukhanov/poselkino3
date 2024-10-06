@@ -2,18 +2,24 @@
 
 use Bitrix\Main\Grid\Declension;
 
-$onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
+if (DOMEN == 'spb')
+  $onlyShosse = ['moskovskoe','kievskoe','novopriozerskoe','murmanskoe'];
+elseif (DOMEN == 'kaluga')
+  $onlyShosse = ['varshavskoe','kievskoe','kaluzhskoe','simferopolskoe'];
+else
+  $onlyShosse = ['dmitrovskoe','novoryazanskoe','simferopolskoe','novorijskoe','kashirskoe'];
+
 $nameShosseDir = ['north','east','south','west'];
 
 global $arrFilter;
 
 if ($shosse) { // шоссе
-  if(!getNamesList($shosse,'SHOSSE')['ID']){
+  if(!getNamesList($shosse,ROAD_CODE)['ID']){
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
   }
-  $arrFilter['=PROPERTY_5'][] = getNamesList($shosse,'SHOSSE')['ID'];
-  $arNames = getNamesList($shosse,'SHOSSE');
+  $arrFilter['=PROPERTY_'.ROAD_CODE][] = getNamesList($shosse,ROAD_CODE)['ID'];
+  $arNames = getNamesList($shosse,ROAD_CODE);
   $UF_Code = $shosse;
   $APPLICATION->AddChainItem($arNames['NAME'].' шоссе',"/poselki/".$shosse."-shosse/",true);
   $urlAll = '/poselki/'.$shosse.'-shosse/';
@@ -25,13 +31,13 @@ if ($shosse) { // шоссе
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$shosse.'-shosse-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-dom/'.$shosse.'-shosse-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
       default: // Поселки
-        $urlTeg = '/poselki/'.$shosse.'-shosse-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/'.$shosse.'-shosse-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
@@ -60,12 +66,12 @@ if ($shosse) { // шоссе
 }
 
 if ($rayon) { // район
-  if(!getNamesList($rayon,'REGION')['ID']){
+  if(!getNamesList($rayon,REGION_CODE)['ID']){
     CHTTP::SetStatus("404 Not Found");
     @define("ERROR_404", "Y");
   }
-  $arrFilter['=PROPERTY_4'][] = getNamesList($rayon,'REGION')['ID'];
-  $arNames = getNamesList($rayon,'REGION');
+  $arrFilter['=PROPERTY_'.REGION_CODE][] = getNamesList($rayon,REGION_CODE)['ID'];
+  $arNames = getNamesList($rayon,REGION_CODE);
   $UF_Code = $rayon;
   $APPLICATION->AddChainItem($arNames['NAME'].' район',"/poselki/".$rayon."-rayon/",true);
   $urlAll = '/poselki/'.$rayon.'-rayon/';
@@ -108,13 +114,13 @@ if ($rayon) { // район
 if ($typePos) { // выбор по типу
   switch ($typePos) {
     case 'dachnye':
-      $arrFilter['=PROPERTY_1'] = [1];
+      $arrFilter['=PROPERTY_TYPE'] = [PROP_DACHA];
       $nameType = 'Дачные';
       $urlNoDom = '/poselki/kupit-dachnyj-uchastok/';
       $urlWithDom = '/poselki/kupit-dachnyj-dom/';
       break;
     case 'kottedzhnye':
-      $arrFilter['=PROPERTY_1'] = [2];
+      $arrFilter['=PROPERTY_TYPE'] = [PROP_COTTAGE];
       $nameType = 'Коттеджные';
       $urlNoDom = '/poselki/kupit-kottedzhnyj-uchastok/';
       $urlWithDom = '/poselki/kupit-kottedzh/';
@@ -133,16 +139,16 @@ if ($typePos) { // выбор по типу
 if ($domPos) { // если выбор с домом или без
   switch ($domPos) {
     case 'noDom':
-      $arrFilter['=PROPERTY_2'] = [3,256];
+      $arrFilter['=PROPERTY_DOMA'] = [PROP_NO_DOM,PROP_HOUSE_PLOT];
       $UF_Code = 'kupit-uchastok';
-      $propFilter = 'PROPERTY_120';
+      $propFilter = 'PROPERTY_COST_LAND_IN_CART';
       $nameDomPos = 'Купить участок';
       $APPLICATION->AddChainItem('Участки',"/kupit-uchastki/",true);
       break;
     case 'withDom':
-      $arrFilter['=PROPERTY_2'] = [4,256];
+      $arrFilter['=PROPERTY_DOMA'] = [PROP_WITH_DOM,PROP_HOUSE_PLOT];
       $UF_Code = 'kupit-dom';
-      $propFilter = 'PROPERTY_17';
+      $propFilter = 'PROPERTY_HOME_VALUE';
       $nameDomPos = 'Купить дом';
       $APPLICATION->AddChainItem('Дома',"/kupit-dom/",true);
       break;
@@ -176,23 +182,23 @@ if($typePos && $domPos){ // если и по типу и по дому - мет�
 if ($mkadKM) { // выбор по км от МКАД
   if(is_numeric($mkadKM)){
     switch ($mkadKM) {
-      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-mkad"; break;
-      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-mkad"; break;
-      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-mkad"; break;
-      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-mkad"; break;
-      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-mkad"; break;
-      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-mkad"; break;
-      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-mkad"; break;
-      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-mkad"; break;
-      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-mkad"; break;
-      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-mkad"; break;
-      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-mkad"; break;
-      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-mkad"; break;
-      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-mkad"; break;
-      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-mkad"; break;
-      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-mkad"; break;
-      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-mkad"; break;
-      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-mkad"; break;
+      case $mkadKM == 10: $url_km_MKAD = "do-10-km-ot-".ROAD_URL; break;
+      case $mkadKM == 15: $url_km_MKAD = "do-15-km-ot-".ROAD_URL; break;
+      case $mkadKM == 20: $url_km_MKAD = "do-20-km-ot-".ROAD_URL; break;
+      case $mkadKM == 25: $url_km_MKAD = "do-25-km-ot-".ROAD_URL; break;
+      case $mkadKM == 30: $url_km_MKAD = "do-30-km-ot-".ROAD_URL; break;
+      case $mkadKM == 35: $url_km_MKAD = "do-35-km-ot-".ROAD_URL; break;
+      case $mkadKM == 40: $url_km_MKAD = "do-40-km-ot-".ROAD_URL; break;
+      case $mkadKM == 45: $url_km_MKAD = "do-45-km-ot-".ROAD_URL; break;
+      case $mkadKM == 50: $url_km_MKAD = "do-50-km-ot-".ROAD_URL; break;
+      case $mkadKM == 55: $url_km_MKAD = "do-55-km-ot-".ROAD_URL; break;
+      case $mkadKM == 60: $url_km_MKAD = "do-60-km-ot-".ROAD_URL; break;
+      case $mkadKM == 65: $url_km_MKAD = "do-65-km-ot-".ROAD_URL; break;
+      case $mkadKM == 70: $url_km_MKAD = "do-70-km-ot-".ROAD_URL; break;
+      case $mkadKM == 75: $url_km_MKAD = "do-75-km-ot-".ROAD_URL; break;
+      case $mkadKM == 80: $url_km_MKAD = "do-80-km-ot-".ROAD_URL; break;
+      case $mkadKM == 100: $url_km_MKAD = "do-100-km-ot-".ROAD_URL; break;
+      case $mkadKM == 120: $url_km_MKAD = "do-120-km-ot-".ROAD_URL; break;
 
       default: CHTTP::SetStatus("404 Not Found"); @define("ERROR_404", "Y"); break;
     }
@@ -200,20 +206,20 @@ if ($mkadKM) { // выбор по км от МКАД
     $mkadKM_ot = $mkadKM - 20; // от - 20
     if($mkadKM_ot < 0)$mkadKM_ot = 0;
     $mkadKM_do = $mkadKM + 10; // до + 10
-    $arrFilter['><PROPERTY_6'] = [$mkadKM_ot,$mkadKM_do];
+    $arrFilter['><PROPERTY_MKAD'] = [$mkadKM_ot,$mkadKM_do];
     // dump($arrFilter);
-    $APPLICATION->AddChainItem('До '.$mkadKM.' км от '.ROAD,"/poselki/do-".$mkadKM."-km-ot-mkad/",true);
+    $APPLICATION->AddChainItem('До '.$mkadKM.' км от '.ROAD,"/poselki/do-".$mkadKM."-km-ot-".ROAD_URL."/",true);
     // url для Шоссе
     foreach ($onlyShosse as $key => $val) {
       switch ($domPos) {
         case 'noDom': // Участки
-          $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/kupit-uchastki/'.$val.'-shosse-do-'.$mkadKM.'-km-'.ROAD_URL.'/';
           break;
         case 'withDom': // Дома
-          $urlTeg = '/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/kupit-dom/'.$val.'-shosse-do-'.$mkadKM.'-km-'.ROAD_URL.'/';
           break;
         default: // Поселки
-          $urlTeg = '/poselki/'.$val.'-shosse-do-'.$mkadKM.'-km-mkad/';
+          $urlTeg = '/poselki/'.$val.'-shosse-do-'.$mkadKM.'-km-'.ROAD_URL.'/';
           break;
       }
       $arTegs[$nameShosseDir[$key]]['url'] = $urlTeg;
@@ -221,26 +227,26 @@ if ($mkadKM) { // выбор по км от МКАД
     // url для С газом
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/kupit-uchastki/gaz-do-".$mkadKM."-km-".ROAD_URL."/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/kupit-dom/gaz-do-".$mkadKM."-km-mkad/";
+        $urlTeg = "/kupit-dom/gaz-do-".$mkadKM."-km-".ROAD_URL."/";
         break;
       default: // Поселки
-        $urlTeg = "/poselki/gaz-do-".$mkadKM."-km-mkad/";;
+        $urlTeg = "/poselki/gaz-do-".$mkadKM."-km-".ROAD_URL."/";;
         break;
     }
     $arTegs['gaz']['url'] = $urlTeg;
     // url для ИЖС
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/kupit-uchastki/do-".$mkadKM."-km-".ROAD_URL."-izhs/";
         break;
       case 'withDom': // Дома
-        $urlTeg = "/kupit-dom/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/kupit-dom/do-".$mkadKM."-km-".ROAD_URL."-izhs/";
         break;
       default: // Поселки
-        $urlTeg = "/poselki/do-".$mkadKM."-km-mkad-izhs/";
+        $urlTeg = "/poselki/do-".$mkadKM."-km-".ROAD_URL."-izhs/";
         break;
     }
     $arTegs['izhs']['url'] = $urlTeg;
@@ -280,7 +286,7 @@ if($plottage){ // площадь дома
       $plottage_ot = $plottage - 50; // от
       $plottage_do = $plottage + 50; // до
     }
-    $arrFilter['><PROPERTY_15'] = [$plottage_ot,$plottage_do]; // Площадь домов
+    $arrFilter['><PROPERTY_HOUSE_AREA'] = [$plottage_ot,$plottage_do]; // Площадь домов
     // dump($arrFilter);
     $APPLICATION->AddChainItem('Купить дом '.$plottage.' кв.м.',"/poselki/kupit-dom-".$plottage."-kv-m/",true);
     $UF_Code = "kupit-dom-".$plottage."-kv-m";
@@ -431,7 +437,7 @@ if($classCode){ // выборка по классу econom / biznes / komfort / 
       $nameClass = 'элитного';$nameClass2 = 'Элитного';
       break;
     case 'premium':
-      $arrFilter['=PROPERTY_2'] = [4,256]; // Наличие домов
+      $arrFilter['=PROPERTY_2'] = [PROP_WITH_DOM,PROP_HOUSE_PLOT]; // Наличие домов
       $arrFilter['>=PROPERTY_17'] = 10000000; // Стоимость домов
       $arrFilter['=PROPERTY_20'] = [12]; // Электричество
       $arrFilter['=PROPERTY_23'] = [15]; // Газ
@@ -498,13 +504,13 @@ if($commun){ // коммуникации
   for ($i=10; $i < 60; $i+=10) { // до МКАД
     switch ($domPos) {
       case 'noDom': // Участки
-        $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-uchastki/'.$commun3.'-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
       case 'withDom': // Дома
-        $urlTeg = '/kupit-dom/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/kupit-dom/'.$commun3.'-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
       default: // Поселки
-        $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-mkad/';
+        $urlTeg = '/poselki/'.$commun3.'-do-'.$i.'-km-'.ROAD_URL.'/';
         break;
     }
     $arTegs['mkad_'.$i]['url'] = $urlTeg;
@@ -606,8 +612,8 @@ if($typeURL){ // другие URL
     case 'promyshlennye':
       $arrFilter['PROPERTY_1'] = 301; // Промышленный поселок
       $inChainItem = 'Промышленные поселки';
-      $newTitle = 'Промышленные поселки в Московской области';
-      $h1 = 'Промышленные поселки в Московской области';
+      $newTitle = 'Промышленные поселки в '.REGION_KOY.' области';
+      $h1 = 'Промышленные поселки в '.REGION_KOY.' области';
       break;
     case 'kupit-letnij-dom':
       // $arrFilter['<=PROPERTY_BUS_TIME_KM'] = 3; // Автобус (расстояние от остановки, км)
@@ -655,13 +661,13 @@ if($typeURL){ // другие URL
       for ($i=10; $i < 60; $i+=10) { // до МКАД
         switch ($domPos) {
           case 'noDom': // Участки
-            $urlTeg = '/kupit-uchastki/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-uchastki/do-'.$i.'-km-'.ROAD_URL.'-izhs/';
             break;
           case 'withDom': // Дома
-            $urlTeg = '/kupit-dom/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/kupit-dom/do-'.$i.'-km-'.ROAD_URL.'-izhs/';
             break;
           default: // Поселки
-            $urlTeg = '/poselki/do-'.$i.'-km-mkad-izhs/';
+            $urlTeg = '/poselki/do-'.$i.'-km-'.ROAD_URL.'-izhs/';
             break;
         }
         $arTegs['mkad_'.$i]['url'] = $urlTeg;

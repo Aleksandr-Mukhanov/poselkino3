@@ -178,7 +178,11 @@ else:
 <?
 		else:
 ?>
+	<?if($arResult["nStartPage"] == 1):?>
+		<li class="page-item"><a href="<?=$arResult["sUrlPath"]?>" class="page-link"><?=$arResult["nStartPage"]?></a></li>
+	<?else:?>
 		<li class="page-item"><a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=$arResult["nStartPage"]?>" class="page-link"><?=$arResult["nStartPage"]?></a></li>
+	<?endif;?>
 <?
 		endif;
 		$arResult["nStartPage"]++;

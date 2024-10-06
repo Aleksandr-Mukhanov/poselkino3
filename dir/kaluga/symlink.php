@@ -34,9 +34,17 @@ if ($_POST['create'])
   // symlink($path."/ajax",$_SERVER['DOCUMENT_ROOT']."/ajax");
   // symlink($path."/assets",$_SERVER['DOCUMENT_ROOT']."/assets");
 
-  // symlink($path."/favicon.png",$_SERVER['DOCUMENT_ROOT']."/favicon.png");
-
   // symlink($path."/kupit-uchastki",$_SERVER['DOCUMENT_ROOT']."/kupit-uchastki");
+  // symlink($path."/include",$_SERVER['DOCUMENT_ROOT']."/include");
+  // symlink($path."/poselki",$_SERVER['DOCUMENT_ROOT']."/poselki");
+
+  // symlink($path."/.access.php",$_SERVER['DOCUMENT_ROOT']."/.access.php");
+  // symlink($path."/.section.php",$_SERVER['DOCUMENT_ROOT']."/.section.php");
+  // symlink($path."/404.php",$_SERVER['DOCUMENT_ROOT']."/404.php");
+  // symlink($path."/favicon.png",$_SERVER['DOCUMENT_ROOT']."/favicon.png");
+  // symlink($path."/favicon.svg",$_SERVER['DOCUMENT_ROOT']."/favicon.svg");
+  // symlink($path."/index.php",$_SERVER['DOCUMENT_ROOT']."/index.php");
+  // symlink($path."/urlrewrite_my.php",$_SERVER['DOCUMENT_ROOT']."/urlrewrite_my.php");
 
    // if (file_exists($_SERVER['DOCUMENT_ROOT']."/bitrix"))
    //    $strError = "В текущей папке уже существует папка bitrix";
@@ -66,8 +74,7 @@ if ($_POST['create'])
    //    $strError = 'Неверно указан путь или ошибка прав доступа';
 
    if ($strError)
-      echo ''.$strError.'
-    Исходный путь: '.$full_path;
+      echo ''.$strError.'Исходный путь: '.$full_path;
 }
 ?>
 <form method=post>

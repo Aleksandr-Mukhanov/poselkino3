@@ -41,7 +41,7 @@ global $arrFilter;
                 </svg></div>
               <div class="col-12 col-sm-4 col-md-3">
                 <div class="hero-info">
-                  <p>Независимый обзор дачных и&nbsp;коттеджных поселков в&nbsp;Московской области</p>
+                  <p>Независимый обзор дачных и&nbsp;коттеджных поселков в&nbsp;<?=REGION_KOY?> области</p>
                 </div>
               </div>
 							<a href="/poselki/map/" class="btn btn-outline-warning btn-map">На карте</a>
@@ -138,7 +138,7 @@ global $arrFilter;
       <div class="tab-content">
         <div class="tab-pane active" id="raiting-area" role="tabpanel">
           <div class="owl-carousel d-flex w-100 block-page__offer" id="raiting-area-slick">
-						<?$arrFilter=array('PROPERTY_DOMA'=>[3,256]); // показывать только участки?>
+						<?$arrFilter=array('PROPERTY_DOMA'=>[PROP_NO_DOM,PROP_HOUSE_PLOT]); // показывать только участки?>
 		 				<?$APPLICATION->IncludeComponent(
 		 					"bitrix:main.include",
 		 					"",
@@ -154,7 +154,7 @@ global $arrFilter;
         </div>
         <div class="tab-pane" id="raiting-area-home" role="tabpanel">
           <div class="owl-carousel d-flex w-100 block-page__offer" id="raiting-area-home-slick">
-						<?$arrFilter=array('PROPERTY_DOMA'=>[4,256]); // показывать участки с домами?>
+						<?$arrFilter=array('PROPERTY_DOMA'=>[PROP_WITH_DOM,PROP_HOUSE_PLOT]); // показывать участки с домами?>
 		 				<?$APPLICATION->IncludeComponent(
 		 					"bitrix:main.include",
 		 					"",
@@ -189,7 +189,11 @@ global $arrFilter;
       <div class="row">
         <div class="col-12 d-sm-none">
           <h3 class="about-home-portal__title h2">Портал Поселкино.ру</h3>
-          <div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков Московского региона. </div>
+					<?if(DOMEN=='mo'):?>
+          	<div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков Московского региона. </div>
+					<?else:?>
+						<div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков <?=REGION_KOY?> области.</div>
+					<?endif;?>
         </div>
         <div class="col-sm-6 col-xl-5">
           <div class="video">
@@ -221,7 +225,11 @@ global $arrFilter;
         <div class="col-sm-6 col-xl-7 about-home-portal__block-right">
           <div class="d-none d-sm-block">
             <h3 class="about-home-portal__title h1">Портал Поселкино.ру</h3>
-            <div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков Московского региона. </div>
+						<?if(DOMEN=='mo'):?>
+	          	<div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков Московского региона. </div>
+						<?else:?>
+							<div class="about-home-portal__subtitle">Единая база дачных и коттеджных поселков <?=REGION_KOY?> области.</div>
+						<?endif;?>
           </div>
           <div class="about-home-portal__text">
             <p>Мы независимы от собственников поселков или девелоперских компаний, мы не заинтересованы продать вам конкретный объект недвижимости. Мы стараемся дать максимально объективную оценку и сделать простым и удобным поиск будущего участка.

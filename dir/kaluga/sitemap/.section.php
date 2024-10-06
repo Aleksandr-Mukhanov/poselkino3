@@ -1,7 +1,7 @@
 <?
 $sSectionName = "Карта сайта";
 $arDirProperties = Array(
-   "description" => "На данной странице находится карта сайта spb.poselkino.ru",
-   "TITLE" => "Карта сайта – spb.poselkino.ru"
+   "description" => "На данной странице находится карта сайта kaluga.poselkino.ru",
+   "TITLE" => "Карта сайта – kaluga.poselkino.ru"
 );
 ?>

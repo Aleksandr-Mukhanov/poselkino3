@@ -75,83 +75,210 @@
               	Loader::includeModule('highloadblock');
               use Bitrix\Highloadblock as HL, Bitrix\Main\Entity;
 
-              // получим шоссе
-              $arShosse['sever']['NAME'] = 'Север';
-              $arShosse['sever-vostok']['NAME'] = 'Северо-Восток';
-              $arShosse['sever-zapad']['NAME'] = 'Северо-Запад';
-              $arShosse['ug']['NAME'] = 'Юг';
-              $arShosse['ug-vostok']['NAME'] = 'Юго-Восток';
-              $arShosse['ug-zapad']['NAME'] = 'Юго-Запад';
-              $arShosse['vostok']['NAME'] = 'Восток';
-              $arShosse['zapad']['NAME'] = 'Запад';
-              $arShosse['other']['NAME'] = 'Другие';
+              $arHighway = getElHL(ROAD_HL,[],[],['ID','UF_XML_ID','UF_NAME']);
 
-              $arHighway = getElHL(16,[],[],['ID','UF_XML_ID','UF_NAME']);
-              foreach ($arHighway as $highway) {
-                switch ($highway['UF_XML_ID']) {
-                  case 'dmitrovskoe':
-                      $arShosse['sever']['SHOSSE'][] = $highway;
-                      break;
-                  case 'rogachevskoe':
-                      $arShosse['sever']['SHOSSE'][] = $highway;
-                      break;
-                  case 'leningradskoe':
-                      $arShosse['sever']['SHOSSE'][] = $highway;
-                      break;
-                  case 'yaroslavskoe':
-                      $arShosse['sever-vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'novorijskoe':
-                      $arShosse['sever-zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'pyatnickoe':
-                      $arShosse['sever-zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'volokolamskoe':
-                      $arShosse['sever-zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'varshavskoe':
-                      $arShosse['ug']['SHOSSE'][] = $highway;
-                      break;
-                  case 'simferopolskoe':
-                      $arShosse['ug']['SHOSSE'][] = $highway;
-                      break;
-                  case 'egorievskoe':
-                      $arShosse['ug-vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'kashirskoe':
-                      $arShosse['ug']['SHOSSE'][] = $highway;
-                      break;
-                  case 'novoryazanskoe':
-                      $arShosse['ug-vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'kievskoe':
-                      $arShosse['ug-zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'kalujskoe':
-                      $arShosse['ug-zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'shelkovskoe':
-                      $arShosse['vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'gorkovskoe':
-                      $arShosse['vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'nosovihinskoe':
-                      $arShosse['vostok']['SHOSSE'][] = $highway;
-                      break;
-                  case 'minskoe':
-                      $arShosse['zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'rublevo-uspenskoe':
-                      $arShosse['zapad']['SHOSSE'][] = $highway;
-                      break;
-                  case 'mozhayskoe':
-                      $arShosse['zapad']['SHOSSE'][] = $highway;
-                      break;
-                  default:
-                      $arShosse['other']['SHOSSE'][] = $highway;
-                      break;
+              if (DOMEN == 'spb')
+              {
+                // получим шоссе
+                $arShosse['sever']['NAME'] = 'Север';
+                $arShosse['sever-vostok']['NAME'] = 'Северо-Восток';
+                $arShosse['sever-zapad']['NAME'] = 'Северо-Запад';
+                $arShosse['ug']['NAME'] = 'Юг';
+                $arShosse['ug-vostok']['NAME'] = 'Юго-Восток';
+                $arShosse['ug-zapad']['NAME'] = 'Юго-Запад';
+                $arShosse['vostok']['NAME'] = 'Восток';
+                $arShosse['zapad']['NAME'] = 'Запад';
+                $arShosse['other']['NAME'] = 'Другие';
+
+                foreach ($arHighway as $highway) {
+                  switch ($highway['UF_XML_ID']) {
+
+                    case 'primorskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'zsd':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'beloostrovskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'aleksandrovskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'vyborgskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'gorskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'novopriozerskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'priozerskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'ryabovskoe':
+                        $arShosse['sever-vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'doroga-zhizni':
+                        $arShosse['sever-vostok']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'murmanskoe':
+                        $arShosse['vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'petrozavodskoe':
+                        $arShosse['vostok']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'moskovskoe':
+                        $arShosse['ug-vostok']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'kievskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+                    case 'pulkovskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+                    case 'volkhonskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'e20':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'ropshinskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'anninskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'gatchinskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'krasnoselskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+
+                    case 'levashovskoe':
+                        $arShosse['zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'gostilitskoe':
+                        $arShosse['zapad']['SHOSSE'][] = $highway;
+                        break;
+
+                    default:
+                        $arShosse['other']['SHOSSE'][] = $highway;
+                        break;
+                  }
+                }
+              }
+              elseif (DOMEN == 'kaluga')
+              {
+                foreach ($arHighway as $highway) {
+                  switch ($highway['UF_XML_ID']) {
+
+                    case 'varshavskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'kaluzhskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'kievskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'simferopolskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+
+                    default:
+                        $arShosse['other']['SHOSSE'][] = $highway;
+                        break;
+                  }
+                }
+              }
+              else
+              {
+                // получим шоссе
+                $arShosse['sever']['NAME'] = 'Север';
+                $arShosse['sever-vostok']['NAME'] = 'Северо-Восток';
+                $arShosse['sever-zapad']['NAME'] = 'Северо-Запад';
+                $arShosse['ug']['NAME'] = 'Юг';
+                $arShosse['ug-vostok']['NAME'] = 'Юго-Восток';
+                $arShosse['ug-zapad']['NAME'] = 'Юго-Запад';
+                $arShosse['vostok']['NAME'] = 'Восток';
+                $arShosse['zapad']['NAME'] = 'Запад';
+                $arShosse['other']['NAME'] = 'Другие';
+
+                foreach ($arHighway as $highway) {
+                  switch ($highway['UF_XML_ID']) {
+                    case 'dmitrovskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'rogachevskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'leningradskoe':
+                        $arShosse['sever']['SHOSSE'][] = $highway;
+                        break;
+                    case 'yaroslavskoe':
+                        $arShosse['sever-vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'novorijskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'pyatnickoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'volokolamskoe':
+                        $arShosse['sever-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'varshavskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+                    case 'simferopolskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+                    case 'egorievskoe':
+                        $arShosse['ug-vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'kashirskoe':
+                        $arShosse['ug']['SHOSSE'][] = $highway;
+                        break;
+                    case 'novoryazanskoe':
+                        $arShosse['ug-vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'kievskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'kalujskoe':
+                        $arShosse['ug-zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'shelkovskoe':
+                        $arShosse['vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'gorkovskoe':
+                        $arShosse['vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'nosovihinskoe':
+                        $arShosse['vostok']['SHOSSE'][] = $highway;
+                        break;
+                    case 'minskoe':
+                        $arShosse['zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'rublevo-uspenskoe':
+                        $arShosse['zapad']['SHOSSE'][] = $highway;
+                        break;
+                    case 'mozhayskoe':
+                        $arShosse['zapad']['SHOSSE'][] = $highway;
+                        break;
+                    default:
+                        $arShosse['other']['SHOSSE'][] = $highway;
+                        break;
+                  }
                 }
               }
               foreach ($arShosse as $shosse) {?>
@@ -1409,7 +1536,7 @@
           <div class="add-filter__modal-top">
             <div class="add-filter__region">
               <a class="btn btn-outline-warning rounded-pill w-100 add-filter__region-txt"
-                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы МО</a>
+                href="#regionModal" data-toggle="modal" data-target="#regionModal">Районы <?=REGION_LETTER?></a>
             </div>
             <div class="add-filter__search">
               <div class="add-filter__search-group">
